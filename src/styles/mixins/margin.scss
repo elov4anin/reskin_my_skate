@@ -1,0 +1,116 @@
+@mixin margin-base($property, $value) {
+  #{$property}: var(--theme-base-margin) * $value;
+}
+
+
+@mixin m() {
+  @include margin-base(margin, 1px)
+}
+
+@mixin m8 {
+  @include margin-base(margin, 2px)
+}
+
+@mixin m12 {
+  @include margin-base(margin, 3px)
+}
+
+@mixin m16 {
+  @include margin-base(margin, 4px)
+}
+
+@mixin m20 {
+  @include margin-base(margin, 5px)
+}
+
+@mixin ml() {
+  @include margin-base(margin-left, 1px)
+}
+
+@mixin ml8 {
+  @include margin-base(margin-left, 2px)
+}
+
+@mixin ml12 {
+  @include margin-base(margin-left, 3px)
+}
+
+@mixin ml16 {
+  @include margin-base(margin-left, 4px)
+}
+
+@mixin ml20 {
+  @include margin-base(margin-left, 5px)
+}
+
+@mixin ml24 {
+  @include margin-base(margin-left, 5px)
+}
+
+@mixin mr() {
+  @include margin-base(margin-right, 1px)
+}
+
+@mixin mr8 {
+  @include margin-base(margin-right, 2px)
+}
+
+@mixin mr12 {
+  @include margin-base(margin-right, 3px)
+}
+
+@mixin mr16 {
+  @include margin-base(margin-right, 4px)
+}
+
+@mixin mr20 {
+  @include margin-base(margin-right, 5px)
+}
+
+@mixin mr24 {
+  @include margin-base(margin-right, 5px)
+}
+
+@mixin mt() {
+  @include margin-base(margin-top, 1px)
+}
+
+@mixin mt8 {
+  @include margin-base(margin-top, 2px)
+}
+
+@mixin mt12 {
+  @include margin-base(margin-top, 3px)
+}
+
+@mixin mt16 {
+  @include margin-base(margin-top, 4px)
+}
+
+@mixin mt20 {
+  @include margin-base(margin-top, 5px)
+}
+
+@mixin mb() {
+  @include margin-base(margin-bottom, 1px)
+}
+
+@mixin mb8 {
+  @include margin-base(margin-bottom, 2px)
+}
+
+@mixin mb12 {
+  @include margin-base(margin-bottom, 3px)
+}
+
+@mixin mb16 {
+  @include margin-base(margin-bottom, 4px)
+}
+
+@mixin mb20 {
+  @include margin-base(margin-bottom, 5px)
+}
+
+@mixin mb24 {
+  @include margin-base(margin-bottom, 6px)
+}

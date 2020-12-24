@@ -1,0 +1,124 @@
+@mixin padding-base($property, $value) {
+  #{$property}: var(--theme-base-padding) * $value;
+}
+
+
+@mixin p() {
+  @include padding-base(padding, 1px)
+}
+
+@mixin p8 {
+  @include padding-base(padding, 2px)
+}
+
+@mixin p12 {
+  @include padding-base(padding, 3px)
+}
+
+@mixin p16 {
+  @include padding-base(padding, 4px)
+}
+
+@mixin p20 {
+  @include padding-base(padding, 5px)
+}
+
+@mixin p24 {
+  @include padding-base(padding, 6px)
+}
+
+@mixin pl() {
+  @include padding-base(padding-left, 1px)
+}
+
+@mixin pl8 {
+  @include padding-base(padding-left, 2px)
+}
+
+@mixin pl12 {
+  @include padding-base(padding-left, 3px)
+}
+
+@mixin pl16 {
+  @include padding-base(padding-left, 4px)
+}
+
+@mixin pl20 {
+  @include padding-base(padding-left, 5px)
+}
+
+@mixin pl24 {
+  @include padding-base(padding-left, 6px)
+}
+
+@mixin pr() {
+  @include padding-base(padding-right, 1px)
+}
+
+@mixin pr8 {
+  @include padding-base(padding-right, 2px)
+}
+
+@mixin pr12 {
+  @include padding-base(padding-right, 3px)
+}
+
+@mixin pr16 {
+  @include padding-base(padding-right, 4px)
+}
+
+@mixin pr20 {
+  @include padding-base(padding-right, 5px)
+}
+
+@mixin pr24 {
+  @include padding-base(padding-right, 6px)
+}
+
+@mixin pt() {
+  @include padding-base(padding-top, 1px)
+}
+
+@mixin pt8 {
+  @include padding-base(padding-top, 2px)
+}
+
+@mixin pt12 {
+  @include padding-base(padding-top, 3px)
+}
+
+@mixin pt16 {
+  @include padding-base(padding-top, 4px)
+}
+
+@mixin pt20 {
+  @include padding-base(padding-top, 5px)
+}
+
+@mixin pt24 {
+  @include padding-base(padding-top, 6px)
+}
+
+@mixin pb() {
+  @include padding-base(padding-bottom, 1px)
+}
+
+@mixin pb8 {
+  @include padding-base(padding-bottom, 2px)
+}
+
+@mixin pb12 {
+  @include padding-base(padding-bottom, 3px)
+}
+
+@mixin pb16 {
+  @include padding-base(padding-bottom, 4px)
+}
+
+@mixin pb20 {
+  @include padding-base(padding-bottom, 5px)
+}
+
+@mixin pb24 {
+  @include padding-base(padding-bottom, 6px)
+}

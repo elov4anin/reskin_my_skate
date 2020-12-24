@@ -1,0 +1,19 @@
+@mixin border-radius-base($value) {
+  border-radius: var(--theme-base-border-radius) * $value;
+}
+
+@mixin border-radius-4() {
+  @include border-radius-base(1px)
+}
+
+@mixin border-radius-8() {
+  @include border-radius-base(2px)
+}
+
+@mixin border-radius-12() {
+  @include border-radius-base(3px)
+}
+
+@mixin border-radius-16() {
+  @include border-radius-base(4px)
+}

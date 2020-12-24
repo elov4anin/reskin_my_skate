@@ -1,0 +1,44 @@
+.container {
+    @include container();
+    @include sm(max-width, rem(510));
+    @include md(max-width, rem(638));
+    @include lg(max-width, rem(894));
+    @include xl(max-width, rem(1250));
+}
+
+.wrapper-block {
+    @include sm(max-width, rem(510));
+    @include md(max-width, rem(638));
+    @include lg(max-width, rem(894));
+    @include xl(max-width, rem(1024));
+
+    margin: auto;
+    padding-right: rem(24);
+    padding-left: rem(24);
+}
+
+html, body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+}
+
+main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    height: 100%;
+
+    &.main-upped {
+        margin-top: -96px;
+    }
+}
