@@ -1,0 +1,13 @@
+{
+  "appId": "com.myskate.app",
+  "appName": "my_skate_app",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 0
+    }
+  },
+  "cordova": {}
+}

@@ -1,0 +1,7 @@
+{
+  "name": "reskin_my_skate",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
