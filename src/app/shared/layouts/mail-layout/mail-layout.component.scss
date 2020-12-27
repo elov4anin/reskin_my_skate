@@ -1,6 +1,12 @@
+.header-md::after {
+  display: none;
+}
 
+.logo {
+  margin-left: 20px;
+}
 
 ion-toolbar {
-  padding-bottom: var(--ion-padding);
+  padding-bottom: 18px;
   --border-width: 0!important;
 }

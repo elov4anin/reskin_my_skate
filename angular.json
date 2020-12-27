@@ -37,8 +37,16 @@
               },
               {
                 "input": "src/global.scss"
+              },
+              {
+                "input": "src/styles/main.scss"
               }
             ],
+            "stylePreprocessorOptions" : {
+              "includePaths": [
+                "src/styles/mixins"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
