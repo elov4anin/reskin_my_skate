@@ -1,0 +1,14 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary" class="ion-padding-top">
+    <div class="ion-margin-start">
+      <app-logo></app-logo>
+    </div>
+    <ion-menu-button slot="end" color="light" class="ion-margin-end">
+      <ion-icon slot="icon-only" size="large" name="menu-outline"></ion-icon>
+    </ion-menu-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary" [fullscreen]="true" class="ion-padding-start ion-padding-end">
+ <ng-content></ng-content>
+</ion-content>
