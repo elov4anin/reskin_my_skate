@@ -1,9 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary" class="ion-padding-top">
+  <ion-toolbar color="primary" class="layout-toolbar">
     <div class="logo">
       <app-logo></app-logo>
     </div>
-    <ion-menu-button slot="end" color="light" class="ion-margin-end">
+    <ion-menu-button *ngIf="mainLayoutHelper.menuToggleEmitter$ | async" slot="end" color="light" class="ion-margin-end" (click)="openMenu()">
       <ion-icon slot="icon-only" size="large" name="menu-outline"></ion-icon>
     </ion-menu-button>
   </ion-toolbar>

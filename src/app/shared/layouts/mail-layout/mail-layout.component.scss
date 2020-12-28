@@ -6,7 +6,8 @@
   margin-left: 20px;
 }
 
-ion-toolbar {
+ion-toolbar.layout-toolbar {
+  padding-top: 18px;
   padding-bottom: 18px;
   --border-width: 0!important;
 }

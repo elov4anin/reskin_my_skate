@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MainLayoutHelper} from "./main-layout.helper";
 
 @Component({
   selector: 'app-mail-layout',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MailLayoutComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {}
+  constructor(
+      public mainLayoutHelper: MainLayoutHelper
+      ) { }
 
+  ngOnInit() {
+  }
+
+  openMenu() {
+    this.mainLayoutHelper.menuToggleEmitter$.next(false);
+  }
 }

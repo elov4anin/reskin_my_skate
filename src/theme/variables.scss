@@ -8,8 +8,10 @@
   --theme-base-margin: 4px;
   --theme-base-padding: 4px;
   --theme-base-border-radius: 4px;
+  --theme-base-font-family: 'Poppins', 'Helvetica Neue', 'Roboto',  'Arial', sans-serif;
 
 
+  --ion-default-font:  var(--theme-base-font-family);
   --ion-padding: 24px;
   --ion-margin: 24px;
 
