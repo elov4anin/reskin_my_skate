@@ -7,8 +7,15 @@ ion-menu {
   --width: 350px;
 }
 
-ion-list.list-ios {
-  background: var(--ion-color-primary);
+ion-list {
+
+  &.list-ios {
+    background: var(--ion-color-primary);
+  }
+
+  &.list-md {
+    background: var(--ion-color-primary);
+  }
 }
 
 ion-thumbnail {
