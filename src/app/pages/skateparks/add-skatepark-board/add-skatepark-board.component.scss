@@ -1,0 +1,25 @@
+.skatepark-board {
+  display: flex;
+  justify-content: flex-end;
+
+  padding: var(--ion-padding);
+
+  background-color: var(--ion-color-dark);
+  background-image: url("/../../assets/images/backgrouds/skatepark-board.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  border-radius: var(--theme-base-border-radius);
+
+  &__text {
+    display: block;
+    width: 82px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+
+    text-align: center;
+  }
+}
