@@ -1,0 +1,32 @@
+<section class="slider-block">
+  <header class="ion-margin-bottom">
+    <ion-text class="title">{{title}}</ion-text>
+  </header>
+
+  <div class="slider-block__list">
+    <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides">
+      <ion-slide *ngFor =" let slide of sliders">
+        <div class="slide" (click)="openSlide()">
+          <div class="slide__img"  [ngStyle]="{'background-image':'url('+slide.imgSrc+')'}"></div>
+          <!--  <img src="{{slide.imgSrc}}">-->
+          <div class="slide__wrap" [ngClass]="{'mt8': !isNeedRating}">
+            <ionic-rating-component
+                    *ngIf="isNeedRating"
+                    #rating
+                    activeIcon = "star"
+                    defaultIcon = "star-outline"
+                    [activeColor] = activeRatingColor
+                    [defaultColor] = defaultRatingColor
+                    readonly="false"
+                    rating="3"
+                    fontSize = "16px">
+            </ionic-rating-component>
+              <span class="slide__title">
+                {{slide.title}}
+              </span>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</section>

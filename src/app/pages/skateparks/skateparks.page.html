@@ -1,4 +1,6 @@
-<app-mail-layout>
+<app-mail-layout
+        [isNeedRightPadding]="false"
+>
     <ion-searchbar
             class="search-field"
             inputmode="search"
@@ -8,4 +10,15 @@
             clearIcon="close-outline"
             debounce="600"
     ></ion-searchbar>
+    <app-slider-block
+            title="Most popular"
+            [sliders]="sliders"
+            [isNeedRating]="true"
+    >
+    </app-slider-block>
+    <app-slider-block
+            title="Favourite skateparks"
+            [sliders]="sliders"
+    >
+    </app-slider-block>
 </app-mail-layout>

@@ -1,0 +1,44 @@
+.title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.slider-block {
+  margin-top: calc(var(--theme-base-margin) * 6);
+}
+
+
+.slide {
+  position: relative;
+  min-width: 180px;
+  background-repeat: no-repeat;
+
+  &__img {
+    height: 200px;
+    width: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--ion-color-tertiary);
+
+    border-radius: var(--theme-base-border-radius);
+
+  }
+
+  &__wrap {
+    text-align: left;
+  }
+
+  &__title {
+    display: block;
+
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 20px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}

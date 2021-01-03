@@ -29,3 +29,7 @@ html, body {
     }
 }
 
+
+.mt8 {
+    margin-top: calc(var(--theme-base-margin) * 2);
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MainLayoutHelper} from "./main-layout.helper";
 
 @Component({
@@ -7,6 +7,7 @@ import {MainLayoutHelper} from "./main-layout.helper";
   styleUrls: ['./mail-layout.component.scss'],
 })
 export class MailLayoutComponent implements OnInit {
+  @Input() isNeedRightPadding: boolean = true;
 
 
   constructor(

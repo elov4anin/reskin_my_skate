@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { sliders } from './demodata';
+import {ISlideInfo} from "./skateparks.interfaces";
 
 @Component({
   selector: 'app-skateparks',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./skateparks.page.scss'],
 })
 export class SkateparksPage implements OnInit {
+
+  sliders: ISlideInfo[] = sliders;
 
   constructor() { }
 
