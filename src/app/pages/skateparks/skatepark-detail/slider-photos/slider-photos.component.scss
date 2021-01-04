@@ -1,0 +1,15 @@
+.slide {
+  position: relative;
+  min-width: 375px;
+  background-repeat: no-repeat;
+
+  &__img {
+    height: 240px;
+    width: auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--ion-color-tertiary);
+    border-radius: var(--theme-base-border-radius);
+  }
+}

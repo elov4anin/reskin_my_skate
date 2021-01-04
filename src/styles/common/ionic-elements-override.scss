@@ -17,3 +17,9 @@ ion-searchbar.search-field {
   }
 
 }
+.swiper-pagination-bullet {
+  background: rgba(20, 20, 20, 0.5);
+}
+.swiper-pagination-bullet-active {
+  background: var(--ion-color-secondary);
+}

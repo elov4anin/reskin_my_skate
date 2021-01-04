@@ -39,7 +39,7 @@ export class TabsPage {
       const idx = this.tabs.findIndex( t => t.tabName.toLowerCase() === this.selectedTab);
       this.tabs.forEach(t => t.current = false);
       this.tabs[idx].current = true;
-      await this._router.navigate(['/', TABS_MAIN_ROUTE, this.selectedTab])
+      // await this._router.navigate(['/', TABS_MAIN_ROUTE, this.selectedTab])
     }
   }
 }
