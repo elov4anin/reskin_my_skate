@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ISlideInfo} from "../skateparks.interfaces";
+import {ISlideInfo} from "../../skateparks.interfaces";
 import {IonSlides} from "@ionic/angular";
 import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../shared/modules/tabs/tabs.enum";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules/tabs/tabs.enum";
 
 @Component({
     selector: 'app-slider-block',

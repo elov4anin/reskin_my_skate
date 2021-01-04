@@ -1,20 +1,16 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
 
-import { IonicModule } from '@ionic/angular';
+import {SkateparkDetailPageRoutingModule} from './skatepark-detail-routing.module';
 
-import { SkateparkDetailPageRoutingModule } from './skatepark-detail-routing.module';
-
-import { SkateparkDetailPage } from './skatepark-detail.page';
+import {SkateparkDetailPage} from './skatepark-detail.page';
+import {SharedModule} from "../../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SkateparkDetailPageRoutingModule
-  ],
-  declarations: [SkateparkDetailPage]
+    imports: [
+        SharedModule,
+        SkateparkDetailPageRoutingModule
+    ],
+    declarations: [SkateparkDetailPage]
 })
-export class SkateparkDetailPageModule {}
+export class SkateparkDetailPageModule {
+}
