@@ -1,6 +1,8 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ISlideInfo} from "../skateparks.interfaces";
 import {IonSlides} from "@ionic/angular";
+import {Router} from "@angular/router";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../shared/modules/tabs/tabs.enum";
 
 @Component({
     selector: 'app-slider-block',
@@ -26,7 +28,7 @@ export class SliderBlockComponent implements OnInit {
     readonly defaultRatingColor: string = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-light');
     readonly activeRatingColor: string = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary');
 
-    constructor() {
+    constructor(private _router: Router) {
     }
 
     ngOnInit() {
@@ -34,5 +36,9 @@ export class SliderBlockComponent implements OnInit {
 
     openSlide() {
 
+    }
+
+    async openSkatepark() {
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, 1])
     }
 }

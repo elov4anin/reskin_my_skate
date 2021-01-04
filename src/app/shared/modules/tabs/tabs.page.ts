@@ -1,7 +1,14 @@
 import {Component, ViewChild} from '@angular/core';
-import {TabsEnum, tabsEnum2IconActiveMapping, tabsEnum2IconMapping, tabsEnum2RouteMapping} from "./tabs.enum";
+import {
+  TABS_MAIN_ROUTE,
+  TabsEnum,
+  tabsEnum2IconActiveMapping,
+  tabsEnum2IconMapping,
+  tabsEnum2RouteMapping
+} from "./tabs.enum";
 import {getEnumAsArray} from "../../helpers/utils";
 import {IonTabs} from "@ionic/angular";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-tabs',
@@ -23,15 +30,16 @@ export class TabsPage {
   readonly tabsEnum2IconMapping = tabsEnum2IconMapping;
   readonly tabsEnum2IconActiveMapping = tabsEnum2IconActiveMapping;
 
-  constructor() {
+  constructor(private _router: Router) {
   }
 
-  setCurrentTab() {
+  async setCurrentTab() {
     this.selectedTab = this.tabsRef.getSelected();
     if (this.selectedTab) {
       const idx = this.tabs.findIndex( t => t.tabName.toLowerCase() === this.selectedTab);
       this.tabs.forEach(t => t.current = false);
       this.tabs[idx].current = true;
+      await this._router.navigate(['/', TABS_MAIN_ROUTE, this.selectedTab])
     }
   }
 }

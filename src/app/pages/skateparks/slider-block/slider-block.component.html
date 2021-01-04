@@ -5,7 +5,7 @@
 
   <div class="slider-block__list">
     <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides">
-      <ion-slide *ngFor =" let slide of sliders">
+      <ion-slide *ngFor =" let slide of sliders" (click)="openSkatepark()">
         <div class="slide" (click)="openSlide()">
           <div class="slide__img"  [ngStyle]="{'background-image':'url('+slide.imgSrc+')'}"></div>
           <!--  <img src="{{slide.imgSrc}}">-->

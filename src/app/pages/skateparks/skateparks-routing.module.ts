@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: SkateparksPage
+  },
+  {
+    path: ':id',
+    loadChildren: () => import('./skatepark-detail/skatepark-detail.module').then( m => m.SkateparkDetailPageModule)
   }
 ];
 

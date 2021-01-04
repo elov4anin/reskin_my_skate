@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TabsPage} from './tabs.page';
-import {tabsEnum2RouteMapping} from "./tabs.enum";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "./tabs.enum";
 
 const routes: Routes = [
     {
-        path: 'tabs',
+        path: TABS_MAIN_ROUTE,
         component: TabsPage,
         children: [
             {
@@ -38,14 +38,14 @@ const routes: Routes = [
             // },
             {
                 path: '',
-                redirectTo: '/tabs/' + tabsEnum2RouteMapping.SKATEPARKS,
+                redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
                 pathMatch: 'full'
             }
         ]
     },
     {
         path: '',
-        redirectTo: '/tabs/' + tabsEnum2RouteMapping.SKATEPARKS,
+        redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
         pathMatch: 'full'
     }
 ];

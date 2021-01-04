@@ -37,3 +37,5 @@ export const tabsEnum2IconActiveMapping:  Record<TabsEnum, string> = {
     STORES: 'store-active.svg',
     EVENTS: 'events-active.svg',
 }
+
+export const TABS_MAIN_ROUTE = 'tabs'
