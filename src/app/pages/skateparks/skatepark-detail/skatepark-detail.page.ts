@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Location} from '@angular/common';
+
 
 @Component({
   selector: 'app-skatepark-detail',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SkateparkDetailPage implements OnInit {
 
-  constructor() { }
+  constructor(private _location: Location) { }
 
   ngOnInit() {
   }
 
+  back() {
+    this._location.back();
+  }
 }

@@ -29,6 +29,16 @@ html, body {
     }
 }
 
+.icon-as-btn {
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.p0 {
+    padding: 0;
+}
+
 
 .mt8 {
     margin-top: calc(var(--theme-base-margin) * 2);

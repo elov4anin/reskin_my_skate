@@ -6,10 +6,16 @@
   margin-left: 20px;
 }
 
-ion-toolbar.layout-toolbar {
-  padding-top: 18px;
-  padding-bottom: 18px;
-  --border-width: 0!important;
+ion-toolbar {
+  &.layout-toolbar {
+    padding-top: 18px;
+    padding-bottom: 18px;
+    --border-width: 0!important;
+
+    &--pb0 {
+      padding-bottom: 0;
+    }
+  }
 }
 
 .menu-icon {

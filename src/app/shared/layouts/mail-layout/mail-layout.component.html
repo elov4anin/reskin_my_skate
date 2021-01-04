@@ -1,5 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary" class="layout-toolbar">
+  <ion-toolbar
+          color="primary"
+          class="layout-toolbar"
+          [ngClass]="{'layout-toolbar-pb0': isNotNeedPaddingTopHeader}"
+  >
     <div class="logo">
       <app-logo></app-logo>
     </div>

@@ -9,6 +9,7 @@ import {MainLayoutHelper} from "./main-layout.helper";
 export class MailLayoutComponent implements OnInit {
   @Input() isNeedRightPadding: boolean = true;
   @Input() isNeedLeftPadding: boolean = true;
+  @Input() isNotNeedPaddingTopHeader: boolean = false;
 
 
   constructor(
