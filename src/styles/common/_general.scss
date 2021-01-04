@@ -18,9 +18,19 @@ html, body {
     }
 }
 
+.text-as-link {
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
 .p0 {
     padding: 0;
 }
 .d-flex {
     display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
 }

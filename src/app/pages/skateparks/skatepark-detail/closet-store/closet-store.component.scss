@@ -1,0 +1,32 @@
+.closest {
+  display: flex;
+
+  &__img {
+    width: 80px;
+    height: 72px;
+
+    background-color: var(--ion-color-primary);
+    background-image: url("/../../assets/images/closest.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &__store {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+  }
+}
+
+.text-16 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+}
+.text-15 {
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 20px;
+}

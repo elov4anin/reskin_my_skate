@@ -1,4 +1,6 @@
-
+.mt4 {
+  margin-top: var(--theme-base-margin);
+}
 
 .mt8 {
   margin-top: calc(var(--theme-base-margin) * 2);
@@ -16,6 +18,11 @@
   margin-top: calc(var(--theme-base-margin) * 5);
 }
 
+
+.mb4 {
+  margin-bottom: var(--theme-base-margin);
+}
+
 .mb8 {
   margin-bottom: calc(var(--theme-base-margin) * 2);
 }
@@ -31,3 +38,4 @@
 .mb20 {
   margin-bottom: calc(var(--theme-base-margin) * 5);
 }
+
