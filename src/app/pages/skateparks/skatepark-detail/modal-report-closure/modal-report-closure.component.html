@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-padding-top">
+    <ion-text slot="start" class="ion ion-margin-start title-20">
+      Skatepark closure
+    </ion-text>
+
+    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+      Close
+    </ion-text>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content color="dark">
+  <form [formGroup]="form" class="ion-margin-top ion-margin-end ion-margin-end">
+    <ion-item color="dark">
+      <ion-label position="stacked">
+        <ion-text class="text-16">When did the skatepark close (or replaced)?</ion-text>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="dateClosure"></ion-input>
+    </ion-item>
+    <ion-item color="dark" class="ion-margin-top">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Has the skatepark been removed or replaced or other?</ion-text>
+      </ion-label>
+      <ion-textarea rows="4" placeholder="Type here" formControlName="description"></ion-textarea>
+    </ion-item>
+    <div class="ion-margin-start ion-margin-end ion-margin-top">
+      <ion-text color="medium" class="text-15">
+        Are you sure you want to submit closure of this skate park? Temporary closures are NOT necessary. Skatepark closures will authorsied by an admin before being displayed on the App.
+      </ion-text>
+
+      <ion-button
+              color="secondary"
+              expand="block"
+              class="ion-margin-top"
+              (click)="closeModal()"
+              [disabled]="form.invalid"
+      >
+        <ion-text color="light" class="text-15-500">Submit closure</ion-text>
+      </ion-button>
+
+      <ion-button color="dark" expand="block" class="mt12" (click)="closeModal()">
+        <ion-text color="danger" class="text-16" (click)="closeModal()">Cancel</ion-text>
+      </ion-button>
+
+    </div>
+
+  </form>
+</ion-content>

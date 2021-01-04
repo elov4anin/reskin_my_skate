@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common';
 import {ISlideInfo} from "../skateparks.interfaces";
 import { featuresSlides } from './features_demodata';
+import {ModalController} from "@ionic/angular";
+import {ModalReportClosureComponent} from "./modal-report-closure/modal-report-closure.component";
 
 
 @Component({
@@ -17,7 +19,9 @@ export class SkateparkDetailPage implements OnInit {
   readonly activeRatingColor: string = getComputedStyle(document.documentElement)
       .getPropertyValue('--ion-color-secondary');
   featuresSlides: ISlideInfo[] = featuresSlides;
-  constructor(private _location: Location) { }
+  constructor(
+      private _location: Location,
+      private _modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -30,4 +34,12 @@ export class SkateparkDetailPage implements OnInit {
     console.log(this.isFavor)
     this.isFavor = !this.isFavor;
   }
+
+    async openModalReportClosure() {
+      const modal = await this._modalController.create({
+        component: ModalReportClosureComponent,
+        cssClass: 'modal-report-closure'
+      });
+      return await modal.present();
+    }
 }
