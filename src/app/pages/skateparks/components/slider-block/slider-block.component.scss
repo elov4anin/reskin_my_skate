@@ -1,13 +1,6 @@
-.title {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 25px;
-}
-
 .slider-block {
   margin-top: calc(var(--theme-base-margin) * 6);
 }
-
 
 .slide {
   position: relative;
@@ -32,10 +25,6 @@
 
   &__title {
     display: block;
-
-    font-weight: 500;
-    font-size: 15px;
-    line-height: 20px;
 
     overflow: hidden;
     text-overflow: ellipsis;
