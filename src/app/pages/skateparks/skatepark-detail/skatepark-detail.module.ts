@@ -5,6 +5,7 @@ import {SkateparkDetailPageRoutingModule} from './skatepark-detail-routing.modul
 import {SkateparkDetailPage} from './skatepark-detail.page';
 import {SharedModule} from "../../../shared/shared.module";
 import {SliderPhotosComponent} from "./slider-photos/slider-photos.component";
+import {SliderFeaturesComponent} from "./slider-features/slider-features.component";
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import {SliderPhotosComponent} from "./slider-photos/slider-photos.component";
     declarations: [
         SkateparkDetailPage,
         SliderPhotosComponent,
+        SliderFeaturesComponent,
     ]
 })
 export class SkateparkDetailPageModule {

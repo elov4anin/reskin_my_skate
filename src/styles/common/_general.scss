@@ -1,21 +1,4 @@
-// .container {
-//     @include container();
-//     @include sm(max-width, rem(510));
-//     @include md(max-width, rem(638));
-//     @include lg(max-width, rem(894));
-//     @include xl(max-width, rem(1250));
-// }
-//
-// .wrapper-block {
-//     @include sm(max-width, rem(510));
-//     @include md(max-width, rem(638));
-//     @include lg(max-width, rem(894));
-//     @include xl(max-width, rem(1024));
-//
-//     margin: auto;
-//     padding-right: rem(24);
-//     padding-left: rem(24);
-// }
+@import "classes/margins";
 
 html, body {
    // display: flex;
@@ -38,8 +21,6 @@ html, body {
 .p0 {
     padding: 0;
 }
-
-
-.mt8 {
-    margin-top: calc(var(--theme-base-margin) * 2);
+.d-flex {
+    display: flex;
 }

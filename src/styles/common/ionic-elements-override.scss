@@ -17,6 +17,11 @@ ion-searchbar.search-field {
   }
 
 }
+
+ion-button {
+  --border-radius: var(--theme-base-border-radius);
+}
+
 .swiper-pagination-bullet {
   background: rgba(20, 20, 20, 0.5);
 }

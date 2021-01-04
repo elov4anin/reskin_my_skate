@@ -4,6 +4,7 @@ import {IonicModule} from "@ionic/angular";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {LogoComponent} from "./components/logo/logo.component";
+import {IonicRatingComponentModule} from "ionic-rating-component";
 
 const IONIC_MODULES = [
     IonicModule,
@@ -14,7 +15,9 @@ const ANGULAR_MODULES = [
     FormsModule,
 ];
 
-const OTHER_MODULES = [];
+const OTHER_MODULES = [
+    IonicRatingComponentModule
+];
 
 const COMPONENTS = [
     MailLayoutComponent,

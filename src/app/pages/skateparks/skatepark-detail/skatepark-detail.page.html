@@ -3,7 +3,7 @@
         [isNeedLeftPadding]="false"
         [isNotNeedPaddingTopHeader]="true"
 >
-    <ion-grid class="ion-padding-start ion-padding-end">
+    <ion-grid class="ion-padding-start ion-padding-end mb12">
         <ion-row>
             <ion-col class="p0">
                 <ion-icon
@@ -35,4 +35,41 @@
         </ion-row>
     </ion-grid>
     <app-slider-photos></app-slider-photos>
+    <ion-grid class="ion-padding-start ion-padding-end mt16">
+        <ion-row>
+            <ion-col class="p0" size="9">
+                <ion-button expand="block" color="dark">Add Photos</ion-button>
+            </ion-col>
+            <ion-col class="p0" offset="1" size="2">
+                <ion-button color="dark" (click)="addFavourite()">
+                    <ion-icon
+                            slot="icon-only"
+                            [color]="isFavor ? 'secondary': 'light'"
+                            [name]="isFavor ? 'heart' : 'heart-outline'"
+                    ></ion-icon>
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <div class="divisor"></div>
+    <div class="ion-padding-start ion-padding-end d-flex ion-justify-content-between ion-align-items-center ">
+        <ionic-rating-component
+                #rating
+                activeIcon = "star"
+                defaultIcon = "star-outline"
+                [activeColor] = activeRatingColor
+                [defaultColor] = defaultRatingColor
+                readonly="true"
+                rating="3"
+                fontSize = "16px">
+        </ionic-rating-component>
+        <ion-text color="light" class="text text--link">Read all ratings</ion-text>
+    </div>
+    <div class="divisor"></div>
+    <div class="ion-padding-start">
+        <app-slider-features [slides]="featuresSlides"></app-slider-features>
+    </div>
+    <div class="ion-padding-start ion-padding-end">
+    </div>
 </app-mail-layout>

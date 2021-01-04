@@ -1,0 +1,28 @@
+<section class="slider-block">
+  <header class="d-flex ion-justify-content-between ion-align-items-center mb16 ion-padding-end">
+    <ion-text class="title">{{title}}</ion-text>
+    <ion-progress-bar color="secondary" [value]="progress" style="width: 56px"></ion-progress-bar>
+  </header>
+
+  <div class="slider-block__list">
+    <ion-slides
+            #slider
+            [options]="slideOpts"
+            class="custom-slides"
+            (ionSlideNextStart)="ionSlideDidChange()"
+            (ionSlidePrevStart)="ionSlideDidChange()"
+    >
+      <ion-slide *ngFor =" let slide of slides">
+        <div class="slide">
+          <div class="slide__img"  [ngStyle]="{'background-image':'url('+slide.imgSrc+')'}"></div>
+          <!--  <img src="{{slide.imgSrc}}">-->
+          <div class="slide__wrap mt8">
+            <span class="slide__title">
+                {{slide.title}}
+              </span>
+          </div>
+        </div>
+      </ion-slide>
+    </ion-slides>
+  </div>
+</section>
