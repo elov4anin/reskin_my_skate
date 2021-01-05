@@ -44,3 +44,10 @@ ion-button {
 .swiper-pagination-bullet-active {
   background: var(--ion-color-secondary);
 }
+
+ion-spinner {
+  color: var(--ion-color-secondary)!important;
+}
+.infinite-loading-text {
+  color: var(--ion-color-secondary)!important;
+}

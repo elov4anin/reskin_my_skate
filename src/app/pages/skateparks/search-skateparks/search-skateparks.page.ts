@@ -38,4 +38,8 @@ export class SearchSkateparksPage implements OnInit {
     segmentChanged($event: any) {
         
     }
+
+    loadData($event: any) {
+        
+    }
 }

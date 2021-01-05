@@ -16,3 +16,19 @@ ion-searchbar {
 ion-segment-button {
  color: var(--ion-color-light);
 }
+
+ion-list {
+  background: var(--ion-color-primary);
+}
+
+ion-item {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+}
+
+ion-fab-button {
+  --border-color: var(--theme-divisor-color);
+  --border-style: solid;
+  --border-width: 1px;
+}
+
