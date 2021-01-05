@@ -3,6 +3,7 @@ import {ISlideInfo} from "../../skateparks.interfaces";
 import {IonSlides} from "@ionic/angular";
 import {Router} from "@angular/router";
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules/tabs/tabs.enum";
+import {SKATEPARKS_ROUTES} from "../../skatepars-routers.enum";
 
 @Component({
     selector: 'app-slider-block',
@@ -39,6 +40,6 @@ export class SliderBlockComponent implements OnInit {
     }
 
     async openSkatepark() {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, 1])
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, SKATEPARKS_ROUTES.SKATEPARK, 1])
     }
 }

@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" color="dark" (click)="back()">
+      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+    </ion-button>
+    <ion-searchbar
+            class="search-field-page"
+            inputmode="search"
+            mode="ios"
+            color="dark"
+            placeholder="Looking for a skatepark?"
+            clearIcon="close-outline"
+            debounce="600"
+            searchIcon="undefined"
+            (ionChange)="search($event)"
+    ></ion-searchbar>
+    <ion-button slot="end" color="dark" class="filter-btn" (click)="openFilter()" size="small">
+      <ion-icon slot="icon-only" name="filter" size="small"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="primary">
+
+</ion-content>

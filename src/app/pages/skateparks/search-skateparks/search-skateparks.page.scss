@@ -1,0 +1,14 @@
+ion-toolbar {
+  --min-height: 60px;
+}
+
+ion-searchbar {
+  --placeholder-font-weight: 500;
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 0.9;
+  padding-inline-end: 0;
+}
+
+.filter-btn {
+  height: 46px;
+}

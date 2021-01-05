@@ -18,6 +18,22 @@ ion-searchbar.search-field {
 
 }
 
+.search-field-page {
+
+  .searchbar-input {
+    padding-inline-start: 0 !important;
+    padding-top: 10px !important;
+  }
+
+  .searchbar-clear-button {
+    top: 5px !important;
+  }
+
+  .searchbar-clear-icon {
+    width: 24px;
+  }
+}
+
 ion-button {
   --border-radius: var(--theme-base-border-radius);
 }
