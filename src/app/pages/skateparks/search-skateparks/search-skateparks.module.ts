@@ -8,6 +8,7 @@ import {SearchSkateparksPageRoutingModule} from './search-skateparks-routing.mod
 
 import {SearchSkateparksPage} from './search-skateparks.page';
 import {GoogleMapComponent} from "./google-map/google-map.component";
+import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {GoogleMapComponent} from "./google-map/google-map.component";
     declarations: [
         SearchSkateparksPage,
         GoogleMapComponent,
+        ModalFilterSkateparksComponent,
     ]
 })
 export class SearchSkateparksPageModule {}

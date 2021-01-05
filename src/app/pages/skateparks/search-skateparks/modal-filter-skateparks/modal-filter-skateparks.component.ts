@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-modal-filter-skateparks',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ModalFilterSkateparksComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _modalController: ModalController) { }
 
   ngOnInit() {}
 
+  async closeModal() {
+    await this._modalController.dismiss();
+  }
 }
