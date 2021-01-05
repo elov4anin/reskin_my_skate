@@ -27,4 +27,8 @@ export class SearchSkateparksPage implements OnInit {
     openFilter() {
 
     }
+
+    segmentChanged($event: any) {
+        
+    }
 }

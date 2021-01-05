@@ -21,5 +21,12 @@
 </ion-header>
 
 <ion-content color="primary">
-
+  <ion-segment (ionChange)="segmentChanged($event)" mode="md"  value="list" color="secondary">
+    <ion-segment-button value="list">
+      <ion-text class="text-16-500">List view</ion-text>
+    </ion-segment-button>
+    <ion-segment-button value="map">
+      <ion-label>Map view</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 </ion-content>
