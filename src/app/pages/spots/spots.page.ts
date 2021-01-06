@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ModalController} from "@ionic/angular";
+import {ModalAddSpotComponent} from "./modal-add-spot/modal-add-spot.component";
 
 @Component({
     selector: 'app-spots',
@@ -7,13 +9,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class SpotsPage implements OnInit {
 
-    constructor() {
+    constructor(
+        private _modalController: ModalController,
+    ) {
     }
 
     ngOnInit() {
     }
 
-    openAddSpotModal() {
-
+    async openAddSpotModal() {
+        const modal = await this._modalController.create({
+            component: ModalAddSpotComponent,
+            cssClass: 'modal-add-spot'
+        });
+        return await modal.present();
     }
 }
