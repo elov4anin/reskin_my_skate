@@ -1,0 +1,11 @@
+ion-checkbox {
+  --background: var(--ion-color-dark);
+  --background-checked: var(--ion-color-primary);
+  --border-color: var(--ion-color-dark);
+  --border-color-checked: var(--ion-color-primary);
+  --checkmark-color: var(--ion-color-secondary);
+}
+
+ion-list {
+  background: var(--ion-color-dark);
+}

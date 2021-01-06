@@ -1,84 +1,67 @@
 <ion-header>
-  <ion-toolbar color="dark" class="ion-padding-top">
-    <ion-text slot="start" class="ion ion-margin-start title-20">
-      Add a new spot
-    </ion-text>
+    <ion-toolbar color="dark" class="ion-padding-top">
+        <ion-text slot="start" class="ion ion-margin-start title-20">
+            Add a new spot
+        </ion-text>
 
-    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
-      Close
-    </ion-text>
+        <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+            Close
+        </ion-text>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content color="dark">
 
-  <div class="ion-margin-start ion-margin-end">
-    <ion-item color="dark" class="ion-margin-top item-inline-padding">
-      <ion-label position="stacked">
-        <ion-text class="text-16">Spot name</ion-text>
-      </ion-label>
-      <ion-input placeholder="Type here"></ion-input>
-    </ion-item>
+    <div class="ion-margin-start ion-margin-end">
+        <ion-item color="dark" class="ion-margin-top item-inline-padding">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Spot name</ion-text>
+            </ion-label>
+            <ion-input placeholder="Type here"></ion-input>
+        </ion-item>
 
-    <ion-item color="dark" class="item-inline-padding">
-      <ion-label position="stacked">
-        <ion-text class="text-16">Location</ion-text>
-      </ion-label>
-      <ion-input placeholder="Type here"></ion-input>
-    </ion-item>
+        <ion-item color="dark" class="item-inline-padding">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Location</ion-text>
+            </ion-label>
+            <ion-input placeholder="Type here"></ion-input>
+        </ion-item>
 
-    <div class="ion-margin-top row">
-      <ion-text color="tertiary" class="text-15">
-        Many spots won’t have an address - place the pin on a map to add the exact location
-      </ion-text>
-      <div class="mt12">
-        <app-map-block></app-map-block>
-      </div>
+        <div class="ion-margin-top row">
+            <ion-text color="tertiary" class="text-15">
+                Many spots won’t have an address - place the pin on a map to add the exact location
+            </ion-text>
+            <div class="mt12">
+                <app-map-block></app-map-block>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="ion-margin-start ion-margin-top row">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Photos</ion-text>
-    </ion-label>
-    <div class="mt12">
-      <app-add-photos-slider></app-add-photos-slider>
+    <div class="ion-margin-start ion-margin-top row">
+        <ion-label position="stacked">
+            <ion-text class="text-16">Photos</ion-text>
+        </ion-label>
+        <div class="mt12">
+            <app-add-photos-slider></app-add-photos-slider>
+        </div>
     </div>
-  </div>
-
-
 
     <div class="ion-margin-start ion-margin-end ion-margin-top row">
-      <ion-label position="stacked">
-        <ion-text class="text-16">Add features</ion-text>
-      </ion-label>
-      <ion-list>
-        <ion-item color="dark" class="mb4">
-          <ion-label color="tertiary">Curb</ion-label>
-          <ion-checkbox slot="end"></ion-checkbox>
-        </ion-item>
-        <ion-item color="primary" class="mb4">
-          <ion-label color="secondary">Rail</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item color="primary" class="mb4">
-          <ion-label color="secondary">Steps</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item color="primary" class="mb4">
-          <ion-label color="secondary">Other</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-      </ion-list>
+        <ion-label position="stacked">
+            <ion-text class="text-16">Add features</ion-text>
+        </ion-label>
+        <div class="mt12">
+            <app-checkbox-list [checkboxes]="checkboxes"></app-checkbox-list>
+        </div>
     </div>
-
-
 
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="dark">
-    <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">Save spot</ion-button>
-  </ion-toolbar>
+    <ion-toolbar color="dark">
+        <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">
+            Save spot
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>

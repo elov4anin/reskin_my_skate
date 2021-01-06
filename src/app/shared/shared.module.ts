@@ -5,6 +5,7 @@ import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
 import {LogoComponent} from "./components/logo/logo.component";
 import {IonicRatingComponentModule} from "ionic-rating-component";
+import {CheckboxListComponent} from "./components/checkbox-list/checkbox-list.component";
 
 const IONIC_MODULES = [
     IonicModule,
@@ -22,6 +23,7 @@ const OTHER_MODULES = [
 const COMPONENTS = [
     MailLayoutComponent,
     LogoComponent,
+    CheckboxListComponent,
 ];
 
 const PIPES = [];
