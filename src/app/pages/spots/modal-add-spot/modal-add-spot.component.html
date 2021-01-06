@@ -11,61 +11,68 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content color="dark" class="ion-padding-start ion-padding-end">
+<ion-content color="dark">
 
-  <ion-item color="dark" class="ion-margin-top item-inline-padding">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Spot name</ion-text>
-    </ion-label>
-    <ion-input placeholder="Type here"></ion-input>
-  </ion-item>
+  <div class="ion-margin-start ion-margin-end">
+    <ion-item color="dark" class="ion-margin-top item-inline-padding">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Spot name</ion-text>
+      </ion-label>
+      <ion-input placeholder="Type here"></ion-input>
+    </ion-item>
 
-  <ion-item color="dark" class="item-inline-padding">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Location</ion-text>
-    </ion-label>
-    <ion-input placeholder="Type here"></ion-input>
-  </ion-item>
+    <ion-item color="dark" class="item-inline-padding">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Location</ion-text>
+      </ion-label>
+      <ion-input placeholder="Type here"></ion-input>
+    </ion-item>
 
-  <div class="ion-margin-top row">
-    <ion-text color="tertiary" class="text-15">
-      Many spots won’t have an address - place the pin on a map to add the exact location
-    </ion-text>
-    <div class="mt12">
-      <app-map-block></app-map-block>
+    <div class="ion-margin-top row">
+      <ion-text color="tertiary" class="text-15">
+        Many spots won’t have an address - place the pin on a map to add the exact location
+      </ion-text>
+      <div class="mt12">
+        <app-map-block></app-map-block>
+      </div>
     </div>
   </div>
 
-  <div class="ion-margin-top row">
+  <div class="ion-margin-start ion-margin-top row">
     <ion-label position="stacked">
       <ion-text class="text-16">Photos</ion-text>
     </ion-label>
+    <div class="mt12">
+      <app-add-photos-slider></app-add-photos-slider>
+    </div>
   </div>
 
 
-  <div class="ion-margin-top row">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Add features</ion-text>
-    </ion-label>
-    <ion-list>
-      <ion-item color="dark" class="mb4">
-        <ion-label color="tertiary">Curb</ion-label>
-        <ion-checkbox slot="end"></ion-checkbox>
-      </ion-item>
-      <ion-item color="primary" class="mb4">
-        <ion-label color="secondary">Rail</ion-label>
-        <ion-checkbox slot="end" checked="true"></ion-checkbox>
-      </ion-item>
-      <ion-item color="primary"  class="mb4">
-        <ion-label color="secondary">Steps</ion-label>
-        <ion-checkbox slot="end" checked="true"></ion-checkbox>
-      </ion-item>
-      <ion-item color="primary" class="mb4">
-        <ion-label color="secondary">Other</ion-label>
-        <ion-checkbox slot="end" checked="true"></ion-checkbox>
-      </ion-item>
-    </ion-list>
-  </div>
+
+    <div class="ion-margin-start ion-margin-end ion-margin-top row">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Add features</ion-text>
+      </ion-label>
+      <ion-list>
+        <ion-item color="dark" class="mb4">
+          <ion-label color="tertiary">Curb</ion-label>
+          <ion-checkbox slot="end"></ion-checkbox>
+        </ion-item>
+        <ion-item color="primary" class="mb4">
+          <ion-label color="secondary">Rail</ion-label>
+          <ion-checkbox slot="end" checked="true"></ion-checkbox>
+        </ion-item>
+        <ion-item color="primary" class="mb4">
+          <ion-label color="secondary">Steps</ion-label>
+          <ion-checkbox slot="end" checked="true"></ion-checkbox>
+        </ion-item>
+        <ion-item color="primary" class="mb4">
+          <ion-label color="secondary">Other</ion-label>
+          <ion-checkbox slot="end" checked="true"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+    </div>
+
 
 
 </ion-content>
