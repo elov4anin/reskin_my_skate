@@ -24,7 +24,7 @@ export class SkateparksPage implements OnInit {
 
   async openSearchPage(evt) {
     await this._router.navigate(
-        ['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, SKATEPARKS_ROUTES.SEARCH],
+        ['/', SKATEPARKS_ROUTES.SEARCH],
         {queryParams: {searchValue: evt.detail.value}})
 
   }

@@ -14,10 +14,6 @@ const routes: Routes = [
     path: SKATEPARKS_ROUTES.SKATEPARK + '/:id',
     loadChildren: () => import('./skatepark-detail/skatepark-detail.module').then( m => m.SkateparkDetailPageModule)
   },
-  {
-    path: SKATEPARKS_ROUTES.SEARCH,
-    loadChildren: () => import('./search-skateparks/search-skateparks.module').then( m => m.SearchSkateparksPageModule)
-  }
 ];
 
 @NgModule({

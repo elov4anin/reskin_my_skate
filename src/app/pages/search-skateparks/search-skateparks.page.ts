@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
-import {getEnumAsArray} from "../../../shared/helpers/utils";
+import {getEnumAsArray} from "../../shared/helpers/utils";
 import {SegmentsEnum, segmentsEnum2LabelMapping} from "./segments.enum";
 import {ModalController} from "@ionic/angular";
 import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";

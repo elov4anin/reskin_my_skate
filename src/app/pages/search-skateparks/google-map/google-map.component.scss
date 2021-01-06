@@ -12,7 +12,8 @@
 
 #map {
   width: 100%;
-  height: calc(100vh - 160px);
+  //height: calc(100vh - 160px); // with tabs
+  height: calc(100vh - 108px);
 }
 
 .map-wrapper {
