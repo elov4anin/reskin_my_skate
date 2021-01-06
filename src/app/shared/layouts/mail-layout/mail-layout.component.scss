@@ -2,6 +2,10 @@
   display: none;
 }
 
+ion-content.height-tabs-header {
+  height: calc(100vh - 132px);
+}
+
 .logo {
   margin-left: 20px;
 }

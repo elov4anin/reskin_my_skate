@@ -1,3 +1,5 @@
+/* text decoration classes */
+
 .text--underline {
   text-decoration: underline;
 }
@@ -6,6 +8,7 @@
   text-transform: none;
 }
 
+/* text classes */
 
 .text-10-500 {
   font-style: normal;
@@ -49,6 +52,7 @@
   line-height: 22px;
 }
 
+/* title classes */
 
 .title-18 {
   font-weight: 500;
@@ -67,4 +71,11 @@
   font-weight: 500;
   font-size: 28px;
   line-height: 36px;
+}
+
+.title-34 {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 41px;
 }

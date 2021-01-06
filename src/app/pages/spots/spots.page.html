@@ -1,3 +1,18 @@
-<app-mail-layout>
-  spots
+<app-mail-layout [isNeedHeightWithTabsAndHeader]="true">
+    <ng-container *ngIf="false; else emptyBlock">
+
+    </ng-container>
+    <ng-template #emptyBlock>
+        <div class="d-flex h100percent">
+            <div class="d-flex flex-column ion-align-items-center ion-justify-content-center">
+                <ion-text color="light" class="title-34">Nothing in here…</ion-text>
+                <ion-text color="tertiary" class="text-15 empty-text">Want to add some news spots? Easy. Just click the
+                    button below and fill in the details
+                </ion-text>
+                <ion-button color="success" expand="block" class="w100percent">
+                    Add new spot
+                </ion-button>
+            </div>
+        </div>
+    </ng-template>
 </app-mail-layout>
