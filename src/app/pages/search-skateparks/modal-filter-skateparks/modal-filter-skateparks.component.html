@@ -1,75 +1,54 @@
 <ion-header>
-  <ion-toolbar color="dark" class="ion-padding-top">
-    <ion-text slot="start" class="ion ion-margin-start title-20">
-     Filter
-    </ion-text>
+    <ion-toolbar color="dark" class="ion-padding-top">
+        <ion-text slot="start" class="ion ion-margin-start title-20">
+            Filter
+        </ion-text>
 
-    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
-      Close
-    </ion-text>
+        <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+            Close
+        </ion-text>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content color="dark" class="ion-padding-start ion-padding-end">
-  <div class="ion-margin-top row">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Type</ion-text>
-    </ion-label>
-    <div class="d-flex ion-justify-content-between">
-      <ion-button color="secondary" expand="block" size="default" fill="outline">Indoor</ion-button>
-      <ion-button color="secondary" expand="block" size="default" fill="outline">Outdoor</ion-button>
+    <div class="ion-margin-top row">
+        <ion-label position="stacked">
+            <ion-text class="text-16">Type</ion-text>
+        </ion-label>
+        <div class="d-flex ion-justify-content-between">
+            <ion-button color="secondary" expand="block" size="default" fill="outline">Indoor</ion-button>
+            <ion-button color="secondary" expand="block" size="default" fill="outline">Outdoor</ion-button>
+        </div>
     </div>
-  </div>
 
-  <div class="ion-margin-top row">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Surface</ion-text>
-    </ion-label>
-    <div class="d-flex ion-justify-content-between">
-      <ion-button color="primary" expand="block" size="default" fill="solid"><ion-text color="tertiary">Concrete</ion-text></ion-button>
-      <ion-button color="secondary" expand="block" size="default" fill="outline"><ion-text color="secondary">Wood</ion-text></ion-button>
+    <div class="ion-margin-top row">
+        <ion-label position="stacked">
+            <ion-text class="text-16">Surface</ion-text>
+        </ion-label>
+        <div class="d-flex ion-justify-content-between">
+            <ion-button color="primary" expand="block" size="default" fill="solid">
+                <ion-text color="tertiary">Concrete</ion-text>
+            </ion-button>
+            <ion-button color="secondary" expand="block" size="default" fill="outline">
+                <ion-text color="secondary">Wood</ion-text>
+            </ion-button>
+        </div>
     </div>
-  </div>
 
-  <div class="ion-margin-top row">
-    <ion-label position="stacked">
-      <ion-text class="text-16">Features</ion-text>
-    </ion-label>
-      <ion-list>
-        <ion-item color="primary" class="mb4">
-          <ion-label color="secondary">Skatelite</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item color="primary"  class="mb4">
-          <ion-label color="secondary">Toilet</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item color="primary" class="mb4">
-          <ion-label color="secondary">Store</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item color="dark" class="mb4">
-          <ion-label color="tertiary">Paid</ion-label>
-          <ion-checkbox slot="end"></ion-checkbox>
-        </ion-item>
-        <ion-item color="primary" class="mb4">
-          <ion-label color="secondary">Free</ion-label>
-          <ion-checkbox slot="end" checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item color="dark" class="mb4">
-          <ion-label color="tertiary">Undercover</ion-label>
-          <ion-checkbox slot="end"></ion-checkbox>
-        </ion-item>
-        <ion-item color="dark" class="mb4">
-          <ion-label color="tertiary">Cafe</ion-label>
-          <ion-checkbox slot="end"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-  </div>
+    <div class="ion-margin-top row">
+        <ion-label position="stacked">
+            <ion-text class="text-16">Features</ion-text>
+        </ion-label>
+        <div class="mt12">
+            <app-checkbox-list [checkboxes]="checkboxes"></app-checkbox-list>
+        </div>
+    </div>
 
 </ion-content>
 <ion-footer>
-  <ion-toolbar color="dark">
-    <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">Apply filters</ion-button>
-  </ion-toolbar>
+    <ion-toolbar color="dark">
+        <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">
+            Apply filters
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>
