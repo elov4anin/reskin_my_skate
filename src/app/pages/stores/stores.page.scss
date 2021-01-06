@@ -1,0 +1,15 @@
+
+ion-list {
+  background: var(--ion-color-primary);
+}
+
+ion-item {
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  --padding-start: 0px;
+  --inner-padding-end: 5px;
+}
+ion-thumbnail  {
+  width: 140px;
+  height: 100px;
+}

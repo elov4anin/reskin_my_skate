@@ -1,3 +1,31 @@
 <app-mail-layout>
-  stores
+
+  <header class="d-flex ion-justify-content-between ion-align-items-center">
+    <ion-text color="light" class="title-20">Stores</ion-text>
+    <ion-button fill="solid" (click)="sort()" class="add-btn">
+      <ion-icon src="assets/images/svg-icons/swap_vert-24px.svg"></ion-icon>
+      <ion-text color="secondary" class="text-16">Sort</ion-text>
+    </ion-button>
+  </header>
+
+  <ion-list color="primary">
+    <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]" color="primary" lines="none">
+      <ion-thumbnail slot="start">
+        <img src="../../../assets/images/thumbnall.png">
+      </ion-thumbnail>
+      <div class="d-flex flex-column ">
+        <ion-text color="light" class="mb12 text-16">Cheap Shop</ion-text>
+        <ion-text color="medium" class="text-15">Second street 25 West London</ion-text>
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </app-mail-layout>
