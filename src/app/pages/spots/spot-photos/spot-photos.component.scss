@@ -1,0 +1,33 @@
+.main-photo {
+  width: auto;
+  height: 160px;
+  border-radius: var(--theme-base-border-radius);
+
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.small-photo {
+  position: relative;
+
+  width: auto;
+  height: 74px;
+  border-radius: var(--theme-base-border-radius);
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+.last {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--theme-divisor-color);
+  opacity: 0.8;
+}

@@ -1,4 +1,5 @@
 @import "classes/margins";
+@import "classes/paddings";
 @import "classes/text";
 
 html, body {
@@ -25,9 +26,6 @@ html, body {
     }
 }
 
-.p0 {
-    padding: 0;
-}
 .d-flex {
     display: flex;
 }

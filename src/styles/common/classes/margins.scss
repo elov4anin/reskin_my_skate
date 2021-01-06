@@ -1,3 +1,4 @@
+/*margin top*/
 .mt4 {
   margin-top: var(--theme-base-margin);
 }
@@ -18,6 +19,7 @@
   margin-top: calc(var(--theme-base-margin) * 5);
 }
 
+/*margin bottom*/
 
 .mb4 {
   margin-bottom: var(--theme-base-margin);
@@ -39,3 +41,47 @@
   margin-bottom: calc(var(--theme-base-margin) * 5);
 }
 
+/*margin right*/
+
+.mr4 {
+  margin-right: var(--theme-base-margin);
+}
+
+.mr8 {
+  margin-right: calc(var(--theme-base-margin) * 2);
+}
+
+.mr12 {
+  margin-right: calc(var(--theme-base-margin) * 3);
+}
+
+.mr16 {
+  margin-right: calc(var(--theme-base-margin) * 4);
+}
+
+.mr20 {
+  margin-right: calc(var(--theme-base-margin) * 5);
+}
+
+
+/*margin left*/
+
+.ml4 {
+  margin-left: var(--theme-base-margin);
+}
+
+.ml8 {
+  margin-left: calc(var(--theme-base-margin) * 2);
+}
+
+.ml12 {
+  margin-left: calc(var(--theme-base-margin) * 3);
+}
+
+.ml16 {
+  margin-left: calc(var(--theme-base-margin) * 4);
+}
+
+.ml20 {
+  margin-left: calc(var(--theme-base-margin) * 5);
+}

@@ -1,6 +1,17 @@
 <app-mail-layout [isNeedHeightWithTabsAndHeader]="true">
-    <ng-container *ngIf="false; else emptyBlock">
+    <ng-container *ngIf="true; else emptyBlock">
+        <header class="d-flex ion-justify-content-between ion-align-items-center">
+            <ion-text color="light" class="title-20">My spots</ion-text>
+            <ion-button fill="solid" (click)="openAddSpotModal()" class="add-btn">
+                <ion-text color="secondary" class="text-16">Add new</ion-text>
+            </ion-button>
+        </header>
+        <div class="d-flex flex-column">
+            <div *ngFor="let spot of [1, 2, 5]" class="mb20">
+                <app-spot-photos></app-spot-photos>
+            </div>
 
+        </div>
     </ng-container>
     <ng-template #emptyBlock>
         <div class="d-flex h100percent">
@@ -9,7 +20,7 @@
                 <ion-text color="tertiary" class="text-15 empty-text">Want to add some news spots? Easy. Just click the
                     button below and fill in the details
                 </ion-text>
-                <ion-button color="success" expand="block" class="w100percent">
+                <ion-button color="success" expand="block" class="w100percent" (click)="openAddSpotModal()">
                     Add new spot
                 </ion-button>
             </div>
