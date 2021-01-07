@@ -48,3 +48,7 @@ html, body {
     height: 1px;
     background: var(--theme-divisor-color);
 }
+
+.mainLayoutHeight124 {
+    height: calc(100% - 124px);
+}

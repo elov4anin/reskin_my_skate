@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, TemplateRef} from '@angular/core';
 import {MainLayoutHelper} from "./main-layout.helper";
 
 @Component({
@@ -11,6 +11,8 @@ export class MailLayoutComponent implements OnInit {
   @Input() isNeedLeftPadding: boolean = true;
   @Input() isNotNeedPaddingTopHeader: boolean = false;
   @Input() isNeedHeightWithTabsAndHeader: boolean = false;
+
+  @Input() footerSlot: TemplateRef<any>;
 
 
   constructor(
