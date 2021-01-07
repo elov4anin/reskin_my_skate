@@ -12,6 +12,7 @@ export class StoreDetailPage implements OnInit {
 
   ngOnInit() {
   }
+
   back() {
     this._location.back();
   }
