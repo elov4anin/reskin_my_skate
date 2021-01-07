@@ -1,0 +1,130 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-padding-top">
+    <ion-text slot="start" class="ion-margin-start title-20">
+      Ratings
+    </ion-text>
+
+    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+      Close
+    </ion-text>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content color="dark">
+  <div class="ion-margin-start ion-margin-end ion-margin-top">
+    <ion-item color="dark">
+      <ion-label position="stacked">
+        <ion-text color="light" class="text-16">Your rating</ion-text>
+      </ion-label>
+      <ionic-rating-component
+              #rating
+              activeIcon = "star"
+              defaultIcon = "star-outline"
+              [activeColor] = activeRatingColor
+              [defaultColor] = defaultRatingColor
+              readonly="false"
+              rating="3"
+              fontSize = "16px">
+      </ionic-rating-component>
+    </ion-item>
+
+    <ion-item color="dark">
+      <ion-label position="stacked" class="mb12">
+        <ion-text color="light" class="text-16">Add a comment</ion-text>
+        <ion-text color="tertiary" class="text-16">(optional)</ion-text>
+      </ion-label>
+      <ion-textarea rows="4" placeholder="Type here" ></ion-textarea>
+    </ion-item>
+    <ion-button
+            color="success"
+            expand="block"
+            class="ion-margin-top"
+    >
+      <ion-text class="text-15-500">Add Rating</ion-text>
+    </ion-button>
+  </div>
+  <div class="divisor mt20 mb20"></div>
+  <div class="ion-margin-start ion-margin-end d-flex ion-justify-content-between ion-align-items-center">
+    <ion-text color="secondary" class="text-16">Overall rating</ion-text>
+    <ion-text color="secondary" class="title-28">5.0</ion-text>
+  </div>
+
+  <div class="ion-margin-top your-rating">
+    <div class="ion-margin-start ion-margin-end d-flex ion-justify-content-between ion-align-items-center">
+      <ion-text color="light" class="text-16">Your Ratings</ion-text>
+    </div>
+
+    <ion-list class="ion-margin-top" lines="none">
+      <ion-item color="primary" class="ion-margin-start ion-margin-end ion-margin-bottom" lines="none">
+        <ion-avatar slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <div class="rating">
+          <div class="rating__row d-flex ion-justify-content-between ion-align-items-center">
+            <div class="rating__author">Mike Welthman</div>
+            <ionic-rating-component
+                    class="comment-rating"
+                    #rating
+                    activeIcon = "star"
+                    defaultIcon = "star-outline"
+                    [activeColor] = activeRatingColor
+                    [defaultColor] = defaultRatingColor
+                    readonly="true"
+                    rating="3"
+                    fontSize = "16px">
+            </ionic-rating-component>
+          </div>
+          <div class="rating__row">
+            <ion-text color="tertiary" class="text-15">
+              I liked it very much! Did a triple back side ollie kickflip 360 over a huge set of stairs (at least 60 of them) and landed perfectly… All thanks to this awesome park!
+            </ion-text>
+          </div>
+          <div class="rating__row">
+            <ion-text color="medium" class="text-13-300">June 6, 2020</ion-text>
+          </div>
+
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </div>
+
+
+  <div class="ion-margin-start ion-margin-end ion-margin-top d-flex ion-justify-content-between ion-align-items-center">
+    <ion-text color="light" class="text-16">User Ratings</ion-text>
+    <ion-text color="tertiary" class="text-15">37 ratings</ion-text>
+  </div>
+
+  <ion-list class="ion-margin-top" lines="none">
+    <ion-item color="dark" class="ion-margin-start ion-margin-end ion-margin-bottom" *ngFor="let r of [1,2,3,4]" lines="none">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <div class="rating">
+        <div class="rating__row d-flex ion-justify-content-between ion-align-items-center">
+          <div class="rating__author">Mike Welthman</div>
+          <ionic-rating-component
+                  class="comment-rating"
+                  #rating
+                  activeIcon = "star"
+                  defaultIcon = "star-outline"
+                  [activeColor] = activeRatingColor
+                  [defaultColor] = defaultRatingColor
+                  readonly="true"
+                  rating="3"
+                  fontSize = "16px">
+          </ionic-rating-component>
+        </div>
+        <div class="rating__row">
+          <ion-text color="tertiary" class="text-15">
+            I liked it very much! Did a triple back side ollie kickflip 360 over a huge set of stairs (at least 60 of them) and landed perfectly… All thanks to this awesome park!
+          </ion-text>
+        </div>
+        <div class="rating__row">
+          <ion-text color="medium" class="text-13-300">June 6, 2020</ion-text>
+        </div>
+
+      </div>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,43 @@
+ion-item {
+  --padding-start: 5px;
+  --inner-padding-end: 0px;
+  display: flex;
+  align-items: flex-start;
+}
+
+ion-input, ion-textarea {
+  --background: var(--ion-color-medium-contrast) !important;
+  --placeholder-color: var(--ion-color-medium) !important;
+  --color: var(--ion-color-light) !important;
+  --padding-start: 16px !important;
+  --padding-end: 16px !important;
+  --padding-top: 10px !important;
+  --padding-botton: 10px !important;
+  --border-radius: var(--theme-base-border-radius);
+
+}
+
+ion-label.mb12 {
+  margin-bottom: 12px!important;
+}
+
+ion-list {
+  background: var(--ion-color-dark);
+}
+
+ion-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.comment-rating {
+  height: 36px;
+}
+.your-rating {
+  padding-top: 12px;
+  background: var(--ion-color-primary);
+
+  ion-list {
+    background: var(--ion-color-primary);
+  }
+}
