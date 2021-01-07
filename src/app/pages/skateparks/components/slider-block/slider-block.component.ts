@@ -40,6 +40,6 @@ export class SliderBlockComponent implements OnInit {
     }
 
     async openSkatepark() {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, SKATEPARKS_ROUTES.SKATEPARK, 1])
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, 1])
     }
 }

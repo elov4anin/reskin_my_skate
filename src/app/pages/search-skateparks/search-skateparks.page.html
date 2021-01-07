@@ -31,7 +31,7 @@
 
   <ng-container *ngIf="selectedSegment === segmentsEnum.LIST">
     <ion-list color="primary">
-      <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]" color="primary" lines="none">
+      <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]" color="primary" lines="none" (click)="openSkatepark()">
         <ion-thumbnail slot="start">
           <img src="../../../assets/images/thumbnall.png">
         </ion-thumbnail>

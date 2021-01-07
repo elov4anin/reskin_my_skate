@@ -4,6 +4,8 @@ import {getEnumAsArray} from "../../shared/helpers/utils";
 import {SegmentsEnum, segmentsEnum2LabelMapping} from "./segments.enum";
 import {ModalController} from "@ionic/angular";
 import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../shared/modules/tabs/tabs.enum";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-search-skateparks',
@@ -20,6 +22,7 @@ export class SearchSkateparksPage implements OnInit {
     constructor(
         private _location: Location,
         private _modalController: ModalController,
+        private _router: Router,
     ) {
     }
 
@@ -48,5 +51,9 @@ export class SearchSkateparksPage implements OnInit {
 
     loadData($event: any) {
 
+    }
+
+    async openSkatepark() {
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, 1])
     }
 }
