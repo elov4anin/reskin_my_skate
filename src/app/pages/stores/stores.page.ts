@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../shared/modules/tabs/tabs.enum";
 
 @Component({
     selector: 'app-stores',
@@ -7,7 +9,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class StoresPage implements OnInit {
 
-    constructor() {
+    constructor(private _router: Router) {
     }
 
     ngOnInit() {
@@ -19,5 +21,9 @@ export class StoresPage implements OnInit {
 
     loadData($event: any) {
 
+    }
+
+    async openStore(storeId: number) {
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.STORES, storeId])
     }
 }

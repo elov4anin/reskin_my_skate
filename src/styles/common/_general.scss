@@ -41,3 +41,10 @@ html, body {
 .w100percent {
     width: 100%;
 }
+
+
+.divisor {
+    width: 100%;
+    height: 1px;
+    background: var(--theme-divisor-color);
+}
