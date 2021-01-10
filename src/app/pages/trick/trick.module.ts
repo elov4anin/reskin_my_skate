@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 import { TrickPageRoutingModule } from './trick-routing.module';
 
 import { TrickPage } from './trick.page';
-import {GamePageModule} from "../game/game.module";
 import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.component";
 
 @NgModule({
@@ -16,7 +15,6 @@ import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.co
         FormsModule,
         IonicModule,
         TrickPageRoutingModule,
-        GamePageModule
     ],
   declarations: [TrickPage, ModalTrickHowtoComponent],
 })

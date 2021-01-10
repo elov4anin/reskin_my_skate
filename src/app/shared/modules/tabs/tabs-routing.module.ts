@@ -18,7 +18,7 @@ const routes: Routes = [
             },
             {
                 path: tabsEnum2RouteMapping.GAME,
-                loadChildren: () => import('../../../pages/game/game.module').then(m => m.GamePageModule)
+                loadChildren: () => import('../../../pages/game-tab/game-tab.module').then(m => m.GameTabPageModule)
             },
             {
                 path: tabsEnum2RouteMapping.STORES,

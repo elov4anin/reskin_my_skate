@@ -6,14 +6,14 @@ import {ModalController} from "@ionic/angular";
 import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
 import {ModalAddPlayersComponent} from "./modals/modal-add-players/modal-add-players.component";
 import {Router} from "@angular/router";
-import {GameRoutes} from "./game-routes";
+import {GameRoutes} from "../game/game-routes";
 
 @Component({
     selector: 'app-game',
-    templateUrl: './game.page.html',
-    styleUrls: ['./game.page.scss'],
+    templateUrl: './game-tab.page.html',
+    styleUrls: ['./game-tab.page.scss'],
 })
-export class GamePage implements OnInit {
+export class GameTabPage implements OnInit {
 
     readonly difficulties = difficulties;
     checkboxes: ICheckBox[] = [
