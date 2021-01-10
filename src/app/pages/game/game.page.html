@@ -23,7 +23,7 @@
     <ion-label slot="stacked">
       <ion-text color="light" class="text-16">Add players</ion-text>
       <div class="d-flex mt12">
-        <div class="person text-hover" *ngFor="let p of players" (click)="removePlayer()">
+        <div class="person" *ngFor="let p of players">
           <app-person></app-person>
         </div>
         <div class="person person--add text-hover" (click)="addPlayer()">

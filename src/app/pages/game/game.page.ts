@@ -4,6 +4,7 @@ import {IDifficulty} from "./difficulty.interface";
 import {ICheckBox} from "../../shared/components/checkbox-list/checkbox-list.component";
 import {ModalController} from "@ionic/angular";
 import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
+import {ModalAddPlayersComponent} from "./modals/modal-add-players/modal-add-players.component";
 
 @Component({
     selector: 'app-game',
@@ -52,11 +53,19 @@ export class GamePage implements OnInit {
         d.isSelected = true;
     }
 
-    addPlayer() {
-        this.players.push(1);
-    }
+    async addPlayer() {
+        const modal = await this._modalController.create({
+            component: ModalAddPlayersComponent,
+            cssClass: 'modal-add-players',
+            componentProps: {
+                players: this.players
+            }
+        });
+        await modal.present();
 
-    removePlayer() {
-        this.players.pop()
+        const { data } = await modal.onWillDismiss();
+        if (data) {
+            this.players = data.players
+        }
     }
 }
