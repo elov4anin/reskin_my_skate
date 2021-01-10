@@ -6,6 +6,22 @@ ion-checkbox {
   --checkmark-color: var(--ion-color-secondary);
 }
 
+ion-checkbox.darktwo {
+  --background: var(--ion-color-primary);
+  --background-checked: var(--ion-color-darktwo);
+  --border-color: var(--ion-color-primary);
+  --border-color-checked: var(--ion-color-darktwo);
+  --checkmark-color: var(--ion-color-secondary);
+}
+
+ion-list.primary {
+  background: var(--ion-color-primary);
+}
+
 ion-list {
   background: var(--ion-color-dark);
+}
+
+ion-item {
+  --border-radius: 4px;
 }

@@ -1,6 +1,11 @@
-<ion-list>
-<ion-item *ngFor="let ch of checkboxes" [color]=" ch.checked ? 'primary'  : 'dark'" class="mb4">
-  <ion-label [color]=" ch.checked ? 'secondary'  : 'tertiary'"  color="">{{ch.label}}</ion-label>
-  <ion-checkbox slot="end" [checked]="ch.checked" (ionChange)="change(ch)"></ion-checkbox>
-</ion-item>
+<ion-list [ngClass]="{'primary': defaultCheckedColor === 'darktwo'}">
+    <ion-item *ngFor="let ch of checkboxes"
+              [color]=" ch.checked ? defaultCheckedColor  : defaultUncheckedColor"
+              class="mb4"
+              lines="none"
+    >
+        <ion-label [color]=" ch.checked ? 'secondary'  : 'tertiary'" color="">{{ch.label}}</ion-label>
+        <ion-checkbox slot="end" [ngClass]="{'darktwo': defaultCheckedColor === 'darktwo'}" [checked]="ch.checked"
+                      (ionChange)="change(ch)"></ion-checkbox>
+    </ion-item>
 </ion-list>

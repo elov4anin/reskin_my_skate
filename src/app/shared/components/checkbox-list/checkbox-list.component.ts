@@ -7,7 +7,8 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class CheckboxListComponent implements OnInit {
   @Input() checkboxes: ICheckBox[] = []
-
+  @Input() defaultCheckedColor: string = 'primary'
+  @Input() defaultUncheckedColor: string = 'dark'
   constructor() { }
 
   ngOnInit() {}
