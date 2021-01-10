@@ -1,0 +1,23 @@
+.difficulty {
+  box-sizing: border-box;
+  width: 96px;
+  height: 142px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--ion-color-dark);
+  border-radius: var(--theme-base-border-radius);
+
+  transition: all 0.3s;
+
+  ion-icon {
+    width: 66px;
+    height: 90px;
+  }
+
+  &--active {
+    border: 2px solid var(--ion-color-secondary);
+  }
+}

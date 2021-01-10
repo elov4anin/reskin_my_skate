@@ -1,0 +1,4 @@
+<div class="difficulty" [ngClass]="{'difficulty--active': difficulty.isSelected}">
+  <ion-icon [src]="difficulty.isSelected ?  difficulty.iconSelected : difficulty.icon"></ion-icon>
+  <ion-text [color]="difficulty.isSelected ? 'secondary' : 'light'">{{difficulty.name}}</ion-text>
+</div>

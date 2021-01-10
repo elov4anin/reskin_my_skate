@@ -1,3 +1,22 @@
-<app-mail-layout>
-  game
+<app-mail-layout
+        [isNeedLeftPadding]="false"
+        [isNeedRightPadding]="false"
+>
+  <div class="ion-margin-start ion-margin-end d-flex flex-column ion-justify-content-center ion-align-items-center">
+    <ion-text color="light" class="title-34">Play S.K.A.T.E</ion-text>
+    <ion-button fill="clear" (click)="openHowPlayModal()">
+      <ion-icon color="secondary" name="information-circle-outline" slot="start"></ion-icon>
+      <ion-text color="secondary">How do I play?</ion-text>
+    </ion-button>
+  </div>
+  <div class="divisor mt12 mb20"></div>
+  <div class="ion-margin-start ion-margin-end d-flex flex-column">
+    <ion-label slot="stacked">
+      <ion-text color="light" class="text-16">Choose difficulty</ion-text>
+      <div class="d-flex ion-justify-content-between mt12">
+        <app-difficulty *ngFor="let d of difficulties" [difficulty]="d" (click)="selectDifficulty(d)"></app-difficulty>
+      </div>
+    </ion-label>
+
+  </div>
 </app-mail-layout>
