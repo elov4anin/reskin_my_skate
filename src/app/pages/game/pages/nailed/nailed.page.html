@@ -1,0 +1,31 @@
+<ion-content color="primary">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="stopGame()">
+      <ion-icon name="power-outline" color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="d-flex flex-column ion-align-items-center nailed">
+    <ion-text class="nailed__text title-34" color="secondary">Nailed it!</ion-text>
+    <ion-text class="nailed__text title-34" color="secondary">Nailed it!</ion-text>
+    <ion-text class="nailed__text title-34" color="secondary">Nailed it!</ion-text>
+    <ion-text class="nailed__text title-34" color="secondary">Nailed it!</ion-text>
+
+    <div class="d-flex flex-column ion-align-self-center ion-align-items-center ion-padding-start ion-padding-end nailed__wrapper">
+      <ion-avatar>
+        <img src="../../../../../assets/images/person.png">
+      </ion-avatar>
+
+      <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
+      <ion-text class=" skate title-34">
+        <span>S.</span>
+        <span>K.</span>
+        <span>A.</span>
+        <span>T.</span>
+        <span>E</span>
+      </ion-text>
+      <ion-button class="w100percent next-btn" fill="solid" color="success" expand="block" (click)="nextPlayer()">
+        Start game
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

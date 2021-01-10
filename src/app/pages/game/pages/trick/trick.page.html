@@ -18,7 +18,7 @@
     <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
     <div class="d-flex ion-justify-content-between buttons">
 
-      <ion-button class="game-btn" color="success">
+      <ion-button class="game-btn" color="success" (click)="openNailed()">
         <div class="d-flex flex-column ion-justify-content-center">
           <ion-icon src="assets/images/svg-icons/nailed.svg"></ion-icon>
           <ion-text class="title-20 mt12">Nailed it!</ion-text>
@@ -26,7 +26,7 @@
         </div>
       </ion-button>
 
-      <ion-button class="game-btn" color="dark">
+      <ion-button class="game-btn" color="dark" (click)="openFailed()">
         <div class="d-flex flex-column ion-justify-content-center">
           <ion-icon src="assets/images/svg-icons/failed.svg"></ion-icon>
           <ion-text class="title-20 mt12">Failed it</ion-text>

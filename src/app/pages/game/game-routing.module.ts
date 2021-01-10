@@ -5,22 +5,20 @@ import {GameRoutes} from "./game-routes";
 const routes: Routes = [
     {
         path: '',
-        children: [
-           {
-               path: GameRoutes.TRICK,
-               loadChildren: () => import('./pages/trick/trick.module').then(m => m.TrickPageModule)
-           },
-            {
-                path: '',
-                redirectTo: `/${GameRoutes.ROOT}/` + GameRoutes.TRICK,
-                pathMatch: 'full'
-            }
-        ]
+        redirectTo: `/${GameRoutes.ROOT}/` + GameRoutes.TRICK,
+        pathMatch: 'full'
     },
     {
-        path: '',
-        redirectTo: `/${GameRoutes.ROOT}/` +  GameRoutes.TRICK,
-        pathMatch: 'full'
+        path: GameRoutes.TRICK,
+        loadChildren: () => import('./pages/trick/trick.module').then(m => m.TrickPageModule)
+    },
+    {
+        path: GameRoutes.NAILED,
+        loadChildren: () => import('./pages/nailed/nailed.module').then(m => m.NailedPageModule)
+    },
+    {
+        path: GameRoutes.FAILED,
+        loadChildren: () => import('./pages/failed/failed.module').then(m => m.FailedPageModule)
     }
 ];
 
