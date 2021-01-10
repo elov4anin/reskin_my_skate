@@ -72,6 +72,6 @@ export class GameTabPage implements OnInit {
     }
 
     async startGame() {
-        await this._router.navigate(['/', GameRoutes.TRICK])
+        await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK])
     }
 }

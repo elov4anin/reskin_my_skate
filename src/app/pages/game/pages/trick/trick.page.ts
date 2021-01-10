@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from "@ionic/angular";
 import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.component";
+import {Router} from "@angular/router";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules/tabs/tabs.enum";
 
 @Component({
     selector: 'app-trick',
@@ -9,7 +11,7 @@ import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.co
 })
 export class TrickPage implements OnInit {
 
-    constructor(private _modalController: ModalController) {
+    constructor(private _modalController: ModalController, private _router: Router) {
     }
 
     ngOnInit() {
@@ -23,7 +25,7 @@ export class TrickPage implements OnInit {
         await modal.present();
     }
 
-    stopGame() {
-
+    async stopGame() {
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME])
     }
 }

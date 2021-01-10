@@ -1,3 +1,4 @@
 export enum GameRoutes {
-    TRICK = 'trick'
+    ROOT = 'game',
+    TRICK = 'trick',
 }

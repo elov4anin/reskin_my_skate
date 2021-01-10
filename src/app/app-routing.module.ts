@@ -9,13 +9,13 @@ const routes: Routes = [
     loadChildren: () => import('./shared/modules/tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
+    path: GameRoutes.ROOT,
+    loadChildren: () => import('./pages/game/game.module').then(m => m.GameModule)
+  },
+  {
     path: SKATEPARKS_ROUTES.SEARCH,
     loadChildren: () => import('./pages/search-skateparks/search-skateparks.module').then(m => m.SearchSkateparksPageModule)
   },
-  {
-    path: GameRoutes.TRICK,
-    loadChildren: () => import('./pages/trick/trick.module').then(m => m.TrickPageModule)
-  }
 ];
 @NgModule({
   imports: [
