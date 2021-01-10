@@ -1,0 +1,39 @@
+<ion-content color="primary">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="stopGame()">
+      <ion-icon name="power-outline" color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="d-flex flex-column ion-align-items-center ion-justify-content-start trick">
+    <ion-text color="tertiary" class="text-15">Trick 2</ion-text>
+    <ion-text  color="light" class="title-34">Frontside Flip</ion-text>
+    <ion-button fill="clear" class="mb16" (click)="openModalPlayTrick()">
+      <ion-icon color="secondary" name="play-circle-outline" slot="start"></ion-icon>
+      <ion-text color="secondary" class="text-16">Play instructions</ion-text>
+    </ion-button>
+    <ion-avatar>
+      <img src="assets/images/person.png">
+    </ion-avatar>
+
+    <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
+    <div class="d-flex ion-justify-content-between buttons">
+
+      <ion-button class="game-btn" color="success">
+        <div class="d-flex flex-column ion-justify-content-center">
+          <ion-icon src="assets/images/svg-icons/nailed.svg"></ion-icon>
+          <ion-text class="title-20 mt12">Nailed it!</ion-text>
+          <ion-text class="text-12 mt4">No letter</ion-text>
+        </div>
+      </ion-button>
+
+      <ion-button class="game-btn" color="dark">
+        <div class="d-flex flex-column ion-justify-content-center">
+          <ion-icon src="assets/images/svg-icons/failed.svg"></ion-icon>
+          <ion-text class="title-20 mt12">Failed it</ion-text>
+          <ion-text class="text-12 mt4">You get a S</ion-text>
+        </div>
+      </ion-button>
+
+    </div>
+  </div>
+</ion-content>

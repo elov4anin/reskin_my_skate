@@ -5,6 +5,8 @@ import {ICheckBox} from "../../shared/components/checkbox-list/checkbox-list.com
 import {ModalController} from "@ionic/angular";
 import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
 import {ModalAddPlayersComponent} from "./modals/modal-add-players/modal-add-players.component";
+import {Router} from "@angular/router";
+import {GameRoutes} from "./game-routes";
 
 @Component({
     selector: 'app-game',
@@ -34,7 +36,7 @@ export class GamePage implements OnInit {
     ];
     players: any[] = [1, 2, 3];
 
-    constructor(private _modalController: ModalController) {
+    constructor(private _modalController: ModalController, private _router: Router) {
     }
 
     ngOnInit() {
@@ -67,5 +69,9 @@ export class GamePage implements OnInit {
         if (data) {
             this.players = data.players
         }
+    }
+
+    async startGame() {
+        await this._router.navigate(['/', GameRoutes.TRICK])
     }
 }

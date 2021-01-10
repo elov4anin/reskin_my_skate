@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import {SKATEPARKS_ROUTES} from "./pages/skateparks/skatepars-routers.enum";
+import {GameRoutes} from "./pages/game/game-routes";
 
 const routes: Routes = [
   {
@@ -10,6 +11,10 @@ const routes: Routes = [
   {
     path: SKATEPARKS_ROUTES.SEARCH,
     loadChildren: () => import('./pages/search-skateparks/search-skateparks.module').then(m => m.SearchSkateparksPageModule)
+  },
+  {
+    path: GameRoutes.TRICK,
+    loadChildren: () => import('./pages/trick/trick.module').then(m => m.TrickPageModule)
   }
 ];
 @NgModule({
