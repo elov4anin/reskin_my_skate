@@ -1,0 +1,25 @@
+.current {
+  padding-top: 220px;
+  text-align: center;
+}
+
+.current__wrapper {
+  position: relative;
+}
+
+.nailed {
+  position: absolute;
+  top: 50px;
+  left: 10px;
+}
+
+
+.failed {
+  position: absolute;
+  top: 70px;
+  right: 10px;
+}
+.next-btn {
+  margin-top: auto;
+  margin-bottom: 40px;
+}

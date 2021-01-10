@@ -19,6 +19,10 @@ const routes: Routes = [
     {
         path: GameRoutes.FAILED,
         loadChildren: () => import('./pages/failed/failed.module').then(m => m.FailedPageModule)
+    },
+    {
+        path: GameRoutes.CURRENT,
+        loadChildren: () => import('./pages/current-standings/current-standings.module').then(m => m.CurrentStandingsPageModule)
     }
 ];
 

@@ -4,11 +4,11 @@ import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules
 import {GameRoutes} from "../../game-routes";
 
 @Component({
-  selector: 'app-failed',
-  templateUrl: './failed.page.html',
-  styleUrls: ['./failed.page.scss'],
+  selector: 'app-current-standings',
+  templateUrl: './current-standings.page.html',
+  styleUrls: ['./current-standings.page.scss'],
 })
-export class FailedPage implements OnInit {
+export class CurrentStandingsPage implements OnInit {
 
   constructor(private _router: Router) { }
 
@@ -19,7 +19,7 @@ export class FailedPage implements OnInit {
     await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME])
   }
 
-  async nextPlayer() {
-    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CURRENT])
+  async nexTrick() {
+    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK])
   }
 }

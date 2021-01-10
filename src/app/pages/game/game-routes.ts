@@ -3,4 +3,5 @@ export enum GameRoutes {
     TRICK = 'trick',
     NAILED = 'nailed',
     FAILED = 'failed',
+    CURRENT = 'current-standings'
 }

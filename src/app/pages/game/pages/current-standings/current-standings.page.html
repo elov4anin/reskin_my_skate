@@ -1,0 +1,47 @@
+<ion-content color="primary">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="stopGame()">
+      <ion-icon name="power-outline" color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="h100percent d-flex flex-column ion-align-items-center ion-margin-start ion-margin-end current">
+    <ion-text color="light" class="title-34  ">Current <br> Standings</ion-text>
+
+    <div class="current__wrapper">
+      <div class="d-flex flex-column ion-align-items-center nailed">
+        <ion-avatar>
+          <img src="../../../../../assets/images/person.png">
+        </ion-avatar>
+
+        <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
+        <ion-text class=" skate title-34">
+          <ion-text>S.</ion-text>
+          <ion-text>K.</ion-text>
+          <ion-text>A.</ion-text>
+          <ion-text>T.</ion-text>
+          <ion-text>E</ion-text>
+        </ion-text>
+      </div>
+
+      <div class="d-flex flex-column ion-align-items-center failed">
+        <ion-avatar>
+          <img src="../../../../../assets/images/person.png">
+        </ion-avatar>
+
+        <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
+
+        <ion-text class="skate title-34">
+          <ion-text color="secondary">S.</ion-text>
+          <ion-text>K.</ion-text>
+          <ion-text>A.</ion-text>
+          <ion-text>T.</ion-text>
+          <ion-text>E</ion-text>
+        </ion-text>
+      </div>
+    </div>
+
+    <ion-button class="w100percent next-btn" fill="solid" color="success" expand="block" (click)="nexTrick()">
+     Next Trick
+    </ion-button>
+  </div>
+</ion-content>
