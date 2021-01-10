@@ -1,3 +1,24 @@
 app-checkbox-list {
   width: 100%;
 }
+.person {
+  margin-left: -4px;
+
+  &--add {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    border-radius: 50%;
+    background: var(--ion-color-dark);
+
+    ion-icon {
+      font-size: 14px;
+    }
+  }
+}

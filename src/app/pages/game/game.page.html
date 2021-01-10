@@ -19,16 +19,21 @@
     </ion-label>
   </div>
 
-  <div class="ion-margin-start ion-margin-end d-flex flex-column">
+  <div class="ion-margin-start ion-margin-end ion-margin-top d-flex flex-column">
     <ion-label slot="stacked">
       <ion-text color="light" class="text-16">Add players</ion-text>
-      <div class="d-flex ion-justify-content-between mt12">
-        <div class="person"></div>
+      <div class="d-flex mt12">
+        <div class="person text-hover" *ngFor="let p of players" (click)="removePlayer()">
+          <app-person></app-person>
+        </div>
+        <div class="person person--add text-hover" (click)="addPlayer()">
+          <ion-icon name="add-outline" color="light"></ion-icon>
+        </div>
       </div>
     </ion-label>
   </div>
 
-  <div class="ion-margin-start ion-margin-end d-flex flex-column">
+  <div class="ion-margin-start ion-margin-end ion-margin-top d-flex flex-column">
     <ion-label slot="stacked">
       <ion-text color="light" class="text-16">Type of tricks</ion-text>
       <div class="d-flex mt12">
@@ -39,5 +44,10 @@
         ></app-checkbox-list>
       </div>
     </ion-label>
+  </div>
+  <div class="ion-margin-start ion-margin-end ion-margin-top ion-margin-bottom">
+    <ion-button class=" w100percent" fill="solid" color="success" expand="block">
+      Start game
+    </ion-button>
   </div>
 </app-mail-layout>

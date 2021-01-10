@@ -29,6 +29,7 @@ export class GamePage implements OnInit {
             checked: true
         },
     ];
+    players: any[] = [1, 2, 3];
 
     constructor() {
     }
@@ -43,5 +44,13 @@ export class GamePage implements OnInit {
     selectDifficulty(d: IDifficulty) {
         this.difficulties.forEach(v => v.isSelected = false);
         d.isSelected = true;
+    }
+
+    addPlayer() {
+        this.players.push(1);
+    }
+
+    removePlayer() {
+        this.players.pop()
     }
 }
