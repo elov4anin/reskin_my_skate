@@ -18,6 +18,6 @@ import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.co
         TrickPageRoutingModule,
         GamePageModule
     ],
-  declarations: [TrickPage, ModalTrickHowtoComponent]
+  declarations: [TrickPage, ModalTrickHowtoComponent],
 })
 export class TrickPageModule {}

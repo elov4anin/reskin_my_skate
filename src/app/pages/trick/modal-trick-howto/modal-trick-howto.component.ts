@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {ModalController, Platform} from "@ionic/angular";
+
 
 @Component({
   selector: 'app-modal-trick-howto',
@@ -9,10 +10,12 @@ import {ModalController} from "@ionic/angular";
 export class ModalTrickHowtoComponent implements OnInit {
 
   constructor(
-      private _modalController: ModalController
+      public platform: Platform,
+      private _modalController: ModalController,
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   async closeModal() {
     await this._modalController.dismiss();
