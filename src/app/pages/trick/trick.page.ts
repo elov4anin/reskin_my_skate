@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {ModalController} from "@ionic/angular";
+import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.component";
 
 @Component({
     selector: 'app-trick',
@@ -7,14 +9,18 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TrickPage implements OnInit {
 
-    constructor() {
+    constructor(private _modalController: ModalController) {
     }
 
     ngOnInit() {
     }
 
-    openModalPlayTrick() {
-
+    async openModalPlayTrick() {
+        const modal = await this._modalController.create({
+            component: ModalTrickHowtoComponent,
+            cssClass: 'modal-add-players',
+        });
+        await modal.present();
     }
 
     stopGame() {
