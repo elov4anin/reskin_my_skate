@@ -1,4 +1,16 @@
-ion-avatar {
+ion-avatar, .add-player {
   width: 44px;
   height: 44px;
+}
+
+ion-input {
+  --background: var(--ion-color-medium-contrast) !important;
+  --placeholder-color: var(--ion-color-medium) !important;
+  --color: var(--ion-color-light) !important;
+  --padding-start: 16px !important;
+  --padding-end: 16px !important;
+  --padding-top: 6px !important;
+  --padding-botton: 6px !important;
+  border-radius: var(--theme-base-border-radius);
+  border: 1px solid var(--ion-color-secondary);
 }

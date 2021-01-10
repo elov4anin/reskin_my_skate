@@ -16,12 +16,24 @@ export class ModalAddPlayersComponent implements OnInit {
   ngOnInit() {}
 
   async closeModal() {
+    await this._modalController.dismiss();
+  }
+
+  removePlayer() {
+    this.players.pop()
+  }
+
+  addPlayer() {
+
+  }
+
+  async savePlayers() {
     await this._modalController.dismiss({
       players: this.players
     });
   }
 
-  removePlayer() {
-    this.players.pop()
+  showProfile() {
+
   }
 }

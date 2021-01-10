@@ -11,7 +11,24 @@
   </ion-toolbar>
 </ion-header>
 <ion-content color="dark">
-  <ion-item color="dark"></ion-item>
+  <ion-list class="ion-list-dark">
+    <ion-list-header color="dark" class="mb16"><ion-text color="light" class="text-16">Player name</ion-text></ion-list-header>
+    <ion-item   color="dark" lines="none" class="mb12">
+
+      <ion-input placeholder="Type here"></ion-input>
+      <ion-button class="add-player" slot="end" color="secondary" (click)="addPlayer()">
+        <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item   color="dark" lines="none" class="mb12">
+      <ion-icon color="secondary" slot="start" name="link-outline"></ion-icon>
+      <ion-label color="secondary">Link profile</ion-label>
+      <ion-button fill="clear" slot="end" (click)="showProfile()">
+        <ion-icon slot="icon-only"  color="secondary" name="chevron-down-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
   <div class="divisor mt20 mb20"></div>
 
@@ -31,7 +48,7 @@
 
 <ion-footer>
   <ion-toolbar color="dark">
-    <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">
+    <ion-button (click)="savePlayers()" class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">
       Save
     </ion-button>
   </ion-toolbar>
