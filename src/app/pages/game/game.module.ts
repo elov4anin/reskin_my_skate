@@ -6,6 +6,7 @@ import {GamePage} from './game.page';
 import {SharedModule} from "../../shared/shared.module";
 import {DifficultyComponent} from "./components/difficulty/difficulty.component";
 import {PersonComponent} from "./components/person/person.component";
+import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import {PersonComponent} from "./components/person/person.component";
         GamePage,
         DifficultyComponent,
         PersonComponent,
+        ModalHowtoComponent,
     ]
 })
 export class GamePageModule {

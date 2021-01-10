@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {difficulties} from './difficulties';
 import {IDifficulty} from "./difficulty.interface";
 import {ICheckBox} from "../../shared/components/checkbox-list/checkbox-list.component";
+import {ModalController} from "@ionic/angular";
+import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
 
 @Component({
     selector: 'app-game',
@@ -31,14 +33,18 @@ export class GamePage implements OnInit {
     ];
     players: any[] = [1, 2, 3];
 
-    constructor() {
+    constructor(private _modalController: ModalController) {
     }
 
     ngOnInit() {
     }
 
-    openHowPlayModal() {
-
+    async openHowPlayModal() {
+        const modal = await this._modalController.create({
+            component: ModalHowtoComponent,
+            cssClass: 'modal-howto'
+        });
+        return await modal.present();
     }
 
     selectDifficulty(d: IDifficulty) {
