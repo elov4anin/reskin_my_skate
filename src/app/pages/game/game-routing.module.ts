@@ -27,7 +27,7 @@ const routes: Routes = [
     {
         path: GameRoutes.CONGRADULATIONS,
         loadChildren: () => import('./pages/congradulations/congradulations.module').then(m => m.CongradulationsPageModule)
-    }
+    },
 ];
 
 @NgModule({

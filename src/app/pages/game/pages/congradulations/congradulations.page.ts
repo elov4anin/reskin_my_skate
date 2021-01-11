@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules/tabs/tabs.enum";
 import {GameRoutes} from "../../game-routes";
+import {ModalController} from "@ionic/angular";
+import {ModalLeaderboardComponent} from "../../modals/modal-leaderboard/modal-leaderboard.component";
 
 @Component({
   selector: 'app-congradulations',
@@ -9,7 +11,7 @@ import {GameRoutes} from "../../game-routes";
   styleUrls: ['./congradulations.page.scss'],
 })
 export class CongradulationsPage implements OnInit {
-  constructor(private _router: Router) { }
+  constructor(private _router: Router, private _modalController: ModalController) { }
 
   ngOnInit() {
   }
@@ -22,7 +24,11 @@ export class CongradulationsPage implements OnInit {
     await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK])
   }
 
-  openLeaderboard() {
-
+  async openLeaderboard() {
+    const modal = await this._modalController.create({
+      component: ModalLeaderboardComponent,
+      cssClass: 'modal-leaderboard'
+    });
+    return await modal.present();
   }
 }

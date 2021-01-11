@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import {GameRoutingModule} from "./game-routing.module";
+import {ModalLeaderboardComponent} from "./modals/modal-leaderboard/modal-leaderboard.component";
 
 @NgModule({
   imports: [
@@ -13,7 +14,7 @@ import {GameRoutingModule} from "./game-routing.module";
     GameRoutingModule
   ],
   declarations: [
-
+    ModalLeaderboardComponent
   ]
 })
 export class GameModule {}
