@@ -1,0 +1,41 @@
+ion-fab-button {
+  border: 1px solid var(--theme-divisor-color);
+  border-radius: 50%;
+}
+
+.trick {
+  height: 100%;
+  box-sizing: border-box;
+  padding-top: 140px;
+
+  background-image: url('/assets/images/congradulations.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.buttons {
+  margin-top: auto;
+  margin-bottom: 40px;
+}
+
+ion-avatar {
+  width: 80px;
+  height: 80px;
+  margin-top: 100px;
+}
+
+.game-btn {
+  width: 140px;
+  height: 177px;
+  border-radius: var(--theme-base-border-radius);
+
+  &:first-of-type {
+    margin-right: 28px;
+  }
+
+  ion-icon {
+    width: 94px;
+    height: 55px;
+  }
+}

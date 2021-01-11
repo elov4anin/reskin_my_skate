@@ -4,12 +4,11 @@ import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules
 import {GameRoutes} from "../../game-routes";
 
 @Component({
-  selector: 'app-current-standings',
-  templateUrl: './current-standings.page.html',
-  styleUrls: ['./current-standings.page.scss'],
+  selector: 'app-congradulations',
+  templateUrl: './congradulations.page.html',
+  styleUrls: ['./congradulations.page.scss'],
 })
-export class CurrentStandingsPage implements OnInit {
-
+export class CongradulationsPage implements OnInit {
   constructor(private _router: Router) { }
 
   ngOnInit() {
@@ -19,7 +18,11 @@ export class CurrentStandingsPage implements OnInit {
     await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME])
   }
 
-  async nexTrick() {
-    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRADULATIONS])
+  async playAgain() {
+    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK])
+  }
+
+  openLeaderboard() {
+
   }
 }

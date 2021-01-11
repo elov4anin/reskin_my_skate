@@ -23,6 +23,10 @@ const routes: Routes = [
     {
         path: GameRoutes.CURRENT,
         loadChildren: () => import('./pages/current-standings/current-standings.module').then(m => m.CurrentStandingsPageModule)
+    },
+    {
+        path: GameRoutes.CONGRADULATIONS,
+        loadChildren: () => import('./pages/congradulations/congradulations.module').then(m => m.CongradulationsPageModule)
     }
 ];
 

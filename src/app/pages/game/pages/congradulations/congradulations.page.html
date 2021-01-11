@@ -1,0 +1,34 @@
+<ion-content color="primary">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="dark" (click)="stopGame()">
+      <ion-icon name="power-outline" color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="d-flex flex-column ion-align-items-center ion-justify-content-start trick">
+    <ion-text  color="secondary" class="title-34">Congradulations</ion-text>
+    <ion-avatar>
+      <img src="../../../../../assets/images/person.png">
+    </ion-avatar>
+
+    <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
+    <div class="d-flex ion-justify-content-between buttons">
+
+      <ion-button class="game-btn" color="success" (click)="playAgain()">
+        <div class="d-flex flex-column ion-justify-content-center">
+          <ion-icon src="assets/images/svg-icons/again.svg"></ion-icon>
+          <ion-text class="title-20 mt12">Play</ion-text>
+          <ion-text class="title-20 mt4">Again</ion-text>
+        </div>
+      </ion-button>
+
+      <ion-button class="game-btn" color="dark" (click)="openLeaderboard()">
+        <div class="d-flex flex-column ion-justify-content-center">
+          <ion-icon src="assets/images/svg-icons/leaderboard.svg"></ion-icon>
+          <ion-text class="title-20 mt12">Leader</ion-text>
+          <ion-text class="title-20 mt4">board</ion-text>
+        </div>
+      </ion-button>
+
+    </div>
+  </div>
+</ion-content>
