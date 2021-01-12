@@ -37,6 +37,10 @@ const routes: Routes = [
                 loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
             },
             {
+                path: tabsEnum2RouteMapping.PROFILE,
+                loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+            },
+            {
                 path: '',
                 redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
                 pathMatch: 'full'
@@ -48,8 +52,6 @@ const routes: Routes = [
         redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
         pathMatch: 'full'
     },
-
-
 ];
 
 @NgModule({

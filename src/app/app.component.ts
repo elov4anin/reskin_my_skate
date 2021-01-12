@@ -41,4 +41,8 @@ export class AppComponent {
   async openNews() {
     await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.NEWS])
   }
+
+  async openProfile() {
+    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.PROFILE])
+  }
 }
