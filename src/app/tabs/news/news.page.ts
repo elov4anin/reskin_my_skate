@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../tabs.enum";
 
 @Component({
   selector: 'app-news',
@@ -18,9 +20,12 @@ export class NewsPage implements OnInit {
       text: 'We just need your registered email address to send you…',
     },
   ];
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
   }
 
+  async openNews(newsId: number) {
+    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.NEWS, newsId])
+  }
 }

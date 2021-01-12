@@ -1,0 +1,34 @@
+<app-mail-layout
+        [isNeedRightPadding]="false"
+        [isNeedLeftPadding]="false"
+        [isNotNeedPaddingTopHeader]="true"
+>
+  <ion-grid class="ion-padding-start ion-padding-end mb12">
+    <ion-row>
+      <ion-col class="p0">
+        <ion-icon
+                class="icon-as-btn"
+                color="secondary"
+                name="arrow-back-outline"
+                size="large"
+                (click)="back()"
+        ></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col class="p0">
+        <ion-text color="light" class="title-28">Ten tips to become a better skater</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-thumbnail>
+    <ion-img [src]="'assets/images/news-item.png'"></ion-img>
+  </ion-thumbnail>
+  <div class="ion-padding-start ion-padding-end ion-margin-top">
+    <ion-text color="tertiary" class="text-15">
+      On September 18th, 2020 the skateboarding community came together to spread the gospel of stoke to the kids of the Nickerson Gardens housing project in Watts, California. 100 Baker & Santa Cruz Skateboards were given out along with 100 Vans Skate Shoes and Pro Tec helmets.
+      None of this would have been possible without the inspiration from Watts Community Core and all they’re doing for the good folks of Nickerson.
+      Each and every Friday since March WCC President, Tanya Dorsey, and dozens of Watts Community Core volunteers have been feeding over 700 families in Watts. Due to unemployment skyrocketing during Covid shutdowns, if it were not for The Watts Community Core many of these families would go hungry.”
+    </ion-text>
+  </div>
+</app-mail-layout>
