@@ -1,9 +1,49 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>profile</ion-title>
+<ion-header [translucent]="false">
+  <ion-toolbar
+          color="dark"
+          class="layout-toolbar"
+  >
+    <ion-menu-button *ngIf="mainLayoutHelper.menuToggleEmitter$ | async" slot="end" color="light" class="header-menu-button" (click)="openMenu()">
+      <ion-icon class="menu-icon" slot="icon-only" size="large" name="menu-outline"></ion-icon>
+    </ion-menu-button>
   </ion-toolbar>
+
+  <div class="profile-header__wrap">
+    <div class="d-flex flex-column">
+      <ion-text color="light" class="title-20">Mike Johanssen</ion-text>
+      <ion-text color="tertiary" class="text-16">Active since 2019</ion-text>
+    </div>
+  </div>
 </ion-header>
 
-<ion-content>
+<ion-content color="primary" [fullscreen]="true" class="ion-padding">
+  <div class="d-flex flex-column ion-margin-bottom">
+    <ion-text color="light" class="text-16">Date of Birth</ion-text>
+    <ion-text color="tertiary" class="text-16">June 28, 1989</ion-text>
+  </div>
+
+  <div class="d-flex flex-column ion-margin-bottom">
+    <ion-text color="light" class="text-16">Location</ion-text>
+    <ion-text color="tertiary" class="text-16">Alderman’s Walk 3183
+      West London, UK</ion-text>
+  </div>
+
+  <div class="divisor"></div>
+
+  <div>
+    <ion-button
+            color="success"
+            expand="block"
+            class="ion-margin-top"
+            (click)="editProfile()"
+    >
+      <ion-text color="light" class="text-15-500">Edit Profile</ion-text>
+    </ion-button>
+
+    <ion-button color="dark" fill="clear" expand="block" class="mt12" (click)="logout()">
+      <ion-text color="danger" class="text-16">Sign out</ion-text>
+    </ion-button>
+  </div>
+
 
 </ion-content>

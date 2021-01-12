@@ -1,0 +1,33 @@
+
+ion-toolbar {
+  &.layout-toolbar {
+    position: relative;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    --border-width: 0!important;
+    --ion-color-base: transparent!important;
+
+    &--pb0 {
+      padding-bottom: 0;
+    }
+  }
+}
+
+.menu-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.header-menu-button {
+  margin-inline-end: 12px;
+}
+.profile-header__wrap {
+  margin-top: -80px;
+  display: flex;
+  align-items: flex-end;
+  height: 372px;
+  padding: var(--ion-padding);
+
+  background: url("/assets/images/profile.png") center no-repeat;
+
+}

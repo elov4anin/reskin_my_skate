@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MainLayoutHelper} from "../../shared/layouts/mail-layout/main-layout.helper";
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePage implements OnInit {
 
-  constructor() { }
+  constructor(public mainLayoutHelper: MainLayoutHelper) { }
 
   ngOnInit() {
   }
 
+  openMenu() {
+    this.mainLayoutHelper.menuToggleEmitter$.next(false);
+  }
+
+  editProfile() {
+
+  }
+
+  logout() {
+
+  }
 }
