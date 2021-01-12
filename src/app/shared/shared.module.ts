@@ -6,6 +6,7 @@ import {FormsModule} from "@angular/forms";
 import {LogoComponent} from "./components/logo/logo.component";
 import {IonicRatingComponentModule} from "ionic-rating-component";
 import {CheckboxListComponent} from "./components/checkbox-list/checkbox-list.component";
+import {CalendarDayComponent} from "./components/calendar-day/calendar-day.component";
 
 const IONIC_MODULES = [
     IonicModule,
@@ -24,6 +25,7 @@ const COMPONENTS = [
     MailLayoutComponent,
     LogoComponent,
     CheckboxListComponent,
+    CalendarDayComponent,
 ];
 
 const PIPES = [];

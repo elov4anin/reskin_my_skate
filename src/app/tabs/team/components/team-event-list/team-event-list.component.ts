@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../tabs.enum";
 
 @Component({
   selector: 'app-team-event-list',
@@ -7,8 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TeamEventListComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
+
+  async openEvent(eventId: number) {
+    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.EVENTS, eventId])
+  }
 
 }

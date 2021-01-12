@@ -1,3 +1,17 @@
-<p>
-  team-event-list works!
-</p>
+<ion-virtual-scroll [items]="[1, 2, 3]" approxItemHeight="220px">
+  <ion-card *virtualItem="let item; let itemBounds = bounds;" color="primary" (click)="openEvent(1)">
+    <div>
+      <ion-img [src]="'assets/images/events.png'" height="160" [alt]="'Second Skate Challenge'"></ion-img>
+    </div>
+    <ion-card-header color="dark" class="d-flex ion-justify-content-between events-card-header">
+
+      <div class="d-flex flex-column ion-justify-content-center mr8">
+        <ion-card-title color="light" class="text-16-500">Second Skate Challenge</ion-card-title>
+        <ion-text color="tertiary" class="text-12">Alderman’s Walk, West London</ion-text>
+      </div>
+
+      <app-calendar-day></app-calendar-day>
+
+    </ion-card-header>
+  </ion-card>
+</ion-virtual-scroll>
