@@ -24,13 +24,14 @@
                         </ion-item>
                     </ion-menu-toggle>
                     <ion-menu-toggle auto-hide="false">
-                        <ion-item color="primary">
+                        <ion-item color="primary" (click)="openTeam()"
+                        >
                             <ion-label>Roll with Team GB</ion-label>
                             <ion-icon color="medium" slot="end" name="chevron-forward-outline"></ion-icon>
                         </ion-item>
                     </ion-menu-toggle>
                     <ion-menu-toggle auto-hide="false">
-                        <ion-item color="primary">
+                        <ion-item color="primary" (click)="openNews()">
                             <ion-label>News</ion-label>
                             <ion-icon color="medium" slot="end" name="chevron-forward-outline"></ion-icon>
                         </ion-item>

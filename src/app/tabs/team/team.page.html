@@ -1,0 +1,20 @@
+<app-mail-layout class="mainLayoutHeight124">
+  <header class="d-flex ion-justify-content-between ion-align-items-center ion-margin-bottom">
+    <ion-text color="light" class="title-20">Roll with Team GB</ion-text>
+
+  </header>
+
+  <ion-segment (ionChange)="segmentChanged($event)" mode="md"  [(ngModel)]="selectedSegment" color="secondary">
+    <ion-segment-button *ngFor="let s of segments" [value]="s" >
+      <ion-label>
+        <ion-text class="text-16-500 text-no-transform">{{segmentsEnum2LabelMapping[s]}}</ion-text>
+      </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ng-container *ngIf="selectedSegment === segmentsEnum.NEWS">
+    <app-team-news-list></app-team-news-list>
+  </ng-container>
+  <ng-container *ngIf="selectedSegment === segmentsEnum.EVENTS">
+    <app-team-event-list></app-team-event-list>
+  </ng-container>
+</app-mail-layout>

@@ -28,14 +28,10 @@ const routes: Routes = [
                 path: tabsEnum2RouteMapping.EVENTS,
                 loadChildren: () => import('./events/events.module').then(m => m.EventsPageModule)
             },
-            // {
-            //   path: 'tab2',
-            //   loadChildren: () => import('../../../pages/tab2/tab2.module').then(m => m.Tab2PageModule)
-            // },
-            // {
-            //   path: 'tab3',
-            //   loadChildren: () => import('../../../pages/tab3/tab3.module').then(m => m.Tab3PageModule)
-            // },
+            {
+                path: tabsEnum2RouteMapping.TEAM,
+                loadChildren: () => import('./team/team.module').then( m => m.TeamPageModule)
+            },
             {
                 path: '',
                 redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
@@ -47,7 +43,8 @@ const routes: Routes = [
         path: '',
         redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
         pathMatch: 'full'
-    }
+    },
+
 ];
 
 @NgModule({

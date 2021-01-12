@@ -18,28 +18,31 @@ import {Router} from "@angular/router";
 export class TabsPage {
   @ViewChild('tabsRef') tabsRef: IonTabs;
 
+  readonly tabsEnum2RouteMapping = tabsEnum2RouteMapping;
+  readonly tabsEnum2IconMapping = tabsEnum2IconMapping;
+  readonly tabsEnum2IconActiveMapping = tabsEnum2IconActiveMapping;
+
+  private readonly MAX_TABS_COUNT: number = 5;
+
   tabs: { tabName: string; current: boolean }[] = getEnumAsArray(TabsEnum).map((t) => {
     return {
       tabName: t,
       current: false
     }
-  });
+  }).slice(0, this.MAX_TABS_COUNT);
   selectedTab: string;
-
-  readonly tabsEnum2RouteMapping = tabsEnum2RouteMapping;
-  readonly tabsEnum2IconMapping = tabsEnum2IconMapping;
-  readonly tabsEnum2IconActiveMapping = tabsEnum2IconActiveMapping;
 
   constructor(private _router: Router) {
   }
 
   async setCurrentTab() {
     this.selectedTab = this.tabsRef.getSelected();
-    if (this.selectedTab) {
+    const tabNames = this.tabs.map(t => t.tabName)
+    if (tabNames.includes(this.selectedTab)) {
       const idx = this.tabs.findIndex( t => t.tabName.toLowerCase() === this.selectedTab);
       this.tabs.forEach(t => t.current = false);
       this.tabs[idx].current = true;
-      // await this._router.navigate(['/', TABS_MAIN_ROUTE, this.selectedTab])
+      // await this._router.navigate(['/', TABS_MAIN_ROUTE, this.selectedTab]) if one click open tab
     }
   }
 }
