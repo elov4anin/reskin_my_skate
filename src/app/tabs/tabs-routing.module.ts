@@ -33,6 +33,10 @@ const routes: Routes = [
                 loadChildren: () => import('./team/team.module').then( m => m.TeamPageModule)
             },
             {
+                path: tabsEnum2RouteMapping.NEWS,
+                loadChildren: () => import('./news/news.module').then( m => m.NewsPageModule)
+            },
+            {
                 path: '',
                 redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
                 pathMatch: 'full'
@@ -44,6 +48,7 @@ const routes: Routes = [
         redirectTo: `/${TABS_MAIN_ROUTE}/` + tabsEnum2RouteMapping.SKATEPARKS,
         pathMatch: 'full'
     },
+
 
 ];
 

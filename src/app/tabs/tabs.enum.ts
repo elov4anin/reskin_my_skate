@@ -6,6 +6,7 @@ export enum TabsEnum {
     EVENTS = 'EVENTS',
     // not show in tabs footer
     TEAM = 'TEAM',
+    NEWS = 'NEWS',
 }
 
 export const tabsEnum2LabelMapping:  Record<TabsEnum, string> = {
@@ -15,6 +16,7 @@ export const tabsEnum2LabelMapping:  Record<TabsEnum, string> = {
     STORES: '',
     EVENTS: '',
     TEAM: '',
+    NEWS: '',
 }
 
 export const tabsEnum2RouteMapping:  Record<TabsEnum, string> = {
@@ -24,6 +26,7 @@ export const tabsEnum2RouteMapping:  Record<TabsEnum, string> = {
     STORES: 'stores',
     EVENTS: 'events',
     TEAM: 'team',
+    NEWS: 'news',
 }
 
 export const tabsEnum2IconMapping:  Record<TabsEnum, string> = {
@@ -33,6 +36,7 @@ export const tabsEnum2IconMapping:  Record<TabsEnum, string> = {
     STORES: 'store.svg',
     EVENTS: 'events.svg',
     TEAM: '',
+    NEWS: '',
 }
 
 export const tabsEnum2IconActiveMapping:  Record<TabsEnum, string> = {
@@ -42,6 +46,7 @@ export const tabsEnum2IconActiveMapping:  Record<TabsEnum, string> = {
     STORES: 'store-active.svg',
     EVENTS: 'events-active.svg',
     TEAM: '',
+    NEWS: '',
 }
 
 export const TABS_MAIN_ROUTE = 'tabs'
