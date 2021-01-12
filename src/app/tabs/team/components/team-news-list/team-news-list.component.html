@@ -1,3 +1,21 @@
-<p>
-  team-news-list works!
-</p>
+<ion-virtual-scroll [items]="items" approxItemHeight="320px">
+  <ion-card *virtualItem="let item; let itemBounds = bounds;" color="primaty">
+    <div>
+      <ion-thumbnail *ngIf="!item.isVideo">
+        <ion-img [src]="item.imgSrc" [alt]="item.name">
+        </ion-img>
+      </ion-thumbnail>
+      <iframe *ngIf="item.isVideo"
+              width="375"
+              height="160"
+              src="https://www.youtube.com/embed/aHrn3-Cb3iM"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+    <ion-card-header>
+      <ion-card-subtitle><ion-text color="tertiary" class="text-12">{{ item.name }}</ion-text></ion-card-subtitle>
+      <ion-card-title class="text-16-500"><ion-text color="light" class="text-16-500">{{ item.text }}</ion-text></ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</ion-virtual-scroll>
