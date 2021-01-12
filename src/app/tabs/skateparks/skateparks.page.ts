@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { sliders } from './demodata';
 import {ISlideInfo} from "./skateparks.interfaces";
 import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../shared/modules/tabs/tabs.enum";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../tabs.enum";
 import {SKATEPARKS_ROUTES} from "./skatepars-routers.enum";
 
 

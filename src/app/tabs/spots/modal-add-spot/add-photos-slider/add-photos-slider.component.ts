@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import { sliders } from 'src/app/pages/skateparks/demodata';
+import { sliders } from 'src/app/tabs/skateparks/demodata';
 import {ISlideInfo} from "../../../skateparks/skateparks.interfaces";
 
 @Component({

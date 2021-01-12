@@ -6,7 +6,7 @@ import {ModalController} from "@ionic/angular";
 import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
 import {ModalAddPlayersComponent} from "./modals/modal-add-players/modal-add-players.component";
 import {Router} from "@angular/router";
-import {GameRoutes} from "../game/game-routes";
+import {GameRoutes} from "../../pages/game/game-routes";
 
 @Component({
     selector: 'app-game',

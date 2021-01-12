@@ -6,7 +6,7 @@ import {
   tabsEnum2IconMapping,
   tabsEnum2RouteMapping
 } from "./tabs.enum";
-import {getEnumAsArray} from "../../helpers/utils";
+import {getEnumAsArray} from "../shared/helpers/utils";
 import {IonTabs} from "@ionic/angular";
 import {Router} from "@angular/router";
 

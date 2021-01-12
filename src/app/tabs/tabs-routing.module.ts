@@ -10,23 +10,23 @@ const routes: Routes = [
         children: [
             {
                 path: tabsEnum2RouteMapping.SKATEPARKS,
-                loadChildren: () => import('../../../pages/skateparks/skateparks.module').then(m => m.SkateparksPageModule)
+                loadChildren: () => import('./skateparks/skateparks.module').then(m => m.SkateparksPageModule)
             },
             {
                 path: tabsEnum2RouteMapping.SPOTS,
-                loadChildren: () => import('../../../pages/spots/spots.module').then(m => m.SpotsPageModule)
+                loadChildren: () => import('./spots/spots.module').then(m => m.SpotsPageModule)
             },
             {
                 path: tabsEnum2RouteMapping.GAME,
-                loadChildren: () => import('../../../pages/game-tab/game-tab.module').then(m => m.GameTabPageModule)
+                loadChildren: () => import('./game-tab/game-tab.module').then(m => m.GameTabPageModule)
             },
             {
                 path: tabsEnum2RouteMapping.STORES,
-                loadChildren: () => import('../../../pages/stores/stores.module').then(m => m.StoresPageModule)
+                loadChildren: () => import('./stores/stores.module').then(m => m.StoresPageModule)
             },
             {
                 path: tabsEnum2RouteMapping.EVENTS,
-                loadChildren: () => import('../../../pages/events/events.module').then(m => m.EventsPageModule)
+                loadChildren: () => import('./events/events.module').then(m => m.EventsPageModule)
             },
             // {
             //   path: 'tab2',

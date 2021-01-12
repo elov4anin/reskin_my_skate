@@ -4,7 +4,7 @@ import {getEnumAsArray} from "../../shared/helpers/utils";
 import {SegmentsEnum, segmentsEnum2LabelMapping} from "./segments.enum";
 import {ModalController} from "@ionic/angular";
 import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../shared/modules/tabs/tabs.enum";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../tabs/tabs.enum";
 import {Router} from "@angular/router";
 
 @Component({

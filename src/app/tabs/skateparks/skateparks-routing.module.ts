@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    loadChildren: () => import('./skatepark-detail/skatepark-detail.module').then( m => m.SkateparkDetailPageModule)
+    loadChildren: () => import('./skatepark-detail/skatepark-detail.module').then(m => m.SkateparkDetailPageModule)
   },
 ];
 

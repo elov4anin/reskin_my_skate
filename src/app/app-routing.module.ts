@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {SKATEPARKS_ROUTES} from "./pages/skateparks/skatepars-routers.enum";
+import {SKATEPARKS_ROUTES} from "./tabs/skateparks/skatepars-routers.enum";
 import {GameRoutes} from "./pages/game/game-routes";
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./shared/modules/tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
     path: GameRoutes.ROOT,

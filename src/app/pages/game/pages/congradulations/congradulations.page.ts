@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../shared/modules/tabs/tabs.enum";
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../../tabs/tabs.enum";
 import {GameRoutes} from "../../game-routes";
 import {ModalController} from "@ionic/angular";
 import {ModalLeaderboardComponent} from "../../modals/modal-leaderboard/modal-leaderboard.component";
