@@ -1,0 +1,35 @@
+ion-input, ion-textarea {
+  --background: var(--ion-color-medium-contrast) !important;
+  --placeholder-color: var(--ion-color-medium) !important;
+  --color: var(--ion-color-light) !important;
+  --padding-start: 16px !important;
+  --padding-end: 16px !important;
+  --padding-top: 10px !important;
+  --padding-botton: 10px !important;
+  --border-radius: var(--theme-base-border-radius);
+
+}
+ion-label {
+  white-space: normal !important;
+}
+
+ion-checkbox {
+  --background: var(--ion-color-dark);
+  --background-checked: var(--ion-color-primary);
+  --border-color: var(--ion-color-dark);
+  --border-color-checked: var(--ion-color-primary);
+  --checkmark-color: var(--ion-color-secondary);
+}
+
+ion-list {
+  background: var(--ion-color-dark);
+}
+.apply-btn {
+  width: 100%;
+  max-width: 320px;
+}
+
+.item-inline-padding {
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}

@@ -6,6 +6,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {SliderBlockComponent} from "./components/slider-block/slider-block.component";
 import {AddSpotBoardComponent} from "./components/add-spot-board/add-spot-board.component";
 import {AddSkateparkBoardComponent} from "./components/add-skatepark-board/add-skatepark-board.component";
+import {ModalAddSkateparkComponent} from "./modals/modal-add-skatepark/modal-add-skatepark.component";
 
 @NgModule({
     imports: [
@@ -17,6 +18,7 @@ import {AddSkateparkBoardComponent} from "./components/add-skatepark-board/add-s
         SliderBlockComponent,
         AddSpotBoardComponent,
         AddSkateparkBoardComponent,
+        ModalAddSkateparkComponent,
     ]
 })
 export class SkateparksPageModule {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalAddSkateparkComponent} from "../../modals/modal-add-skatepark/modal-add-skatepark.component";
+import {ModalController} from "@ionic/angular";
 
 @Component({
   selector: 'app-add-skatepark-board',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddSkateparkBoardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _modalController: ModalController) { }
 
   ngOnInit() {}
 
+  async openModalAddSkatepark() {
+    const modal = await this._modalController.create({
+      component: ModalAddSkateparkComponent,
+      cssClass: 'modal-add-spot'
+    });
+    return await modal.present();
+  }
 }

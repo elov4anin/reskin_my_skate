@@ -7,6 +7,8 @@ import {LogoComponent} from "./components/logo/logo.component";
 import {IonicRatingComponentModule} from "ionic-rating-component";
 import {CheckboxListComponent} from "./components/checkbox-list/checkbox-list.component";
 import {CalendarDayComponent} from "./components/calendar-day/calendar-day.component";
+import {MapBlockComponent} from "./components/map-block/map-block.component";
+import {AddPhotosSliderComponent} from "./components/add-photos-slider/add-photos-slider.component";
 
 const IONIC_MODULES = [
     IonicModule,
@@ -26,6 +28,8 @@ const COMPONENTS = [
     LogoComponent,
     CheckboxListComponent,
     CalendarDayComponent,
+    MapBlockComponent,
+    AddPhotosSliderComponent,
 ];
 
 const PIPES = [];

@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { sliders } from 'src/app/tabs/skateparks/demodata';
-import {ISlideInfo} from "../../../skateparks/skateparks.interfaces";
+import {ISlideInfo} from "../../../tabs/skateparks/skateparks.interfaces";
 
 @Component({
   selector: 'app-add-photos-slider',
