@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ICheckBox} from "../../../../shared/components/checkbox-list/checkbox-list.component";
 import {ModalController} from "@ionic/angular";
+import {ModalSkateparkConfirmComponent} from "../modal-skatepark-confirm/modal-skatepark-confirm.component";
 
 @Component({
   selector: 'app-modal-add-skatepark',
@@ -49,4 +50,11 @@ export class ModalAddSkateparkComponent implements OnInit {
     await this._modalController.dismiss();
   }
 
+  async confirmSave() {
+    const modal = await this._modalController.create({
+      component: ModalSkateparkConfirmComponent,
+      cssClass: 'modal-confirm'
+    });
+    return await modal.present();
+  }
 }

@@ -7,6 +7,7 @@ import {SliderBlockComponent} from "./components/slider-block/slider-block.compo
 import {AddSpotBoardComponent} from "./components/add-spot-board/add-spot-board.component";
 import {AddSkateparkBoardComponent} from "./components/add-skatepark-board/add-skatepark-board.component";
 import {ModalAddSkateparkComponent} from "./modals/modal-add-skatepark/modal-add-skatepark.component";
+import {ModalSkateparkConfirmComponent} from "./modals/modal-skatepark-confirm/modal-skatepark-confirm.component";
 
 @NgModule({
     imports: [
@@ -19,6 +20,7 @@ import {ModalAddSkateparkComponent} from "./modals/modal-add-skatepark/modal-add
         AddSpotBoardComponent,
         AddSkateparkBoardComponent,
         ModalAddSkateparkComponent,
+        ModalSkateparkConfirmComponent,
     ]
 })
 export class SkateparksPageModule {

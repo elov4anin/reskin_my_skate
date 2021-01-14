@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-padding-top">
+    <ion-text slot="start" class="ion ion-margin-start title-20">
+      Submit a Skatepark
+    </ion-text>
+
+    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+      Close
+    </ion-text>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark" class="ion-padding-start ion-padding-end">
+  <div class="d-flex flex-column h100percent">
+    <div class="d-flex flex-column ion-text-center wrapper">
+      <ion-text color="light" class="ion-margin-bottom title-34">Confirm submission?</ion-text>
+      <ion-text color="tertiary" class="ion-margin-bottom text-16-500">Skatepark will not display automatically, as needs to be authorized by admin.
+      </ion-text>
+      <div class="d-flex flex-column ion-margin-top">
+        <ion-button expand="block" color="success" (click)="closeModal()">Confirm</ion-button>
+        <ion-button fill="clear" color="danger" (click)="closeModal()">Cancel</ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
