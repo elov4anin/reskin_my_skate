@@ -1,0 +1,28 @@
+.header {
+  margin-top: 38px;
+}
+
+ion-input {
+  margin-top: 12px;
+  --background: var(--ion-color-medium-contrast) !important;
+  --placeholder-color: var(--ion-color-medium) !important;
+  --color: var(--ion-color-light) !important;
+  --padding-start: 16px !important;
+  --padding-end: 16px !important;
+  --padding-top: 10px !important;
+  --padding-botton: 10px !important;
+  --border-radius: var(--theme-base-border-radius);
+  border-radius: var(--theme-base-border-radius);
+}
+
+.apply-btn {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 40px;
+}
+ion-item {
+  --inner-padding-end: 0;
+  margin-bottom: var(--ion-margin);
+  margin-right: 5px;
+  --padding-start: 0;
+}

@@ -1,9 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-mail-layout [isNeeBackBtn]="false" [footerSlot]="footer" [isNeedHeightWithTabsAndHeader]="true">
+    <header class="d-flex ion-justify-content-between ion-align-items-center ion-margin-bottom header">
+        <ion-text color="light" class="title-20">Login</ion-text>
+    </header>
 
-<ion-content>
+    <form [formGroup]="form" class="ion-margin-top">
+        <ion-item color="primary">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Email</ion-text>
+            </ion-label>
+            <ion-input placeholder="Type here" formControlName="email"></ion-input>
+        </ion-item>
 
-</ion-content>
+        <ion-item color="primary">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Password</ion-text>
+            </ion-label>
+            <ion-input placeholder="Type here" formControlName="password"></ion-input>
+        </ion-item>
+
+        <ion-button (click)="logIn()" class="mb12 apply-btn" fill="solid" color="success" expand="block">
+            Log in
+        </ion-button>
+    </form>
+
+    <ng-template #footer>
+        <ion-footer>
+            <ion-toolbar color="primary">
+                <ion-text class="text-15 d-block ion-text-center" color="light">
+                    Don’t have an account?
+                    <ion-text (click)="openRegistration()" color="secondary">Sign up</ion-text>
+                </ion-text>
+            </ion-toolbar>
+        </ion-footer>
+    </ng-template>
+
+</app-mail-layout>

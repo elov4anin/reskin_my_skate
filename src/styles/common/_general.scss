@@ -29,7 +29,9 @@ html, body {
 .d-flex {
     display: flex;
 }
-
+.d-block {
+    display: block;
+}
 .flex-column {
     flex-direction: column;
 }

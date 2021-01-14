@@ -11,6 +11,7 @@ export class MailLayoutComponent implements OnInit {
   @Input() isNeedLeftPadding: boolean = true;
   @Input() isNotNeedPaddingTopHeader: boolean = false;
   @Input() isNeedHeightWithTabsAndHeader: boolean = false;
+  @Input() isNeeBackBtn: boolean = true;
 
   @Input() footerSlot: TemplateRef<any>;
 
