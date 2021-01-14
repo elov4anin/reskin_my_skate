@@ -1,20 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
 
-import { IonicModule } from '@ionic/angular';
+import {ForgotPageRoutingModule} from './forgot-routing.module';
 
-import { ForgotPageRoutingModule } from './forgot-routing.module';
-
-import { ForgotPage } from './forgot.page';
+import {ForgotPage} from './forgot.page';
+import {SharedModule} from "../../../shared/shared.module";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ForgotPageRoutingModule
-  ],
-  declarations: [ForgotPage]
+    imports: [
+        SharedModule,
+        ForgotPageRoutingModule,
+        ReactiveFormsModule
+    ],
+    declarations: [ForgotPage]
 })
-export class ForgotPageModule {}
+export class ForgotPageModule {
+}

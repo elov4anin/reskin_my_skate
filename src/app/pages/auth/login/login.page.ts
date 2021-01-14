@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {AuthRoutesEnum} from "../auth-routes.enum";
 
 @Component({
   selector: 'app-login',
@@ -11,7 +13,7 @@ export class LoginPage implements OnInit {
     email: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
-  constructor() { }
+  constructor(private _router: Router) { }
 
   ngOnInit() {
   }
@@ -20,7 +22,11 @@ export class LoginPage implements OnInit {
 
   }
 
-  openRegistration() {
+  async openRegistration() {
+    await this._router.navigate(['/', AuthRoutesEnum.ROOT, AuthRoutesEnum.REG]);
+  }
 
+  async openForgot($event) {
+    await this._router.navigate(['/', AuthRoutesEnum.ROOT, AuthRoutesEnum.FORGOT_PASS]);
   }
 }
