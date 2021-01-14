@@ -13,7 +13,7 @@ export interface IUser {
     fullname: string
     gender: string;
     id: string;
-    lasname: string;
+    lastname: string;
     marital_status: string;
     picture: string;
     status: string;

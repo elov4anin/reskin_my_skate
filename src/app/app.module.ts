@@ -10,6 +10,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NativeGeocoder} from "@ionic-native/native-geocoder/ngx";
 import {HttpClientModule} from "@angular/common/http";
+import {IonicStorageModule} from "@ionic/storage";
 
 @NgModule({
     declarations: [AppComponent],
@@ -17,7 +18,13 @@ import {HttpClientModule} from "@angular/common/http";
     imports: [
         BrowserModule,
         HttpClientModule,
-        IonicModule.forRoot(),
+        IonicModule.forRoot({
+            mode: 'ios'
+        }),
+        IonicStorageModule.forRoot({
+            name: '__skate',
+            driverOrder: ['sqlite', 'websql', 'indexeddb']
+        }),
         AppRoutingModule,
     ],
     providers: [

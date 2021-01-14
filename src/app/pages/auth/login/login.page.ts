@@ -5,6 +5,8 @@ import {AuthRoutesEnum} from "../auth-routes.enum";
 import {AuthService} from "../auth.service";
 import {RESPONSE_CODES} from "../../../shared/configs/response.constants";
 import {ToastNotificationService} from "../../../shared/helpers/toast-notification.service";
+import {CoreStore} from "../../../shared/store/core.store";
+import {StorageEnum} from "../../../shared/enums/Storage.enum";
 
 @Component({
     selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginPage implements OnInit {
         private _router: Router,
         private _authService: AuthService,
         private _toast: ToastNotificationService,
+        private _coreStore: CoreStore
     ) {
     }
 
@@ -30,6 +33,8 @@ export class LoginPage implements OnInit {
     login() {
         this._authService.login(this.form.value).subscribe(async (res) => {
                 if (res.response_code === RESPONSE_CODES.SUCCESS) {
+                    await this._coreStore.setValue(StorageEnum.LOGGEDIN, true)
+                    await this._coreStore.setValue(StorageEnum.PROFILE, res.user)
                     await this._router.navigate(['/']);
                 } else {
                     await this._toast.error(res.response_msg);
