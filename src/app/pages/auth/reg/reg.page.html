@@ -1,9 +1,79 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>reg</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-mail-layout [isNeeBackBtn]="false"[isNeedHeightWithTabsAndHeader]="true">
+  <header class="d-flex ion-justify-content-between ion-align-items-center ion-margin-bottom header">
+    <ion-text color="light" class="title-20">Register</ion-text>
+  </header>
 
-<ion-content>
+  <form [formGroup]="form" class="ion-margin-top">
+    <ion-item color="primary">
+      <ion-label position="stacked">
+        <ion-text class="text-16">First Name</ion-text>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="firstName"></ion-input>
+    </ion-item>
 
-</ion-content>
+    <ion-item color="primary">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Last Name</ion-text>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="lastName"></ion-input>
+    </ion-item>
+
+    <ion-item color="primary">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Email</ion-text>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item color="primary">
+      <ion-label position="stacked">
+        <div class="d-flex ion-justify-content-between">
+          <ion-text class="text-16" color="light">Password</ion-text>
+        </div>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item color="primary">
+      <ion-label position="stacked">
+        <div class="d-flex ion-justify-content-between">
+          <ion-text class="text-16" color="light">Confirm password</ion-text>
+        </div>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="confirmPassword"></ion-input>
+    </ion-item>
+
+    <ion-item color="primary">
+      <ion-label position="stacked">
+        <div class="d-flex ion-justify-content-between">
+          <ion-text class="text-16" color="light">DOB</ion-text>
+        </div>
+      </ion-label>
+      <ion-input placeholder="Type here" formControlName="date"></ion-input>
+    </ion-item>
+
+    <div class="ion-margin-top">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Gender</ion-text>
+      </ion-label>
+      <div class="d-flex ion-justify-content-between mt12">
+        <ion-button color="darktwo" expand="block" size="default" fill="solid" class="w100percent mr20">
+          <ion-text color="tertiary">Female</ion-text>
+        </ion-button>
+        <ion-button color="secondary" expand="block" size="default" fill="outline" class="w100percent">
+          <ion-text color="secondary">Male</ion-text>
+        </ion-button>
+      </div>
+    </div>
+
+    <ion-button (click)="register()" class="mb12 apply-btn" fill="solid" color="success" expand="block">
+      Sign up
+    </ion-button>
+  </form>
+  <ion-footer class="ion-margin-top">
+    <ion-text class="text-15 d-block ion-text-center" color="light">
+      Already have an account?
+      <ion-text (click)="openLogin()" color="secondary"> Log in</ion-text>
+    </ion-text>
+  </ion-footer>
+</app-mail-layout>
