@@ -7,6 +7,9 @@ import {RESPONSE_CODES} from "../../../shared/configs/response.constants";
 import {ToastNotificationService} from "../../../shared/helpers/toast-notification.service";
 import {CoreStore} from "../../../shared/store/core.store";
 import {StorageEnum} from "../../../shared/enums/Storage.enum";
+import {VALIDATION_MESSAGES} from "../../../shared/classes/validation-messages";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
     selector: 'app-login',
@@ -15,9 +18,18 @@ import {StorageEnum} from "../../../shared/enums/Storage.enum";
 })
 export class LoginPage implements OnInit {
     form: FormGroup = new FormGroup({
-        email: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        password: new FormControl('', [
+            Validators.required,
+            Validators.maxLength(40),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)
+        ]),
     });
+
+    isReqSending: boolean = false;
+    readonly validationMessages = VALIDATION_MESSAGES;
+
+    private componentDestroyed: Subject<any> = new Subject();
 
     constructor(
         private _router: Router,
@@ -31,7 +43,11 @@ export class LoginPage implements OnInit {
     }
 
     login() {
-        this._authService.login(this.form.value).subscribe(async (res) => {
+        this.isReqSending = true;
+        this._authService.login(this.form.value)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(async (res) => {
+                this.isReqSending = false;
                 if (res.response_code === RESPONSE_CODES.SUCCESS) {
                     await this._coreStore.setValue(StorageEnum.LOGGEDIN, true)
                     await this._coreStore.setValue(StorageEnum.PROFILE, res.user)

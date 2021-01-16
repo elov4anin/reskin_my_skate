@@ -25,12 +25,4 @@ ion-item {
   --inner-padding-bottom: var(--ion-margin);
   margin-right: 5px;
   --padding-start: 0;
-
-  &.large-pb {
-    --inner-padding-bottom: 28px;
-
-    .validation-errors {
-      padding: 0;
-    }
-  }
 }

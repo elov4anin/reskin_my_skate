@@ -22,12 +22,14 @@ ion-input {
   margin-left: auto;
   margin-top: 40px;
 }
+
 ion-item {
   --inner-padding-end: 0;
-  margin-bottom: var(--ion-margin);
+  --inner-padding-bottom: var(--ion-margin);
   margin-right: 5px;
   --padding-start: 0;
 }
+
 .forgot-btn {
   --padding-top: 0;
   --padding-start: 0;

@@ -8,7 +8,18 @@
             <ion-label position="stacked">
                 <ion-text class="text-16">Email</ion-text>
             </ion-label>
-            <ion-input placeholder="Type here" formControlName="email"></ion-input>
+            <ion-input placeholder="Type here" formControlName="email" type="email"
+                       [ngClass]="{'invalid-input': form.get('email').touched && form.get('email').invalid}"
+            ></ion-input>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validationMessages.email">
+                    <div class="error-message"
+                         *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)"
+                    >
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
         </ion-item>
 
         <ion-item color="primary">
@@ -21,11 +32,28 @@
 
                 </div>
             </ion-label>
-            <ion-input placeholder="Type here" formControlName="password"></ion-input>
+            <ion-input placeholder="Type here" formControlName="password" type="password" autocomplete="off"
+                       [minlength]="8" [maxlength]="40"
+                       [ngClass]="{'invalid-input': form.get('password').touched && form.get('password').invalid}"
+            ></ion-input>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validationMessages.password">
+                    <div class="error-message"
+                         *ngIf="form.get('password').hasError(validation.type) && (form.get('password').dirty || form.get('password').touched)"
+                    >
+                        {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
         </ion-item>
 
         <ion-button [disabled]="form.invalid" (click)="login()" class="mb12 apply-btn" fill="solid" color="success" expand="block">
-            Log in
+            <ng-container *ngIf="isReqSending; else textBlock">
+                <ion-spinner name="lines-small"></ion-spinner>Sending...
+            </ng-container>
+            <ng-template #textBlock>
+                Log in
+            </ng-template>
         </ion-button>
     </form>
 

@@ -18,3 +18,29 @@
   line-height: 0.8em;
   color: var(--ion-color-danger);
 }
+
+ion-item.large-pb {
+  --inner-padding-bottom: 28px;
+
+  .validation-errors {
+    padding: 0;
+  }
+}
+
+/* Change Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  border: 1px solid var(--ion-color-base);
+  -webkit-text-fill-color: var(--ion-color-light);
+  -webkit-box-shadow: none;
+  transition: background-color 5000s ease-in-out 0s;
+  font-size: 17px;
+  border-radius: var(--theme-base-border-radius);
+}
