@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar color="dark" class="ion-padding-top">
+    <ion-text slot="start" class="ion ion-margin-start title-20">
+      Add new Skatepark
+    </ion-text>
+
+    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+      Close
+    </ion-text>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="dark">
+  <ion-list class="ion-list-primary mt12" *ngIf="locations$ | async as locations" lines="full">
+    <ion-item *ngFor="let l of locations" color="primary" (click)="selectLocation(l)">
+      <ion-label>{{l}}</ion-label>
+      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

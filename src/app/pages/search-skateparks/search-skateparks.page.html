@@ -1,61 +1,67 @@
 <ion-header>
-  <ion-toolbar color="dark">
-    <ion-button slot="start" color="dark" (click)="back()">
-      <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
-    </ion-button>
-    <ion-searchbar
-            class="search-field-page"
-            inputmode="search"
-            mode="ios"
-            color="dark"
-            placeholder="Looking for a skatepark?"
-            clearIcon="close-outline"
-            debounce="600"
-            searchIcon="undefined"
-            (ionChange)="search($event)"
-    ></ion-searchbar>
-    <ion-button slot="end" color="dark" class="filter-btn" (click)="openFilter()" size="small">
-      <ion-icon slot="icon-only" name="filter" size="small"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar color="dark">
+        <ion-button slot="start" color="dark" (click)="back()">
+            <ion-icon slot="icon-only" name="arrow-back"></ion-icon>
+        </ion-button>
+        <ion-searchbar
+                class="search-field-page"
+                inputmode="search"
+                mode="ios"
+                color="dark"
+                placeholder="Looking for a skatepark?"
+                clearIcon="close-outline"
+                debounce="600"
+                searchIcon="undefined"
+                [(ngModel)]="currentSearchExp"
+                (ionInput)="search($event)"
+        ></ion-searchbar>
+        <ion-button slot="end" color="dark" class="filter-btn" (click)="openFilter()" size="small">
+            <ion-icon slot="icon-only" name="filter" size="small"></ion-icon>
+        </ion-button>
+    </ion-toolbar>
 </ion-header>
+<div class="segments-wrapper">
+    <ion-segment (ionChange)="segmentChanged($event)" mode="md" [(ngModel)]="selectedSegment" color="secondary">
+        <ion-segment-button *ngFor="let s of segments" [value]="s">
+            <ion-label>
+                <ion-text class="text-16-500 text-no-transform">{{segmentsEnum2LabelMapping[s]}}</ion-text>
+            </ion-label>
+        </ion-segment-button>
+    </ion-segment>
+</div>
 
 <ion-content color="primary">
-  <ion-segment (ionChange)="segmentChanged($event)" mode="md"  [(ngModel)]="selectedSegment" color="secondary">
-    <ion-segment-button *ngFor="let s of segments" [value]="s" >
-      <ion-label>
-        <ion-text class="text-16-500 text-no-transform">{{segmentsEnum2LabelMapping[s]}}</ion-text>
-      </ion-label>
-    </ion-segment-button>
-  </ion-segment>
 
-  <ng-container *ngIf="selectedSegment === segmentsEnum.LIST">
-    <ion-list color="primary">
-      <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]" color="primary" lines="none" (click)="openSkatepark()">
-        <ion-thumbnail slot="start">
-          <img src="../../../assets/images/thumbnall.png">
-        </ion-thumbnail>
-        <div class="d-flex flex-column">
-          <ion-text color="light" class="text-16">Isleham Skatepark East</ion-text>
-          <ion-text color="medium" class="text-15">East London, London</ion-text>
-          <ion-text color="medium" class="text-13-300">Last update on May 5, 2020</ion-text>
-        </div>
+    <ng-container *ngIf="selectedSegment === segmentsEnum.LIST">
+        <ion-list color="primary">
+            <ion-item *ngFor="let s of foundSkateparks" color="primary" lines="none" (click)="openSkatepark(s.id)">
+                <ion-thumbnail slot="start">
+                    <img [src]="s.has_images === '1' ? s.images[0] : '../../../assets/images/thumbnall.png'">
+                </ion-thumbnail>
+                <div class="d-flex flex-column">
+                    <ion-text color="light" class="text-16">{{s.name}}</ion-text>
+                    <ion-text color="medium" class="text-15">{{s.address}}, {{s.city}}</ion-text>
+                    <ion-text color="medium" class="text-13-300">Last update on May 5, 2020</ion-text>
+                </div>
 
-        <ion-fab-button slot="end" color="primary" size="small">
-          <ion-text color="secondary" class="text-16">5.0</ion-text>
-        </ion-fab-button>
-      </ion-item>
-    </ion-list>
+                <ion-fab-button slot="end" color="primary" size="small">
+                    <ion-text color="secondary" class="text-16">{{s.rating}}</ion-text>
+                </ion-fab-button>
+            </ion-item>
+        </ion-list>
 
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-      <ion-infinite-scroll-content
-              loadingSpinner="bubbles"
-              loadingText="Loading more..."
-      >
-      </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </ng-container>
-  <ng-container *ngIf="selectedSegment === segmentsEnum.MAP">
-    <app-google-map></app-google-map>
-  </ng-container>
+       <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+            <ion-infinite-scroll-content
+                    loadingSpinner="bubbles"
+                    loadingText="Loading more..."
+            >
+            </ion-infinite-scroll-content>
+        </ion-infinite-scroll>-->
+    </ng-container>
+    <ng-container *ngIf="selectedSegment === segmentsEnum.MAP">
+        <app-google-map [coordinates]="coordinates$ | async"
+                        [skateparks]="foundSkateparks"
+                        [searchValue]="currentSearchExp"
+        ></app-google-map>
+    </ng-container>
 </ion-content>

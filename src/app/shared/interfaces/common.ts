@@ -1,5 +1,15 @@
 export interface IServerResponse {
-    response_code: string;
+    response_code?: string;
     response_msg: string;
     success: boolean;
+}
+
+export interface IClubStatusResponse {
+    id: string;
+    status: string;
+}
+
+export interface ICoordinates {
+    lat: number;
+    lng: number;
 }

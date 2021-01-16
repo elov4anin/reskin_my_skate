@@ -9,6 +9,7 @@ import {CheckboxListComponent} from "./components/checkbox-list/checkbox-list.co
 import {CalendarDayComponent} from "./components/calendar-day/calendar-day.component";
 import {MapBlockComponent} from "./components/map-block/map-block.component";
 import {AddPhotosSliderComponent} from "./components/add-photos-slider/add-photos-slider.component";
+import {ModalLocationListComponent} from "./modals/modal-location-list/modal-location-list.component";
 
 const IONIC_MODULES = [
     IonicModule,
@@ -30,6 +31,7 @@ const COMPONENTS = [
     CalendarDayComponent,
     MapBlockComponent,
     AddPhotosSliderComponent,
+    ModalLocationListComponent,
 ];
 
 const PIPES = [];
