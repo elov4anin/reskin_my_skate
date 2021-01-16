@@ -26,13 +26,11 @@ export class RegPage implements OnInit, OnDestroy {
         email: new FormControl('', [Validators.required, Validators.email]),
         pwd: new FormControl('', [
             Validators.required,
-            Validators.minLength(8),
             Validators.maxLength(40),
             Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)
         ]),
-        confirmPassword: new FormControl('', [
+        confirmPassword: new FormControl({value: '', disabled: true}, [
             Validators.required,
-            Validators.minLength(8),
             Validators.maxLength(40),
             Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/),
             matchValuesValidator('pwd')
@@ -41,9 +39,11 @@ export class RegPage implements OnInit, OnDestroy {
     });
 
     readonly validationMessages = VALIDATION_MESSAGES;
+
+    private componentDestroyed: Subject<any> = new Subject();
+
     maxYear: number;
     isReqSending: boolean = false;
-    private componentDestroyed: Subject<any> = new Subject();
 
     constructor(
         private _router: Router,
@@ -55,6 +55,16 @@ export class RegPage implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.maxYear = dayjs().year() - MIN_AGE;
+        this.form.get('pwd').valueChanges
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(() => {
+            if (this.form.get('pwd').valid && this.form.get('confirmPassword').disabled) {
+                this.form.get('confirmPassword').enable()
+            }
+            if (this.form.get('pwd').invalid && this.form.get('confirmPassword').enabled) {
+                this.form.get('confirmPassword').disable()
+            }
+        })
     }
 
     ngOnDestroy(): void {

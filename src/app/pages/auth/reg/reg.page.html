@@ -46,7 +46,7 @@
       <ion-label position="stacked">
         <ion-text class="text-16">Email</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="email"
+      <ion-input placeholder="Type here" formControlName="email" autocomplete="off"
                  [minlength]="2" [maxlength]="25"
                  [ngClass]="{'invalid-input': form.get('email').touched && form.get('email').invalid}"
       ></ion-input>
@@ -61,13 +61,13 @@
       </div>
     </ion-item>
 
-    <ion-item color="primary" lines="none" class="large-pb">
+    <ion-item color="primary" lines="none">
       <ion-label position="stacked">
         <div class="d-flex ion-justify-content-between">
           <ion-text class="text-16" color="light">Password</ion-text>
         </div>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="pwd"
+      <ion-input placeholder="Type here" formControlName="pwd" type="password" autocomplete="off"
                  [minlength]="8" [maxlength]="40"
                  [ngClass]="{'invalid-input': form.get('pwd').touched && form.get('pwd').invalid}"
       ></ion-input>
@@ -88,8 +88,7 @@
           <ion-text class="text-16" color="light">Confirm password</ion-text>
         </div>
       </ion-label>
-      <ion-input placeholder="Confirm Password" formControlName="confirmPassword"
-                 [disabled]="form.get('pwd').invalid"
+      <ion-input placeholder="Confirm Password" formControlName="confirmPassword" type="password" autocomplete="off"
                  [minlength]="8" [maxlength]="40"
                  [ngClass]="{'invalid-input': form.get('confirmPassword').touched && form.get('confirmPassword').invalid}"
       ></ion-input>

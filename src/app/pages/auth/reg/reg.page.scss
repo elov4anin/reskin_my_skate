@@ -27,11 +27,10 @@ ion-item {
   --padding-start: 0;
 
   &.large-pb {
-    --inner-padding-bottom: 30px;
+    --inner-padding-bottom: 28px;
 
     .validation-errors {
       padding: 0;
-      line-height: 0.75em;
     }
   }
 }
