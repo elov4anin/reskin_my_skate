@@ -10,7 +10,7 @@
       </ion-label>
       <ion-input placeholder="Type here" formControlName="firstName"
                  [minlength]="2" [maxlength]="25"
-                 [ngClass]="{'invalid-input': form.get('firstName').invalid}"
+                 [ngClass]="{'invalid-input': form.get('firstName').touched && form.get('firstName').invalid}"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.firstName">
@@ -29,7 +29,7 @@
       </ion-label>
       <ion-input placeholder="Type here" formControlName="lastName"
                  [minlength]="2" [maxlength]="25"
-                 [ngClass]="{'invalid-input': form.get('lastName').invalid}"
+                 [ngClass]="{'invalid-input': form.get('lastName').touched && form.get('lastName').invalid}"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.lastName">
@@ -48,7 +48,7 @@
       </ion-label>
       <ion-input placeholder="Type here" formControlName="email"
                  [minlength]="2" [maxlength]="25"
-                 [ngClass]="{'invalid-input': form.get('email').invalid}"
+                 [ngClass]="{'invalid-input': form.get('email').touched && form.get('email').invalid}"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.email">
@@ -69,7 +69,7 @@
       </ion-label>
       <ion-input placeholder="Type here" formControlName="pwd"
                  [minlength]="8" [maxlength]="40"
-                 [ngClass]="{'invalid-input': form.get('pwd').invalid}"
+                 [ngClass]="{'invalid-input': form.get('pwd').touched && form.get('pwd').invalid}"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.pwd">
@@ -90,7 +90,7 @@
       </ion-label>
       <ion-input placeholder="Confirm Password" formControlName="confirmPassword"
                  [minlength]="8" [maxlength]="40"
-                 [ngClass]="{'invalid-input': form.get('confirmPassword').invalid}"
+                 [ngClass]="{'invalid-input': form.get('confirmPassword').touched && form.get('confirmPassword').invalid}"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.pwd">
@@ -111,7 +111,7 @@
       </ion-label>
       <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Select Date" formControlName="dob" class="mt12"
                     [max]="maxYear" mode="ios"
-                    [ngClass]="{'invalid-input': form.get('dob').invalid}"
+                    [ngClass]="{'invalid-input': form.get('dob').touched && form.get('dob').invalid}"
       ></ion-datetime>
     <!--  <ion-input placeholder="DD/MM/YYYY" formControlName="dob"
                  (click)="openDataPicker()"
