@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {AuthRoutesEnum} from "../auth-routes.enum";
@@ -14,7 +14,7 @@ import {VALIDATION_MESSAGES} from "../../../shared/classes/validation-messages";
     templateUrl: './forgot.page.html',
     styleUrls: ['./forgot.page.scss'],
 })
-export class ForgotPage implements OnInit {
+export class ForgotPage implements OnInit, OnDestroy {
     form: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
     });

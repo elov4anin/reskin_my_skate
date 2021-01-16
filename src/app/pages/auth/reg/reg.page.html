@@ -89,6 +89,7 @@
         </div>
       </ion-label>
       <ion-input placeholder="Confirm Password" formControlName="confirmPassword"
+                 [disabled]="form.get('pwd').invalid"
                  [minlength]="8" [maxlength]="40"
                  [ngClass]="{'invalid-input': form.get('confirmPassword').touched && form.get('confirmPassword').invalid}"
       ></ion-input>
@@ -113,11 +114,6 @@
                     [max]="maxYear" mode="ios"
                     [ngClass]="{'invalid-input': form.get('dob').touched && form.get('dob').invalid}"
       ></ion-datetime>
-    <!--  <ion-input placeholder="DD/MM/YYYY" formControlName="dob"
-                 (click)="openDataPicker()"
-                 [minlength]="8" [maxlength]="40"
-                 [ngClass]="{'invalid-input': form.get('dob').invalid}"
-      ></ion-input>-->
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.dob">
           <div class="error-message"
@@ -143,8 +139,13 @@
       </div>
     </div>
 
-    <ion-button (click)="register()" class="mb12 apply-btn" fill="solid" color="success" expand="block">
-      Sign up
+    <ion-button [disabled]="form.invalid || isReqSending" (click)="register()" class="mb12 apply-btn" fill="solid" color="success" expand="block">
+      <ng-container *ngIf="isReqSending; else textBlock">
+        <ion-spinner name="lines-small"></ion-spinner>Sending...
+      </ng-container>
+      <ng-template #textBlock>
+        Sign up
+      </ng-template>
     </ion-button>
   </form>
   <ion-footer class="ion-margin-top">
