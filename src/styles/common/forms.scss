@@ -1,0 +1,19 @@
+.invalid-input {
+  border-bottom: 1px solid var(--ion-color-danger);
+}
+
+.valid-input {
+  border-bottom: 1px solid var(--ion-color-success);
+}
+
+.has-focus {
+  border: 1px solid var(--theme-dark-green);
+}
+
+.validation-errors {
+  position: absolute;
+  bottom: 0;
+  padding: 2px 6px;
+  font-size: 10px;
+  color: var(--ion-color-danger);
+}

@@ -8,15 +8,36 @@
   </div>
 
   <form [formGroup]="form" class="ion-margin-top">
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none">
       <ion-label position="stacked">
         <ion-text class="text-16">Email</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="email"></ion-input>
+      <ion-input placeholder="Type here" formControlName="email"
+                 [ngClass]="{'invalid-input': form.get('email').invalid}"
+      ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.email">
+          <div class="error-message"
+               *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
-    <ion-button (click)="reset()" class="mb12 apply-btn" fill="solid" color="success" expand="block">
-      Reset
+    <ion-button
+            [disabled]="form.invalid"
+            (click)="reset()"
+            class="mb12 apply-btn"
+            fill="solid" color="success" expand="block"
+    >
+      <ng-container *ngIf="isReqSending; else textBlock">
+        <ion-spinner name="lines-small"></ion-spinner>Sending...
+      </ng-container>
+      <ng-template #textBlock>
+        Reset
+      </ng-template>
     </ion-button>
   </form>
 

@@ -6,6 +6,7 @@ import {SITE_MAIN} from "../../shared/configs/main.config";
 // import sha1 from 'crypto-js/sha1';
 import {Observable} from "rxjs";
 import {ILoginResponse} from "../../shared/interfaces/auth.interfaces";
+import {IServerResponse} from "../../shared/interfaces/common";
 
 @Injectable({
     providedIn: 'root'
@@ -37,8 +38,8 @@ export class AuthService {
         );
     }
 
-    forgot(params: { email: string }) {
-        return this._http.post<ILoginResponse>(
+    forgot(params: { email: string }): Observable<IServerResponse> {
+        return this._http.post<IServerResponse>(
             SITE_MAIN + 'integration/sport80-reset-pass.php',
             {email: params.email},
             {

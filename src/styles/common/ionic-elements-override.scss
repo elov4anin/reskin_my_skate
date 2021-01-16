@@ -45,9 +45,6 @@ ion-button {
   background: var(--ion-color-secondary);
 }
 
-ion-spinner {
-  color: var(--ion-color-secondary)!important;
-}
 .infinite-loading-text {
   color: var(--ion-color-secondary)!important;
 }
@@ -63,4 +60,13 @@ ion-spinner {
 
 .ion-list-dark {
   background: var(--ion-color-dark);
+}
+
+ion-input {
+  transition: all 0.2s;
+  border: 1px solid var(--ion-color-base);
+}
+
+ion-item {
+  position: relative;
 }
