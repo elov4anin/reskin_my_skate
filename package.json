@@ -32,6 +32,7 @@
     "cordova-plugin-nativegeocoder": "^3.4.1",
     "cordova-sqlite-storage": "^5.1.0",
     "crypto-js": "^4.0.0",
+    "dayjs": "^1.10.3",
     "ionic-rating-component": "^1.1.6",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",

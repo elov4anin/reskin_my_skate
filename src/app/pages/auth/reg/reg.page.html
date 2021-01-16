@@ -4,52 +4,129 @@
   </header>
 
   <form [formGroup]="form" class="ion-margin-top">
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none">
       <ion-label position="stacked">
         <ion-text class="text-16">First Name</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="firstName"></ion-input>
+      <ion-input placeholder="Type here" formControlName="firstName"
+                 [minlength]="2" [maxlength]="25"
+                 [ngClass]="{'invalid-input': form.get('firstName').invalid}"
+      ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.firstName">
+          <div class="error-message"
+               *ngIf="form.get('firstName').hasError(validation.type) && (form.get('firstName').dirty || form.get('firstName').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none">
       <ion-label position="stacked">
         <ion-text class="text-16">Last Name</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="lastName"></ion-input>
+      <ion-input placeholder="Type here" formControlName="lastName"
+                 [minlength]="2" [maxlength]="25"
+                 [ngClass]="{'invalid-input': form.get('lastName').invalid}"
+      ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.lastName">
+          <div class="error-message"
+               *ngIf="form.get('lastName').hasError(validation.type) && (form.get('lastName').dirty || form.get('lastName').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none">
       <ion-label position="stacked">
         <ion-text class="text-16">Email</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="email"></ion-input>
+      <ion-input placeholder="Type here" formControlName="email"
+                 [minlength]="2" [maxlength]="25"
+                 [ngClass]="{'invalid-input': form.get('email').invalid}"
+      ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.email">
+          <div class="error-message"
+               *ngIf="form.get('email').hasError(validation.type) && (form.get('email').dirty || form.get('email').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none" class="large-pb">
       <ion-label position="stacked">
         <div class="d-flex ion-justify-content-between">
           <ion-text class="text-16" color="light">Password</ion-text>
         </div>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="pwd"></ion-input>
+      <ion-input placeholder="Type here" formControlName="pwd"
+                 [minlength]="8" [maxlength]="40"
+                 [ngClass]="{'invalid-input': form.get('pwd').invalid}"
+      ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.pwd">
+          <div class="error-message"
+               *ngIf="form.get('pwd').hasError(validation.type) && (form.get('pwd').dirty || form.get('pwd').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none"  class="large-pb">
       <ion-label position="stacked">
         <div class="d-flex ion-justify-content-between">
           <ion-text class="text-16" color="light">Confirm password</ion-text>
         </div>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="confirmPassword"></ion-input>
+      <ion-input placeholder="Confirm Password" formControlName="confirmPassword"
+                 [minlength]="8" [maxlength]="40"
+                 [ngClass]="{'invalid-input': form.get('confirmPassword').invalid}"
+      ></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.pwd">
+          <div class="error-message"
+               *ngIf="form.get('confirmPassword').hasError(validation.type) && (form.get('confirmPassword').dirty || form.get('confirmPassword').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
-    <ion-item color="primary">
+    <ion-item color="primary" lines="none">
       <ion-label position="stacked">
         <div class="d-flex ion-justify-content-between">
           <ion-text class="text-16" color="light">DOB</ion-text>
         </div>
       </ion-label>
-      <ion-input placeholder="Type here" formControlName="dob"></ion-input>
+      <ion-datetime displayFormat="DD/MM/YYYY" placeholder="Select Date" formControlName="dob" class="mt12"
+                    [max]="maxYear" mode="ios"
+                    [ngClass]="{'invalid-input': form.get('dob').invalid}"
+      ></ion-datetime>
+    <!--  <ion-input placeholder="DD/MM/YYYY" formControlName="dob"
+                 (click)="openDataPicker()"
+                 [minlength]="8" [maxlength]="40"
+                 [ngClass]="{'invalid-input': form.get('dob').invalid}"
+      ></ion-input>-->
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.dob">
+          <div class="error-message"
+               *ngIf="form.get('dob').hasError(validation.type) && (form.get('dob').dirty || form.get('dob').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
     <div class="ion-margin-top">
