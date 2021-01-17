@@ -4,6 +4,8 @@ import {ISlideInfo} from "../skateparks.interfaces";
 import {featuresSlides} from './features_demodata';
 import {ModalController} from "@ionic/angular";
 import {ModalReportClosureComponent} from "./modal-report-closure/modal-report-closure.component";
+import {ISkatepark} from "../../../shared/interfaces/skatepark.interfaces";
+import {CoreStore} from "../../../shared/store/core.store";
 
 
 @Component({
@@ -20,12 +22,18 @@ export class SkateparkDetailPage implements OnInit {
         .getPropertyValue('--ion-color-secondary');
     featuresSlides: ISlideInfo[] = featuresSlides;
 
+    skatepark: ISkatepark;
+
     constructor(
         private _location: Location,
-        private _modalController: ModalController) {
+        private _modalController: ModalController,
+        private _coreStore: CoreStore,
+        ) {
     }
 
     ngOnInit() {
+        this.skatepark = this._coreStore.state.selectedSkatepark;
+        console.log(this.skatepark)
     }
 
     back() {

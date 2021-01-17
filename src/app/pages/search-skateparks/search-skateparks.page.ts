@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Location} from "@angular/common";
 import {getEnumAsArray} from "../../shared/helpers/utils";
 import {SegmentsEnum, segmentsEnum2LabelMapping} from "./segments.enum";
-import {ModalController} from "@ionic/angular";
+import {LoadingController, ModalController} from "@ionic/angular";
 import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../tabs/tabs.enum";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -13,6 +13,8 @@ import {ModalLocationListComponent} from "../../shared/modals/modal-location-lis
 import {ISkatepark} from "../../shared/interfaces/skatepark.interfaces";
 import {ICoordinates} from "../../shared/interfaces/common";
 import {GoogleMapService} from "../../shared/services/google--map.service";
+import {CoreStore} from "../../shared/store/core.store";
+import {StorageEnum} from "../../shared/enums/Storage.enum";
 
 @Component({
     selector: 'app-search-skateparks',
@@ -31,6 +33,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
     selectedSegment: SegmentsEnum = SegmentsEnum.LIST;
     currentSearchExp: string;
     foundSkateparks: ISkatepark[] = [];
+    isReloading: boolean = false;
 
 
     constructor(
@@ -39,7 +42,9 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
         private _router: Router,
         private _route: ActivatedRoute,
         private _skateparksService: SkateparksService,
-        private _googleMapService: GoogleMapService
+        private _googleMapService: GoogleMapService,
+        private _coreStore: CoreStore,
+        public _loadingController: LoadingController,
     ) {
     }
 
@@ -48,20 +53,26 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             takeUntil(this.componentDestroyed),
         ).subscribe(async (params: any) => {
             if (params && params.search) {
-                this.currentSearchExp = params.search;
-                const coordinates = await this._googleMapService.getCoordinates(this.currentSearchExp);
-                this.coordinates$.next(coordinates);
+                if (this.foundSkateparks.length === 0) {
+                    this.currentSearchExp = params.search;
+                    const coordinates = await this._googleMapService.getCoordinates(this.currentSearchExp);
+                    this.coordinates$.next(coordinates);
+                }
             }
         })
         this.coordinates$.pipe(
             takeUntil(this.componentDestroyed),
             switchMap((coordinates) => {
                 if (coordinates) {
+                    this.presentLoading().then();
                     return this._skateparksService.getParksByLocation({location: this.currentSearchExp, coordinates})
                 }
                 return of(null)
             })
-        ).subscribe((res: any) => this.foundSkateparks = res.parks);
+        ).subscribe(async (res: any) => {
+            this.foundSkateparks = res.parks;
+            await this._loadingController.dismiss();
+        });
 
 
     }
@@ -113,7 +124,20 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
     segmentChanged() {
     }
 
-    async openSkatepark(skateparkId: string) {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, skateparkId])
+    async openSkatepark(skatepark: ISkatepark) {
+        await this._coreStore.setValue(StorageEnum.SELECTED_SKATEPARK, skatepark);
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, skatepark.id])
+    }
+
+    private async presentLoading() {
+        const loading = await this._loadingController.create({
+            cssClass: 'loading',
+            message: 'Please wait...',
+            duration: 2000
+        });
+        await loading.present();
+
+        const { role, data } = await loading.onDidDismiss();
+        console.log('Loading dismissed!');
     }
 }
