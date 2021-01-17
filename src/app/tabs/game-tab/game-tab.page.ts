@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {difficulties} from './difficulties';
 import {IDifficulty} from "./difficulty.interface";
-import {ICheckBox} from "../../shared/components/checkbox-list/checkbox-list.component";
 import {ModalController} from "@ionic/angular";
 import {ModalHowtoComponent} from "./modals/modal-howto/modal-howto.component";
 import {ModalAddPlayersComponent} from "./modals/modal-add-players/modal-add-players.component";
 import {Router} from "@angular/router";
 import {GameRoutes} from "../../pages/game/game-routes";
+import {IFeatureSkatepark} from "../../shared/interfaces/skatepark.interfaces";
 
 @Component({
     selector: 'app-game',
@@ -16,22 +16,26 @@ import {GameRoutes} from "../../pages/game/game-routes";
 export class GameTabPage implements OnInit {
 
     readonly difficulties = difficulties;
-    checkboxes: ICheckBox[] = [
+    checkboxes: IFeatureSkatepark[] = [
         {
-            label: 'Straight, Spin, Shove Tricks',
+            name: 'Straight, Spin, Shove Tricks',
+            checked: true,
+            value: 'Straight, Spin, Shove Tricks'
+        },
+        {
+            name: 'Rail & Ledge Tricks',
+            checked: true,
+            value: 'Rail & Ledge Tricks'
+        },
+        {
+            name: 'Ramp Tricks',
+            value: 'Ramp Tricks',
             checked: true
         },
         {
-            label: 'Rail & Ledge Tricks',
-            checked: true
-        },
-        {
-            label: 'Ramp Tricks',
-            checked: true
-        },
-        {
-            label: 'Flip Tricks',
-            checked: true
+            name: 'Flip Tricks',
+            checked: true,
+            value: 'Flip Tricks'
         },
     ];
     players: any[] = [1, 2, 3];

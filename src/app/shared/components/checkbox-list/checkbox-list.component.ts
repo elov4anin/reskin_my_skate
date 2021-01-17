@@ -18,8 +18,3 @@ export class CheckboxListComponent implements OnInit {
     ch.checked = !ch.checked;
   }
 }
-
-export interface ICheckBox {
-  label: string;
-  checked: boolean;
-}

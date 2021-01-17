@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ICheckBox} from "../../../../shared/components/checkbox-list/checkbox-list.component";
 import {ModalController} from "@ionic/angular";
 import {ModalSkateparkConfirmComponent} from "../modal-skatepark-confirm/modal-skatepark-confirm.component";
+import {IFeatureSkatepark} from "../../../../shared/interfaces/skatepark.interfaces";
 
 @Component({
   selector: 'app-modal-add-skatepark',
@@ -9,34 +9,41 @@ import {ModalSkateparkConfirmComponent} from "../modal-skatepark-confirm/modal-s
   styleUrls: ['./modal-add-skatepark.component.scss'],
 })
 export class ModalAddSkateparkComponent implements OnInit {
-  checkboxes: ICheckBox[] = [
+  checkboxes: IFeatureSkatepark[] = [
     {
-      label: 'Skatelite',
-      checked: true
+      name: 'Skatelite',
+      checked: true,
+      value: 'skatelite'
     },
     {
-      label: 'Toilet',
-      checked: true
+      name: 'Toilet',
+      checked: true,
+      value: 'toilet'
     },
     {
-      label: 'Store',
-      checked: true
+      name: 'Store',
+      checked: true,
+      value: 'store'
     },
     {
-      label: 'Paid',
-      checked: false
+      name: 'Paid',
+      checked: false,
+      value: 'paid'
     },
     {
-      label: 'Free',
-      checked: true
+      name: 'Free',
+      checked: true,
+      value: 'free'
     },
     {
-      label: 'Undercover',
-      checked: false
+      name: 'Undercover',
+      checked: false,
+      value: 'undercover'
     },
     {
-      label: 'Cafe',
-      checked: false
+      name: 'Cafe',
+      checked: false,
+      value: 'cafe'
     },
   ];
 

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from "@ionic/angular";
-import {ICheckBox} from "../../../shared/components/checkbox-list/checkbox-list.component";
+import {IFeatureSkatepark} from "../../../shared/interfaces/skatepark.interfaces";
 
 @Component({
     selector: 'app-modal-add-spot',
@@ -8,22 +8,26 @@ import {ICheckBox} from "../../../shared/components/checkbox-list/checkbox-list.
     styleUrls: ['./modal-add-spot.component.scss'],
 })
 export class ModalAddSpotComponent implements OnInit {
-    checkboxes: ICheckBox[] = [
+    checkboxes: IFeatureSkatepark[] = [
         {
-            label: 'Curb',
-            checked: true
+            name: 'Curb',
+            checked: true,
+            value: 'Curb'
         },
         {
-            label: 'Rail',
-            checked: false
+            name: 'Rail',
+            checked: false,
+            value: 'Rail'
         },
         {
-            label: 'Steps',
-            checked: true
+            name: 'Steps',
+            checked: true,
+            value: 'Steps'
         },
         {
-            label: 'Other',
-            checked: false
+            name: 'Other',
+            checked: false,
+            value: 'Other'
         },
     ];
 
