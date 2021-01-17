@@ -1,5 +1,3 @@
-import {HttpClient} from "@angular/common/http";
-import {SITE_MAIN} from "../configs/main.config";
 import {Observable, of} from "rxjs";
 import {Injectable} from "@angular/core";
 import {
@@ -7,21 +5,22 @@ import {
     ISearchLocationsResponse,
     ISkateparkFilterParams, IUserLastCheckInResponse
 } from "../interfaces/skatepark.interfaces";
+import {ApiCreatorService} from "./api-creator.service";
+
 
 @Injectable({
     providedIn: "root"
 })
 export class SkateparksService {
 
-    constructor(private _http: HttpClient) {
+    constructor(private _api: ApiCreatorService) {
 
     }
 
     searchLocations(exp: string): Observable<ISearchLocationsResponse> {
-        return this._http.post<ISearchLocationsResponse>(
-            SITE_MAIN + 'integration/myskate/myskate-parks-search-location.php',
+        return this._api.basePostRequest<ISearchLocationsResponse>(
+            'integration/myskate/myskate-parks-search-location.php',
             {filter: exp},
-
         );
     }
 
@@ -30,15 +29,15 @@ export class SkateparksService {
         filter.material = "";
         filter.page = 0;
         filter.type = "";
-        return this._http.post<IGetParksByLocation>(
-            SITE_MAIN + 'integration/myskate-parks-radius-search.php',
+        return this._api.basePostRequest<IGetParksByLocation>(
+            'integration/myskate-parks-radius-search.php',
             filter
         );
     }
 
     userLastCheckIn(parkId: string, userId: string): Observable<IUserLastCheckInResponse> {
-        return this._http.post<IUserLastCheckInResponse>(
-            SITE_MAIN + 'integration/myskate/myskate-park-user-last-check-in.php',
+        return this._api.basePostRequest<IUserLastCheckInResponse>(
+            'integration/myskate/myskate-park-user-last-check-in.php',
             {
                 park: parkId,
                 user: userId
@@ -46,10 +45,9 @@ export class SkateparksService {
         );
     }
 
-
     getFeatures(): Observable<IGetFeaturesResponse> {
-        return this._http.post<IGetFeaturesResponse>(
-            SITE_MAIN + 'integration/myskate/myskate-features.php',
+        return this._api.basePostRequest<IGetFeaturesResponse>(
+            'integration/myskate/myskate-features.php',
             {},
         );
     }

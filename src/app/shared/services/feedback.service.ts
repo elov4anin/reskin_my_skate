@@ -1,22 +1,20 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {SITE_MAIN} from "../configs/main.config";
 import {IGetFeedbackListByParkIdResponse} from "../interfaces/feedback.interfaces";
+import {ApiCreatorService} from "./api-creator.service";
 
 @Injectable({
     providedIn: "root"
 })
 export class FeedbackService {
-    constructor(private _http: HttpClient) {
+    constructor(private _api: ApiCreatorService) {
 
     }
 
     getFeedbackListByParkId(parkId: string, page: number = 0): Observable<IGetFeedbackListByParkIdResponse> {
-        return this._http.post<IGetFeedbackListByParkIdResponse>(
-            SITE_MAIN + 'integration/myskate/myskate-feed.php',
+        return this._api.basePostRequest<IGetFeedbackListByParkIdResponse>(
+            'integration/myskate/myskate-feed.php',
             {park: parkId, page},
-
         );
     }
 }
