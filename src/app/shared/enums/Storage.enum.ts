@@ -3,5 +3,6 @@ export enum StorageEnum {
     GAME = 'game',
     LOGGEDIN = 'loggedIn',
     SELECTED_SKATEPARK = 'selectedSkatepark',
+    SKATEPARK_FEATURES = 'skateparkFeatures',
 }
 

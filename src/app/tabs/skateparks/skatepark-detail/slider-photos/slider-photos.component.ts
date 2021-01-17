@@ -8,7 +8,7 @@ import {ISlideInfo} from "../../skateparks.interfaces";
   styleUrls: ['./slider-photos.component.scss'],
 })
 export class SliderPhotosComponent implements OnInit {
-  @Input() sliders: ISlideInfo[] = sliders;
+  @Input() slides: ISlideInfo[] = sliders;
 
   slideOpts = {
     initialSlide: 0,

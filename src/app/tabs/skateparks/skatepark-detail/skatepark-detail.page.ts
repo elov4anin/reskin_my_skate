@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {ISlideInfo} from "../skateparks.interfaces";
-import {featuresSlides} from './features_demodata';
+import {ISlideInfo} from "../skateparks.interfaces";;
 import {ModalController} from "@ionic/angular";
 import {ModalReportClosureComponent} from "./modal-report-closure/modal-report-closure.component";
 import {ISkatepark} from "../../../shared/interfaces/skatepark.interfaces";
 import {CoreStore} from "../../../shared/store/core.store";
+import {TRUE_VALUE} from "../../../shared/configs/main.config";
+import {prepareFeatures} from "./feature.heper";
 
 
 @Component({
@@ -20,9 +21,10 @@ export class SkateparkDetailPage implements OnInit {
         .getPropertyValue('--ion-color-light');
     readonly activeRatingColor: string = getComputedStyle(document.documentElement)
         .getPropertyValue('--ion-color-secondary');
-    featuresSlides: ISlideInfo[] = featuresSlides;
+    featuresSlides: ISlideInfo[] = []
 
     skatepark: ISkatepark;
+    slides: ISlideInfo[] = [];
 
     constructor(
         private _location: Location,
@@ -33,6 +35,12 @@ export class SkateparkDetailPage implements OnInit {
 
     ngOnInit() {
         this.skatepark = this._coreStore.state.selectedSkatepark;
+        this.featuresSlides =  prepareFeatures(this.skatepark);
+        if(this.skatepark.has_images === TRUE_VALUE) {
+            this.slides = this.skatepark.images.map(image => {
+                return {imgSrc: image}
+            })
+        }
         console.log(this.skatepark)
     }
 
@@ -40,9 +48,8 @@ export class SkateparkDetailPage implements OnInit {
         this._location.back();
     }
 
-    addFavourite() {
-        console.log(this.isFavor)
-        this.isFavor = !this.isFavor;
+    addFavourite(skatepark: ISkatepark) {
+       skatepark.is_favourite = !skatepark.is_favourite;
     }
 
     async openModalReportClosure() {

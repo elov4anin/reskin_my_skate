@@ -5,7 +5,7 @@
 >
     <ion-grid class="ion-padding-start ion-padding-end mb12">
         <ion-row>
-            <ion-col class="p0">
+            <ion-col class="p0" size="6">
                 <ion-icon
                         class="icon-as-btn"
                         color="secondary"
@@ -14,18 +14,6 @@
                         (click)="back()"
                 ></ion-icon>
             </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="p0">
-                <ion-text color="light" class="title-28">Newquay Concrete Waves Skatepark</ion-text>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col class="p0" size="6">
-                <ion-chip color="primary">
-                    <ion-label color="light"  class="text-16">West Cornwall</ion-label>
-                </ion-chip>
-            </ion-col>
             <ion-col class="p0" size="4" offset="2">
                 <ion-chip color="primary">
                     <ion-icon color="secondary" name="location-outline"></ion-icon>
@@ -33,19 +21,29 @@
                 </ion-chip>
             </ion-col>
         </ion-row>
+        <ion-row>
+            <ion-col class="p0">
+                <ion-text color="light" class="title-28">{{skatepark?.name}}</ion-text>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="p0">
+                <ion-text color="light"  class="text-15">{{skatepark?.city}}</ion-text>
+            </ion-col>
+        </ion-row>
     </ion-grid>
-    <app-slider-photos></app-slider-photos>
+    <app-slider-photos [slides]="slides"></app-slider-photos>
     <ion-grid class="ion-padding-start ion-padding-end mt16">
         <ion-row>
             <ion-col class="p0" size="9">
                 <ion-button expand="block" color="dark">Add Photos</ion-button>
             </ion-col>
             <ion-col class="p0" offset="1" size="2">
-                <ion-button color="dark" (click)="addFavourite()">
+                <ion-button color="dark" (click)="addFavourite(skatepark)">
                     <ion-icon
                             slot="icon-only"
-                            [color]="isFavor ? 'secondary': 'light'"
-                            [name]="isFavor ? 'heart' : 'heart-outline'"
+                            [color]="skatepark.is_favourite ? 'secondary': 'light'"
+                            [name]="skatepark.is_favourite ? 'heart' : 'heart-outline'"
                     ></ion-icon>
                 </ion-button>
             </ion-col>
@@ -61,7 +59,7 @@
                 [activeColor] = activeRatingColor
                 [defaultColor] = defaultRatingColor
                 readonly="true"
-                rating="3"
+                [rating]="skatepark.rating"
                 fontSize = "16px">
         </ionic-rating-component>
         <ion-text color="light" class="text-16 text--underline">Read all ratings</ion-text>

@@ -47,6 +47,7 @@ export interface ISkatepark {
     lessons:       string;
     images:        string[];
     rating:        number;
+    is_favourite?: boolean;
 }
 
 export interface ISkateparkFilterParams {

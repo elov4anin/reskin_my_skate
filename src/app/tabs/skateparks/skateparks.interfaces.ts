@@ -4,5 +4,5 @@ export interface ISlideInfo {
     imgSrc?: string;
     srcset?: any;
     icon?: string;
-    isPhotoSlide?: boolean
+    type?: string;
 }

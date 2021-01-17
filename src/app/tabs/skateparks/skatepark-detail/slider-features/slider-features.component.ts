@@ -17,7 +17,7 @@ export class SliderFeaturesComponent implements OnInit {
   slideOpts = {
     initialSlide: 0,
     speed: 400,
-    loop: true,
+    loop: false,
     slidesPerView: 1,
     spaceBetween: 20,
     width: 80
