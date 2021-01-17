@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {ModalController} from "@ionic/angular";
 import {CoreStore} from "../../../shared/store/core.store";
 import {IFeatureSkatepark} from "../../../shared/interfaces/skatepark.interfaces";
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {TYPES} from "./dictionaries";
+import {SURFACES} from "./surfaces";
 
 
 @Component({
@@ -12,7 +14,11 @@ import {FormBuilder} from "@angular/forms";
 })
 export class ModalFilterSkateparksComponent implements OnInit {
 
+  readonly types: IFeatureSkatepark[] = TYPES
+  readonly surfaces: IFeatureSkatepark[] = SURFACES;
+
   checkboxes: IFeatureSkatepark[] =[];
+  form: FormGroup;
 
   constructor(
       private _modalController: ModalController,
@@ -21,6 +27,10 @@ export class ModalFilterSkateparksComponent implements OnInit {
       ) { }
 
   ngOnInit() {
+    this.form = this._fb.group({
+      type: 'indoors',
+      material: ''
+    })
     this.checkboxes = this._coreStore.state.skateparkFeatures;
   }
 
@@ -29,5 +39,6 @@ export class ModalFilterSkateparksComponent implements OnInit {
   }
 
   applyFilter() {
+    console.log(this.form.value)
   }
 }

@@ -11,28 +11,19 @@
     </ion-toolbar>
 </ion-header>
 <ion-content color="dark" class="ion-padding-start ion-padding-end">
+    <from [formGroup]="form">
     <div class="ion-margin-top row">
         <ion-label position="stacked">
             <ion-text class="text-16">Type</ion-text>
         </ion-label>
-        <div class="d-flex ion-justify-content-between">
-            <ion-button color="secondary" expand="block" size="default" fill="outline">Indoor</ion-button>
-            <ion-button color="secondary" expand="block" size="default" fill="outline">Outdoor</ion-button>
-        </div>
+        <app-custom-toggle-control [buttons]="types" formControlName="type"></app-custom-toggle-control>
     </div>
 
     <div class="ion-margin-top row">
         <ion-label position="stacked">
             <ion-text class="text-16">Surface</ion-text>
         </ion-label>
-        <div class="d-flex ion-justify-content-between">
-            <ion-button color="primary" expand="block" size="default" fill="solid">
-                <ion-text color="tertiary">Concrete</ion-text>
-            </ion-button>
-            <ion-button color="secondary" expand="block" size="default" fill="outline">
-                <ion-text color="secondary">Wood</ion-text>
-            </ion-button>
-        </div>
+        <app-custom-toggle-control [buttons]="surfaces" formControlName="material"></app-custom-toggle-control>
     </div>
 
     <div class="ion-margin-top row">
@@ -43,7 +34,7 @@
             <app-checkbox-list [checkboxes]="checkboxes"></app-checkbox-list>
         </div>
     </div>
-
+</from>
 </ion-content>
 <ion-footer>
     <ion-toolbar color="dark">

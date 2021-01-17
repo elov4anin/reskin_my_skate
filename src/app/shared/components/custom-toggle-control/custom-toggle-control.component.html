@@ -1,3 +1,10 @@
-<p>
-  custom-toggle-control works!
-</p>
+<div class="d-flex ion-justify-content-between">
+    <ion-button *ngFor="let btn of buttons"
+                [color]="btn.checked ? 'secondary' : 'primary'"
+                [fill]="btn.checked ? 'outline' : 'solid'"
+                expand="block" size="default"
+                (click)="clickBtn(btn)"
+    >
+        <ion-text [color]="btn.checked ? 'secondary' : 'tertiary'">{{btn.name}}</ion-text>
+    </ion-button>
+</div>
