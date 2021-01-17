@@ -26,7 +26,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
 
     private componentDestroyed: Subject<any> = new Subject();
 
-    private coordinates$: ReplaySubject<ICoordinates> = new ReplaySubject<ICoordinates>(1);
+    coordinates$: ReplaySubject<ICoordinates> = new ReplaySubject<ICoordinates>(1);
 
     selectedSegment: SegmentsEnum = SegmentsEnum.LIST;
     currentSearchExp: string;
@@ -88,16 +88,14 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
         await modal.present();
         const { data } = await modal.onWillDismiss();
         if (data) {
-           this.getParksByLocation(data.selectedLocation, data.coordinates);
+            if (this.selectedSegment === SegmentsEnum.MAP) {
+                this.selectedSegment = SegmentsEnum.LIST;
+            }
+            this.currentSearchExp = data.selectedLocation;
+            this.coordinates$.next(data.coordinates);
         }
 
 
-    }
-
-    getParksByLocation (location: string, coordinates: ICoordinates) {
-        this._skateparksService.getParksByLocation({location, coordinates})
-            .pipe(takeUntil(this.componentDestroyed))
-            .subscribe((res) => this.foundSkateparks = res.parks)
     }
 
     back() {
@@ -112,15 +110,10 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
         return await modal.present();
     }
 
-    segmentChanged($event: any) {
-
-    }
-
-    loadData($event: any) {
-
+    segmentChanged() {
     }
 
     async openSkatepark(skateparkId: string) {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, 1])
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, skateparkId])
     }
 }
