@@ -21,6 +21,7 @@ export class CoreStore extends Store<CoreState> {
             this.initValue(StorageEnum.LOGGEDIN),
             this.initValue(StorageEnum.PROFILE),
             this.initValue(StorageEnum.GAME),
+            this.initValue(StorageEnum.SELECTED_SKATEPARK),
         ]);
     }
 
@@ -76,6 +77,7 @@ export class CoreStore extends Store<CoreState> {
         await this.removeValue(StorageEnum.LOGGEDIN);
         await this.removeValue(StorageEnum.GAME);
         await this.removeValue(StorageEnum.PROFILE);
+        await this.removeValue(StorageEnum.SELECTED_SKATEPARK);
     }
 
 }
