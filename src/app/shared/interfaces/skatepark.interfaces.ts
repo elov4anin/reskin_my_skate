@@ -52,11 +52,10 @@ export interface ISkatepark {
 
 export interface ISkateparkFilterParams {
     coordinates?: ICoordinates;
-    type?: string; //@todo
-    surface?: 'CONCRETE' | 'WOOD';  //@todo - is there material ?
+    type?: 'outdoors' | 'indoors'; //@todo  'outdoors' | 'indoors'
     features?: string[];
     location: string;
-    material?: string;
+    material?: 'concrete' | 'wood';
     page?: number;
 }
 
@@ -65,7 +64,7 @@ export interface IGetParksByLocation {
 }
 
 export interface IFeatureSkatepark {
-    checked: false;
+    checked: boolean;
     name: string;
     value: string;
 }

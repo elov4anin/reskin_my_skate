@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalController} from "@ionic/angular";
-import {ICheckBox} from "../../../shared/components/checkbox-list/checkbox-list.component";
+import {CoreStore} from "../../../shared/store/core.store";
+import {IFeatureSkatepark} from "../../../shared/interfaces/skatepark.interfaces";
+import {FormBuilder} from "@angular/forms";
+
 
 @Component({
   selector: 'app-modal-filter-skateparks',
@@ -9,42 +12,22 @@ import {ICheckBox} from "../../../shared/components/checkbox-list/checkbox-list.
 })
 export class ModalFilterSkateparksComponent implements OnInit {
 
-  checkboxes: ICheckBox[] = [
-    {
-      label: 'Skatelite',
-      checked: true
-    },
-    {
-      label: 'Toilet',
-      checked: true
-    },
-    {
-      label: 'Store',
-      checked: true
-    },
-    {
-      label: 'Paid',
-      checked: false
-    },
-    {
-      label: 'Free',
-      checked: true
-    },
-    {
-      label: 'Undercover',
-      checked: false
-    },
-    {
-      label: 'Cafe',
-      checked: false
-    },
-  ];
+  checkboxes: IFeatureSkatepark[] =[];
 
-  constructor(private _modalController: ModalController) { }
+  constructor(
+      private _modalController: ModalController,
+      private _coreStore: CoreStore,
+      private _fb: FormBuilder
+      ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.checkboxes = this._coreStore.state.skateparkFeatures;
+  }
 
   async closeModal() {
     await this._modalController.dismiss();
+  }
+
+  applyFilter() {
   }
 }

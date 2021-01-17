@@ -47,7 +47,11 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar color="dark">
-        <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">
+        <ion-button
+                class="ion-margin-start ion-margin-end mb12 apply-btn"
+                fill="solid" color="success" expand="block"
+                (click)="applyFilter()"
+        >
             Apply filters
         </ion-button>
     </ion-toolbar>

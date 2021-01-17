@@ -4,7 +4,7 @@
               class="mb4"
               lines="none"
     >
-        <ion-label [color]=" ch.checked ? 'secondary'  : 'tertiary'" color="">{{ch.label}}</ion-label>
+        <ion-label [color]=" ch.checked ? 'secondary'  : 'tertiary'" color="">{{ch.name}}</ion-label>
         <ion-checkbox slot="end" [ngClass]="{'darktwo': defaultCheckedColor === 'darktwo'}" [checked]="ch.checked"
                       (ionChange)="change(ch)"></ion-checkbox>
     </ion-item>
