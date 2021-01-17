@@ -29,7 +29,8 @@ export class ModalFilterSkateparksComponent implements OnInit {
   ngOnInit() {
     this.form = this._fb.group({
       type: 'indoors',
-      material: ''
+      material: '',
+      features: [['paid',]]
     })
     this.checkboxes = this._coreStore.state.skateparkFeatures;
   }
