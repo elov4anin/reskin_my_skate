@@ -13,3 +13,14 @@ export interface ICoordinates {
     lat: number;
     lng: number;
 }
+
+export interface IUserShortInfo {
+    name: string;
+    picture: string;
+}
+
+export interface  IGetUserRatingResponse {
+    rating: {
+        has_rating: boolean;
+    }
+}

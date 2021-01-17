@@ -72,3 +72,8 @@ export interface IFeatureSkatepark {
 export interface IGetFeaturesResponse {
     features: IFeatureSkatepark[]
 }
+
+export interface IUserLastCheckInResponse {
+    checkins: any[];
+    user_checked_in_recently: boolean;
+}

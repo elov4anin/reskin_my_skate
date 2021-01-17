@@ -1,22 +1,19 @@
 import {HttpClient} from "@angular/common/http";
 import {SITE_MAIN} from "../configs/main.config";
 import {Observable, of} from "rxjs";
-import {Injectable, NgZone} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {
     IGetFeaturesResponse, IGetParksByLocation,
     ISearchLocationsResponse,
-    ISkateparkFilterParams
+    ISkateparkFilterParams, IUserLastCheckInResponse
 } from "../interfaces/skatepark.interfaces";
-import {ICoordinates} from "../interfaces/common";
-
-declare var google;
 
 @Injectable({
     providedIn: "root"
 })
 export class SkateparksService {
 
-    constructor(private _http: HttpClient, private zone: NgZone) {
+    constructor(private _http: HttpClient) {
 
     }
 
@@ -36,6 +33,16 @@ export class SkateparksService {
         return this._http.post<IGetParksByLocation>(
             SITE_MAIN + 'integration/myskate-parks-radius-search.php',
             filter
+        );
+    }
+
+    userLastCheckIn(parkId: string, userId: string): Observable<IUserLastCheckInResponse> {
+        return this._http.post<IUserLastCheckInResponse>(
+            SITE_MAIN + 'integration/myskate/myskate-park-user-last-check-in.php',
+            {
+                park: parkId,
+                user: userId
+            }
         );
     }
 

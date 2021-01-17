@@ -1,5 +1,5 @@
 import {HttpClient} from "@angular/common/http";
-import {IClubStatusResponse, IServerResponse} from "../interfaces/common";
+import {IClubStatusResponse, IGetUserRatingResponse, IServerResponse} from "../interfaces/common";
 import {SITE_MAIN} from "../configs/main.config";
 import {Observable} from "rxjs";
 import {Injectable} from "@angular/core";
@@ -17,15 +17,28 @@ export class UserService {
         return this._http.post<IServerResponse>(
             SITE_MAIN + 'check-user-status.php',
             {userId},
-
         );
     }
 
-    checkClubStatus(userId: number): Observable<IClubStatusResponse> {
+    checkClubStatus(userId: string): Observable<IClubStatusResponse> {
         return this._http.post<IClubStatusResponse>(
             SITE_MAIN + 'check-club-status.php',
             {userId},
+        );
+    }
 
+
+    getUserRating(parkId: string, userId: string): Observable<IGetUserRatingResponse> {
+        return this._http.post<IGetUserRatingResponse>(
+            SITE_MAIN + 'integration/myskate/myskate-rating-user.php',
+            {park: parkId, user: userId},
+        );
+    }
+
+    getUserReports(parkId: string, userId: string): Observable<{ park_reported: false }> {
+        return this._http.post<{ park_reported: false }>(
+            SITE_MAIN + 'integration/myskate/myskate-park-user-reports.php',
+            {park: parkId, user: userId},
         );
     }
 }
