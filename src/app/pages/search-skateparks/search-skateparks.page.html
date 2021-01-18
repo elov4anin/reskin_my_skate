@@ -13,9 +13,10 @@
                 debounce="600"
                 searchIcon="undefined"
                 [(ngModel)]="currentFilter.location"
-                (ionInput)="search($event)"
+                (ionChange)="search($event)"
         ></ion-searchbar>
-        <ion-button slot="end" [color]="isFilterActive? 'warning': 'light'"  fill="clear" class="filter-btn" (click)="openFilter()" size="small">
+        <ion-button slot="end" [color]="isFilterActive? 'warning': 'light'" fill="clear" class="filter-btn"
+                    (click)="openFilter()" size="small">
             <ion-icon slot="icon-only" name="filter" size="small"></ion-icon>
         </ion-button>
     </ion-toolbar>
@@ -50,13 +51,13 @@
             </ion-item>
         </ion-list>
 
-       <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
-            <ion-infinite-scroll-content
-                    loadingSpinner="bubbles"
-                    loadingText="Loading more..."
-            >
-            </ion-infinite-scroll-content>
-        </ion-infinite-scroll>-->
+        <!-- <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+             <ion-infinite-scroll-content
+                     loadingSpinner="bubbles"
+                     loadingText="Loading more..."
+             >
+             </ion-infinite-scroll-content>
+         </ion-infinite-scroll>-->
     </ng-container>
     <ng-container *ngIf="selectedSegment === segmentsEnum.MAP">
         <app-google-map [coordinates]="currentFilter.coordinates"

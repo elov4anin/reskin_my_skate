@@ -6,7 +6,7 @@ import {LoadingController, ModalController} from "@ionic/angular";
 import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../tabs/tabs.enum";
 import {ActivatedRoute, Router} from "@angular/router";
-import {switchMap, takeUntil} from "rxjs/operators";
+import {delay, switchMap, takeUntil} from "rxjs/operators";
 import {SkateparksService} from "../../shared/services/skateparks.service";
 import {of, Subject} from "rxjs";
 import {ModalLocationListComponent} from "../../shared/modals/modal-location-list/modal-location-list.component";
@@ -34,6 +34,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
     isReloading: boolean = false;
     currentFilter: ISkateparkFilterParams;
     isFilterActive: boolean = false;
+    isInit: boolean = false;
 
 
     constructor(
@@ -50,6 +51,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.isInit = true;
         this.currentFilter = Object.assign({}, this._filterHelper.defaultFilterState);
         this._route.queryParams.pipe(
             takeUntil(this.componentDestroyed),
@@ -75,7 +77,11 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             })
         ).subscribe(async (res: any) => {
             this.foundSkateparks = res.parks;
-            await this._loadingController.dismiss();
+            this.isInit = false
+            const isLoading = await this._loadingController.getTop();
+            if (isLoading) {
+                await this._loadingController.dismiss();
+            }
         });
 
 
@@ -87,6 +93,13 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
     }
 
     async search(evt: any) {
+        if (this.isInit) {
+            return ;
+        }
+        const isLoading = await this._loadingController.getTop();
+        if (isLoading) {
+            return ;
+        }
         if(!evt.target.value) {
             return false;
         }
