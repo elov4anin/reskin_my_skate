@@ -1,7 +1,7 @@
 import {ApiCreatorService} from "./api-creator.service";
 import {Injectable} from "@angular/core";
 import {Observable} from "rxjs";
-import {IGetFeedListResponse} from "../interfaces/team.interfaces";
+import {IGetEventListResponse, IGetFeedListResponse} from "../interfaces/team.interfaces";
 
 
 @Injectable({
@@ -18,10 +18,24 @@ export class TeamService {
         );
     }
 
-    getLatestNews(page:number = 0): Observable<IGetFeedListResponse> {
+    getLatestNews(): Observable<IGetFeedListResponse> {
         return this._api.basePostRequest<IGetFeedListResponse>(
             'integration/myskate/myskate-feed-teamGB-latest.php',
+            {},
+        );
+    }
+
+    getEventList(page:number = 0): Observable<IGetEventListResponse> {
+        return this._api.basePostRequest<IGetEventListResponse>(
+            'integration/myskate/myskate-events.php',
             {page},
+        );
+    }
+
+    getLatestEvents(): Observable<IGetEventListResponse> {
+        return this._api.basePostRequest<IGetEventListResponse>(
+            'integration/myskate/myskate-events-latest.php',
+            {},
         );
     }
 }

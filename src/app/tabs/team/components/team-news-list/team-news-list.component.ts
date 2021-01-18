@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TeamService} from "../../../../shared/services/team.service";
 import {Subject} from "rxjs";
 import {IFeedNews} from "../../../../shared/interfaces/team.interfaces";
@@ -14,7 +14,7 @@ import {IonInfiniteScroll} from "@ionic/angular";
     templateUrl: './team-news-list.component.html',
     styleUrls: ['./team-news-list.component.scss'],
 })
-export class TeamNewsListComponent implements OnInit {
+export class TeamNewsListComponent implements OnInit, OnDestroy {
     @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
     items: IFeedNews[] = []
