@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from "@angular/common";
-import {ModalController} from "@ionic/angular";
+import {CoreStore} from "../../../shared/store/core.store";
+import {IFeedNews} from "../../../shared/interfaces/team.interfaces";
 
 @Component({
   selector: 'app-news-item',
@@ -9,12 +10,16 @@ import {ModalController} from "@ionic/angular";
 })
 export class NewsItemPage implements OnInit {
 
+  news: IFeedNews;
+
   constructor(
       private _location: Location,
-      private _modalController: ModalController) {
+      private _coreStore: CoreStore,
+      ) {
   }
 
   ngOnInit() {
+    this.news = this._coreStore.state.selectedNews;
   }
 
   back() {

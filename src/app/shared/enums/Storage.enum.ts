@@ -4,5 +4,6 @@ export enum StorageEnum {
     LOGGEDIN = 'loggedIn',
     SELECTED_SKATEPARK = 'selectedSkatepark',
     SKATEPARK_FEATURES = 'skateparkFeatures',
+    SELECTED_NEWS = 'selectedNews',
 }
 
