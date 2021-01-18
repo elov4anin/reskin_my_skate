@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {ISkateparkFilterParams} from "../../../shared/interfaces/skatepark.interfaces";
+import {ReplaySubject} from "rxjs";
 
 
 @Injectable({
@@ -14,6 +15,8 @@ export class FilterSkateparksHelper {
         material: null,
         page: 0,
     }
+    filterChange$: ReplaySubject<ISkateparkFilterParams> = new ReplaySubject<ISkateparkFilterParams>(1);
+
     constructor() {
     }
 

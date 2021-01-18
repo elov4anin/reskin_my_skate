@@ -25,10 +25,7 @@ export class SkateparksService {
     }
 
     getParksByLocation(filter: ISkateparkFilterParams): Observable<IGetParksByLocation> {
-        filter.features = [];
-        filter.material = null;
         filter.page = 0;
-        filter.type = null;
         return this._api.basePostRequest<IGetParksByLocation>(
             'integration/myskate-parks-radius-search.php',
             filter

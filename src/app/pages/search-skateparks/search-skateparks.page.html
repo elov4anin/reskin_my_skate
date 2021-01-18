@@ -12,16 +12,16 @@
                 clearIcon="close-outline"
                 debounce="600"
                 searchIcon="undefined"
-                [(ngModel)]="currentSearchExp"
+                [(ngModel)]="currentFilter.location"
                 (ionInput)="search($event)"
         ></ion-searchbar>
-        <ion-button slot="end" color="dark" class="filter-btn" (click)="openFilter()" size="small">
+        <ion-button slot="end" [color]="isFilterActive? 'warning': 'light'"  fill="clear" class="filter-btn" (click)="openFilter()" size="small">
             <ion-icon slot="icon-only" name="filter" size="small"></ion-icon>
         </ion-button>
     </ion-toolbar>
 </ion-header>
 <div class="segments-wrapper">
-    <ion-segment (ionChange)="segmentChanged($event)" mode="md" [(ngModel)]="selectedSegment" color="secondary">
+    <ion-segment (ionChange)="segmentChanged()" mode="md" [(ngModel)]="selectedSegment" color="secondary">
         <ion-segment-button *ngFor="let s of segments" [value]="s">
             <ion-label>
                 <ion-text class="text-16-500 text-no-transform">{{segmentsEnum2LabelMapping[s]}}</ion-text>
@@ -59,9 +59,9 @@
         </ion-infinite-scroll>-->
     </ng-container>
     <ng-container *ngIf="selectedSegment === segmentsEnum.MAP">
-        <app-google-map [coordinates]="coordinates$ | async"
+        <app-google-map [coordinates]="currentFilter.coordinates"
                         [skateparks]="foundSkateparks"
-                        [searchValue]="currentSearchExp"
+                        [searchValue]="currentFilter.location"
         ></app-google-map>
     </ng-container>
 </ion-content>

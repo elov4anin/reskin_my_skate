@@ -1,4 +1,5 @@
 import {Injectable, NgZone} from "@angular/core";
+import {ICoordinates} from "../interfaces/common";
 
 
 declare var google;
@@ -11,7 +12,7 @@ export class GoogleMapService {
     constructor(private zone: NgZone) {
     }
 
-    getCoordinates(address: string): Promise<any> {
+    getCoordinates(address: string): Promise<ICoordinates> {
 
         return new Promise((resolve, reject) => {
             const geocoder = new google.maps.Geocoder();

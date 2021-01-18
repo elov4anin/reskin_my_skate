@@ -8,13 +8,14 @@ import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../tabs/tabs.enum";
 import {ActivatedRoute, Router} from "@angular/router";
 import {switchMap, takeUntil} from "rxjs/operators";
 import {SkateparksService} from "../../shared/services/skateparks.service";
-import {of, ReplaySubject, Subject} from "rxjs";
+import {of, Subject} from "rxjs";
 import {ModalLocationListComponent} from "../../shared/modals/modal-location-list/modal-location-list.component";
-import {ISkatepark} from "../../shared/interfaces/skatepark.interfaces";
+import {ISkatepark, ISkateparkFilterParams} from "../../shared/interfaces/skatepark.interfaces";
 import {ICoordinates} from "../../shared/interfaces/common";
 import {GoogleMapService} from "../../shared/services/google--map.service";
 import {CoreStore} from "../../shared/store/core.store";
 import {StorageEnum} from "../../shared/enums/Storage.enum";
+import {FilterSkateparksHelper} from "./modal-filter-skateparks/filter-skateparks.helper";
 
 @Component({
     selector: 'app-search-skateparks',
@@ -28,12 +29,11 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
 
     private componentDestroyed: Subject<any> = new Subject();
 
-    coordinates$: ReplaySubject<ICoordinates> = new ReplaySubject<ICoordinates>(1);
-
     selectedSegment: SegmentsEnum = SegmentsEnum.LIST;
-    currentSearchExp: string;
     foundSkateparks: ISkatepark[] = [];
     isReloading: boolean = false;
+    currentFilter: ISkateparkFilterParams;
+    isFilterActive: boolean = false;
 
 
     constructor(
@@ -45,27 +45,31 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
         private _googleMapService: GoogleMapService,
         private _coreStore: CoreStore,
         public _loadingController: LoadingController,
+        public _filterHelper: FilterSkateparksHelper,
     ) {
     }
 
     ngOnInit() {
+        this.currentFilter = Object.assign({}, this._filterHelper.defaultFilterState);
         this._route.queryParams.pipe(
             takeUntil(this.componentDestroyed),
         ).subscribe(async (params: any) => {
             if (params && params.search) {
                 if (this.foundSkateparks.length === 0) {
-                    this.currentSearchExp = params.search;
-                    const coordinates = await this._googleMapService.getCoordinates(this.currentSearchExp);
-                    this.coordinates$.next(coordinates);
+                    const coordinates = await this._googleMapService.getCoordinates(params.search);
+                    this.setFilter(params.search, coordinates);
+                    this._filterHelper.filterChange$.next(this.currentFilter);
                 }
             }
         })
-        this.coordinates$.pipe(
+        this._filterHelper.filterChange$.pipe(
             takeUntil(this.componentDestroyed),
-            switchMap((coordinates) => {
-                if (coordinates) {
+            switchMap((filter: ISkateparkFilterParams) => {
+                if (filter) {
+                    this.currentFilter = filter;
+                    this.isFilterActive = this._filterHelper.checkFilterActive(filter);
                     this.presentLoading().then();
-                    return this._skateparksService.getParksByLocation({location: this.currentSearchExp, coordinates})
+                    return this._skateparksService.getParksByLocation(filter)
                 }
                 return of(null)
             })
@@ -102,11 +106,9 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             if (this.selectedSegment === SegmentsEnum.MAP) {
                 this.selectedSegment = SegmentsEnum.LIST;
             }
-            this.currentSearchExp = data.selectedLocation;
-            this.coordinates$.next(data.coordinates);
+            this.setFilter(data.selectedLocation, data.coordinates);
+            this._filterHelper.filterChange$.next(this.currentFilter);
         }
-
-
     }
 
     back() {
@@ -116,9 +118,16 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
     async openFilter() {
         const modal = await this._modalController.create({
             component: ModalFilterSkateparksComponent,
-            cssClass: 'modal-filter-skateparks'
+            cssClass: 'modal-filter-skateparks',
+            componentProps: {
+                filterState: this.currentFilter
+            }
         });
-        return await modal.present();
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        if (data && data.filter) {
+            this._filterHelper.filterChange$.next(data.filter);
+        }
     }
 
     segmentChanged() {
@@ -136,8 +145,13 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             duration: 2000
         });
         await loading.present();
+    }
 
-        const { role, data } = await loading.onDidDismiss();
-        console.log('Loading dismissed!');
+    private setFilter(location: string, coordinates: ICoordinates) {
+        this.currentFilter = {
+            ...this.currentFilter,
+            location,
+            coordinates
+        }
     }
 }

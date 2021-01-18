@@ -20,6 +20,7 @@ import {StorageEnum} from "../../shared/enums/Storage.enum";
 export class SkateparksPage implements OnInit, OnDestroy {
 
     sliders: ISlideInfo[] = sliders;
+    searchValue: string;
 
     private componentDestroyed: Subject<any> = new Subject();
 
@@ -47,7 +48,9 @@ export class SkateparksPage implements OnInit, OnDestroy {
     }
 
     async openSearchPage(evt) {
-
+        if (!evt.detail.value) {
+            return;
+        }
         const modal = await this._modalController.create({
             component: ModalLocationListComponent,
             cssClass: 'modal-location-skateparks',
@@ -58,6 +61,7 @@ export class SkateparksPage implements OnInit, OnDestroy {
         await modal.present();
         const {data} = await modal.onWillDismiss();
         if (data) {
+            this.searchValue = '';
             await this._router.navigate(
                 ['/', SKATEPARKS_ROUTES.SEARCH],
                 {queryParams: {search: data.selectedLocation}})
