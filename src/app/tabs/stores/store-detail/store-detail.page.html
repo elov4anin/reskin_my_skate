@@ -17,7 +17,7 @@
         </ion-row>
         <ion-row class="mt16">
             <ion-col class="p0">
-                <ion-text color="light" class="title-20">Second Skate Shop</ion-text>
+                <ion-text color="light" class="title-20">{{store.name}}</ion-text>
             </ion-col>
         </ion-row>
         <ion-row class="mt20">
@@ -27,7 +27,6 @@
         </ion-row>
     </ion-grid>
     <div class="divisor mt20 mb20"></div>
-
     <ion-list>
         <ion-item color="primary" lines="none" class="ion-margin-end mb16">
             <div class="icon-slot" slot="start">
@@ -35,9 +34,9 @@
             </div>
             <div class="d-flex flex-column">
                 <ion-label >
-                    <ion-text class="text-16" color="light">115 Cowley Road</ion-text>
+                    <ion-text class="text-16" color="light">{{store.address_1}}</ion-text>
                 </ion-label>
-                <ion-text class="text-12" color="tertiary">Oxford, OX4 1UQ</ion-text>
+                <ion-text class="text-12" color="tertiary">{{store.city}}{{store.postcode ? ', ' + store.postcode: ''}}</ion-text>
             </div>
         </ion-item>
         <ion-item color="primary" lines="none" class="ion-margin-end mb16">
@@ -46,7 +45,9 @@
             </div>
             <div class="d-flex flex-column">
                 <ion-label >
-                    <ion-text class="text-16" color="light">115 Cowley Road</ion-text>
+                    <ion-text class="text-16" color="light">
+                        <a [href]="'mailto:' + store.email" target="_blank">{{store.email}}</a>
+                    </ion-text>
                 </ion-label>
             </div>
         </ion-item>
@@ -55,7 +56,7 @@
                 <ion-icon src="assets/images/svg-icons/call-24px.svg"></ion-icon>
             </div>
             <ion-label>
-                <a class="text-16" href="tel:01865201089">01865 201089</a>
+                <a class="text-16" [href]="'tel:' + store.phone" target="_blank">{{store.phone}}</a>
             </ion-label>
         </ion-item>
         <ion-item color="primary" lines="none" class="ion-margin-end">
@@ -74,6 +75,7 @@
             color="success"
             expand="block"
             class="ion-margin-top ion-padding-start ion-padding-end"
+            (click)="openBrowser()"
     >
         <ion-text class="text-15-500">Visit Website</ion-text>
     </ion-button>

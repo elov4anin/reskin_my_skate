@@ -2,6 +2,7 @@ import {IUser} from "../interfaces/auth.interfaces";
 import {IGameSettings} from "../interfaces/game";
 import {IFeatureSkatepark, ISkatepark} from "../interfaces/skatepark.interfaces";
 import {IEvent, IFeedNews} from "../interfaces/team.interfaces";
+import {IStore} from "../interfaces/store.interfaces";
 
 export class CoreState {
 
@@ -12,6 +13,7 @@ export class CoreState {
     public readonly skateparkFeatures: IFeatureSkatepark[];
     public readonly selectedNews: IFeedNews;
     public readonly selectedEvent: IEvent;
+    public readonly selectedStore: IStore;
 
     constructor() {
         // set initial state
@@ -22,5 +24,6 @@ export class CoreState {
         this.skateparkFeatures = undefined;
         this.selectedNews = undefined;
         this.selectedEvent = undefined;
+        this.selectedStore = undefined;
     }
 }

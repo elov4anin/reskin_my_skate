@@ -11,6 +11,7 @@ import {AppComponent} from './app.component';
 import {NativeGeocoder} from "@ionic-native/native-geocoder/ngx";
 import {HttpClientModule} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @NgModule({
     declarations: [AppComponent],
@@ -32,6 +33,7 @@ import {IonicStorageModule} from "@ionic/storage";
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         NativeGeocoder,
+        InAppBrowser,
     ],
     bootstrap: [AppComponent]
 })

@@ -9,13 +9,14 @@
   </header>
 
   <ion-list color="primary">
-    <ion-item *ngFor="let i of [1,2,3,4,5,6,7,8]" color="primary" lines="none" (click)="openStore(1)">
-      <ion-thumbnail slot="start">
+    <ion-item *ngFor="let s of stores" color="primary" lines="none" (click)="openStore(s)">
+      <ion-thumbnail slot="start" class="pos-relative">
+        <ion-badge color="success" class="badge-into-thumbnail">Featured</ion-badge>
         <img src="../../../assets/images/thumbnall.png">
       </ion-thumbnail>
       <div class="d-flex flex-column ">
-        <ion-text color="light" class="mb12 text-16">Cheap Shop</ion-text>
-        <ion-text color="medium" class="text-15">Second street 25 West London</ion-text>
+        <ion-text color="light" class="mb12 text-16">{{s.name}}</ion-text>
+        <ion-text color="medium" class="text-15">{{s.address_1}}</ion-text>
       </div>
     </ion-item>
   </ion-list>

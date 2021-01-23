@@ -36,8 +36,8 @@
     <ng-container *ngIf="selectedSegment === segmentsEnum.LIST">
         <ion-list color="primary">
             <ion-item *ngFor="let s of foundSkateparks" color="primary" lines="none" (click)="openSkatepark(s)">
-                <ion-thumbnail slot="start">
-                    <ion-chip color="success" class="text-13-500">New</ion-chip>
+                <ion-thumbnail slot="start" class="pos-relative">
+                    <ion-badge color="success" class="badge-into-thumbnail">New</ion-badge>
                     <img [src]="s.has_images === '1' ? s.images[0] : '../../../assets/images/no-image-thumbnall.png'">
                 </ion-thumbnail>
                 <div class="d-flex flex-column">

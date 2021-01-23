@@ -85,3 +85,10 @@ ion-datetime {
   --border-radius: var(--theme-base-border-radius);
   border-radius: var(--theme-base-border-radius);
 }
+
+.badge-into-thumbnail {
+  position: absolute;
+  top: -4px;
+  left: 0px;
+  border-radius: 2px;
+}
