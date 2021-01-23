@@ -2,10 +2,12 @@ import {Observable, of} from "rxjs";
 import {Injectable} from "@angular/core";
 import {
     IGetFeaturesResponse, IGetParksByLocation,
-    ISearchLocationsResponse,
+    ISearchLocationsResponse, ISkatepark,
     ISkateparkFilterParams, IUserLastCheckInResponse
 } from "../interfaces/skatepark.interfaces";
 import {ApiCreatorService} from "./api-creator.service";
+import {map} from "rxjs/operators";
+import * as dayjs from "dayjs";
 
 
 @Injectable({
@@ -29,6 +31,18 @@ export class SkateparksService {
         return this._api.basePostRequest<IGetParksByLocation>(
             'integration/myskate-parks-radius-search.php',
             filter
+        ).pipe(
+            map(res => {
+                return {
+                    ...res,
+                    parks: res.parks.map((s) => {
+                        return {
+                            ...s,
+                            _isNew: this.checkSkatePark(s.modified_at)
+                        }
+                    })
+                }
+            })
         );
     }
 
@@ -47,5 +61,10 @@ export class SkateparksService {
             'integration/myskate/myskate-features.php',
             {},
         );
+    }
+
+    private checkSkatePark(modified_at: string): boolean {
+        const date = dayjs(modified_at).format()
+        return true;
     }
 }

@@ -37,7 +37,8 @@
         <ion-list color="primary">
             <ion-item *ngFor="let s of foundSkateparks" color="primary" lines="none" (click)="openSkatepark(s)">
                 <ion-thumbnail slot="start">
-                    <img [src]="s.has_images === '1' ? s.images[0] : '../../../assets/images/thumbnall.png'">
+                    <ion-chip color="success" class="text-13-500">New</ion-chip>
+                    <img [src]="s.has_images === '1' ? s.images[0] : '../../../assets/images/no-image-thumbnall.png'">
                 </ion-thumbnail>
                 <div class="d-flex flex-column">
                     <ion-text color="light" class="text-16">{{s.name}}</ion-text>

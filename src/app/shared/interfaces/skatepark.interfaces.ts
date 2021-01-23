@@ -48,6 +48,8 @@ export interface ISkatepark {
     images:        string[];
     rating:        number;
     is_favourite?: boolean;
+    modified_at:   string; // What format date? (DD-MM-YYYY HH:mm) created_at ?
+    _isNew?:       boolean;
 }
 
 export interface ISkateparkFilterParams {

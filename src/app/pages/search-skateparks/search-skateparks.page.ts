@@ -6,7 +6,7 @@ import {LoadingController, ModalController} from "@ionic/angular";
 import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../tabs/tabs.enum";
 import {ActivatedRoute, Router} from "@angular/router";
-import {delay, switchMap, takeUntil} from "rxjs/operators";
+import {switchMap, takeUntil} from "rxjs/operators";
 import {SkateparksService} from "../../shared/services/skateparks.service";
 import {of, Subject} from "rxjs";
 import {ModalLocationListComponent} from "../../shared/modals/modal-location-list/modal-location-list.component";
