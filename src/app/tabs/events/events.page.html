@@ -3,28 +3,36 @@
     <ion-text color="light" class="title-20">Events</ion-text>
 
   </header>
-  <ion-virtual-scroll [items]="[1, 2, 3]" approxItemHeight="220px">
-    <ion-card *virtualItem="let item; let itemBounds = bounds;" color="primary" (click)="openEvent(1)">
+
+  <ng-container *ngIf="events.length > 0; else emptyBlock">
+    <app-event *ngFor="let item of events;" [event]="events"></app-event>
+  </ng-container>
+  <ng-template #emptyBlock>
+    <ion-text color="tertiary" class="empty-title">No events yet</ion-text>
+  </ng-template>
+
+ <!-- <ion-virtual-scroll [items]="[1, 2, 3]" approxItemHeight="220px">
+    <ion-card *virtualItem="let item; let itemBounds = bounds;" color="primary" (click)="openEvent(item)">
       <div>
-        <ion-img [src]="'assets/images/events.png'" height="160" [alt]="'Second Skate Challenge'"></ion-img>
+        <ion-img [src]="item.image" height="160" [alt]="item.name"></ion-img>
       </div>
       <ion-card-header color="dark" class="d-flex ion-justify-content-between events-card-header">
 
         <div class="d-flex flex-column ion-justify-content-center mr8">
-          <ion-card-title color="light" class="text-16-500">Second Skate Challenge</ion-card-title>
-          <ion-text color="tertiary" class="text-12">Alderman’s Walk, West London</ion-text>
+          <ion-card-title color="light" class="text-16-500">{{item.name}}</ion-card-title>
+          <ion-text color="tertiary" class="text-12">{{item.address_line_1}}{{item.city ? ', ' + item.city : ''}}</ion-text>
         </div>
 
-        <app-calendar-day></app-calendar-day>
+        <app-calendar-day [date]="item.date"></app-calendar-day>
 
       </ion-card-header>
     </ion-card>
-  </ion-virtual-scroll>
+  </ion-virtual-scroll>-->
   <ng-template #footer>
-    <ion-footer>
+    <ion-footer *ngIf="!isDisableLoadMore">
       <ion-toolbar color="primary">
         <ion-buttons class="ion-justify-content-center">
-          <ion-button fill="clear">
+          <ion-button fill="clear" (click)="loadMore()" [disabled]="isDisableLoadMore">
             <ion-icon slot="start" name="arrow-down" color="secondary"></ion-icon>
             <ion-text color="secondary" class="text-16">Load more</ion-text>
           </ion-button>

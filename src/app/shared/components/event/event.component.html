@@ -1,0 +1,15 @@
+<ion-card color="primary" (click)="openEvent(event)">
+<div>
+  <ion-img [src]="'assets/images/events.png'" height="160" [alt]="event.name"></ion-img>
+</div>
+<ion-card-header color="dark" class="d-flex ion-justify-content-between events-card-header">
+
+  <div class="d-flex flex-column ion-justify-content-center mr8">
+    <ion-card-title color="light" class="text-16-500">{{event.name}}</ion-card-title>
+    <ion-text color="tertiary" class="text-12">{{event.address_line_1}}{{event.city ? ', ' + event.city : ''}}</ion-text>
+  </div>
+
+  <app-calendar-day [date]="event.date"></app-calendar-day>
+
+</ion-card-header>
+</ion-card>

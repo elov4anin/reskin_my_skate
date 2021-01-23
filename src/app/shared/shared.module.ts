@@ -11,6 +11,7 @@ import {MapBlockComponent} from "./components/map-block/map-block.component";
 import {AddPhotosSliderComponent} from "./components/add-photos-slider/add-photos-slider.component";
 import {ModalLocationListComponent} from "./modals/modal-location-list/modal-location-list.component";
 import {CustomToggleControlComponent} from "./components/custom-toggle-control/custom-toggle-control.component";
+import {EventComponent} from "./components/event/event.component";
 
 const IONIC_MODULES = [
     IonicModule,
@@ -34,6 +35,7 @@ const COMPONENTS = [
     AddPhotosSliderComponent,
     ModalLocationListComponent,
     CustomToggleControlComponent,
+    EventComponent,
 ];
 
 const PIPES = [];

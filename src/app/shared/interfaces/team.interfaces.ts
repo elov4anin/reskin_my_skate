@@ -13,13 +13,18 @@ export interface IFeedNews {
 
 export interface IEvent {
     date: string; // April 14, 2020, 2:55 pm
+    time: string;
+    date_timestamp: string;
     date_formatted: string;
-    name: string
+    description: string;
+    name: string;
     address_line_1: string;
+    address_line_2: string;
     city: string;
-    postcode: string
+    postcode: string;
     id: string;
     image: string;
+    website: string;
 }
 
 export interface IGetFeedListResponse extends IServerResponse{

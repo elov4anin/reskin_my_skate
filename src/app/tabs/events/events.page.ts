@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../tabs.enum";
+import {TeamService} from "../../shared/services/team.service";
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
+import {IEvent} from "../../shared/interfaces/team.interfaces";
 
 @Component({
   selector: 'app-events',
@@ -9,12 +11,40 @@ import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../tabs.enum";
 })
 export class EventsPage implements OnInit {
 
-  constructor(private _router: Router) { }
+  events: IEvent[] = [];
+
+  isDisableLoadMore: boolean = false;
+
+  private componentDestroyed: Subject<any> = new Subject();
+  private page: number = 0;
+
+  constructor(
+      private _team: TeamService,
+      ) { }
 
   ngOnInit() {
+    this.getEvents();
   }
 
-  async openEvent(eventId: number) {
-    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.EVENTS, eventId])
+  ngOnDestroy(): void {
+    this.componentDestroyed.next();
+    this.componentDestroyed.unsubscribe();
+  }
+
+  getEvents() {
+    this._team.getEventList(this.page).pipe(takeUntil(this.componentDestroyed))
+        .subscribe(res => this.events = this.events.concat(res.events))
+
+  }
+
+  loadMore() {
+    this.page++;
+    this._team.getEventList(this.page).pipe(takeUntil(this.componentDestroyed))
+        .subscribe(res => {
+          this.events = this.events.concat(res.events);
+          if (res.events.length < 10) {
+            this.isDisableLoadMore = true
+          }
+        })
   }
 }

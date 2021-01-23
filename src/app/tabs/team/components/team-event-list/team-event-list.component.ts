@@ -1,13 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../tabs.enum";
 import {IEvent} from "../../../../shared/interfaces/team.interfaces";
 import {TeamService} from "../../../../shared/services/team.service";
-import {CoreStore} from "../../../../shared/store/core.store";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {IonInfiniteScroll} from "@ionic/angular";
-import {StorageEnum} from "../../../../shared/enums/Storage.enum";
 
 @Component({
     selector: 'app-team-event-list',
@@ -25,12 +21,11 @@ export class TeamEventListComponent implements OnInit, OnDestroy {
 
     constructor(
         private _teamService: TeamService,
-        private _coreStore: CoreStore,
-        private _router: Router,
     ) {
     }
 
     ngOnInit() {
+        this.getEvents();
     }
 
     getEvents() {
@@ -51,10 +46,6 @@ export class TeamEventListComponent implements OnInit, OnDestroy {
         this.componentDestroyed.unsubscribe();
     }
 
-    async openEvent(event: IEvent) {
-        await this._coreStore.setValue(StorageEnum.SELECTED_NEWS, event);
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.EVENTS, event.id])
-    }
 
     loadData($event: any) {
         if (this.breakLoadMore) {
