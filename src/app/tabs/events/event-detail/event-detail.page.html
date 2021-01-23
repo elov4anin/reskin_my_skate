@@ -18,12 +18,12 @@
 
     <ion-row class="mt12">
       <ion-col class="p0">
-        <ion-img src="assets/images/store.png"></ion-img>
+        <ion-img [src]="event.image"></ion-img>
       </ion-col>
     </ion-row>
     <ion-row class="mt12">
       <ion-col class="p0">
-        <ion-text color="light" class="title-20">Second Skate Challenge vol. II</ion-text>
+        <ion-text color="light" class="title-20">{{event.name}}</ion-text>
       </ion-col>
     </ion-row>
   </ion-grid>
@@ -36,9 +36,9 @@
       </div>
       <div class="d-flex flex-column">
         <ion-label >
-          <ion-text class="text-16" color="light">Sunday, June 27, 2021</ion-text>
+          <ion-text class="text-16" color="light">{{event.date_formatted}}</ion-text>
         </ion-label>
-        <ion-text class="text-12" color="tertiary">2:30 PM - 11:00 PM </ion-text>
+        <ion-text class="text-12" color="tertiary">{{event.time}} </ion-text>
       </div>
     </ion-item>
 
@@ -50,7 +50,7 @@
         <ion-label >
           <ion-text class="text-16" color="light">Locak Skatepark</ion-text>
         </ion-label>
-        <ion-text class="text-12" color="tertiary">Alderman’s Walk West London</ion-text>
+        <ion-text class="text-12" color="tertiary">{{event.address_line_1}}</ion-text>
       </div>
     </ion-item>
 
@@ -69,8 +69,7 @@
   <div class="d-flex flex-column ion-margin-start ion-margin-end">
     <ion-label position="stacked"><ion-text color="light" class="text-16">About the Event</ion-text></ion-label>
     <ion-text color="tertiary" class="mt8 text-15">
-      I liked it very much! Did a triple back side ollie kickflip 360 over a huge set of stairs (at least 60 of them) and landed perfectly… All thanks to this awesome park!
-      Did a triple back side ollie kickflip 360 over a huge set of stairs
+      {{event.description}}
     </ion-text>
   </div>
   <!--@todo ask-->
@@ -83,6 +82,7 @@
   </ion-button>
 
   <ion-button
+          (click)="openBrowser()"
           color="success"
           expand="block"
           class="ion-margin-top ion-padding-start ion-padding-end"

@@ -3,7 +3,12 @@ import {Location} from "@angular/common";
 import {ModalController} from "@ionic/angular";
 import {ModalRatingsComponent} from "./modal-ratings/modal-ratings.component";
 import {CoreStore} from "../../../shared/store/core.store";
-import {IEvent} from "../../../shared/interfaces/team.interfaces";
+import {EventImpl, IEvent} from "../../../shared/interfaces/team.interfaces";
+import {selectEvent} from "../../../shared/store/selectors";
+import {takeUntil} from "rxjs/operators";
+import {Subject} from "rxjs";
+import {StorageEnum} from "../../../shared/enums/Storage.enum";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
     selector: 'app-event-detail',
@@ -11,21 +16,39 @@ import {IEvent} from "../../../shared/interfaces/team.interfaces";
     styleUrls: ['./event-detail.page.scss'],
 })
 export class EventDetailPage implements OnInit {
-    event: IEvent;
+    event: IEvent = new EventImpl();
+
+    private componentDestroyed: Subject<any> = new Subject();
 
     constructor(
         private _location: Location,
         private _modalController: ModalController,
         private _coreStore: CoreStore,
+        private _iab: InAppBrowser
     ) {
     }
 
     ngOnInit() {
-        this.event = this._coreStore.state.selectedEvent;
+        this._coreStore.getValue(StorageEnum.SELECTED_EVENT).then(event => this.setEvent(event));
+        this._coreStore.select(selectEvent)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(event => this.setEvent(event))
+    }
+
+    ngOnDestroy(): void {
+        this.componentDestroyed.next();
+        this.componentDestroyed.unsubscribe();
     }
 
     back() {
         this._location.back();
+    }
+
+
+    private setEvent(event: IEvent): void {
+        if (event) {
+            this.event = event;
+        }
     }
 
     async openModalRatings() {
@@ -34,5 +57,9 @@ export class EventDetailPage implements OnInit {
             cssClass: 'modal-rating'
         });
         return await modal.present();
+    }
+
+    openBrowser() {
+        this._iab.create(this.event.website)
     }
 }
