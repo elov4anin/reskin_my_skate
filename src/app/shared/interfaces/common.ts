@@ -14,6 +14,11 @@ export interface ICoordinates {
     lng: number;
 }
 
+export interface IAddressWithPostalCode {
+    address: string;
+    postalCode: string;
+}
+
 export interface IUserShortInfo {
     name: string;
     picture: string;

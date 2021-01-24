@@ -4,6 +4,8 @@ import {Plugins} from "@capacitor/core";
 import {Platform} from "@ionic/angular";
 import {GoogleMapService} from "../../services/google--map.service";
 import {Observable} from "rxjs";
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
+import {IAddressWithPostalCode, ICoordinates} from "../../interfaces/common";
 
 const { Geolocation } = Plugins;
 
@@ -22,10 +24,12 @@ export class MapBlockComponent implements OnInit {
   };
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   map: any;
-  address: string;
+  address: IAddressWithPostalCode;
 
   latitude: number;
   longitude: number;
+
+  markers: google.maps.Marker[] = []
   constructor(
       private nativeGeocoder: NativeGeocoder,
       private _platform: Platform,
@@ -34,7 +38,15 @@ export class MapBlockComponent implements OnInit {
 
   ngOnInit() {
     this.loadMap();
-    this.address$.subscribe(value => console.log(value))
+    this.address$
+        .pipe(
+            debounceTime(500),
+            distinctUntilChanged()
+        )
+        .subscribe(async (location) => {
+          const coordinates: ICoordinates = await this._googleMapService.getCoordinates(location);
+          this.map.setCenter({...coordinates})
+        })
   }
 
   loadMap() {
@@ -54,12 +66,14 @@ export class MapBlockComponent implements OnInit {
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-      this.map.addListener('click', () => {
+      this.map.addListener('click', async ($event) => {
+        this.markers.forEach(m => m.setMap(null));
+        this.markers = []
 
-        this.latitude = this.map.center.lat();
-        this.longitude = this.map.center.lng();
+        this.latitude = await $event.latLng.lat();
+        this.longitude = await $event.latLng.lng();
 
-        console.log('click')
+        this.addMarker($event.latLng);
 
         this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng()).then()
       });
@@ -70,9 +84,11 @@ export class MapBlockComponent implements OnInit {
   }
 
   async getAddressFromCoords(lattitude, longitude) {
-    console.log("getAddressFromCoords " + lattitude + " " + longitude);
-    if (this._platform.is("desktop")) {
-      await this._googleMapService.getAddress(lattitude, longitude)
+    this.address = await this._googleMapService.getAddress(lattitude, longitude);
+    console.log('this.address', this.address);
+    /*if (this._platform.is("desktop")) {
+      this.address = await this._googleMapService.getAddress(lattitude, longitude);
+      console.log('this.address', this.address);
 
     } else {
       try {
@@ -116,8 +132,16 @@ export class MapBlockComponent implements OnInit {
           })
           .catch((error: any) => {
             this.address = "Address Not Available!";
-          });*/
-    }
+          });
+    }*/
 
+  }
+
+  addMarker(location) {
+    const marker = new google.maps.Marker({
+      position: location,
+      map: this.map,
+    });
+    this.markers.push(marker);
   }
 }

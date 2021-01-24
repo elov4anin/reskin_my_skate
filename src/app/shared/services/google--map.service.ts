@@ -1,8 +1,12 @@
-import {Injectable} from "@angular/core";
-import {ICoordinates} from "../interfaces/common";
 
+import {Injectable} from "@angular/core";
+import {IAddressWithPostalCode, ICoordinates} from "../interfaces/common";
+// @ts-ignore
+import GeocoderStatus = google.maps.GeocoderStatus;
+import GeocoderResult = google.maps.GeocoderResult;
 
 declare var google;
+
 
 @Injectable({
     providedIn: "root"
@@ -29,7 +33,7 @@ export class GoogleMapService {
         });
     }
 
-    getAddress(latitude, longitude) {
+    getAddress(latitude, longitude): Promise<IAddressWithPostalCode> {
         return new Promise((resolve, reject) => {
             const params = {
                 location: {
@@ -38,12 +42,22 @@ export class GoogleMapService {
                 }
             }
             const geocoder = new google.maps.Geocoder();
-            geocoder.geocode(params, (results, status) => {
+            geocoder.geocode(params, (results: GeocoderResult[], status: GeocoderStatus) => {
                 if (status === 'OK') {
-                    console.log('results', results)
+                    let postalCode:string = '';
+                    let address: string = '';
+                    const streetAddresses = results.find(r => r.types.includes('street_address'));
+                    if (streetAddresses) {
+                        address = streetAddresses.formatted_address;
+                    }
+                    const postalCodeRecord = results.find(r => r.types.includes('postal_code'));
+                    if (postalCodeRecord) {
+                        const postalCodeResult = postalCodeRecord.address_components.find(r => r.types.includes('postal_code'));
+                        postalCode = postalCodeResult.long_name;
+                    }
                     resolve({
-                        lat: results[0].geometry.location.lat(),
-                        lng: results[0].geometry.location.lng()
+                        address,
+                        postalCode
                     });
                 } else {
                     reject(status);
