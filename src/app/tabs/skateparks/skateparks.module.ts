@@ -8,10 +8,12 @@ import {AddSpotBoardComponent} from "./components/add-spot-board/add-spot-board.
 import {AddSkateparkBoardComponent} from "./components/add-skatepark-board/add-skatepark-board.component";
 import {ModalAddSkateparkComponent} from "./modals/modal-add-skatepark/modal-add-skatepark.component";
 import {ModalSkateparkConfirmComponent} from "./modals/modal-skatepark-confirm/modal-skatepark-confirm.component";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
         SharedModule,
+        ReactiveFormsModule,
         SkateparksPageRoutingModule,
     ],
     declarations: [

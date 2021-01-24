@@ -12,20 +12,20 @@
 </ion-header>
 
 <ion-content color="dark">
-
+  <from [formGroup]="form">
   <div class="ion-margin-start ion-margin-end">
     <ion-item color="dark" class="ion-margin-top item-inline-padding">
       <ion-label position="stacked">
         <ion-text class="text-16">Park name</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here"></ion-input>
+      <ion-input placeholder="Type here" formControlName="name"></ion-input>
     </ion-item>
 
     <ion-item color="dark" class="item-inline-padding">
       <ion-label position="stacked">
         <ion-text class="text-16">Location</ion-text>
       </ion-label>
-      <ion-input placeholder="Type here"></ion-input>
+      <ion-input placeholder="Type here" formControlName="city"></ion-input>
     </ion-item>
 
     <div class="ion-margin-top row">
@@ -33,7 +33,7 @@
         Some parks won’t have an address - place the pin on a map to add the exact location
       </ion-text>
       <div class="mt12">
-        <app-map-block></app-map-block>
+        <app-map-block [address$]="form.get('city').valueChanges"></app-map-block>
       </div>
     </div>
   </div>
@@ -49,13 +49,34 @@
 
   <div class="ion-margin-start ion-margin-end ion-margin-top row">
     <ion-label position="stacked">
+      <ion-text class="text-16">Type</ion-text>
+    </ion-label>
+    <app-custom-toggle-control [buttons]="types" formControlName="type"></app-custom-toggle-control>
+  </div>
+
+  <div class="ion-margin-start ion-margin-end ion-margin-top row">
+    <ion-label position="stacked">
+      <ion-text class="text-16">Surface</ion-text>
+    </ion-label>
+    <app-custom-toggle-control [buttons]="surfaces" formControlName="material"></app-custom-toggle-control>
+  </div>
+
+    <div class="ion-margin-start ion-margin-end ion-margin-top row">
+      <ion-label position="stacked">
+        <ion-text class="text-16">Skatelite</ion-text>
+      </ion-label>
+      <app-custom-toggle-control [buttons]="skatelities" formControlName="skatelite"></app-custom-toggle-control>
+    </div>
+
+  <div class="ion-margin-start ion-margin-end ion-margin-top row">
+    <ion-label position="stacked">
       <ion-text class="text-16">Add features</ion-text>
     </ion-label>
     <div class="mt12">
-      <app-checkbox-list [checkboxes]="checkboxes"></app-checkbox-list>
+      <app-checkbox-list [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
     </div>
   </div>
-
+  </from>
 </ion-content>
 
 <ion-footer>
@@ -65,6 +86,7 @@
             fill="solid"
             color="success"
             expand="block"
+            [disabled]="form.invalid"
             (click)="confirmSave()"
     >
       Save skatepark

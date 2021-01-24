@@ -11,4 +11,12 @@ export const TYPES: IFeatureSkatepark[] = [
         name: 'Outdoor',
         value: 'outdoors'
     },
-]
+];
+
+export const SKATELITIES: IFeatureSkatepark[] = [
+    {
+        checked: false,
+        name: 'Skatelite',
+        value: true
+    },
+];

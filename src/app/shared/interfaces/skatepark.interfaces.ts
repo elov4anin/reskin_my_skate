@@ -4,17 +4,6 @@ export interface ISearchLocationsResponse {
     parks: string[]
 }
 
-export interface IShortInfoFromSearchSkatepark {
-    id: string;
-    name: string;
-    location: string;
-    rating: number;
-    lastUpdateDate: string
-    linkPhoto: string;
-    lat: number;
-    long: number;
-}
-
 export interface ISkatepark {
     id:            string;
     external_id:   string;
@@ -68,7 +57,7 @@ export interface IGetParksByLocation {
 export interface IFeatureSkatepark {
     checked: boolean;
     name: string;
-    value: string;
+    value: any;
 }
 
 export interface IGetFeaturesResponse {
@@ -78,4 +67,18 @@ export interface IGetFeaturesResponse {
 export interface IUserLastCheckInResponse {
     checkins: any[];
     user_checked_in_recently: boolean;
+}
+
+export interface IAddSkateparkParams {
+    name: string;
+    city: string;
+    address: string;
+    postcode: string;
+    latitude: string;
+    longitude: string;
+    website: string;
+    material: 'concrete' | 'wood';
+    type: 'outdoors' | 'indoors';
+    skatelite: boolean;
+    features: string[];
 }

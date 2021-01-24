@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {ModalController} from "@ionic/angular";
 import {ModalSkateparkConfirmComponent} from "../modal-skatepark-confirm/modal-skatepark-confirm.component";
 import {IFeatureSkatepark} from "../../../../shared/interfaces/skatepark.interfaces";
+import {SkateparksService} from "../../../../shared/services/skateparks.service";
+import {CoreStore} from "../../../../shared/store/core.store";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {SKATELITIES, TYPES} from "../../../../pages/search-skateparks/modal-filter-skateparks/dictionaries";
+import {SURFACES} from "../../../../pages/search-skateparks/modal-filter-skateparks/surfaces";
 
 @Component({
   selector: 'app-modal-add-skatepark',
@@ -9,48 +14,35 @@ import {IFeatureSkatepark} from "../../../../shared/interfaces/skatepark.interfa
   styleUrls: ['./modal-add-skatepark.component.scss'],
 })
 export class ModalAddSkateparkComponent implements OnInit {
-  checkboxes: IFeatureSkatepark[] = [
-    {
-      name: 'Skatelite',
-      checked: true,
-      value: 'skatelite'
-    },
-    {
-      name: 'Toilet',
-      checked: true,
-      value: 'toilet'
-    },
-    {
-      name: 'Store',
-      checked: true,
-      value: 'store'
-    },
-    {
-      name: 'Paid',
-      checked: false,
-      value: 'paid'
-    },
-    {
-      name: 'Free',
-      checked: true,
-      value: 'free'
-    },
-    {
-      name: 'Undercover',
-      checked: false,
-      value: 'undercover'
-    },
-    {
-      name: 'Cafe',
-      checked: false,
-      value: 'cafe'
-    },
-  ];
+  form: FormGroup;
+  checkboxes: IFeatureSkatepark[] = [];
+  readonly types: IFeatureSkatepark[] = TYPES
+  readonly skatelities: IFeatureSkatepark[] = SKATELITIES;
+  readonly surfaces: IFeatureSkatepark[] = SURFACES;
 
-  constructor(private _modalController: ModalController) {
+  constructor(
+      private _modalController: ModalController,
+      private _skateparkService: SkateparksService,
+      private _coreStore: CoreStore,
+      private _fb: FormBuilder,
+
+    ) {
   }
 
   ngOnInit() {
+    this.checkboxes = this._coreStore.state.skateparkFeatures;
+    this.creatForm();
+  }
+
+  private creatForm() {
+    this.form = this._fb.group({
+      name: '',
+      city: '',
+      type: '',
+      material: '',
+      features: [[]],
+      skatelite: false,
+    })
   }
 
   async closeModal() {

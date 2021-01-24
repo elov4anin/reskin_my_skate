@@ -1,13 +1,15 @@
 import {Observable, of} from "rxjs";
 import {Injectable} from "@angular/core";
 import {
+    IAddSkateparkParams,
     IGetFeaturesResponse, IGetParksByLocation,
-    ISearchLocationsResponse, ISkatepark,
+    ISearchLocationsResponse,
     ISkateparkFilterParams, IUserLastCheckInResponse
 } from "../interfaces/skatepark.interfaces";
 import {ApiCreatorService} from "./api-creator.service";
 import {map} from "rxjs/operators";
 import * as dayjs from "dayjs";
+import {IServerResponse} from "../interfaces/common";
 
 
 @Injectable({
@@ -64,7 +66,14 @@ export class SkateparksService {
     }
 
     private checkSkatePark(modified_at: string): boolean {
-        const date = dayjs(modified_at).format()
+        // const date = dayjs(modified_at).format()
         return true;
+    }
+
+    addSkatepark(params: IAddSkateparkParams): Observable<IServerResponse> {
+        return this._api.basePostRequest<IServerResponse>(
+            'integration/myskate/myskate-park-save.php',
+            params,
+        );
     }
 }
