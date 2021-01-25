@@ -1,5 +1,5 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult} from "@ionic-native/native-geocoder/ngx";
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {NativeGeocoder, NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
 import {Plugins} from "@capacitor/core";
 import {Platform} from "@ionic/angular";
 import {GoogleMapService} from "../../services/google--map.service";
@@ -17,12 +17,14 @@ declare var google;
   styleUrls: ['./map-block.component.scss'],
 })
 export class MapBlockComponent implements OnInit {
-  @Input() address$: Observable<string>
+  @Input() location$: Observable<string>
   options: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
   };
   @ViewChild('map', { static: false }) mapElement: ElementRef;
+
+  @Output() address$: EventEmitter<IAddressWithPostalCode> = new EventEmitter<IAddressWithPostalCode>()
   map: any;
   address: IAddressWithPostalCode;
 
@@ -38,7 +40,7 @@ export class MapBlockComponent implements OnInit {
 
   ngOnInit() {
     this.loadMap();
-    this.address$
+    this.location$
         .pipe(
             debounceTime(500),
             distinctUntilChanged()
@@ -83,9 +85,13 @@ export class MapBlockComponent implements OnInit {
     });
   }
 
-  async getAddressFromCoords(lattitude, longitude) {
-    this.address = await this._googleMapService.getAddress(lattitude, longitude);
-    console.log('this.address', this.address);
+  async getAddressFromCoords(latitude, longitude) {
+    this.address = await this._googleMapService.getAddress(latitude, longitude);
+    this.address$.emit({
+      ...this.address,
+      latitude,
+      longitude,
+    });
     /*if (this._platform.is("desktop")) {
       this.address = await this._googleMapService.getAddress(lattitude, longitude);
       console.log('this.address', this.address);

@@ -1,4 +1,4 @@
-import {ICoordinates} from "./common";
+import {ICoordinates, IServerResponse} from "./common";
 
 export interface ISearchLocationsResponse {
     parks: string[]
@@ -81,4 +81,9 @@ export interface IAddSkateparkParams {
     type: 'outdoors' | 'indoors';
     skatelite: boolean;
     features: string[];
+}
+
+export interface IAddSkateParkResponse extends IServerResponse  {
+    // response_code: 200
+    sent: boolean
 }

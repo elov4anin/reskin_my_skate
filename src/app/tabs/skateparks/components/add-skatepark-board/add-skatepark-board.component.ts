@@ -16,7 +16,8 @@ export class AddSkateparkBoardComponent implements OnInit {
   async openModalAddSkatepark() {
     const modal = await this._modalController.create({
       component: ModalAddSkateparkComponent,
-      cssClass: 'modal-add-spot'
+      cssClass: 'modal-add-spot',
+      id: 'addSkateparkId'
     });
     return await modal.present();
   }

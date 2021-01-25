@@ -16,7 +16,9 @@ export interface ICoordinates {
 
 export interface IAddressWithPostalCode {
     address: string;
-    postalCode: string;
+    postcode: string;
+    latitude?: number;
+    longitude?: number;
 }
 
 export interface IUserShortInfo {

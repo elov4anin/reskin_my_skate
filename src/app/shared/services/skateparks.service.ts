@@ -1,7 +1,7 @@
 import {Observable, of} from "rxjs";
 import {Injectable} from "@angular/core";
 import {
-    IAddSkateparkParams,
+    IAddSkateparkParams, IAddSkateParkResponse,
     IGetFeaturesResponse, IGetParksByLocation,
     ISearchLocationsResponse,
     ISkateparkFilterParams, IUserLastCheckInResponse
@@ -70,8 +70,8 @@ export class SkateparksService {
         return true;
     }
 
-    addSkatepark(params: IAddSkateparkParams): Observable<IServerResponse> {
-        return this._api.basePostRequest<IServerResponse>(
+    addSkatepark(params: IAddSkateparkParams): Observable<IAddSkateParkResponse> {
+        return this._api.basePostRequest<IAddSkateParkResponse>(
             'integration/myskate/myskate-park-save.php',
             params,
         );

@@ -1,8 +1,8 @@
-
 import {Injectable} from "@angular/core";
 import {IAddressWithPostalCode, ICoordinates} from "../interfaces/common";
 // @ts-ignore
 import GeocoderStatus = google.maps.GeocoderStatus;
+// @ts-ignore
 import GeocoderResult = google.maps.GeocoderResult;
 
 declare var google;
@@ -44,7 +44,7 @@ export class GoogleMapService {
             const geocoder = new google.maps.Geocoder();
             geocoder.geocode(params, (results: GeocoderResult[], status: GeocoderStatus) => {
                 if (status === 'OK') {
-                    let postalCode:string = '';
+                    let postcode:string = '';
                     let address: string = '';
                     const streetAddresses = results.find(r => r.types.includes('street_address'));
                     if (streetAddresses) {
@@ -53,11 +53,11 @@ export class GoogleMapService {
                     const postalCodeRecord = results.find(r => r.types.includes('postal_code'));
                     if (postalCodeRecord) {
                         const postalCodeResult = postalCodeRecord.address_components.find(r => r.types.includes('postal_code'));
-                        postalCode = postalCodeResult.long_name;
+                        postcode = postalCodeResult.long_name;
                     }
                     resolve({
                         address,
-                        postalCode
+                        postcode
                     });
                 } else {
                     reject(status);

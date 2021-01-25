@@ -33,7 +33,10 @@
         Some parks won’t have an address - place the pin on a map to add the exact location
       </ion-text>
       <div class="mt12">
-        <app-map-block [address$]="form.get('city').valueChanges"></app-map-block>
+        <app-map-block
+                [location$]="form.get('city').valueChanges"
+                (address$)="getAddressFromMap($event)"
+        ></app-map-block>
       </div>
     </div>
   </div>

@@ -18,7 +18,7 @@
       <ion-text color="tertiary" class="ion-margin-bottom text-16-500">Skatepark will not display automatically, as needs to be authorized by admin.
       </ion-text>
       <div class="d-flex flex-column ion-margin-top">
-        <ion-button expand="block" color="success" (click)="closeModal()">Confirm</ion-button>
+        <ion-button [disabled]="!candidate" expand="block" color="success" (click)="savePark()">Confirm</ion-button>
         <ion-button fill="clear" color="danger" (click)="closeModal()">Cancel</ion-button>
       </div>
     </div>
