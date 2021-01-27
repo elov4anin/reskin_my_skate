@@ -12,6 +12,8 @@ import {NativeGeocoder} from "@ionic-native/native-geocoder/ngx";
 import {HttpClientModule} from "@angular/common/http";
 import {IonicStorageModule} from "@ionic/storage";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
+import { Camera } from '@ionic-native/camera/ngx';
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -34,6 +36,8 @@ import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         NativeGeocoder,
         InAppBrowser,
+        Camera,
+        FileTransfer,
     ],
     bootstrap: [AppComponent]
 })

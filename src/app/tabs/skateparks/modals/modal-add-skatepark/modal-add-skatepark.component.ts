@@ -8,6 +8,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {SKATELITIES, TYPES} from "../../../../pages/search-skateparks/modal-filter-skateparks/dictionaries";
 import {SURFACES} from "../../../../pages/search-skateparks/modal-filter-skateparks/surfaces";
 import {IAddressWithPostalCode} from "../../../../shared/interfaces/common";
+import {ISlideInfo} from "../../skateparks.interfaces";
 
 @Component({
     selector: 'app-modal-add-skatepark',
@@ -21,6 +22,7 @@ export class ModalAddSkateparkComponent implements OnInit {
     readonly skatelities: IFeatureSkatepark[] = SKATELITIES;
     readonly surfaces: IFeatureSkatepark[] = SURFACES;
     private location: IAddressWithPostalCode;
+    private images: any[] = []
 
     constructor(
         private _modalController: ModalController,
@@ -60,6 +62,7 @@ export class ModalAddSkateparkComponent implements OnInit {
                 candidate: {
                     ...this.form.value,
                     ...this.location,
+                    image: this.images
                 }
             }
         });
@@ -68,5 +71,9 @@ export class ModalAddSkateparkComponent implements OnInit {
 
     getAddressFromMap($event: IAddressWithPostalCode) {
         this.location = $event;
+    }
+
+    changeImages(slides: ISlideInfo[]) {
+        this.images = slides.map(s => s.imgSrc);
     }
 }

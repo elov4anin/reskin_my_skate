@@ -76,4 +76,11 @@ export class SkateparksService {
             params,
         );
     }
+
+    addSkateparkWithImage(params: IAddSkateparkParams): Observable<IAddSkateParkResponse> {
+        return this._api.basePostRequest<IAddSkateParkResponse>(
+            'integration/myskate/myskate-park-save-image.php',
+            params,
+        );
+    }
 }

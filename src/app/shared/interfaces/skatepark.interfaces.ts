@@ -81,6 +81,7 @@ export interface IAddSkateparkParams {
     type: 'outdoors' | 'indoors';
     skatelite: boolean;
     features: string[];
+    image?: any;
 }
 
 export interface IAddSkateParkResponse extends IServerResponse  {

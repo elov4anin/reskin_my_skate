@@ -31,3 +31,7 @@ export interface  IGetUserRatingResponse {
         has_rating: boolean;
     }
 }
+
+export interface HTMLInputEvent extends Event {
+    target: HTMLInputElement & EventTarget;
+}

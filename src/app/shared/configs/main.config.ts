@@ -7,3 +7,5 @@ export const MIN_AGE = 5;
 
 export const TRUE_VALUE = '1';
 export const FALSE_VALUE = '0';
+
+export const QUALITY_CAMERA: number = 60;

@@ -1,10 +1,10 @@
 <div class="d-flex">
-  <input type="file" #upload (change)="uploadImage($event)" style="display: none">
-  <div class="add-btn" (click)="triggerUploadImage()">
+  <input type="file" #upload (change)="uploadFiles($event)" style="display: none">
+  <div class="add-btn" (click)="addFile()">
     <ion-icon color="light" name="add-outline" size="large"></ion-icon>
   </div>
 
-  <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides" pager="false">
+  <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides">
     <ion-slide *ngFor =" let slide of sliders">
       <div class="slide" >
         <div class="slide__img"  [ngStyle]="{'background-image':'url('+slide.imgSrc+')'}"></div>

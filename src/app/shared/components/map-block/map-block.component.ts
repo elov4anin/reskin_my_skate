@@ -6,6 +6,8 @@ import {GoogleMapService} from "../../services/google--map.service";
 import {Observable} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 import {IAddressWithPostalCode, ICoordinates} from "../../interfaces/common";
+// @ts-ignore
+import Marker = google.maps.Marker;
 
 const { Geolocation } = Plugins;
 
@@ -31,7 +33,7 @@ export class MapBlockComponent implements OnInit {
   latitude: number;
   longitude: number;
 
-  markers: google.maps.Marker[] = []
+  markers: Marker[] = []
   constructor(
       private nativeGeocoder: NativeGeocoder,
       private _platform: Platform,
