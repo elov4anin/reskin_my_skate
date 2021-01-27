@@ -6,7 +6,7 @@ import {ModalReportClosureComponent} from "./modal-report-closure/modal-report-c
 import {ISkatepark} from "../../../shared/interfaces/skatepark.interfaces";
 import {CoreStore} from "../../../shared/store/core.store";
 import {TRUE_VALUE} from "../../../shared/configs/main.config";
-import {prepareFeatures} from "./feature.heper";
+import {addOutdoorsToFeatures, prepareFeatures} from "./feature.heper";
 
 
 @Component({
@@ -36,6 +36,8 @@ export class SkateparkDetailPage implements OnInit {
     ngOnInit() {
         this.skatepark = this._coreStore.state.selectedSkatepark;
         this.featuresSlides =  prepareFeatures(this.skatepark);
+        this.featuresSlides = addOutdoorsToFeatures(this.skatepark, this.featuresSlides);
+
         if(this.skatepark.has_images === TRUE_VALUE) {
             this.slides = this.skatepark.images.map(image => {
                 return {imgSrc: image}

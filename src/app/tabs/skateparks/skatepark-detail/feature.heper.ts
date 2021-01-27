@@ -82,6 +82,24 @@ export function prepareFeatures(skatepark: ISkatepark) {
     return slides
 }
 
+export function addOutdoorsToFeatures(skatepark: ISkatepark, slides: ISlideInfo[]) {
+    if (skatepark.outdoors === TRUE_VALUE) {
+        slides.push({
+            title: "Outdoors",
+            imgSrc: "/assets/images/features_icons/outside.svg",
+            type: 'outdoors'
+        })
+    }
+    if (skatepark.indoors === TRUE_VALUE) {
+        slides.push({
+            title: "Indoors",
+            imgSrc: "/assets/images/features_icons/inside.svg",
+            type: 'indoors'
+        })
+    }
+    return slides
+}
+
 function checkFeature(key: string, skatepark: ISkatepark) {
     return FeaturesSkatepark.includes(key) && skatepark[key] === TRUE_VALUE;
 }
