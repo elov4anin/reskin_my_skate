@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
-import {ISlideInfo} from "../skateparks.interfaces";;
-import {ModalController} from "@ionic/angular";
-import {ModalReportClosureComponent} from "./modal-report-closure/modal-report-closure.component";
-import {ISkatepark} from "../../../shared/interfaces/skatepark.interfaces";
-import {CoreStore} from "../../../shared/store/core.store";
-import {TRUE_VALUE} from "../../../shared/configs/main.config";
-import {addOutdoorsToFeatures, prepareFeatures} from "./feature.heper";
+import {ISlideInfo} from '../skateparks.interfaces';
+import {ModalController} from '@ionic/angular';
+import {ModalReportClosureComponent} from './modal-report-closure/modal-report-closure.component';
+import {ISkatepark} from '../../../shared/interfaces/skatepark.interfaces';
+import {CoreStore} from '../../../shared/store/core.store';
+import {TRUE_VALUE} from '../../../shared/configs/main.config';
+import {addToFeatures, prepareFeatures} from './feature.heper';
 
 
 @Component({
@@ -15,13 +15,13 @@ import {addOutdoorsToFeatures, prepareFeatures} from "./feature.heper";
     styleUrls: ['./skatepark-detail.page.scss'],
 })
 export class SkateparkDetailPage implements OnInit {
-    isFavor: boolean = false;
+    isFavor = false;
 
     readonly defaultRatingColor: string = getComputedStyle(document.documentElement)
         .getPropertyValue('--ion-color-light');
     readonly activeRatingColor: string = getComputedStyle(document.documentElement)
         .getPropertyValue('--ion-color-secondary');
-    featuresSlides: ISlideInfo[] = []
+    featuresSlides: ISlideInfo[] = [];
 
     skatepark: ISkatepark;
     slides: ISlideInfo[] = [];
@@ -36,14 +36,14 @@ export class SkateparkDetailPage implements OnInit {
     ngOnInit() {
         this.skatepark = this._coreStore.state.selectedSkatepark;
         this.featuresSlides =  prepareFeatures(this.skatepark);
-        this.featuresSlides = addOutdoorsToFeatures(this.skatepark, this.featuresSlides);
+        this.featuresSlides = addToFeatures(this.skatepark, this.featuresSlides);
 
-        if(this.skatepark.has_images === TRUE_VALUE) {
+        if (this.skatepark.has_images === TRUE_VALUE) {
             this.slides = this.skatepark.images.map(image => {
-                return {imgSrc: image}
-            })
+                return {imgSrc: image};
+            });
         }
-        console.log(this.skatepark)
+        console.log(this.skatepark);
     }
 
     back() {

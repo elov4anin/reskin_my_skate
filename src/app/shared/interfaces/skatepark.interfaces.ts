@@ -1,53 +1,54 @@
-import {ICoordinates, IServerResponse} from "./common";
+import {ICoordinates, IServerResponse} from './common';
 
 export interface ISearchLocationsResponse {
-    parks: string[]
+    parks: string[];
 }
 
 export interface ISkatepark {
-    id:            string;
-    external_id:   string;
-    name:          string;
-    url:           string;
-    city:          string;
-    address:       string;
-    longitude:     string;
-    latitude:      string;
-    status:        string;
-    month_opened:  null;
-    year_opened:   null;
-    has_images:    string;
-    concrete:      string;
-    free:          string;
-    indoors:       string;
-    metal:         string;
-    outdoors:      string;
-    paid:          string;
-    skatelite:     string;
-    undercover:    string;
-    wood:          string;
-    toilet:        string;
-    cafe:          string;
-    store:         string;
-    lighting:      string;
-    locker:        string;
+    id: string;
+    external_id: string;
+    name: string;
+    url: string;
+    city: string;
+    address: string;
+    longitude: string;
+    latitude: string;
+    status: string;
+    month_opened: null;
+    year_opened: null;
+    has_images: string;
+    concrete: string;
+    free: string;
+    indoors: string;
+    metal: string;
+    outdoors: string;
+    paid: string;
+    skatelite: string;
+    undercover: string;
+    wood: string;
+    toilet: string;
+    cafe: string;
+    store: string;
+    lighting: string;
+    locker: string;
     relaxing_area: string;
-    viewing_area:  string;
-    lessons:       string;
-    images:        string[];
-    rating:        number;
+    viewing_area: string;
+    lessons: string;
+    images: string[];
+    rating: number;
     is_favourite?: boolean;
-    modified_at:   string; // What format date? (DD-MM-YYYY HH:mm) created_at ?
-    _isNew?:       boolean;
+    modified_at: string; // What format date? (DD-MM-YYYY HH:mm) created_at ?
+    _isNew?: boolean;
 }
 
 export interface ISkateparkFilterParams {
     coordinates?: ICoordinates;
-    type?: 'outdoors' | 'indoors'; //@todo  'outdoors' | 'indoors'
+    type?: 'outdoors' | 'indoors'; // @todo  'outdoors' | 'indoors'
     features?: string[];
     location: string;
     material?: 'concrete' | 'wood';
     page?: number;
+    skatelite?: string;
 }
 
 export interface IGetParksByLocation {
@@ -61,7 +62,7 @@ export interface IFeatureSkatepark {
 }
 
 export interface IGetFeaturesResponse {
-    features: IFeatureSkatepark[]
+    features: IFeatureSkatepark[];
 }
 
 export interface IUserLastCheckInResponse {
@@ -86,5 +87,5 @@ export interface IAddSkateparkParams {
 
 export interface IAddSkateParkResponse extends IServerResponse  {
     // response_code: 200
-    sent: boolean
+    sent: boolean;
 }

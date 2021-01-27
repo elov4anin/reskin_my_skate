@@ -1,4 +1,4 @@
-import {IFeatureSkatepark} from "../../../shared/interfaces/skatepark.interfaces";
+import {IFeatureSkatepark} from '../../../shared/interfaces/skatepark.interfaces';
 
 export const SURFACES: IFeatureSkatepark[] = [
     {
@@ -11,4 +11,12 @@ export const SURFACES: IFeatureSkatepark[] = [
         name: 'Wood',
         value: 'wood'
     },
-]
+];
+
+export const SKATELITE: IFeatureSkatepark[] = [
+    {
+        checked: false,
+        name: 'Skatelite',
+        value: 'skatelite'
+    }
+];

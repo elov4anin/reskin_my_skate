@@ -12,29 +12,36 @@
 </ion-header>
 <ion-content color="dark" class="ion-padding-start ion-padding-end">
     <from [formGroup]="form">
-    <div class="ion-margin-top row">
-        <ion-label position="stacked">
-            <ion-text class="text-16">Type</ion-text>
-        </ion-label>
-        <app-custom-toggle-control [buttons]="types" formControlName="type"></app-custom-toggle-control>
-    </div>
-
-    <div class="ion-margin-top row">
-        <ion-label position="stacked">
-            <ion-text class="text-16">Surface</ion-text>
-        </ion-label>
-        <app-custom-toggle-control [buttons]="surfaces" formControlName="material"></app-custom-toggle-control>
-    </div>
-
-    <div class="ion-margin-top row">
-        <ion-label position="stacked">
-            <ion-text class="text-16">Features</ion-text>
-        </ion-label>
-        <div class="mt12">
-            <app-checkbox-list [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
+        <div class="ion-margin-top row">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Type</ion-text>
+            </ion-label>
+            <app-custom-toggle-control [buttons]="types" formControlName="type"></app-custom-toggle-control>
         </div>
-    </div>
-</from>
+
+        <div class="ion-margin-top row">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Surface</ion-text>
+            </ion-label>
+            <app-custom-toggle-control [buttons]="surfaces" formControlName="material"></app-custom-toggle-control>
+        </div>
+
+        <div class="ion-margin-top row">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Skatelite</ion-text>
+            </ion-label>
+            <app-custom-toggle-control [buttons]="skatelite" formControlName="skatelite"></app-custom-toggle-control>
+        </div>
+
+        <div class="ion-margin-top row">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Features</ion-text>
+            </ion-label>
+            <div class="mt12">
+                <app-checkbox-list [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
+            </div>
+        </div>
+    </from>
 </ion-content>
 <ion-footer>
     <ion-toolbar color="dark">
