@@ -11,7 +11,7 @@
     </ion-toolbar>
 </ion-header>
 <ion-content color="dark" class="ion-padding-start ion-padding-end">
-    <from [formGroup]="form">
+    <form [formGroup]="form">
         <div class="ion-margin-top row">
             <ion-label position="stacked">
                 <ion-text class="text-16">Type</ion-text>
@@ -38,15 +38,20 @@
                 <ion-text class="text-16">Features</ion-text>
             </ion-label>
             <div class="mt12">
-                <app-checkbox-list [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
+                <app-checkbox-list
+                        [checkboxes]="checkboxesList"
+                        formControlName="features"
+                ></app-checkbox-list>
             </div>
         </div>
-    </from>
+    </form>
 </ion-content>
 <ion-footer>
     <ion-toolbar color="dark">
-        <ion-button
-                class="ion-margin-start ion-margin-end mb12 apply-btn"
+        <ion-button slot="start" class="ml20" fill="solid" color="primary" expand="block" (click)="resetFilter()">
+            Clear
+        </ion-button>
+        <ion-button slot="end" class="mr20"
                 fill="solid" color="success" expand="block"
                 (click)="applyFilter()"
         >

@@ -8,10 +8,10 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {NativeGeocoder} from "@ionic-native/native-geocoder/ngx";
-import {HttpClientModule} from "@angular/common/http";
-import {IonicStorageModule} from "@ionic/storage";
-import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
+import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
+import {HttpClientModule} from '@angular/common/http';
+import {IonicStorageModule} from '@ionic/storage';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 
@@ -26,7 +26,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
         }),
         IonicStorageModule.forRoot({
             name: '__skate',
-            driverOrder: ['sqlite', 'websql', 'indexeddb']
+            driverOrder: ['sqlite', 'indexeddb', 'websql']
         }),
         AppRoutingModule,
     ],

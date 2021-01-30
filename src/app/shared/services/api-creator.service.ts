@@ -5,8 +5,9 @@ import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {Router} from '@angular/router';
 // import * as FileSaver from 'file-saver';
 import {CoreStore} from '../store/core.store';
-import {AuthRoutesEnum} from "../../pages/auth/auth-routes.enum";
-import {SITE_MAIN} from "../configs/main.config";
+import {AuthRoutesEnum} from '../../pages/auth/auth-routes.enum';
+import {SITE_MAIN} from '../configs/main.config';
+import {ToastNotificationService} from '../helpers/toast-notification.service';
 
 export type MapCallbackInterface<T1, T2> = (d: T1) => T2;
 
@@ -21,6 +22,7 @@ export class ApiCreatorService implements OnDestroy  {
     constructor(private _http: HttpClient,
                 private _router: Router,
                 private _coreStore: CoreStore,
+                private _toast: ToastNotificationService,
     ) {
     }
 
@@ -33,8 +35,8 @@ export class ApiCreatorService implements OnDestroy  {
      * @returns {Observable<any>}
      */
     basePostRequest<IOut1, IOut2 = IOut1>(url: string,
-                                      body = {} as any,
-                                      mapCallback: MapCallbackInterface<IOut1, IOut2> = d => (d as any as IOut2)) {
+                                          body = {} as any,
+                                          mapCallback: MapCallbackInterface<IOut1, IOut2> = d => (d as any as IOut2)) {
         const currUrl = ApiCreatorService._fullApiUrl + url;
         return this._http
             .post<IOut1>(currUrl, body, {
@@ -58,7 +60,7 @@ export class ApiCreatorService implements OnDestroy  {
      * @returns {Observable<any>}
      */
     basePostRequestWithProgress<IOut1, IOut2 = IOut1>(url: string,
-                                      body = {} as any) {
+                                                      body = {} as any) {
         const currUrl = ApiCreatorService._fullApiUrl + url;
         return this._http
             .post<IOut1>(currUrl, body, {
@@ -120,7 +122,7 @@ export class ApiCreatorService implements OnDestroy  {
     private _getHeader() {
         return new HttpHeaders(
             {
-                'Accept': '*/*',
+                Accept: '*/*',
                 'Content-Type': 'application/json',
             }
         );
@@ -129,6 +131,7 @@ export class ApiCreatorService implements OnDestroy  {
 
 
     private showNotifyAndReturnError(title, msg, err, url) {
+        this._toast.error(msg).then();
         return observableThrowError(err);
     }
 
@@ -136,6 +139,7 @@ export class ApiCreatorService implements OnDestroy  {
         const errTitle = 'Unknown error';
         const errMsg = 'Something is broken';
         const {title = errTitle, msg = errMsg} = (err.error || {});
+
         switch (err.status) {
             case 0: {
                 if  (err.statusText === 'Unknown Error') {
@@ -145,6 +149,9 @@ export class ApiCreatorService implements OnDestroy  {
                 // this._coreStore.setValue(StorageEnum.CONNECTED , NetworkStatusEnum.OFFLINE);
                 // break;
                 return observableThrowError(err);
+            }
+            case 200: {
+                return this.showNotifyAndReturnError(errTitle, err.message, err, url);
             }
             case 401: {
                 // если пользователь не авторизован

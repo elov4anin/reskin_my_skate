@@ -1,21 +1,21 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
-import {getEnumAsArray} from "../../shared/helpers/utils";
-import {SegmentsEnum, segmentsEnum2LabelMapping} from "./segments.enum";
-import {LoadingController, ModalController} from "@ionic/angular";
-import {ModalFilterSkateparksComponent} from "./modal-filter-skateparks/modal-filter-skateparks.component";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../tabs/tabs.enum";
-import {ActivatedRoute, Router} from "@angular/router";
-import {switchMap, takeUntil} from "rxjs/operators";
-import {SkateparksService} from "../../shared/services/skateparks.service";
-import {of, Subject} from "rxjs";
-import {ModalLocationListComponent} from "../../shared/modals/modal-location-list/modal-location-list.component";
-import {ISkatepark, ISkateparkFilterParams} from "../../shared/interfaces/skatepark.interfaces";
-import {ICoordinates} from "../../shared/interfaces/common";
-import {GoogleMapService} from "../../shared/services/google--map.service";
-import {CoreStore} from "../../shared/store/core.store";
-import {StorageEnum} from "../../shared/enums/Storage.enum";
-import {FilterSkateparksHelper} from "./modal-filter-skateparks/filter-skateparks.helper";
+import {Location} from '@angular/common';
+import {getEnumAsArray} from '../../shared/helpers/utils';
+import {SegmentsEnum, segmentsEnum2LabelMapping} from './segments.enum';
+import {LoadingController, ModalController} from '@ionic/angular';
+import {ModalFilterSkateparksComponent} from './modal-filter-skateparks/modal-filter-skateparks.component';
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../tabs/tabs.enum';
+import {ActivatedRoute, Router} from '@angular/router';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {SkateparksService} from '../../shared/services/skateparks.service';
+import {of, Subject} from 'rxjs';
+import {ModalLocationListComponent} from '../../shared/modals/modal-location-list/modal-location-list.component';
+import {ISkatepark, ISkateparkFilterParams} from '../../shared/interfaces/skatepark.interfaces';
+import {ICoordinates} from '../../shared/interfaces/common';
+import {GoogleMapService} from '../../shared/services/google--map.service';
+import {CoreStore} from '../../shared/store/core.store';
+import {StorageEnum} from '../../shared/enums/Storage.enum';
+import {FilterSkateparksHelper} from './modal-filter-skateparks/filter-skateparks.helper';
 
 @Component({
     selector: 'app-search-skateparks',
@@ -63,7 +63,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
                     this._filterHelper.filterChange$.next(this.currentFilter);
                 }
             }
-        })
+        });
         this._filterHelper.filterChange$.pipe(
             takeUntil(this.componentDestroyed),
             switchMap((filter: ISkateparkFilterParams) => {
@@ -71,13 +71,13 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
                     this.currentFilter = filter;
                     this.isFilterActive = this._filterHelper.checkFilterActive(filter);
                     this.presentLoading().then();
-                    return this._skateparksService.getParksByLocation(filter)
+                    return this._skateparksService.getParksByLocation(filter);
                 }
-                return of(null)
+                return of(null);
             })
         ).subscribe(async (res: any) => {
             this.foundSkateparks = res.parks;
-            this.isInit = false
+            this.isInit = false;
             const isLoading = await this._loadingController.getTop();
             if (isLoading) {
                 await this._loadingController.dismiss();
@@ -100,7 +100,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
         if (isLoading) {
             return ;
         }
-        if(!evt.target.value) {
+        if (!evt.target.value) {
             return false;
         }
         if (evt.target.value.length < 2) {
@@ -148,7 +148,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
 
     async openSkatepark(skatepark: ISkatepark) {
         await this._coreStore.setValue(StorageEnum.SELECTED_SKATEPARK, skatepark);
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, skatepark.id])
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, skatepark.id]);
     }
 
     private async presentLoading() {
@@ -165,6 +165,6 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             ...this.currentFilter,
             location,
             coordinates
-        }
+        };
     }
 }

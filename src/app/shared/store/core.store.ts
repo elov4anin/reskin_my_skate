@@ -2,7 +2,7 @@ import {Store} from './abstract.store';
 import {CoreState} from './core.state';
 import {StorageEnum} from '../enums/Storage.enum';
 import {Injectable} from '@angular/core';
-import {IonicStorageService} from "../helpers/ionic-storage.service";
+import {IonicStorageService} from '../helpers/ionic-storage.service';
 
 
 @Injectable({
@@ -25,7 +25,7 @@ export class CoreStore extends Store<CoreState> {
             this.initValue(StorageEnum.SKATEPARK_FEATURES),
             this.initValue(StorageEnum.SELECTED_NEWS),
             this.initValue(StorageEnum.SELECTED_EVENT),
-            this.initValue(StorageEnum.SELECTED_EVENT),
+            this.initValue(StorageEnum.SELECTED_STORE),
         ]);
     }
 

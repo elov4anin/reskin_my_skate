@@ -1,15 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {sliders} from './demodata';
-import {ISlideInfo} from "./skateparks.interfaces";
-import {Router} from "@angular/router";
-import {SKATEPARKS_ROUTES} from "./skatepars-routers.enum";
-import {ModalController} from "@ionic/angular";
-import {ModalLocationListComponent} from "../../shared/modals/modal-location-list/modal-location-list.component";
-import {SkateparksService} from "../../shared/services/skateparks.service";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {CoreStore} from "../../shared/store/core.store";
-import {StorageEnum} from "../../shared/enums/Storage.enum";
+import {ISlideInfo} from './skateparks.interfaces';
+import {Router} from '@angular/router';
+import {SKATEPARKS_ROUTES} from './skatepars-routers.enum';
+import {ModalController} from '@ionic/angular';
+import {ModalLocationListComponent} from '../../shared/modals/modal-location-list/modal-location-list.component';
+import {SkateparksService} from '../../shared/services/skateparks.service';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {CoreStore} from '../../shared/store/core.store';
+import {StorageEnum} from '../../shared/enums/Storage.enum';
 
 
 @Component({
@@ -37,8 +37,8 @@ export class SkateparksPage implements OnInit, OnDestroy {
             this._skateparkService.getFeatures().pipe(
                 takeUntil(this.componentDestroyed),
             ).subscribe(async (res) => {
-                await this._coreStore.setValue(StorageEnum.SKATEPARK_FEATURES, res.features)
-            })
+                await this._coreStore.setValue(StorageEnum.SKATEPARK_FEATURES, res.features);
+            });
         }
     }
 
@@ -64,7 +64,7 @@ export class SkateparksPage implements OnInit, OnDestroy {
             this.searchValue = '';
             await this._router.navigate(
                 ['/', SKATEPARKS_ROUTES.SEARCH],
-                {queryParams: {search: data.selectedLocation}})
+                {queryParams: {search: data.selectedLocation}});
         }
 
 

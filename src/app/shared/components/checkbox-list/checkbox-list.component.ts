@@ -1,6 +1,6 @@
-import {Component, forwardRef, Input, OnInit} from '@angular/core';
-import {IFeatureSkatepark} from "../../interfaces/skatepark.interfaces";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {Component, forwardRef, Input} from '@angular/core';
+import {IFeatureSkatepark} from '../../interfaces/skatepark.interfaces';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox-list',
@@ -13,9 +13,21 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
   }]
 })
 export class CheckboxListComponent implements ControlValueAccessor {
-  @Input() checkboxes: IFeatureSkatepark[] = []
-  @Input() defaultCheckedColor: string = 'primary'
-  @Input() defaultUncheckedColor: string = 'dark'
+  @Input()
+  set checkboxes(val: IFeatureSkatepark[]) {
+    this._checkboxes = val;
+    if (!val.map(v => v.checked).includes(true)) {
+      this.value = [];
+    }
+  }
+
+  get checkboxes(){
+    return this._checkboxes;
+  }
+
+
+  @Input() defaultCheckedColor: string = 'primary';
+  @Input() defaultUncheckedColor: string = 'dark';
 
   @Input()
   set value(val) {
@@ -28,9 +40,10 @@ export class CheckboxListComponent implements ControlValueAccessor {
   }
 
   private _value;
-
+  private _checkboxes: IFeatureSkatepark[] = [];
 
   onChange(_: any) {}
+  onTouched = () => {};
 
   writeValue(value: any[]) {
     if (value) {
@@ -39,16 +52,19 @@ export class CheckboxListComponent implements ControlValueAccessor {
         if (idx !== -1) {
           this.checkboxes[idx].checked = true;
         }
-      })
+      });
+    } else {
+      this.value = [];
     }
-    this.value ='';
   }
 
   registerOnChange(fn) {
     this.onChange = fn;
   }
 
-  registerOnTouched() {}
+  registerOnTouched(fn: () => {}): void {
+    this.onTouched = fn;
+  }
 
   change(ch: IFeatureSkatepark) {
     ch.checked = !ch.checked;
