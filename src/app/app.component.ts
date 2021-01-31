@@ -1,20 +1,28 @@
-import { Component } from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import {MainLayoutHelper} from "./shared/layouts/mail-layout/main-layout.helper";
-import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "./tabs/tabs.enum";
-import {CoreStore} from "./shared/store/core.store";
-import {AuthService} from "./pages/auth/auth.service";
+import {MainLayoutHelper} from './shared/layouts/mail-layout/main-layout.helper';
+import {Router} from '@angular/router';
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from './tabs/tabs.enum';
+import {CoreStore} from './shared/store/core.store';
+import {AuthService} from './pages/auth/auth.service';
+import {IUser} from './shared/interfaces/auth.interfaces';
+import {selectProfile} from './shared/store/selectors';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy{
+  profile: IUser;
+
+  private componentDestroyed: Subject<any> = new Subject();
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -32,7 +40,15 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       await this._coreStore.ready$;
+      this._coreStore.select(selectProfile)
+          .pipe(takeUntil(this.componentDestroyed))
+          .subscribe(profile => this.profile = profile);
     });
+  }
+
+  ngOnDestroy(): void {
+    this.componentDestroyed.next();
+    this.componentDestroyed.unsubscribe();
   }
 
   showHeaderToggle() {
@@ -40,14 +56,14 @@ export class AppComponent {
   }
 
   async openTeam() {
-    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.TEAM])
+    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.TEAM]);
   }
 
   async openNews() {
-    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.NEWS])
+    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.NEWS]);
   }
 
   async openProfile() {
-    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.PROFILE])
+    await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.PROFILE]);
   }
 }

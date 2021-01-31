@@ -1,22 +1,23 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthRoutesEnum} from "../auth-routes.enum";
-import {AuthService} from "../auth.service";
-import {RESPONSE_CODES} from "../../../shared/configs/response.constants";
-import {ToastNotificationService} from "../../../shared/helpers/toast-notification.service";
-import {CoreStore} from "../../../shared/store/core.store";
-import {StorageEnum} from "../../../shared/enums/Storage.enum";
-import {VALIDATION_MESSAGES} from "../../../shared/classes/validation-messages";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthRoutesEnum} from '../auth-routes.enum';
+import {AuthService} from '../auth.service';
+import {RESPONSE_CODES} from '../../../shared/configs/response.constants';
+import {ToastNotificationService} from '../../../shared/helpers/toast-notification.service';
+import {CoreStore} from '../../../shared/store/core.store';
+import {StorageEnum} from '../../../shared/enums/Storage.enum';
+import {VALIDATION_MESSAGES} from '../../../shared/classes/validation-messages';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {getPhotoPath} from '../../../shared/helpers/utils';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
     styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
     form: FormGroup = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         password: new FormControl('', [
@@ -42,6 +43,11 @@ export class LoginPage implements OnInit {
     ngOnInit() {
     }
 
+    ngOnDestroy(): void {
+        this.componentDestroyed.next();
+        this.componentDestroyed.unsubscribe();
+    }
+
     login() {
         this.isReqSending = true;
         this._authService.login(this.form.value)
@@ -49,14 +55,18 @@ export class LoginPage implements OnInit {
             .subscribe(async (res) => {
                 this.isReqSending = false;
                 if (res.response_code === RESPONSE_CODES.SUCCESS) {
-                    await this._coreStore.setValue(StorageEnum.LOGGEDIN, true)
-                    await this._coreStore.setValue(StorageEnum.PROFILE, res.user)
+                    await this._coreStore.setValue(StorageEnum.LOGGEDIN, true);
+                    const user = {
+                        ...res.user,
+                        picture: getPhotoPath(res.user.picture)
+                    };
+                    await this._coreStore.setValue(StorageEnum.PROFILE, user);
                     await this._router.navigate(['/']);
                 } else {
                     await this._toast.error(res.response_msg);
                 }
             }
-        )
+        );
 
     }
 

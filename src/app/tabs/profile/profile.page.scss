@@ -28,6 +28,7 @@ ion-toolbar {
   height: 372px;
   padding: var(--ion-padding);
 
-  background: url("/assets/images/profile.png") center no-repeat;
+  background: url('/assets/images/profile.png') center no-repeat;
+  background-size: cover;
 
 }

@@ -9,9 +9,9 @@ import {UserService} from '../../shared/services/user.service';
 import {IUser} from '../../shared/interfaces/auth.interfaces';
 import {selectProfile} from '../../shared/store/selectors';
 import {StorageEnum} from '../../shared/enums/Storage.enum';
-import {API_URL} from '../../shared/configs/main.config';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {getPhotoPath} from '../../shared/helpers/utils';
 
 @Component({
     selector: 'app-profile',
@@ -35,8 +35,14 @@ export class ProfilePage implements OnInit, OnDestroy {
 
     ngOnInit() {
         this._coreStore.select(selectProfile)
-            .pipe(takeUntil(this.componentDestroyed))
-            .subscribe(profile => this.profile = profile);
+            .pipe(
+                takeUntil(this.componentDestroyed),
+                )
+            .subscribe(profile => {
+                if (profile) {
+                    this.profile = profile;
+                }
+            });
         this.getProfile();
     }
 
@@ -53,7 +59,8 @@ export class ProfilePage implements OnInit, OnDestroy {
                     delete profile.response_msg;
                     const data: IUser = {
                         ...this._coreStore.state.profile,
-                        picture: API_URL + profile.picture
+                        ...profile,
+                        picture: getPhotoPath(profile.picture)
                     };
                     await this._coreStore.setValue(StorageEnum.PROFILE, data);
                 }

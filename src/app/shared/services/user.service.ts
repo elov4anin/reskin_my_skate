@@ -56,4 +56,15 @@ export class UserService {
             params,
         );
     }
+
+    /**
+     * unused, but example
+     * @param params
+     */
+    uploadPhoto(params) {
+        return this._api.basePostRequest<IGetUserDataResponse>(
+            'profile-picture-upload.php',
+            params,
+        );
+    }
 }

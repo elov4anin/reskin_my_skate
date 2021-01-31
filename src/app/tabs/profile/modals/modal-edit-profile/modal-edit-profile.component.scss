@@ -30,15 +30,19 @@ ion-item {
   background-image: url("/assets/images/profile.png");
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
 
   .add-image-btn {
-    position: relative;
-    top: -28px;
-    left: -41px;
+
   }
 
   ion-icon {
+    position: relative;
+    top: -20px;
+    left: -20px;
     font-size: 44px;
+
+    background: var(--ion-color-primary);
+    border-radius: 50%;
   }
 }

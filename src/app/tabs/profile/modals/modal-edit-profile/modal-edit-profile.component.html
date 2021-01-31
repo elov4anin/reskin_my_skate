@@ -8,10 +8,9 @@
 </ion-header>
 <ion-content color="dark">
   <form [formGroup]="form" class="ion-margin-top">
+    <input type="file" #upload (change)="uploadFiles($event)" style="display: none">
     <div class="upload-photo" [ngStyle]="{'background-image': 'url(' + profile.picture + ')'}">
-      <ion-button fill="clear" class="add-image-btn">
-        <ion-icon slot="icon-only" name="add-circle" color="success"></ion-icon>
-      </ion-button>
+      <ion-icon slot="icon-only" name="add-circle" color="success" (click)="addFile()"></ion-icon>
     </div>
 
     <div class="divisor mb20 "></div>

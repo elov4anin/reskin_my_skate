@@ -1,14 +1,14 @@
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
-import {Camera, CameraResultType, CameraSource} from "@capacitor/core";
-import {excludedCameraErrors} from "./excluded-camera-errors";
-import {Platform} from "@ionic/angular";
-import {Camera as CameraCordova} from "@ionic-native/camera/ngx";
-import {ToastNotificationService} from "./toast-notification.service";
-import {QUALITY_CAMERA} from "../configs/main.config";
+import {Camera, CameraResultType, CameraSource} from '@capacitor/core';
+import {excludedCameraErrors} from './excluded-camera-errors';
+import {Platform} from '@ionic/angular';
+import {Camera as CameraCordova} from '@ionic-native/camera/ngx';
+import {ToastNotificationService} from './toast-notification.service';
+import {QUALITY_CAMERA} from '../configs/main.config';
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class CameraHelper {
     constructor(
@@ -28,8 +28,9 @@ export class CameraHelper {
                     mediaType: this._camera.MediaType.PICTURE,
                     correctOrientation: true,
                 });
-                console.log(image)
-                return 'data:image/jpeg;base64,' + image
+                console.log(image);
+                return image;
+                // return 'data:image/jpeg;base64,' + image;
             } else {
                 const image = await Camera.getPhoto({
                     quality: QUALITY_CAMERA,
@@ -38,7 +39,7 @@ export class CameraHelper {
                     source: CameraSource.Prompt,
                     correctOrientation: true
                 });
-                console.log(image)
+                console.log(image);
                 return image.webPath;
             }
         } catch (e) {
