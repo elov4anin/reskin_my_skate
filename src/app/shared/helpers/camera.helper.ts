@@ -18,7 +18,7 @@ export class CameraHelper {
     ) {
     }
 
-    async takePictureFromCamera(): Promise<string> {
+    async takePictureFromCamera(sourceType = 1): Promise<string> {
         try {
             if (this._platform.is('android') || this._platform.is('ios')) {
                 const image = await this._camera.getPicture({
@@ -27,6 +27,7 @@ export class CameraHelper {
                     encodingType: this._camera.EncodingType.JPEG,
                     mediaType: this._camera.MediaType.PICTURE,
                     correctOrientation: true,
+                    sourceType
                 });
                 console.log(image);
                 return image;
