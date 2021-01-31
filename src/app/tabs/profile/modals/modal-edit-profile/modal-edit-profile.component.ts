@@ -102,7 +102,6 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
         } else {
             this.uploadRef.nativeElement.click();
         }
-
     }
 
     async addFile() {

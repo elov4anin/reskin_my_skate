@@ -4,4 +4,5 @@ export interface ISlideInfo {
     imgSrc?: string;
     icon?: string;
     type?: string;
+    fileName?: string;
 }

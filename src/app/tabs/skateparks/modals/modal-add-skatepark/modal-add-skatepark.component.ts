@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController} from "@ionic/angular";
-import {ModalSkateparkConfirmComponent} from "../modal-skatepark-confirm/modal-skatepark-confirm.component";
-import {IFeatureSkatepark} from "../../../../shared/interfaces/skatepark.interfaces";
-import {SkateparksService} from "../../../../shared/services/skateparks.service";
-import {CoreStore} from "../../../../shared/store/core.store";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {SKATELITIES, TYPES} from "../../../../pages/search-skateparks/modal-filter-skateparks/dictionaries";
-import {SURFACES} from "../../../../pages/search-skateparks/modal-filter-skateparks/surfaces";
-import {IAddressWithPostalCode} from "../../../../shared/interfaces/common";
-import {ISlideInfo} from "../../skateparks.interfaces";
+import {ModalController} from '@ionic/angular';
+import {ModalSkateparkConfirmComponent} from '../modal-skatepark-confirm/modal-skatepark-confirm.component';
+import {IFeatureSkatepark} from '../../../../shared/interfaces/skatepark.interfaces';
+import {SkateparksService} from '../../../../shared/services/skateparks.service';
+import {CoreStore} from '../../../../shared/store/core.store';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {SKATELITIES, TYPES} from '../../../../pages/search-skateparks/modal-filter-skateparks/dictionaries';
+import {SURFACES} from '../../../../pages/search-skateparks/modal-filter-skateparks/surfaces';
+import {IAddressWithPostalCode} from '../../../../shared/interfaces/common';
+import {ISlideInfo} from '../../skateparks.interfaces';
 
 @Component({
     selector: 'app-modal-add-skatepark',
@@ -18,11 +18,11 @@ import {ISlideInfo} from "../../skateparks.interfaces";
 export class ModalAddSkateparkComponent implements OnInit {
     form: FormGroup;
     checkboxes: IFeatureSkatepark[] = [];
-    readonly types: IFeatureSkatepark[] = TYPES
+    readonly types: IFeatureSkatepark[] = TYPES;
     readonly skatelities: IFeatureSkatepark[] = SKATELITIES;
     readonly surfaces: IFeatureSkatepark[] = SURFACES;
     private location: IAddressWithPostalCode;
-    private images: any[] = []
+    private images: any[] = [];
 
     constructor(
         private _modalController: ModalController,
@@ -45,7 +45,7 @@ export class ModalAddSkateparkComponent implements OnInit {
             material: '',
             features: [[]],
             skatelite: false,
-        })
+        });
     }
 
     async closeModal() {
@@ -74,6 +74,6 @@ export class ModalAddSkateparkComponent implements OnInit {
     }
 
     changeImages(slides: ISlideInfo[]) {
-        this.images = slides.map(s => s.imgSrc);
+        this.images = slides;
     }
 }

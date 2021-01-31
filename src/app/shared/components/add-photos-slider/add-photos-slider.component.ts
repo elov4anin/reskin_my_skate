@@ -1,10 +1,8 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {sliders} from 'src/app/tabs/skateparks/demodata';
-import {ISlideInfo} from "../../../tabs/skateparks/skateparks.interfaces";
-import {CameraHelper} from "../../helpers/camera.helper";
-import {ActionSheetController} from "@ionic/angular";
-import {uuid4} from "@capacitor/core/dist/esm/util";
-import {HTMLInputEvent} from "../../interfaces/common";
+import {ISlideInfo} from '../../../tabs/skateparks/skateparks.interfaces';
+import {CameraHelper} from '../../helpers/camera.helper';
+import {ActionSheetController, Platform} from '@ionic/angular';
+import {HTMLInputEvent} from '../../interfaces/common';
 
 @Component({
     selector: 'app-add-photos-slider',
@@ -14,7 +12,7 @@ import {HTMLInputEvent} from "../../interfaces/common";
 export class AddPhotosSliderComponent implements OnInit {
     @Input() sliders: ISlideInfo[] = [];
 
-    @Output() images$: EventEmitter<ISlideInfo[]>=new EventEmitter<ISlideInfo[]>()
+    @Output() images$: EventEmitter<ISlideInfo[]> = new EventEmitter<ISlideInfo[]>();
     @ViewChild('upload') uploadRef: ElementRef;
 
     slideOpts = {
@@ -29,6 +27,7 @@ export class AddPhotosSliderComponent implements OnInit {
     constructor(
         private _cameraHelper: CameraHelper,
         private _actionSheetController: ActionSheetController,
+        private _platform: Platform,
     ) {
     }
 
@@ -37,13 +36,17 @@ export class AddPhotosSliderComponent implements OnInit {
 
     uploadFiles(event: HTMLInputEvent | any) {
         const files: any[] = Array.from(event.target.files);
-        this.sliders = []
+        this.sliders = [];
         this.sliders.push({imgSrc: files[0]});
-        this.images$.emit(this.sliders)
+        this.images$.emit(this.sliders);
     }
 
-    triggerUploadImage() {
-        this.uploadRef.nativeElement.click();
+    async triggerUploadImage() {
+        if (this._platform.is('android') || this._platform.is('ios')) {
+            await this.takeFromCamera(0);
+        } else {
+            this.uploadRef.nativeElement.click();
+        }
     }
 
     async addFile() {
@@ -54,13 +57,13 @@ export class AddPhotosSliderComponent implements OnInit {
                 text: 'Take Photo',
                 icon: 'camera-outline',
                 handler: () => {
-                    this.takeFromCamera()
+                    this.takeFromCamera(1);
                 }
             }, {
                 text: 'Photo from Library',
                 icon: 'image-outline',
                 handler: () => {
-                    this.triggerUploadImage()
+                    this.triggerUploadImage();
                 }
             }, {
                 text: 'Close',
@@ -74,24 +77,15 @@ export class AddPhotosSliderComponent implements OnInit {
         await actionSheet.present();
     }
 
-    async takeFromCamera() {
+    async takeFromCamera(sourceType: 1 | 0) {
         try {
-            const image64: string = await this._cameraHelper.takePictureFromCamera();
-            console.log(image64);
-            this.sliders = []
-            this.sliders.push({imgSrc: image64});
-            this.images$.emit(this.sliders)
-
-           //fetch(waterMarkedPhoto)
-           //    .then(res => res.blob())
-           //    .then(blob => {
-           //        this.candidateFilesToUpload.push({
-           //            file: blob,
-           //            _uuid: uuid4(),
-           //            filename: getNameCameraPicture()
-           //        });
-           //        this.isFileLoading = false;
-           //    });
+            const filePath: string = await this._cameraHelper.takePictureFromCamera(sourceType);
+            const fileName = sourceType === 1 ?
+                filePath.substring(filePath.lastIndexOf('/') + 1) :
+                filePath.split('?')[0].substring(filePath.lastIndexOf('/') + 1);
+            this.sliders = [];
+            this.sliders.push({imgSrc: filePath, fileName});
+            this.images$.emit(this.sliders);
         } catch (e) {
            // this.isFileLoading = false;
         }
