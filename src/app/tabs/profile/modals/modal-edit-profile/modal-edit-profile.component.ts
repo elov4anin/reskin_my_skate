@@ -1,6 +1,6 @@
 import {Component, ElementRef, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActionSheetController, ModalController} from '@ionic/angular';
+import {ActionSheetController, ModalController, Platform} from '@ionic/angular';
 import {GENDERS} from '../../../../shared/helpers/genders';
 import {IUser} from '../../../../shared/interfaces/auth.interfaces';
 import {UserService} from '../../../../shared/services/user.service';
@@ -39,7 +39,8 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
         private _userService: UserService,
         private _cameraHelper: CameraHelper,
         private _actionSheetController: ActionSheetController,
-        private _transfer: FileTransfer
+        private _transfer: FileTransfer,
+        private _platform: Platform,
     ) {
     }
 
@@ -92,11 +93,16 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
     }
 
     uploadFiles(event: HTMLInputEvent | any) {
-        const files: any[] = Array.from(event.target.files);
+        const file: any[] = event.target.files[0];
     }
 
-    triggerUploadImage() {
-        this.uploadRef.nativeElement.click();
+    async triggerUploadImage() {
+        if (this._platform.is('android') || this._platform.is('ios')) {
+            await this.takeFromCamera(0);
+        } else {
+            this.uploadRef.nativeElement.click();
+        }
+
     }
 
     async addFile() {
@@ -107,7 +113,7 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
                 text: 'Take Photo',
                 icon: 'camera-outline',
                 handler: () => {
-                    this.takeFromCamera();
+                    this.takeFromCamera(1);
                 }
             }, {
                 text: 'Photo from Library',
@@ -127,12 +133,16 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
         await actionSheet.present();
     }
 
-    async takeFromCamera() {
+    async takeFromCamera(sourceType: 1 | 0) {
         try {
-            const image64: string = await this._cameraHelper.takePictureFromCamera();
+            const filePath: string = await this._cameraHelper.takePictureFromCamera(sourceType);
+            const fileName = sourceType === 1 ?
+                filePath.substring(filePath.lastIndexOf('/') + 1) :
+                filePath.split('?')[0].substring(filePath.lastIndexOf('/') + 1);
+
             const options: FileUploadOptions = {
+                fileName,
                 fileKey: 'image',
-                fileName: image64.substr(image64.lastIndexOf('/') + 1),
                 chunkedMode: false,
                 params: {
                     userid: this.profile.id,
@@ -141,12 +151,11 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
             };
             const url: string = SITE_MAIN + 'profile-picture-upload.php';
             const fileTransfer: FileTransferObject = this._transfer.create();
-            const res =  await fileTransfer.upload(image64, url, options);
+            const res = await fileTransfer.upload(filePath, url, options);
             if (res.responseCode === 200) {
                 this.profile.picture = getPhotoPath(res.response);
             }
         } catch (e) {
-            // this.isFileLoading = false;
         }
     }
 }
