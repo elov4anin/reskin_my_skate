@@ -68,9 +68,17 @@ export class ProfilePage implements OnInit, OnDestroy {
     async editProfile() {
         const modal = await this._modalController.create({
             component: ModalEditProfileComponent,
-            cssClass: 'modal-edit-profile'
+            cssClass: 'modal-edit-profile',
+            componentProps: {
+                profile: this.profile
+            }
         });
-        return await modal.present();
+        await modal.present();
+
+        const { data } = await modal.onWillDismiss();
+        if (data) {
+            await this._coreStore.setValue(StorageEnum.PROFILE, data);
+        }
     }
 
     async logout() {

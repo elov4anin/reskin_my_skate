@@ -30,3 +30,16 @@ export interface IUser {
 export interface IGetUserDataResponse extends IUser {
     response_msg: string;
 }
+
+export interface IEditUserDataParams {
+    userid: string;
+    data: {
+        firstname: string
+        lastname: string
+        telephone?: string
+        bio?: string
+        weblink?: string
+        dob: string
+        gender: string
+    };
+}

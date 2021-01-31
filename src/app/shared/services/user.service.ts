@@ -2,7 +2,7 @@ import {IClubStatusResponse, IGetUserRatingResponse, IServerResponse} from '../i
 import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {ApiCreatorService} from './api-creator.service';
-import {IGetUserDataResponse} from '../interfaces/auth.interfaces';
+import {IEditUserDataParams, IGetUserDataResponse} from '../interfaces/auth.interfaces';
 
 
 @Injectable({
@@ -47,6 +47,13 @@ export class UserService {
         return this._api.basePostRequest<IGetUserDataResponse>(
             'view-about-me.php',
             {userid},
+        );
+    }
+
+    editUserData(params: IEditUserDataParams): Observable<IGetUserDataResponse>  {
+        return this._api.basePostRequest<IGetUserDataResponse>(
+            'view-about-me.php',
+            params,
         );
     }
 }

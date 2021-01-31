@@ -53,7 +53,6 @@ export class ModalFilterSkateparksComponent implements OnInit, OnDestroy {
     }
 
     private creatForm(filterState: ISkateparkFilterParams) {
-        console.log('filterState', filterState);
         this.form = this._fb.group({
             type: filterState.type ? filterState.type : '',
             material: filterState.material ? filterState.material : '',

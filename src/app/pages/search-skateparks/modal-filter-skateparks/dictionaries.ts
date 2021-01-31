@@ -1,4 +1,4 @@
-import {IFeatureSkatepark} from "../../../shared/interfaces/skatepark.interfaces";
+import {IFeatureSkatepark} from '../../../shared/interfaces/skatepark.interfaces';
 
 export const TYPES: IFeatureSkatepark[] = [
     {

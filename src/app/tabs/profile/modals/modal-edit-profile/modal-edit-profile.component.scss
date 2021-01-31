@@ -32,11 +32,13 @@ ion-item {
   background-position: center;
   background-size: contain;
 
-  ion-icon {
+  .add-image-btn {
     position: relative;
-    top: -20px;
-    left: -20px;
+    top: -28px;
+    left: -41px;
+  }
 
+  ion-icon {
     font-size: 44px;
   }
 }
