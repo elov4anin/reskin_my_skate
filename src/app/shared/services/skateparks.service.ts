@@ -1,19 +1,19 @@
-import {Observable, of} from "rxjs";
-import {Injectable} from "@angular/core";
+import {Observable, of} from 'rxjs';
+import {Injectable} from '@angular/core';
 import {
     IAddSkateparkParams, IAddSkateParkResponse,
     IGetFeaturesResponse, IGetParksByLocation,
     ISearchLocationsResponse,
     ISkateparkFilterParams, IUserLastCheckInResponse
-} from "../interfaces/skatepark.interfaces";
-import {ApiCreatorService} from "./api-creator.service";
-import {map} from "rxjs/operators";
-import * as dayjs from "dayjs";
-import {IServerResponse} from "../interfaces/common";
+} from '../interfaces/skatepark.interfaces';
+import {ApiCreatorService} from './api-creator.service';
+import {map} from 'rxjs/operators';
+import * as dayjs from 'dayjs';
+import {IServerResponse} from '../interfaces/common';
 
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class SkateparksService {
 
@@ -41,9 +41,9 @@ export class SkateparksService {
                         return {
                             ...s,
                             _isNew: this.checkSkatePark(s.modified_at)
-                        }
+                        };
                     })
-                }
+                };
             })
         );
     }
@@ -65,9 +65,9 @@ export class SkateparksService {
         );
     }
 
-    private checkSkatePark(modified_at: string): boolean {
-        // const date = dayjs(modified_at).format()
-        return true;
+    private checkSkatePark(modifiedAt: string): boolean {
+        // const date = dayjs(modifiedAt).format()
+        return false;
     }
 
     addSkatepark(params: IAddSkateparkParams): Observable<IAddSkateParkResponse> {

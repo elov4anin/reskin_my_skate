@@ -12,6 +12,7 @@ import {AddPhotosSliderComponent} from "./components/add-photos-slider/add-photo
 import {ModalLocationListComponent} from "./modals/modal-location-list/modal-location-list.component";
 import {CustomToggleControlComponent} from "./components/custom-toggle-control/custom-toggle-control.component";
 import {EventComponent} from "./components/event/event.component";
+import {OverflowDotsPipe} from './pipes/overflow-dots.pipe';
 
 const IONIC_MODULES = [
     IonicModule,
@@ -38,7 +39,9 @@ const COMPONENTS = [
     EventComponent,
 ];
 
-const PIPES = [];
+const PIPES = [
+    OverflowDotsPipe
+];
 
 const DIRECTIVES = [];
 

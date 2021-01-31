@@ -38,7 +38,7 @@ export interface ISkatepark {
     rating: number;
     is_favourite?: boolean;
     modified_at: string; // What format date? (DD-MM-YYYY HH:mm) created_at ?
-    _isNew?: boolean;
+    _isNew?: boolean; // if add modified date
 }
 
 export interface ISkateparkFilterParams {
