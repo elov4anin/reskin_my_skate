@@ -22,7 +22,7 @@ export class ToastNotificationService {
     }
 
     async info(message: string, duration?: number): Promise<void> {
-        await this.presentToast(message, 'dark', duration);
+        await this.presentToast(message, 'primary', duration);
     }
 
     async presentToast(message: string, color: string = 'primary', duration: number = 2000): Promise<void> {

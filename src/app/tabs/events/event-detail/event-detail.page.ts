@@ -1,21 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
-import {ModalController} from "@ionic/angular";
-import {ModalRatingsComponent} from "./modal-ratings/modal-ratings.component";
-import {CoreStore} from "../../../shared/store/core.store";
-import {EventImpl, IEvent} from "../../../shared/interfaces/team.interfaces";
-import {selectEvent} from "../../../shared/store/selectors";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {StorageEnum} from "../../../shared/enums/Storage.enum";
-import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
+import {ModalController} from '@ionic/angular';
+import {CoreStore} from '../../../shared/store/core.store';
+import {EventImpl, IEvent} from '../../../shared/interfaces/team.interfaces';
+import {selectEvent} from '../../../shared/store/selectors';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {StorageEnum} from '../../../shared/enums/Storage.enum';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-event-detail',
     templateUrl: './event-detail.page.html',
     styleUrls: ['./event-detail.page.scss'],
 })
-export class EventDetailPage implements OnInit {
+export class EventDetailPage implements OnInit, OnDestroy {
     event: IEvent = new EventImpl();
 
     private componentDestroyed: Subject<any> = new Subject();
@@ -32,7 +31,7 @@ export class EventDetailPage implements OnInit {
         this._coreStore.getValue(StorageEnum.SELECTED_EVENT).then(event => this.setEvent(event));
         this._coreStore.select(selectEvent)
             .pipe(takeUntil(this.componentDestroyed))
-            .subscribe(event => this.setEvent(event))
+            .subscribe(event => this.setEvent(event));
     }
 
     ngOnDestroy(): void {
@@ -51,15 +50,7 @@ export class EventDetailPage implements OnInit {
         }
     }
 
-    async openModalRatings() {
-        const modal = await this._modalController.create({
-            component: ModalRatingsComponent,
-            cssClass: 'modal-rating'
-        });
-        return await modal.present();
-    }
-
     openBrowser() {
-        this._iab.create(this.event.website)
+        this._iab.create(this.event.website);
     }
 }

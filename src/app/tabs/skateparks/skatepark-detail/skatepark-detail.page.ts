@@ -7,6 +7,7 @@ import {ISkatepark} from '../../../shared/interfaces/skatepark.interfaces';
 import {CoreStore} from '../../../shared/store/core.store';
 import {TRUE_VALUE} from '../../../shared/configs/main.config';
 import {addToFeatures, prepareFeatures} from './feature.heper';
+import {ModalRatingsComponent} from './modal-ratings/modal-ratings.component';
 
 
 @Component({
@@ -58,6 +59,17 @@ export class SkateparkDetailPage implements OnInit {
         const modal = await this._modalController.create({
             component: ModalReportClosureComponent,
             cssClass: 'modal-report-closure'
+        });
+        return await modal.present();
+    }
+
+    async openModalRatings() {
+        const modal = await this._modalController.create({
+            component: ModalRatingsComponent,
+            cssClass: 'modal-rating',
+            componentProps: {
+                park: this.skatepark
+            }
         });
         return await modal.present();
     }

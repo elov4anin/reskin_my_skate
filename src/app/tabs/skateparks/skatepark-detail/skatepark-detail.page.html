@@ -62,7 +62,9 @@
                 [rating]="skatepark.rating"
                 fontSize = "16px">
         </ionic-rating-component>
-        <ion-text color="light" class="text-16 text--underline">Read all ratings</ion-text>
+        <ion-button fill="clear" (click)="openModalRatings()">
+            <ion-text color="light" class="text-16 text--underline">Read all ratings</ion-text>
+        </ion-button>
     </section>
     <div class="divisor mt16 mb16"></div>
     <section class="ion-padding-start">

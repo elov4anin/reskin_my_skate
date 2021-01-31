@@ -29,7 +29,7 @@ export interface IUserShortInfo {
 export interface  IGetUserRatingResponse {
     rating: {
         has_rating: boolean;
-    }
+    };
 }
 
 export interface HTMLInputEvent extends Event {
