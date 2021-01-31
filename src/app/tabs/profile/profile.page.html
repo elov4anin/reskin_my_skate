@@ -8,10 +8,10 @@
     </ion-menu-button>
   </ion-toolbar>
 
-  <div class="profile-header__wrap">
+  <div class="profile-header__wrap" [ngStyle]="{'background-image': 'url(' + profile.picture + ')'}">
     <div class="d-flex flex-column">
-      <ion-text color="light" class="title-20">Mike Johanssen</ion-text>
-      <ion-text color="tertiary" class="text-16">Active since 2019</ion-text>
+      <ion-text color="light" class="title-20">{{profile.fullname}}</ion-text>
+      <ion-text color="tertiary" class="text-16">Active since {{profile.date}}</ion-text>
     </div>
   </div>
 </ion-header>
@@ -19,7 +19,7 @@
 <ion-content color="primary" [fullscreen]="true" class="ion-padding">
   <div class="d-flex flex-column ion-margin-bottom">
     <ion-text color="light" class="text-16">Date of Birth</ion-text>
-    <ion-text color="tertiary" class="text-16">June 28, 1989</ion-text>
+    <ion-text color="tertiary" class="text-16">{{profile.date}}</ion-text>
   </div>
 
   <div class="d-flex flex-column ion-margin-bottom">

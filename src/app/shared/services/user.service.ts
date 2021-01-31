@@ -1,11 +1,12 @@
-import {IClubStatusResponse, IGetUserRatingResponse, IServerResponse} from "../interfaces/common";
-import {Observable} from "rxjs";
-import {Injectable} from "@angular/core";
-import {ApiCreatorService} from "./api-creator.service";
+import {IClubStatusResponse, IGetUserRatingResponse, IServerResponse} from '../interfaces/common';
+import {Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ApiCreatorService} from './api-creator.service';
+import {IGetUserDataResponse} from '../interfaces/auth.interfaces';
 
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class UserService {
 
@@ -39,6 +40,13 @@ export class UserService {
         return this._api.basePostRequest<{ park_reported: false }>(
             'integration/myskate/myskate-park-user-reports.php',
             {park: parkId, user: userId},
+        );
+    }
+
+    getUserData(userid: string): Observable<IGetUserDataResponse> {
+        return this._api.basePostRequest<IGetUserDataResponse>(
+            'view-about-me.php',
+            {userid},
         );
     }
 }
