@@ -44,7 +44,6 @@ export class SkateparkDetailPage implements OnInit {
                 return {imgSrc: image};
             });
         }
-        console.log(this.skatepark);
     }
 
     back() {
@@ -58,7 +57,10 @@ export class SkateparkDetailPage implements OnInit {
     async openModalReportClosure() {
         const modal = await this._modalController.create({
             component: ModalReportClosureComponent,
-            cssClass: 'modal-report-closure'
+            cssClass: 'modal-report-closure',
+            componentProps: {
+                skateparkId: this.skatepark.id
+            }
         });
         return await modal.present();
     }

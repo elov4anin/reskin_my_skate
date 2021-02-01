@@ -36,7 +36,7 @@ export class UserService {
         );
     }
 
-    getUserReports(parkId: string, userId: string): Observable<{ park_reported: false }> {
+    userReported(parkId: string, userId: string): Observable<{ park_reported: false }> {
         return this._api.basePostRequest<{ park_reported: false }>(
             'integration/myskate/myskate-park-user-reports.php',
             {park: parkId, user: userId},
