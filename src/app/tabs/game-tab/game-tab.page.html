@@ -24,7 +24,7 @@
       <ion-text color="light" class="text-16">Add players</ion-text>
       <div class="d-flex mt12">
         <div class="person" *ngFor="let p of players">
-          <app-person></app-person>
+          <app-person [player]="p"></app-person>
         </div>
         <div class="person person--add text-hover" (click)="addPlayer()">
           <ion-icon name="add-outline" color="light"></ion-icon>

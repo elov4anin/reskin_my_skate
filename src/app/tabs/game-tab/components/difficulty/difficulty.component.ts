@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IDifficulty} from "../../difficulty.interface";
+import {IDifficulty} from '../../interfaces/difficulty.interface';
 
 @Component({
   selector: 'app-difficulty',

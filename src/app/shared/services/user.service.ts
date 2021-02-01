@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {ApiCreatorService} from './api-creator.service';
 import {IEditUserDataParams, IGetUserDataResponse} from '../interfaces/auth.interfaces';
+import {IFindPlayerByEmailResponse} from '../interfaces/game';
 
 
 @Injectable({
@@ -65,6 +66,13 @@ export class UserService {
         return this._api.basePostRequest<IGetUserDataResponse>(
             'profile-picture-upload.php',
             params,
+        );
+    }
+
+    findPlayerByEmail(search: string): Observable<IFindPlayerByEmailResponse>  {
+        return this._api.basePostRequest<IFindPlayerByEmailResponse>(
+            'integration/myskate/myskate-players-match.php',
+            { search },
         );
     }
 }

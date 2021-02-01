@@ -1,6 +1,7 @@
 ion-avatar, .add-player {
   width: 44px;
   height: 44px;
+  border: 1px solid var(--ion-color-light);
 }
 
 ion-input {
@@ -13,4 +14,24 @@ ion-input {
   --padding-botton: 6px !important;
   border-radius: var(--theme-base-border-radius);
   border: 1px solid var(--ion-color-secondary);
+}
+
+.email-input {
+  height: 0;
+  opacity: 0;
+  transition: all 0.3s;
+
+  &--show {
+    opacity: 1;
+    height: auto;
+  }
+
+  ion-item {
+    --inner-padding-bottom: var(--ion-margin);
+  }
+
+}
+
+.invalid-input {
+  border: 1px solid var(--ion-color-danger) !important;
 }

@@ -1,4 +1,4 @@
-import {IDifficulty} from "./difficulty.interface";
+import {IDifficulty} from './interfaces/difficulty.interface';
 
 export const difficulties: IDifficulty[] = [
     {
@@ -22,4 +22,4 @@ export const difficulties: IDifficulty[] = [
         iconSelected: 'assets/images/game/hard-active.svg',
         isSelected: false
     }
-]
+];

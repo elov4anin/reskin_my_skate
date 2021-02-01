@@ -2,6 +2,7 @@ export const GOOGLE_API_KEY = 'AIzaSyD4NsbNRut7TIheBfLcZzeT-0hZV8sxwCY';
 export const API_URL = 'https://myskate.sport80.app';
 export const SITE_MAIN = API_URL + '/app/';
 export const DOMAIN = 'myskate';
+export const NO_PICTURE_USER = '/assets/img/no-profile-pic-dark.jpg';
 
 export const DATE_FORMAT = 'DD/MM/YYYY';
 export const MIN_AGE = 5;
