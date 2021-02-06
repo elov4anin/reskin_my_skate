@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Storage} from '@ionic/storage';
-import {StorageEnum} from '../enums/Storage.enum';
+import {StorageEnum} from '../store/Storage.enum';
 
 @Injectable({
   providedIn: 'root'

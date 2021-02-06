@@ -4,7 +4,7 @@ import {Subject} from 'rxjs';
 import {IFeedNews} from '../../../../shared/interfaces/team.interfaces';
 import {takeUntil} from 'rxjs/operators';
 import {CoreStore} from '../../../../shared/store/core.store';
-import {StorageEnum} from '../../../../shared/enums/Storage.enum';
+import {StorageEnum} from '../../../../shared/store/Storage.enum';
 import {Router} from '@angular/router';
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs.enum';
 import {IonInfiniteScroll} from '@ionic/angular';

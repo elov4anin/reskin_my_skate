@@ -6,7 +6,7 @@ import {AuthService} from '../auth.service';
 import {RESPONSE_CODES} from '../../../shared/configs/response.constants';
 import {ToastNotificationService} from '../../../shared/helpers/toast-notification.service';
 import {CoreStore} from '../../../shared/store/core.store';
-import {StorageEnum} from '../../../shared/enums/Storage.enum';
+import {StorageEnum} from '../../../shared/store/Storage.enum';
 import {VALIDATION_MESSAGES} from '../../../shared/classes/validation-messages';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';

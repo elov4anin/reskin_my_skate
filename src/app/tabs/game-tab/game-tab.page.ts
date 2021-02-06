@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {difficulties} from './difficulties';
 import {IDifficulty} from './interfaces/difficulty.interface';
-import {ModalController} from '@ionic/angular';
+import {LoadingController, ModalController} from '@ionic/angular';
 import {ModalHowtoComponent} from './modals/modal-howto/modal-howto.component';
 import {ModalAddPlayersComponent} from './modals/modal-add-players/modal-add-players.component';
 import {Router} from '@angular/router';
@@ -9,6 +9,9 @@ import {GameRoutes} from '../../pages/game/game-routes';
 import {IFeatureSkatepark} from '../../shared/interfaces/skatepark.interfaces';
 import {IPlayer} from './interfaces/player.interface';
 import {CoreStore} from '../../shared/store/core.store';
+import {PlayersHelper} from './classes/players.helper';
+import {GameHelper} from './classes/game.helper';
+import {StorageEnum} from '../../shared/store/Storage.enum';
 
 @Component({
     selector: 'app-game',
@@ -47,6 +50,9 @@ export class GameTabPage implements OnInit {
         private _modalController: ModalController,
         private _router: Router,
         private _coreStore: CoreStore,
+        private _playersHelper: PlayersHelper,
+        private _gameHelper: GameHelper,
+        private _loadingController: LoadingController,
         ) {
     }
 
@@ -93,6 +99,39 @@ export class GameTabPage implements OnInit {
     }
 
     async startGame() {
-        await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK]);
+        try {
+            await this.presentLoading();
+            this._playersHelper.setInitialPlayers(this.players);
+            await this._gameHelper.initialLoad();
+            await this._gameHelper.resetTricksList();
+            await this._gameHelper.setDifficultyLevel(this.selectedDifficulty);
+            const tricks = await this._gameHelper.getTricksList(this.selectedDifficulty);
+            await this._coreStore.setValue(StorageEnum.TRICKS, tricks);
+            await this._coreStore.setValue(StorageEnum.ORIGINAL_TRICKS, tricks);
+            await this.dismissLoaders();
+            await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK]);
+        } catch (e) {
+            await this.dismissLoaders();
+            console.log('error start', e);
+        }
+        // clearBack();
     }
+
+    private async presentLoading() {
+        const loading = await this._loadingController.create({
+            cssClass: 'my-custom-class',
+            message: 'Starting game...',
+            duration: 2000
+        });
+        await loading.present();
+    }
+
+    private async dismissLoaders() {
+        const element = await this._loadingController.getTop();
+        if (element) {
+            await element.dismiss();
+            return;
+        }
+    }
+
 }

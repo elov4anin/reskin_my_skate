@@ -6,7 +6,7 @@ import {EventImpl, IEvent} from '../../../shared/interfaces/team.interfaces';
 import {selectEvent} from '../../../shared/store/selectors';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
-import {StorageEnum} from '../../../shared/enums/Storage.enum';
+import {StorageEnum} from '../../../shared/store/Storage.enum';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({

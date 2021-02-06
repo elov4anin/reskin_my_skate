@@ -8,7 +8,7 @@ import {AuthRoutesEnum} from '../../pages/auth/auth-routes.enum';
 import {UserService} from '../../shared/services/user.service';
 import {IUser} from '../../shared/interfaces/auth.interfaces';
 import {selectProfile} from '../../shared/store/selectors';
-import {StorageEnum} from '../../shared/enums/Storage.enum';
+import {StorageEnum} from '../../shared/store/Storage.enum';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {getPhotoPath} from '../../shared/helpers/utils';

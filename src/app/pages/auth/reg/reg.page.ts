@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 import {AuthRoutesEnum} from "../auth-routes.enum";
 import {AuthService} from "../auth.service";
 import {RESPONSE_CODES} from "../../../shared/configs/response.constants";
-import {StorageEnum} from "../../../shared/enums/Storage.enum";
+import {StorageEnum} from "../../../shared/store/Storage.enum";
 import {CoreStore} from "../../../shared/store/core.store";
 import {ToastNotificationService} from "../../../shared/helpers/toast-notification.service";
 import {VALIDATION_MESSAGES} from "../../../shared/classes/validation-messages";

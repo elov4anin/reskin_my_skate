@@ -1,6 +1,6 @@
 import {Store} from './abstract.store';
 import {CoreState} from './core.state';
-import {StorageEnum} from '../enums/Storage.enum';
+import {StorageEnum} from './Storage.enum';
 import {Injectable} from '@angular/core';
 import {IonicStorageService} from '../helpers/ionic-storage.service';
 
@@ -26,21 +26,15 @@ export class CoreStore extends Store<CoreState> {
             this.initValue(StorageEnum.SELECTED_NEWS),
             this.initValue(StorageEnum.SELECTED_EVENT),
             this.initValue(StorageEnum.SELECTED_STORE),
+            this.initValue(StorageEnum.PLAYERS),
+            this.initValue(StorageEnum.PLAYERS_IN_GAME),
+            this.initValue(StorageEnum.TRICKS),
+            this.initValue(StorageEnum.ORIGINAL_TRICKS),
         ]);
     }
 
 
     private initValue(prop: keyof CoreState): Promise<any> {
-        return this._storage.getItem(prop).then(value => {
-            this.setStateValue(prop, value);
-            return value;
-        }).catch(_ => {
-            this.setStateValue(prop, undefined);
-            return undefined;
-        });
-    }
-
-    private initObsValue(prop: keyof CoreState): Promise<any> {
         return this._storage.getItem(prop).then(value => {
             this.setStateValue(prop, value);
             return value;

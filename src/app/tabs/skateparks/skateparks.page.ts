@@ -9,7 +9,7 @@ import {SkateparksService} from '../../shared/services/skateparks.service';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {CoreStore} from '../../shared/store/core.store';
-import {StorageEnum} from '../../shared/enums/Storage.enum';
+import {StorageEnum} from '../../shared/store/Storage.enum';
 
 
 @Component({

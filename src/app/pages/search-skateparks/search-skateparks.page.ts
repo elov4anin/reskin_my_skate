@@ -14,7 +14,7 @@ import {ISkatepark, ISkateparkFilterParams} from '../../shared/interfaces/skatep
 import {ICoordinates} from '../../shared/interfaces/common';
 import {GoogleMapService} from '../../shared/services/google--map.service';
 import {CoreStore} from '../../shared/store/core.store';
-import {StorageEnum} from '../../shared/enums/Storage.enum';
+import {StorageEnum} from '../../shared/store/Storage.enum';
 import {FilterSkateparksHelper} from './modal-filter-skateparks/filter-skateparks.helper';
 
 @Component({

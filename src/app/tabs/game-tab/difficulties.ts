@@ -13,7 +13,7 @@ export const difficulties: IDifficulty[] = [
         name: 'Medium',
         icon: 'assets/images/game/medium.svg',
         iconSelected: 'assets/images/game/medium-active.svg',
-        isSelected: true
+        isSelected: false
     },
     {
         id: 3,

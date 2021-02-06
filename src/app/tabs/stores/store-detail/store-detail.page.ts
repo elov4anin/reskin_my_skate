@@ -5,7 +5,7 @@ import {selectStore} from "../../../shared/store/selectors";
 import {takeUntil} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {IStore, Store} from "../../../shared/interfaces/store.interfaces";
-import {StorageEnum} from "../../../shared/enums/Storage.enum";
+import {StorageEnum} from "../../../shared/store/Storage.enum";
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({

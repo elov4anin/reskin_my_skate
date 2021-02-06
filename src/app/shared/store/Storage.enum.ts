@@ -6,6 +6,10 @@ export enum StorageEnum {
     SKATEPARK_FEATURES = 'skateparkFeatures',
     SELECTED_NEWS = 'selectedNews',
     SELECTED_EVENT = 'selectedEvent',
-    SELECTED_STORE = 'selectedStore'
+    SELECTED_STORE = 'selectedStore',
+    PLAYERS = 'players',
+    PLAYERS_IN_GAME = 'playersInGame',
+    TRICKS = 'tricks',
+    ORIGINAL_TRICKS = 'originalTricks'
 }
 

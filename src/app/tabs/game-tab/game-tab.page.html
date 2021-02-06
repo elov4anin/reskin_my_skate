@@ -46,7 +46,14 @@
     </ion-label>
   </div>
   <div class="ion-margin-start ion-margin-end ion-margin-top ion-margin-bottom">
-    <ion-button class=" w100percent" fill="solid" color="success" expand="block" (click)="startGame()">
+    <ion-button
+            [disabled]="players.length < 2 || !selectedDifficulty"
+            class=" w100percent"
+            fill="solid"
+            color="success"
+            expand="block"
+            (click)="startGame()"
+    >
       Start game
     </ion-button>
   </div>

@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IEvent} from "../../interfaces/team.interfaces";
-import {StorageEnum} from "../../enums/Storage.enum";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../tabs/tabs.enum";
-import {Router} from "@angular/router";
-import {CoreStore} from "../../store/core.store";
+import {IEvent} from '../../interfaces/team.interfaces';
+import {StorageEnum} from '../../store/Storage.enum';
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs/tabs.enum';
+import {Router} from '@angular/router';
+import {CoreStore} from '../../store/core.store';
 
 @Component({
     selector: 'app-event',
