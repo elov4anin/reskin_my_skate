@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {GameTabPage} from "./game-tab.page";
+import {GameTabPage} from './game-tab.page';
 
 
 const routes: Routes = [

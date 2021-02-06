@@ -3,8 +3,8 @@ import {IGameSettings} from '../interfaces/game';
 import {IFeatureSkatepark, ISkatepark} from '../interfaces/skatepark.interfaces';
 import {IEvent, IFeedNews} from '../interfaces/team.interfaces';
 import {IStore} from '../interfaces/store.interfaces';
-import {IPlayer} from '../../tabs/game-tab/interfaces/player.interface';
-import {ITrick} from '../../tabs/game-tab/interfaces/game.interfaces';
+import {IPlayer} from '../../pages/game/interfaces/player.interface';
+import {ITrick} from '../../pages/game/interfaces/game.interfaces';
 
 export class CoreState {
 
@@ -20,6 +20,8 @@ export class CoreState {
     public readonly playersInGame: IPlayer[];
     public readonly tricks: ITrick[];
     public readonly originalTricks: ITrick[];
+    public readonly selectedDifficulty: number;
+    public readonly currentTrick: ITrick;
 
     constructor() {
         // set initial state
@@ -31,9 +33,12 @@ export class CoreState {
         this.selectedNews = undefined;
         this.selectedEvent = undefined;
         this.selectedStore = undefined;
+        // game
         this.players = [];
         this.playersInGame = [];
         this.tricks = [];
         this.originalTricks = [];
+        this.selectedDifficulty = undefined;
+        this.currentTrick = undefined;
     }
 }

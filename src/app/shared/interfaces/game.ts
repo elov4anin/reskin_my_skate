@@ -1,5 +1,5 @@
 import {IServerResponse} from './common';
-import {IPlayer} from '../../tabs/game-tab/interfaces/player.interface';
+import {IPlayer} from '../../pages/game/interfaces/player.interface';
 
 export interface IGameSettings {
     originalTricks: string[]; // @todo

@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {difficulties} from './difficulties';
-import {IDifficulty} from './interfaces/difficulty.interface';
+import {IDifficulty} from '../../pages/game/interfaces/difficulty.interface';
 import {LoadingController, ModalController} from '@ionic/angular';
 import {ModalHowtoComponent} from './modals/modal-howto/modal-howto.component';
 import {ModalAddPlayersComponent} from './modals/modal-add-players/modal-add-players.component';
 import {Router} from '@angular/router';
 import {GameRoutes} from '../../pages/game/game-routes';
 import {IFeatureSkatepark} from '../../shared/interfaces/skatepark.interfaces';
-import {IPlayer} from './interfaces/player.interface';
+import {IPlayer} from '../../pages/game/interfaces/player.interface';
 import {CoreStore} from '../../shared/store/core.store';
-import {PlayersHelper} from './classes/players.helper';
-import {GameHelper} from './classes/game.helper';
+import {PlayersHelper} from '../../pages/game/classes/players.helper';
+import {GameHelper} from '../../pages/game/classes/game.helper';
 import {StorageEnum} from '../../shared/store/Storage.enum';
 
 @Component({
@@ -108,8 +108,9 @@ export class GameTabPage implements OnInit {
             const tricks = await this._gameHelper.getTricksList(this.selectedDifficulty);
             await this._coreStore.setValue(StorageEnum.TRICKS, tricks);
             await this._coreStore.setValue(StorageEnum.ORIGINAL_TRICKS, tricks);
+            await this._coreStore.setValue(StorageEnum.SELECTED_DIFFICULTY, this.selectedDifficulty);
             await this.dismissLoaders();
-            await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.TRICK]);
+            await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONTROLLER]);
         } catch (e) {
             await this.dismissLoaders();
             console.log('error start', e);

@@ -1,4 +1,4 @@
-import {IDifficulty} from './interfaces/difficulty.interface';
+import {IDifficulty} from '../../pages/game/interfaces/difficulty.interface';
 
 export const difficulties: IDifficulty[] = [
     {

@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {IPlayer} from '../../interfaces/player.interface';
+import {IPlayer} from '../../../../pages/game/interfaces/player.interface';
 import {API_URL, NO_PICTURE_USER} from '../../../../shared/configs/main.config';
 import {CoreStore} from '../../../../shared/store/core.store';
 import {uuid4} from '@capacitor/core/dist/esm/util';
@@ -8,7 +8,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {VALIDATION_MESSAGES} from '../../../../shared/classes/validation-messages';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
-import {PlayersService} from '../../services/players.service';
+import {PlayersService} from '../../../../pages/game/services/players.service';
 import {ToastNotificationService} from '../../../../shared/helpers/toast-notification.service';
 
 @Component({

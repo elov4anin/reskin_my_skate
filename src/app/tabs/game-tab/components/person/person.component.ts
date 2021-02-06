@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {IPlayer} from '../../interfaces/player.interface';
+import {IPlayer} from '../../../../pages/game/interfaces/player.interface';
 
 @Component({
   selector: 'app-person',

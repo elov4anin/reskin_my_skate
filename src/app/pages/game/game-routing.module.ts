@@ -1,15 +1,20 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {GameRoutes} from "./game-routes";
+import {GameRoutes} from './game-routes';
+import {LoadTrickControllerComponent} from './components/load-trick-controller/load-trick-controller.component';
 
 const routes: Routes = [
     {
         path: '',
-        redirectTo: `/${GameRoutes.ROOT}/` + GameRoutes.TRICK,
+        redirectTo: `/${GameRoutes.ROOT}/` + GameRoutes.CONTROLLER,
         pathMatch: 'full'
     },
     {
-        path: GameRoutes.TRICK,
+        path: GameRoutes.CONTROLLER,
+        component: LoadTrickControllerComponent
+    },
+    {
+        path: GameRoutes.TRICK + '/:id',
         loadChildren: () => import('./pages/trick/trick.module').then(m => m.TrickPageModule)
     },
     {

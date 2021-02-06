@@ -32,6 +32,9 @@ export class PlayersHelper {
             this.gamePlayers = await this._coreStore.getValue(StorageEnum.PLAYERS);
             console.log('game player in game', this.gamePlayers);
         }
+        if (!this.gamePlayers) {
+            this.gamePlayers = [];
+        }
 
         this.gamePlayers.forEach(p => {
             if (p._lives_left !== 0) {
