@@ -9,12 +9,12 @@
 
   </ion-toolbar>
 </ion-header>
-<ion-content color="dark">
+<ion-content color="dark" *ngIf="trickUrl">
   <div class="d-flex h100percent ion-align-items-center ion-justify-content-center">
     <iframe
             width="375"
             height="211"
-            src="https://www.youtube.com/embed/aHrn3-Cb3iM"
+            [src]="getTrickUrl() | safe: 'resourceUrl'"
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen></iframe>

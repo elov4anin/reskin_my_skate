@@ -44,4 +44,29 @@ export class PlayersHelper {
         await this._coreStore.setValue(StorageEnum.PLAYERS_IN_GAME, playersInGame);
         return playersInGame;
     }
+
+    async setPlayerScore(playerID, score): Promise<void> {
+        this.gamePlayers.forEach((p) => {
+            if (p._playerID === playerID) {
+                p._score = score;
+            }
+        });
+        await this._coreStore.setValue(StorageEnum.GAME_PLAYERS, this.gamePlayers);
+    }
+
+    getInitialPlayers() {
+        if (this.gamePlayers.length === 0) {
+            this.gamePlayers = this._coreStore.state.players;
+        }
+        return this.gamePlayers;
+    }
+
+    async removePlayerLives(playerID) {
+        this.gamePlayers.forEach((p) => {
+            if (p._playerID === playerID) {
+                p._lives_left = p._lives_left - 1;
+            }
+        });
+        await this._coreStore.setValue(StorageEnum.PLAYERS, this.gamePlayers);
+    }
 }

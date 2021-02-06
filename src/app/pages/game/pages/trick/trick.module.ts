@@ -8,6 +8,7 @@ import { TrickPageRoutingModule } from './trick-routing.module';
 
 import { TrickPage } from './trick.page';
 import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.component";
+import {SafePipe} from '../../safe.pipe';
 
 @NgModule({
     imports: [
@@ -16,6 +17,10 @@ import {ModalTrickHowtoComponent} from "./modal-trick-howto/modal-trick-howto.co
         IonicModule,
         TrickPageRoutingModule,
     ],
-  declarations: [TrickPage, ModalTrickHowtoComponent],
+  declarations: [
+      TrickPage,
+      ModalTrickHowtoComponent,
+      SafePipe,
+  ],
 })
 export class TrickPageModule {}
