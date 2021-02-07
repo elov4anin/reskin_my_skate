@@ -1,7 +1,8 @@
 import {ApiCreatorService} from '../../../shared/services/api-creator.service';
 import {Observable} from 'rxjs';
-import {IGetTrickListResponse} from '../interfaces/game.interfaces';
+import {IAddToLeaderboardResponse, IGetTrickListResponse} from '../interfaces/game.interfaces';
 import {Injectable} from '@angular/core';
+import {IPlayer} from '../interfaces/player.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -26,10 +27,10 @@ export class GameService {
         );
     }
 
-    addResults(winner: string[]): Observable<IGetTrickListResponse> {
-        return this._api.basePostRequest<IGetTrickListResponse>(
+    addResults(winners: IPlayer[]): Observable<IAddToLeaderboardResponse> {
+        return this._api.basePostRequest<IAddToLeaderboardResponse>(
             'integration/myskate/myskate-leaderboard-add.php',
-            { winner},
+            { winners},
         );
     }
 

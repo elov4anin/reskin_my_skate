@@ -9,6 +9,8 @@ import {IPlayer} from '../../interfaces/player.interface';
 import {GameHelper} from '../../classes/game.helper';
 import {PlayersHelper} from '../../classes/players.helper';
 import {CoreStore} from '../../../../shared/store/core.store';
+import {ModalNailedComponent} from '../../modals/modal-nailed/modal-nailed.component';
+import {ModalFailedComponent} from '../../modals/modal-failed/modal-failed.component';
 
 @Component({
     selector: 'app-trick',
@@ -70,40 +72,67 @@ export class TrickPage implements OnInit {
     }
 
     async openNailed() {
-        const newScore = this.currentPlayer._score + 1;
-        await this._playerHelper.setPlayerScore(this.currentPlayer._playerID, newScore);
+        const modal = await this._modalController.create({
+            component: ModalNailedComponent,
+            cssClass: 'modal-nailed',
+            componentProps: {
+                currentPlayer: this.currentPlayer
+            }
+        });
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        if (data.next) {
+            const newScore = this.currentPlayer._score + 1;
+            await this._playerHelper.setPlayerScore(this.currentPlayer._playerID, newScore);
 
-        // check if there are anymore players
-        await this.checkStatus();
-        // await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.NAILED])
+            // check if there are anymore players
+            await this.checkStatus();
+            // await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.NAILED])
+        }
+
     }
 
     async openFailed() {
-
-        if (this._gameHelper.playerFailLetter === 'E') {
-            if (this._playerHelper.getInitialPlayers().length > 1) {
-                //  var failedPopup = $ionicPopup.alert({
-                //      title: $scope.currentPlayer.name + ' is out!',
-                //      templateUrl: 'templates/game-playerout-popup.html',
-                //      cssClass: 'myskate-game-popup failed'
-                //  });
-            } else {
-                //  clearBack();
-                //  $state.go('app.game-winner');
-                await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRADULATIONS]);
+        const modal = await this._modalController.create({
+            component: ModalFailedComponent,
+            cssClass: 'modal-failed',
+            componentProps: {
+                currentPlayer: {
+                    ...this.currentPlayer,
+                    _lives_left: this.currentPlayer._lives_left - 1
+                }
             }
-        } else {
-            // var failedPopup = $ionicPopup.alert({
-            //     title: 'Failed It!',
-            //     templateUrl: 'templates/game-failed-popup.html',
-            //     cssClass: 'myskate-game-popup failed'
-            // });
+        });
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        console.log(data);
+        if (data.next) {
+            if (this._gameHelper.playerFailLetter === 'E') {
+                if (this._playerHelper.getInitialPlayers().length > 1) {
+                    //  var failedPopup = $ionicPopup.alert({
+                    //      title: $scope.currentPlayer.name + ' is out!',
+                    //      templateUrl: 'templates/game-playerout-popup.html',
+                    //      cssClass: 'myskate-game-popup failed'
+                    //  });
+
+                } else {
+                    //  clearBack();
+                    //  $state.go('app.game-winner');
+                    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRADULATIONS]);
+                }
+            } else {
+                // var failedPopup = $ionicPopup.alert({
+                //     title: 'Failed It!',
+                //     templateUrl: 'templates/game-failed-popup.html',
+                //     cssClass: 'myskate-game-popup failed'
+                // });
+            }
+
+            await this._playerHelper.removePlayerLives(this.currentPlayer._playerID);
+
+            await this.checkStatus();
+            // await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.FAILED]);
         }
-
-        await this._playerHelper.removePlayerLives(this.currentPlayer._playerID);
-
-        await this.checkStatus();
-        // await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.FAILED]);
     }
 
     setLives(livesLeft) {
@@ -130,7 +159,7 @@ export class TrickPage implements OnInit {
         if (this._playerHelper.getInitialPlayers().length > 1) {
             if (this._gameHelper.hasMorePlayers()) {
                 // true
-                const nextplayer = this._gameHelper.loadNextPlayer();
+                const nextPlayer = this._gameHelper.loadNextPlayer();
                 // can load player score page
                 // or go straight to next player
                 /// clearBack();
@@ -138,7 +167,7 @@ export class TrickPage implements OnInit {
                 // { trick_count: $scope.trick_count, currentTrick: JSON.stringify($scope.trick), currentPlayer: nextplayer });
                 await this._router.navigate(
                     ['/', GameRoutes.ROOT, GameRoutes.TRICK, this.trick.trick_id],
-                    {queryParams: {trickCount: this.trickCount, currentPlayer: nextplayer}}
+                    {queryParams: {trickCount: this.trickCount, currentPlayer: nextPlayer}}
                 );
             } else {
                 // false - end of level

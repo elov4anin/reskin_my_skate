@@ -1,4 +1,5 @@
 import {IServerResponse} from '../../../shared/interfaces/common';
+import {IPlayer} from './player.interface';
 
 export interface ITrick {
     difficulty_level: string;
@@ -25,4 +26,9 @@ export class Trick implements ITrick {
 
 export interface IGetTrickListResponse extends IServerResponse {
     tricks: ITrick[];
+}
+
+export interface IAddToLeaderboardResponse extends IServerResponse {
+    winner: IPlayer[];
+    winnerid: string;
 }

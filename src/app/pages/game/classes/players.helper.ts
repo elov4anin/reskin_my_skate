@@ -58,6 +58,9 @@ export class PlayersHelper {
         if (this.gamePlayers.length === 0) {
             this.gamePlayers = this._coreStore.state.players;
         }
+        if (!this.gamePlayers) {
+            this.gamePlayers = [];
+        }
         return this.gamePlayers;
     }
 

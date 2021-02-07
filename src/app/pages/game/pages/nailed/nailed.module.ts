@@ -17,4 +17,7 @@ import { NailedPage } from './nailed.page';
   ],
   declarations: [NailedPage]
 })
+/**
+ * @deprecated
+ */
 export class NailedPageModule {}

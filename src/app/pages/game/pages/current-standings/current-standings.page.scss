@@ -1,23 +1,25 @@
 .current {
-  padding-top: 220px;
+  padding-top: 50px;
   text-align: center;
 }
 
 .current__wrapper {
   position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 30px;
+  width: 90%;
+
 }
 
-.nailed {
-  position: absolute;
-  top: 50px;
-  left: 10px;
-}
-
-
-.failed {
-  position: absolute;
-  top: 70px;
-  right: 10px;
+.player {
+  &:nth-child(odd) {
+  }
+  &:nth-child(even) {
+    margin-top: 30px;
+  }
 }
 .next-btn {
   margin-top: auto;

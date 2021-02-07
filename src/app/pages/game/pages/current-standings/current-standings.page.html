@@ -8,40 +8,39 @@
     <ion-text color="light" class="title-34  ">Current <br> Standings</ion-text>
 
     <div class="current__wrapper">
-      <div class="d-flex flex-column ion-align-items-center nailed">
-        <ion-avatar>
-          <img src="../../../../../assets/images/person.png">
-        </ion-avatar>
+      <ng-container *ngFor="let player of players">
+        <div class="d-flex flex-column ion-align-items-center player">
+          <ion-avatar>
+            <img [src]="player.picture">
+          </ion-avatar>
 
-        <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
-        <ion-text class=" skate title-34">
-          <ion-text>S.</ion-text>
-          <ion-text>K.</ion-text>
-          <ion-text>A.</ion-text>
-          <ion-text>T.</ion-text>
-          <ion-text>E</ion-text>
-        </ion-text>
-      </div>
-
-      <div class="d-flex flex-column ion-align-items-center failed">
-        <ion-avatar>
-          <img src="../../../../../assets/images/person.png">
-        </ion-avatar>
-
-        <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
-
-        <ion-text class="skate title-34">
-          <ion-text color="secondary">S.</ion-text>
-          <ion-text>K.</ion-text>
-          <ion-text>A.</ion-text>
-          <ion-text>T.</ion-text>
-          <ion-text>E</ion-text>
-        </ion-text>
-      </div>
+          <ion-text color="tertiary" class="mt12 text-16">{{player.name}}</ion-text>
+          <ion-text color="light" class="text-13-300">Points: {{player._score}}</ion-text>
+          <app-skate-text [player]="player"></app-skate-text>
+        </div>
+      </ng-container>
     </div>
 
-    <ion-button class="w100percent next-btn" fill="solid" color="success" expand="block" (click)="nexTrick()">
+    <ion-button
+            *ngIf="stillPlaying"
+            class="w100percent next-btn"
+            fill="solid"
+            color="success"
+            expand="block"
+            (click)="nexTrick()"
+    >
      Next Trick
+    </ion-button>
+
+    <ion-button
+            *ngIf="!stillPlaying"
+            class="w100percent next-btn"
+            fill="solid"
+            color="success"
+            expand="block"
+            (click)="openLeaderboard()"
+    >
+      Next
     </ion-button>
   </div>
 </ion-content>

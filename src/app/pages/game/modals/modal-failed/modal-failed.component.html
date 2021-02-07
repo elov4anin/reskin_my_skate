@@ -1,0 +1,25 @@
+<ion-content color="primary">
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="primary" (click)="stopGame()">
+      <ion-icon name="power-outline" color="danger"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <div class="d-flex flex-column ion-align-items-center failed">
+    <ion-text class="failed__text title-34" color="tertiary">Failed it!</ion-text>
+    <ion-text class="failed__text title-34" color="tertiary">Failed it!</ion-text>
+    <ion-text class="failed__text title-34" color="tertiary">Failed it!</ion-text>
+    <ion-text class="failed__text title-34" color="tertiary">Failed it!</ion-text>
+
+    <div class="d-flex flex-column ion-align-self-center ion-align-items-center ion-padding-start ion-padding-end failed__wrapper">
+      <ion-avatar>
+        <img [src]="currentPlayer.picture">
+      </ion-avatar>
+
+      <ion-text color="tertiary" class="mt12 text-16">{{currentPlayer.name}}</ion-text>
+      <app-skate-text [player]="currentPlayer"></app-skate-text>
+      <ion-button class="w100percent next-btn" fill="solid" color="success" expand="block" (click)="nextPlayer()">
+        Next Player
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

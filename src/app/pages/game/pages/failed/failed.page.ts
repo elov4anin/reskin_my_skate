@@ -8,6 +8,9 @@ import {GameRoutes} from "../../game-routes";
   templateUrl: './failed.page.html',
   styleUrls: ['./failed.page.scss'],
 })
+/**
+ * @deprecated
+ */
 export class FailedPage implements OnInit {
 
   constructor(private _router: Router) { }

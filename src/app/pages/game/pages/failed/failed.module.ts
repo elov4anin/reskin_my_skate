@@ -17,4 +17,7 @@ import { FailedPage } from './failed.page';
   ],
   declarations: [FailedPage]
 })
+/**
+ * @deprecated
+ */
 export class FailedPageModule {}
