@@ -20,7 +20,7 @@ import {StorageEnum} from '../../shared/store/Storage.enum';
 })
 export class GameTabPage implements OnInit {
 
-    readonly difficulties = difficulties;
+    difficulties = difficulties;
     checkboxes: IFeatureSkatepark[] = [
         {
             name: 'Straight, Spin, Shove Tricks',
@@ -133,6 +133,13 @@ export class GameTabPage implements OnInit {
             await element.dismiss();
             return;
         }
+    }
+
+    ionViewDidLeave() {
+        this.selectedDifficulty = undefined;
+        this.players = [];
+        this.difficulties.forEach(v => v.isSelected = false);
+        console.log('ionViewDidLeave');
     }
 
 }

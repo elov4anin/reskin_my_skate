@@ -1,4 +1,4 @@
-import {IServerResponse} from '../../../shared/interfaces/common';
+import {IServerResponse, IUserShortInfo} from '../../../shared/interfaces/common';
 import {IPlayer} from './player.interface';
 
 export interface ITrick {
@@ -31,4 +31,19 @@ export interface IGetTrickListResponse extends IServerResponse {
 export interface IAddToLeaderboardResponse extends IServerResponse {
     winner: IPlayer[];
     winnerid: string;
+}
+
+export interface IPoint {
+    id: string;
+    points: string;
+    user: IUserShortInfo;
+    user_id: string;
+    wins: string
+}
+
+
+export interface ILoadLeaderboardResponse extends IServerResponse {
+    leaderboard: IPoint[];
+    total_count: number;
+    total_games_won: number;
 }

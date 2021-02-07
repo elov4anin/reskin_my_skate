@@ -5,6 +5,7 @@ import {GameRoutes} from '../../game-routes';
 import {GameHelper} from '../../classes/game.helper';
 import {PlayersHelper} from '../../classes/players.helper';
 import {IPlayer} from '../../interfaces/player.interface';
+import {uuid4} from '@capacitor/core/dist/esm/util';
 
 @Component({
     selector: 'app-current-standings',
@@ -25,7 +26,7 @@ export class CurrentStandingsPage implements OnInit {
 
     async ngOnInit() {
         await this.init();
-        this.players = this._playerHelper.getInitialPlayers().sort((a, b) => b._score - a._score);
+        this.players = this._playerHelper.getInitialPlayers().sort((a, b) => b.score - a.score);
     }
 
     private async init(): Promise<void> {
@@ -44,7 +45,7 @@ export class CurrentStandingsPage implements OnInit {
     }
 
     async nexTrick() {
-        await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONTROLLER]);
+        await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONTROLLER], {queryParams: {hash: uuid4()}});
     }
 
     async openLeaderboard() {

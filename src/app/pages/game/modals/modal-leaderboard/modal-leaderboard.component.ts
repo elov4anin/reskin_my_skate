@@ -1,25 +1,61 @@
-import { Component, OnInit } from '@angular/core';
-import {ModalController} from "@ionic/angular";
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {IonInfiniteScroll, ModalController} from '@ionic/angular';
+import {IPlayer} from '../../interfaces/player.interface';
+import {GameService} from '../../services/game.service';
+import {IPoint} from '../../interfaces/game.interfaces';
 
 @Component({
-  selector: 'app-modal-leaderboard',
-  templateUrl: './modal-leaderboard.component.html',
-  styleUrls: ['./modal-leaderboard.component.scss'],
+    selector: 'app-modal-leaderboard',
+    templateUrl: './modal-leaderboard.component.html',
+    styleUrls: ['./modal-leaderboard.component.scss'],
 })
 export class ModalLeaderboardComponent implements OnInit {
-  players: any = [1, 2, 3, ,4, 5, 5, 6, 7, 8, 9,7, 4, 4, 2, 3, ,4, 5, 5, 6, 7, 8, 9,7, 4, 4];
+    @Input() winner: IPlayer;
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  constructor(
-      private _modalController: ModalController
-  ) { }
+    leaderboard: IPoint[] = [];
+    page: number = 0;
+    private breakLoadMore: boolean = false;
 
-  ngOnInit() {}
+    constructor(
+        private _modalController: ModalController,
+        private _gameService: GameService,
+    ) {
+    }
 
-  async closeModal() {
-    await this._modalController.dismiss();
-  }
+    ngOnInit() {
+        this.getLeaderList();
+    }
 
-  playAgain() {
-    this.closeModal().then()
-  }
+
+    getLeaderList() {
+        this._gameService.loadLeaderBoard(this.winner ? this.winner.id : '', this.page).subscribe((res) => {
+            if (res.leaderboard.length < 20) {
+                this.breakLoadMore = true;
+                this.infiniteScroll.complete().then();
+            } else {
+                this.leaderboard = this.leaderboard.concat(res.leaderboard);
+                this.page = this.page + 1;
+            }
+        });
+
+    }
+
+    async closeModal() {
+        await this._modalController.dismiss();
+    }
+
+    async playAgain() {
+        await this._modalController.dismiss({again: true});
+    }
+
+    loadData($event: any) {
+        if (this.breakLoadMore) {
+            $event.target.disabled = true;
+            return;
+        } else {
+            $event.target.disabled = false;
+            this.getLeaderList();
+        }
+    }
 }

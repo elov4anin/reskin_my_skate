@@ -1,43 +1,55 @@
 <ion-header>
-  <ion-toolbar color="dark" class="ion-padding-top">
-    <ion-text slot="start" class="ion-margin-start title-20">
-      Leaderboard
-    </ion-text>
+    <ion-toolbar color="dark" class="ion-padding-top">
+        <ion-text slot="start" class="ion-margin-start title-20">
+            Leaderboard
+        </ion-text>
 
-    <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
-      Close
-    </ion-text>
+        <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
+            Close
+        </ion-text>
 
-  </ion-toolbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content color="dark">
-  <div class="divisor mt20"></div>
-<ion-list class="ion-list-dark">
-  <ion-list-header color="dark">
-    <div  class="d-flex ion-justify-content-between w100percent">
-      <ion-text color="light" class="text-16">Player</ion-text>
-      <ion-text color="light" class="ion-margin-end text-16">Wins</ion-text>
-    </div>
-  </ion-list-header>
-  <ion-item *ngFor="let p of players; let idx = index" color="dark" lines="none">
-    <ion-text slot="start" [color]="idx === 1 ? 'secondary' : 'medium'" class="text-13-300">{{idx}}</ion-text>
-    <ion-avatar slot="start">
-      <img src="../../../../../assets/images/person.png">
-    </ion-avatar>
-    <ion-label [color]="idx === 1 ? 'secondary' : 'tertiary'" class="text-16">Matt Jones</ion-label>
-    <ion-chip slot="end" color="dark"><ion-text [color]="idx === 1 ? 'secondary' : 'light'" class="text-16">23</ion-text></ion-chip>
-  </ion-item>
-</ion-list>
+    <div class="divisor mt20"></div>
+    <ion-list class="ion-list-dark">
+        <ion-list-header color="dark">
+            <div class="d-flex ion-justify-content-between w100percent">
+                <ion-text color="light" class="text-16">Player</ion-text>
+                <ion-text color="light" class="ion-margin-end text-16">Wins</ion-text>
+            </div>
+        </ion-list-header>
+        <ion-item *ngFor="let p of leaderboard; let idx = index" color="dark" lines="none">
+            <ion-text slot="start" [color]="winner && winner.id === p.user_id ? 'secondary' : 'medium'"
+                      class="text-13-300">{{idx}}</ion-text>
+            <ion-avatar slot="start">
+                <img [src]="p.user.picture">
+            </ion-avatar>
+            <ion-label [color]="winner && winner.id === p.user_id ? 'secondary' : 'tertiary'"
+                       class="text-16">{{p.user.name}}</ion-label>
+            <ion-chip slot="end" color="dark">
+                <ion-text [color]="winner && winner.id === p.user_id ? 'secondary' : 'light'"
+                          class="text-16">{{p.points}}</ion-text>
+            </ion-chip>
+        </ion-item>
+    </ion-list>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more..."
+        >
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar color="dark">
-    <ion-button
-            class="ion-margin-start ion-margin-end mb12 apply-btn"
-            fill="solid" color="success" expand="block"
-            (click)="playAgain()"
-    >
-      Play again
-    </ion-button>
-  </ion-toolbar>
+    <ion-toolbar color="dark">
+        <ion-button
+                class="ion-margin-start ion-margin-end mb12 apply-btn"
+                fill="solid" color="success" expand="block"
+                (click)="playAgain()"
+        >
+            Play again
+        </ion-button>
+    </ion-toolbar>
 </ion-footer>

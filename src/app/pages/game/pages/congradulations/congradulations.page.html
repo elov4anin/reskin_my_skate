@@ -4,13 +4,20 @@
       <ion-icon name="power-outline" color="danger"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <div class="d-flex flex-column ion-align-items-center ion-justify-content-start trick">
-    <ion-text  color="secondary" class="title-34">Congradulations</ion-text>
-    <ion-avatar>
-      <img src="../../../../../assets/images/person.png">
-    </ion-avatar>
 
-    <ion-text color="tertiary" class="mt12 text-16">Bobby Mount</ion-text>
+  <div class="d-flex flex-column ion-align-items-center ion-justify-content-start trick">
+
+    <ion-text  color="secondary" class="title-34">Congradulations</ion-text>
+    <ng-container *ngIf="initialPlayerCount > 1; else onePlayer">
+      <ion-avatar>
+        <img [src]="winners[0].picture">
+      </ion-avatar>
+      <ion-text color="tertiary" class="mt12 text-16">{{winners[0].name}}</ion-text>
+    </ng-container>
+    <ng-template #onePlayer>
+      <ion-text color="tertiary" class="mt20 title-28">End of Game</ion-text>
+    </ng-template>
+
     <div class="d-flex ion-justify-content-between buttons">
 
       <ion-button class="game-btn" color="success" (click)="playAgain()">

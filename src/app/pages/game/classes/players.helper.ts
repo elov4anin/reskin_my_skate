@@ -16,9 +16,9 @@ export class PlayersHelper {
         this.gamePlayers = this.gamePlayers.concat(players.map((p, idx) => {
             return {
                 ...p,
-                _score: 0,
-                _lives_left: 5,
-                _playerID: idx + 1
+                score: 0,
+                lives_left: 5,
+                playerID: idx + 1
             };
         }));
     }
@@ -37,7 +37,7 @@ export class PlayersHelper {
         }
 
         this.gamePlayers.forEach(p => {
-            if (p._lives_left !== 0) {
+            if (p.lives_left !== 0) {
                 playersInGame.push(p);
             }
         });
@@ -47,8 +47,8 @@ export class PlayersHelper {
 
     async setPlayerScore(playerID, score): Promise<void> {
         this.gamePlayers.forEach((p) => {
-            if (p._playerID === playerID) {
-                p._score = score;
+            if (p.playerID === playerID) {
+                p.score = score;
             }
         });
         await this._coreStore.setValue(StorageEnum.GAME_PLAYERS, this.gamePlayers);
@@ -61,15 +61,20 @@ export class PlayersHelper {
         if (!this.gamePlayers) {
             this.gamePlayers = [];
         }
+        console.log('this.gamePlayers', this.gamePlayers.length);
         return this.gamePlayers;
     }
 
     async removePlayerLives(playerID) {
         this.gamePlayers.forEach((p) => {
-            if (p._playerID === playerID) {
-                p._lives_left = p._lives_left - 1;
+            if (p.playerID === playerID) {
+                p.lives_left = p.lives_left - 1;
             }
         });
         await this._coreStore.setValue(StorageEnum.PLAYERS, this.gamePlayers);
+    }
+
+    clearPlayers() {
+        this.gamePlayers = [];
     }
 }

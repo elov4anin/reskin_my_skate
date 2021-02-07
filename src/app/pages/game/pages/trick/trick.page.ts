@@ -36,7 +36,7 @@ export class TrickPage implements OnInit {
         this._route.queryParams.subscribe((params) => {
             this.trickCount = params.trickCount;
             this.currentPlayer = this._gameHelper.currentPlayerDetails(params.currentPlayer);
-            this.setLives(this.currentPlayer._lives_left);
+            this.setLives(this.currentPlayer.lives_left);
         });
         this._route.params.subscribe(async (params) => {
             if (params && params.id) {
@@ -68,7 +68,7 @@ export class TrickPage implements OnInit {
     }
 
     async stopGame() {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME]);
+        await this._gameHelper.stopGame();
     }
 
     async openNailed() {
@@ -82,8 +82,8 @@ export class TrickPage implements OnInit {
         await modal.present();
         const { data } = await modal.onWillDismiss();
         if (data.next) {
-            const newScore = this.currentPlayer._score + 1;
-            await this._playerHelper.setPlayerScore(this.currentPlayer._playerID, newScore);
+            const newScore = this.currentPlayer.score + 1;
+            await this._playerHelper.setPlayerScore(this.currentPlayer.playerID, newScore);
 
             // check if there are anymore players
             await this.checkStatus();
@@ -99,7 +99,7 @@ export class TrickPage implements OnInit {
             componentProps: {
                 currentPlayer: {
                     ...this.currentPlayer,
-                    _lives_left: this.currentPlayer._lives_left - 1
+                    lives_left: this.currentPlayer.lives_left - 1
                 }
             }
         });
@@ -128,7 +128,7 @@ export class TrickPage implements OnInit {
                 // });
             }
 
-            await this._playerHelper.removePlayerLives(this.currentPlayer._playerID);
+            await this._playerHelper.removePlayerLives(this.currentPlayer.playerID);
 
             await this.checkStatus();
             // await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.FAILED]);

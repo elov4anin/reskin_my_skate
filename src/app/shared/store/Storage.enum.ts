@@ -7,6 +7,7 @@ export enum StorageEnum {
     SELECTED_NEWS = 'selectedNews',
     SELECTED_EVENT = 'selectedEvent',
     SELECTED_STORE = 'selectedStore',
+    // game
     PLAYERS = 'players',
     PLAYERS_IN_GAME = 'playersInGame',
     TRICKS = 'tricks',

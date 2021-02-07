@@ -7,6 +7,8 @@ import {StorageEnum} from '../../../shared/store/Storage.enum';
 import {IPlayer} from '../interfaces/player.interface';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs/tabs.enum';
+import {Router} from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +29,7 @@ export class GameHelper implements OnDestroy {
         private _playerHelper: PlayersHelper,
         private _gameService: GameService,
         private _coreStore: CoreStore,
+        private _router: Router,
         ) {
     }
 
@@ -81,6 +84,10 @@ export class GameHelper implements OnDestroy {
         return this.trickList[randomIndex];
     }
 
+    /**
+     * @deprecated trickCompleted
+     * @param index
+     */
     async trickCompleted(index): Promise<void> {
         // get the trick from list
         const completed = this.trickList[index];
@@ -139,7 +146,7 @@ export class GameHelper implements OnDestroy {
         if (this.currentPlayer === undefined) {
             this.currentPlayer = 0;
         }
-        if (this.playersInGame[this.currentPlayer]._lives_left > 0) {
+        if (this.playersInGame[this.currentPlayer].lives_left > 0) {
             // players still has lives left
             // check if there are any tricks left otherwise go through tricks again
             if (this.trickList.length > 0) {
@@ -159,11 +166,12 @@ export class GameHelper implements OnDestroy {
 
     findWinner(): IPlayer[] {
         const players: IPlayer[] = this._playerHelper.getInitialPlayers();
+        console.log('players', players);
         const winners: IPlayer[] = [];
         const ultimateWinner: IPlayer[] = [];
         if (players.length > 1) {
             players.forEach((p) => {
-                if (p._lives_left > 0) {
+                if (p.lives_left > 0) {
                     // add to winners list
                     winners.push(p);
                 }
@@ -175,17 +183,19 @@ export class GameHelper implements OnDestroy {
             // multiple winners - so check who has the highest score
             let higherScore = 0;
             winners.forEach(item => {
-                if (item._score > higherScore) {
-                    higherScore = item._score;
+                if (item.score > higherScore) {
+                    higherScore = item.score;
                 }
             });
             winners.forEach(item => {
-                if (item._score === higherScore) {
+                if (item.score === higherScore) {
                     ultimateWinner.push(item);
                 }
             });
+            console.log('ultimateWinner', ultimateWinner);
             return ultimateWinner;
         } else {
+            console.log('winners', winners);
             return winners;
         }
     }
@@ -194,5 +204,28 @@ export class GameHelper implements OnDestroy {
         this._gameService.addResults(winners)
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe();
+    }
+
+    clearGameHelper() {
+        this.playerFailLetter = '';
+        this.currentPlayer = 0;
+        this.playersInGame = []; // reset everytime there is a new
+        this.difficulty = 0;
+        this.trickList = [];
+        this.completedTricks = [];
+    }
+    async stopGame(needRedirect: boolean = true){
+        this._playerHelper.clearPlayers();
+        this.clearGameHelper();
+        await this._coreStore.removeValue(StorageEnum.PLAYERS);
+        await this._coreStore.removeValue(StorageEnum.PLAYERS_IN_GAME);
+        await this._coreStore.removeValue(StorageEnum.TRICKS);
+        await this._coreStore.removeValue(StorageEnum.ORIGINAL_TRICKS);
+        await this._coreStore.removeValue(StorageEnum.SELECTED_DIFFICULTY);
+        await this._coreStore.removeValue(StorageEnum.CURRENT_TRICK);
+        await this._coreStore.removeValue(StorageEnum.GAME_PLAYERS);
+        if (needRedirect) {
+            await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME]);
+        }
     }
 }

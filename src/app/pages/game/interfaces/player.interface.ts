@@ -7,9 +7,9 @@ export interface IPlayer {
     email: string;
     username: string;
     linked?: boolean;
-    _score?: number;
-    _lives_left?: number;
-    _playerID?: number;
+    score?: number;
+    lives_left?: number;
+    playerID?: number;
 }
 
 export interface IPlayerSearchResponse extends IServerResponse {

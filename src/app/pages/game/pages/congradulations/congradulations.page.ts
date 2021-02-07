@@ -29,15 +29,17 @@ export class CongradulationsPage implements OnInit {
     async ngOnInit() {
         this.initialPlayerCount = this._playerHelper.getInitialPlayers().length;
         this.winners = this._gameHelper.findWinner();
+        console.log('winners', this.winners);
 
         if (this.winners.length > 0) {
             this._gameHelper.addResultOnLeaderboard(this.winners);
 
         }
+        await this._gameHelper.stopGame(false);
     }
 
     async stopGame() {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME]);
+      await this._gameHelper.stopGame();
     }
 
     async playAgain() {
@@ -47,8 +49,15 @@ export class CongradulationsPage implements OnInit {
     async openLeaderboard() {
         const modal = await this._modalController.create({
             component: ModalLeaderboardComponent,
-            cssClass: 'modal-leaderboard'
+            cssClass: 'modal-leaderboard',
+            componentProps: {
+                winner: this.winners[0],
+            }
         });
-        return await modal.present();
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        if (data && data.again) {
+            await this.playAgain();
+        }
     }
 }

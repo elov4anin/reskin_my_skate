@@ -4,7 +4,7 @@ import {PlayersHelper} from '../../classes/players.helper';
 import {GameHelper} from '../../classes/game.helper';
 import {LoadingController} from '@ionic/angular';
 import {StorageEnum} from '../../../../shared/store/Storage.enum';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {GameRoutes} from '../../game-routes';
 import {ITrick} from '../../interfaces/game.interfaces';
 import {TabsEnum} from '../../../../tabs/tabs.enum';
@@ -23,17 +23,27 @@ export class LoadTrickControllerComponent implements OnInit {
         private _gameHelper: GameHelper,
         private _loadingController: LoadingController,
         private _router: Router,
+        private _route: ActivatedRoute,
     ) {
     }
 
     async ngOnInit() {
-        await this.presentLoading();
-        this._gameHelper.onGamePage = true;
         await this.init();
-        await this.playTrick();
+        this._route.queryParams.subscribe(async (params) => {
+            if (params.hash) {
+                await this.init();
+            }
+        });
     }
 
     private async init() {
+        await this.presentLoading();
+        this._gameHelper.onGamePage = true;
+        await this.checkTricks();
+        await this.playTrick();
+    }
+
+    private async checkTricks() {
         const difficulty = this._coreStore.state.selectedDifficulty;
         const trickCount = this._gameHelper.getTotalCompletedTricks();
         const hasTricks = this._gameHelper.hasTricks();
@@ -66,11 +76,6 @@ export class LoadTrickControllerComponent implements OnInit {
         }
         await this._router.navigate(
             ['/', GameRoutes.ROOT, GameRoutes.TRICK, currentTrick.trick_id], {queryParams: {trickCount, currentPlayer: 0}});
-        // $timeout(function () {
-        //     clearBack();
-        //     GameService.InitialLoad();
-        //     $state.go('app.play-trick', { trick_count: trick_count, currentTrick: JSON.stringify($scope.currentTrick), currentPlayer: 0});
-        // }, 3000);
     }
 
     private async presentLoading() {

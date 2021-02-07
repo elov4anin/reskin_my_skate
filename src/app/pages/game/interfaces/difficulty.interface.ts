@@ -3,5 +3,5 @@ export interface IDifficulty {
     name: string;
     icon: string;
     iconSelected: string;
-    isSelected: boolean
+    isSelected: boolean;
 }

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {IPlayer} from '../../interfaces/player.interface';
+import {GameHelper} from '../../classes/game.helper';
 
 @Component({
     selector: 'app-modal-nailed',
@@ -12,6 +13,7 @@ export class ModalNailedComponent implements OnInit {
 
     constructor(
         private _modalController: ModalController,
+        private _gameHelper: GameHelper,
     ) {
     }
 
@@ -22,7 +24,7 @@ export class ModalNailedComponent implements OnInit {
         await this._modalController.dismiss({next: true});
     }
 
-    stopGame() {
-
+    async stopGame() {
+        await this._gameHelper.stopGame();
     }
 }
