@@ -14,6 +14,8 @@ import {IonicStorageModule} from '@ionic/storage';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import {OneSignal} from '@ionic-native/onesignal/ngx';
+import {Vibration} from '@ionic-native/vibration/ngx';
 
 @NgModule({
     declarations: [AppComponent],
@@ -38,6 +40,8 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
         InAppBrowser,
         Camera,
         FileTransfer,
+        OneSignal,
+        Vibration
     ],
     bootstrap: [AppComponent]
 })

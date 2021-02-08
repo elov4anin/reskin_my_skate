@@ -12,6 +12,7 @@ import {IUser} from './shared/interfaces/auth.interfaces';
 import {selectProfile} from './shared/store/selectors';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
+import {PushHelper} from './shared/helpers/push.helper';
 
 @Component({
   selector: 'app-root',
@@ -30,7 +31,8 @@ export class AppComponent implements OnDestroy{
     private _mainLayoutHelper: MainLayoutHelper,
     private _router: Router,
     private _coreStore: CoreStore,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _pushHelper: PushHelper,
   ) {
     this.initializeApp();
   }
@@ -39,10 +41,17 @@ export class AppComponent implements OnDestroy{
     this.platform.ready().then(async () => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      await this._coreStore.ready$;
-      this._coreStore.select(selectProfile)
-          .pipe(takeUntil(this.componentDestroyed))
-          .subscribe(profile => this.profile = profile);
+
+      this._coreStore.ready$.then(() => {
+        this._coreStore.select(selectProfile)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(profile => {
+              if (profile) {
+                this.profile = profile;
+                this._pushHelper.init();
+              }
+            });
+      });
     });
   }
 
