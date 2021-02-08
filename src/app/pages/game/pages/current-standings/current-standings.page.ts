@@ -31,7 +31,7 @@ export class CurrentStandingsPage implements OnInit {
 
     private async init(): Promise<void> {
         await this._gameHelper.initialLoad();
-        if (this._playerHelper.getInitialPlayers()) {
+        if (this._playerHelper.getInitialPlayers().length > 1) {
             const hasWinner = await this._gameHelper.hasWinner();
             this.stillPlaying = !hasWinner;
         } else {

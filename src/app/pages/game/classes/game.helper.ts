@@ -146,7 +146,7 @@ export class GameHelper implements OnDestroy {
         if (this.currentPlayer === undefined) {
             this.currentPlayer = 0;
         }
-        if (this.playersInGame[this.currentPlayer].lives_left > 0) {
+        if (this.playersInGame.length > 0 && this.playersInGame[this.currentPlayer].lives_left > 0) {
             // players still has lives left
             // check if there are any tricks left otherwise go through tricks again
             if (this.trickList.length > 0) {
