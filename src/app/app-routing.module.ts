@@ -1,9 +1,9 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {SKATEPARKS_ROUTES} from "./tabs/skateparks/skatepars-routers.enum";
-import {GameRoutes} from "./pages/game/game-routes";
-import {AuthRoutesEnum} from "./pages/auth/auth-routes.enum";
-import {AuthGuard} from "./shared/guards/auth.guard";
+import {SKATEPARKS_ROUTES} from './tabs/skateparks/skatepars-routers.enum';
+import {GameRoutes} from './pages/game/game-routes';
+import {AuthRoutesEnum} from './pages/auth/auth-routes.enum';
+import {AuthGuard} from './shared/guards/auth.guard';
 
 const routes: Routes = [
     {

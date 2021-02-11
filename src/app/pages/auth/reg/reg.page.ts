@@ -1,18 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-import {AuthRoutesEnum} from "../auth-routes.enum";
-import {AuthService} from "../auth.service";
-import {RESPONSE_CODES} from "../../../shared/configs/response.constants";
-import {StorageEnum} from "../../../shared/store/Storage.enum";
-import {CoreStore} from "../../../shared/store/core.store";
-import {ToastNotificationService} from "../../../shared/helpers/toast-notification.service";
-import {VALIDATION_MESSAGES} from "../../../shared/classes/validation-messages";
-import * as dayjs from "dayjs";
-import {DATE_FORMAT, MIN_AGE} from "../../../shared/configs/main.config";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {matchValuesValidator} from "../../../shared/classes/validators";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AuthRoutesEnum} from '../auth-routes.enum';
+import {AuthService} from '../auth.service';
+import {RESPONSE_CODES} from '../../../shared/configs/response.constants';
+import {StorageEnum} from '../../../shared/store/Storage.enum';
+import {CoreStore} from '../../../shared/store/core.store';
+import {ToastNotificationService} from '../../../shared/helpers/toast-notification.service';
+import {VALIDATION_MESSAGES} from '../../../shared/classes/validation-messages';
+import * as dayjs from 'dayjs';
+import {DATE_FORMAT, MIN_AGE} from '../../../shared/configs/main.config';
+import {takeUntil} from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {matchValuesValidator} from '../../../shared/classes/validators';
+import {GENDERS} from '../../../shared/helpers/genders';
 
 @Component({
     selector: 'app-reg',
@@ -36,7 +37,10 @@ export class RegPage implements OnInit, OnDestroy {
             matchValuesValidator('pwd')
         ]),
         dob: new FormControl('', [Validators.required]),
+        gender: new FormControl('', [Validators.required]),
     });
+
+    genders = GENDERS.map(g => g);
 
     readonly validationMessages = VALIDATION_MESSAGES;
 
@@ -59,12 +63,12 @@ export class RegPage implements OnInit, OnDestroy {
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(() => {
             if (this.form.get('pwd').valid && this.form.get('confirmPassword').disabled) {
-                this.form.get('confirmPassword').enable()
+                this.form.get('confirmPassword').enable();
             }
             if (this.form.get('pwd').invalid && this.form.get('confirmPassword').enabled) {
-                this.form.get('confirmPassword').disable()
+                this.form.get('confirmPassword').disable();
             }
-        })
+        });
     }
 
     ngOnDestroy(): void {
@@ -75,27 +79,26 @@ export class RegPage implements OnInit, OnDestroy {
     register() {
         this.isReqSending = true;
         if (this.form.value.dob) {
-            const dob = dayjs(this.form.value.dob).format(DATE_FORMAT);
-            this.form.value.dob = dob;
+            this.form.value.dob = dayjs(this.form.value.dob).format(DATE_FORMAT);
         }
-        delete this.form.value.confirmPassword
+        delete this.form.value.confirmPassword;
         this._authService.register(this.form.value)
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(async (res) => {
                     this.isReqSending = false;
                     if (res.response_code === RESPONSE_CODES.SUCCESS) {
-                        await this._coreStore.setValue(StorageEnum.LOGGEDIN, true)
-                        await this._coreStore.setValue(StorageEnum.PROFILE, res.user)
+                        await this._coreStore.setValue(StorageEnum.LOGGEDIN, true);
+                        await this._coreStore.setValue(StorageEnum.PROFILE, res.user);
                         await this._router.navigate(['/']);
                     } else {
                         await this._toast.error(res.response_msg);
                     }
                 }
-            )
+            );
     }
 
     async openLogin() {
-        await this._router.navigate(['/', AuthRoutesEnum.ROOT, AuthRoutesEnum.LOGIN])
+        await this._router.navigate(['/', AuthRoutesEnum.ROOT, AuthRoutesEnum.LOGIN]);
     }
 
     openDataPicker() {
