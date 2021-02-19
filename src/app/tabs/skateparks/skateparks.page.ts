@@ -10,6 +10,7 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {CoreStore} from '../../shared/store/core.store';
 import {StorageEnum} from '../../shared/store/Storage.enum';
+import {ISkatepark} from '../../shared/interfaces/skatepark.interfaces';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class SkateparksPage implements OnInit, OnDestroy {
 
     sliders: ISlideInfo[] = sliders;
     searchValue: string;
+    favouriteParks: ISkatepark[] = [];
 
     private componentDestroyed: Subject<any> = new Subject();
 
@@ -40,6 +42,9 @@ export class SkateparksPage implements OnInit, OnDestroy {
                 await this._coreStore.setValue(StorageEnum.SKATEPARK_FEATURES, res.features);
             });
         }
+        this._skateparkService.getFavouriteParks( this._coreStore.state.profile.id, 0)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(res => this.favouriteParks = res.parks);
     }
 
     ngOnDestroy(): void {

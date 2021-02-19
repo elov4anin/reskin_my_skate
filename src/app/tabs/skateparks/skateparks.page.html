@@ -1,7 +1,7 @@
 <app-mail-layout
         [isNeedRightPadding]="false"
 >
-    <div class="ion-margin-end">
+    <div class="ion-margin-end" [ngClass]="{'ion-margin-bottom': favouriteParks.length === 0}">
         <ion-searchbar
                 class="search-field"
                 inputmode="search"
@@ -15,19 +15,27 @@
         ></ion-searchbar>
     </div>
     <app-slider-block
+            *ngIf="favouriteParks.length > 0; else emptyText"
             title="Most popular"
-            [sliders]="sliders"
+            [parks]="favouriteParks"
             [isNeedRating]="true"
     >
     </app-slider-block>
+    <ng-template #emptyText>
+        <ion-text class="title-20">No most popular skate parks</ion-text>
+    </ng-template>
     <div class="ion-margin-top ion-margin-bottom ion-margin-end">
         <app-add-skatepark-board></app-add-skatepark-board>
     </div>
     <app-slider-block
+            *ngIf="favouriteParks.length > 0; else emptyTextFavourite"
             title="Favourite skateparks"
-            [sliders]="sliders"
+            [parks]="favouriteParks"
     >
     </app-slider-block>
+    <ng-template #emptyTextFavourite>
+        <ion-text class="title-20">No favourite skate parks</ion-text>
+    </ng-template>
     <div class="ion-margin-top ion-margin-bottom ion-margin-end">
         <app-add-spot-board></app-add-spot-board>
     </div>

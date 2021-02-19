@@ -1,3 +1,25 @@
 .p0 {
   padding: 0;
 }
+
+/*padding top*/
+.pt4 {
+  padding-top: var(--theme-base-padding);
+}
+
+.pt8 {
+  padding-top: calc(var(--theme-base-padding) * 2);
+}
+
+.pt12 {
+  padding-top: calc(var(--theme-base-padding) * 3);
+}
+
+.pt16 {
+  padding-top: calc(var(--theme-base-padding) * 4);
+}
+
+.pt20 {
+  padding-top: calc(var(--theme-base-padding) * 5);
+}
+

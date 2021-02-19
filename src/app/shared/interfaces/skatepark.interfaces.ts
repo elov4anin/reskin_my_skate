@@ -89,3 +89,7 @@ export interface IAddSkateParkResponse extends IServerResponse  {
     // response_code: 200
     sent: boolean;
 }
+
+export interface IGetFavouriteParksResponse extends IServerResponse  {
+    parks: ISkatepark[];
+}

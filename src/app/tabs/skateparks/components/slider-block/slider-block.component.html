@@ -5,9 +5,9 @@
 
   <div class="slider-block__list">
     <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides" pager="false">
-      <ion-slide *ngFor =" let slide of sliders" (click)="openSkatepark()">
+      <ion-slide *ngFor =" let park of parks" (click)="openSkatepark(park.id)">
         <div class="slide" (click)="openSlide()">
-          <div class="slide__img"  [ngStyle]="{'background-image':'url('+slide.imgSrc+')'}"></div>
+          <div class="slide__img" *ngIf="park.has_images" [ngStyle]="{'background-image':'url('+ park.images[0]+')'}"></div>
           <!--  <img src="{{slide.imgSrc}}">-->
           <div class="slide__wrap" [ngClass]="{'mt8': !isNeedRating}">
             <ionic-rating-component
@@ -18,11 +18,11 @@
                     [activeColor] = activeRatingColor
                     [defaultColor] = defaultRatingColor
                     readonly="false"
-                    rating="3"
+                    [rating]="park.rating"
                     fontSize = "16px">
             </ionic-rating-component>
               <span class="text-15-500 slide__title">
-                {{slide.title}}
+                {{park.name}}
               </span>
           </div>
         </div>

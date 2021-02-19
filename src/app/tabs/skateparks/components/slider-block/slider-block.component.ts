@@ -1,9 +1,8 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {ISlideInfo} from "../../skateparks.interfaces";
-import {IonSlides} from "@ionic/angular";
-import {Router} from "@angular/router";
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from "../../../tabs.enum";
-import {SKATEPARKS_ROUTES} from "../../skatepars-routers.enum";
+import {IonSlides} from '@ionic/angular';
+import {Router} from '@angular/router';
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs.enum';
+import {ISkatepark} from '../../../../shared/interfaces/skatepark.interfaces';
 
 @Component({
     selector: 'app-slider-block',
@@ -12,7 +11,7 @@ import {SKATEPARKS_ROUTES} from "../../skatepars-routers.enum";
 })
 export class SliderBlockComponent implements OnInit {
     @Input() title: string = 'Example title';
-    @Input() sliders: ISlideInfo[] = [];
+    @Input() parks: ISkatepark[] = [];
     @Input() isNeedRating: boolean = false;
 
     @ViewChild('slider', {static: false}) sliderRef: IonSlides;
@@ -39,7 +38,7 @@ export class SliderBlockComponent implements OnInit {
 
     }
 
-    async openSkatepark() {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, 1])
+    async openSkatepark(parkId: string) {
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, parkId]);
     }
 }

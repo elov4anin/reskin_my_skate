@@ -1,7 +1,7 @@
 import {Observable, of} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {
-    IAddSkateparkParams, IAddSkateParkResponse,
+    IAddSkateparkParams, IAddSkateParkResponse, IGetFavouriteParksResponse,
     IGetFeaturesResponse, IGetParksByLocation,
     ISearchLocationsResponse,
     ISkateparkFilterParams, IUserLastCheckInResponse
@@ -91,6 +91,17 @@ export class SkateparksService {
             {
                 user: userId,
                 park: parkId
+            },
+        );
+    }
+
+    getFavouriteParks(userId: string, page: number = 0, limit: number = 10): Observable<IGetFavouriteParksResponse> {
+        return this._api.basePostRequest<IGetFavouriteParksResponse>(
+            'integration/myskate/myskate-park-favourites.php',
+            {
+                user_id: userId,
+                page,
+                limit
             },
         );
     }
