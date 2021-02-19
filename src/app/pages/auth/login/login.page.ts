@@ -55,12 +55,12 @@ export class LoginPage implements OnInit, OnDestroy {
             .subscribe(async (res) => {
                 this.isReqSending = false;
                 if (res.response_code === RESPONSE_CODES.SUCCESS) {
-                    await this._coreStore.setValue(StorageEnum.LOGGEDIN, true);
                     const user = {
                         ...res.user,
                         picture: getPhotoPath(res.user.picture)
                     };
                     await this._coreStore.setValue(StorageEnum.PROFILE, user);
+                    await this._coreStore.setValue(StorageEnum.LOGGEDIN, true);
                     await this._router.navigate(['/']);
                 } else {
                     await this._toast.error(res.response_msg);

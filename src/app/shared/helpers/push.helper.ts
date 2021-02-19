@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {OneSignal, OSNotificationOpenedResult} from '@ionic-native/onesignal/ngx';
 import {CoreStore} from '../store/core.store';
-import {StorageEnum} from '../store/Storage.enum';
 import {IUser} from '../interfaces/auth.interfaces';
 import {DOMAIN} from '../configs/main.config';
 import {PushSubscribeService} from '../services/push-subscribe.service';
@@ -35,7 +34,7 @@ export class PushHelper {
         });
 
         this._oneSignal.handleNotificationOpened().subscribe((res) => this.notificationOpenedCallback(res));
-        const user: IUser = await this._coreStore.getValue(StorageEnum.PROFILE);
+        const user: IUser = this._coreStore.state.profile;
         this._oneSignal.sendTags({
             fitnexus_user_id: user.id,
             email: user.email,

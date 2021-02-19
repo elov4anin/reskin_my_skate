@@ -9,7 +9,7 @@ import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from './tabs/tabs.enum';
 import {CoreStore} from './shared/store/core.store';
 import {AuthService} from './pages/auth/auth.service';
 import {IUser} from './shared/interfaces/auth.interfaces';
-import {selectProfile} from './shared/store/selectors';
+import {selectLoggedIn, selectProfile} from './shared/store/selectors';
 import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {PushHelper} from './shared/helpers/push.helper';
@@ -43,11 +43,10 @@ export class AppComponent implements OnDestroy{
       this.splashScreen.hide();
 
       this._coreStore.ready$.then(() => {
-        this._coreStore.select(selectProfile)
+        this._coreStore.select(selectLoggedIn)
             .pipe(takeUntil(this.componentDestroyed))
-            .subscribe(profile => {
-              if (profile) {
-                this.profile = profile;
+            .subscribe(auth => {
+              if (auth) {
                 this._pushHelper.init();
               }
             });
