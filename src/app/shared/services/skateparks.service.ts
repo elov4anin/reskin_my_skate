@@ -1,4 +1,4 @@
-import {Observable, of} from 'rxjs';
+import {Observable} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {
     IAddSkateparkParams, IAddSkateParkResponse, IGetFavouriteParksResponse,
@@ -8,7 +8,6 @@ import {
 } from '../interfaces/skatepark.interfaces';
 import {ApiCreatorService} from './api-creator.service';
 import {map} from 'rxjs/operators';
-import * as dayjs from 'dayjs';
 import {IServerResponse} from '../interfaces/common';
 
 
@@ -104,5 +103,25 @@ export class SkateparksService {
                 limit
             },
         );
+    }
+
+    saveParkFavourite(userId: string, parkId: string): Promise<IServerResponse> {
+        return this._api.basePostRequest<IServerResponse>(
+            'integration/myskate/myskate-save-park-favourite.php',
+            {
+                user_id: userId,
+                park_id: parkId
+            },
+        ).toPromise();
+    }
+
+    deleteParkFavourite(userId: string, parkId: string): Promise<IServerResponse> {
+        return this._api.basePostRequest<IServerResponse>(
+            'integration/myskate/myskate-delete-park-favourite.php',
+            {
+                user_id: userId,
+                park_id: parkId
+            },
+        ).toPromise();
     }
 }

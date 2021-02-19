@@ -8,6 +8,7 @@ import {CoreStore} from '../../../shared/store/core.store';
 import {TRUE_VALUE} from '../../../shared/configs/main.config';
 import {addToFeatures, prepareFeatures} from './feature.heper';
 import {ModalRatingsComponent} from './modal-ratings/modal-ratings.component';
+import {SkateparksService} from '../../../shared/services/skateparks.service';
 
 
 @Component({
@@ -16,7 +17,6 @@ import {ModalRatingsComponent} from './modal-ratings/modal-ratings.component';
     styleUrls: ['./skatepark-detail.page.scss'],
 })
 export class SkateparkDetailPage implements OnInit {
-    isFavor = false;
 
     readonly defaultRatingColor: string = getComputedStyle(document.documentElement)
         .getPropertyValue('--ion-color-light');
@@ -31,6 +31,7 @@ export class SkateparkDetailPage implements OnInit {
         private _location: Location,
         private _modalController: ModalController,
         private _coreStore: CoreStore,
+        private _skateParkService: SkateparksService
         ) {
     }
 
@@ -50,8 +51,13 @@ export class SkateparkDetailPage implements OnInit {
         this._location.back();
     }
 
-    addFavourite(skatepark: ISkatepark) {
+    async addFavourite(skatepark: ISkatepark) {
        skatepark.is_favourite = !skatepark.is_favourite;
+       if (skatepark.is_favourite) {
+           await this._skateParkService.saveParkFavourite(this._coreStore.state.profile.id, skatepark.id);
+       } else {
+           await this._skateParkService.deleteParkFavourite(this._coreStore.state.profile.id, skatepark.id);
+       }
     }
 
     async openModalReportClosure() {
