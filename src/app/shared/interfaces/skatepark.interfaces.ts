@@ -93,3 +93,24 @@ export interface IAddSkateParkResponse extends IServerResponse  {
 export interface IGetFavouriteParksResponse extends IServerResponse  {
     parks: ISkatepark[];
 }
+
+export interface ISpot {
+    id?: string;
+    user_id: string;
+    name: string;
+    city: string;
+    description: string;
+    postcode: string;
+    longitude: string;
+    latitude: string;
+    images: string[];
+    features: string[];
+}
+
+export interface IEditParamsSpot extends ISpot{
+    spot_id: string;
+}
+
+export interface IAddParamsSpot extends ISpot{
+    spot_id: string;
+}
