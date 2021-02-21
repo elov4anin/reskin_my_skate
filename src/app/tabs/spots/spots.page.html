@@ -1,5 +1,5 @@
 <app-mail-layout [isNeedHeightWithTabsAndHeader]="true">
-    <ng-container *ngIf="true; else emptyBlock">
+    <ng-container *ngIf="spots.length > 0; else emptyBlock">
         <header class="d-flex ion-justify-content-between ion-align-items-center">
             <ion-text color="light" class="title-20">My spots</ion-text>
             <ion-button fill="solid" (click)="openAddSpotModal()" class="add-btn">
@@ -7,7 +7,8 @@
             </ion-button>
         </header>
         <div class="d-flex flex-column">
-            <div *ngFor="let spot of [1, 2, 5]" class="mb20">
+            <div *ngFor="let spot of spots
+" class="mb20">
                 <app-spot-photos></app-spot-photos>
             </div>
 

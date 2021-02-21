@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {IServerResponse} from '../interfaces/common';
 import {Observable} from 'rxjs';
 import {ApiCreatorService} from './api-creator.service';
-import {IAddParamsSpot, IEditParamsSpot} from '../interfaces/skatepark.interfaces';
+import {IAddParamsSpot, IEditParamsSpot, IGetSpotsResponse} from '../interfaces/skatepark.interfaces';
 
 @Injectable({
     providedIn: 'root'
@@ -11,8 +11,8 @@ export class SpotService {
     constructor(private _api: ApiCreatorService) {
     }
 
-    getSpots(userId: string, page: number, limit: number = 10): Observable<IServerResponse> {
-        return this._api.basePostRequest<IServerResponse>(
+    getSpots(userId: string, page: number, limit: number = 10): Observable<IGetSpotsResponse> {
+        return this._api.basePostRequest<IGetSpotsResponse>(
             'integration/myskate/myskate-user-skate-spots.php',
             {
                 user_id: userId,

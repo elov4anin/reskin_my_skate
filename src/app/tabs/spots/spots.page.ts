@@ -1,16 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {ModalAddSpotComponent} from './modal-add-spot/modal-add-spot.component';
 import {SpotService} from '../../shared/services/spot.service';
 import {CoreStore} from '../../shared/store/core.store';
+import {ISpot} from '../../shared/interfaces/skatepark.interfaces';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
     selector: 'app-spots',
     templateUrl: './spots.page.html',
     styleUrls: ['./spots.page.scss'],
 })
-export class SpotsPage implements OnInit {
+export class SpotsPage implements OnInit, OnDestroy {
+    spots: ISpot[] = [];
+
     private page: number = 0;
+    private componentDestroyed: Subject<any> = new Subject();
 
     constructor(
         private _modalController: ModalController,
@@ -23,6 +29,11 @@ export class SpotsPage implements OnInit {
         this.getSpots();
     }
 
+    ngOnDestroy(): void {
+        this.componentDestroyed.next();
+        this.componentDestroyed.unsubscribe();
+    }
+
     async openAddSpotModal() {
         const modal = await this._modalController.create({
             component: ModalAddSpotComponent,
@@ -32,8 +43,8 @@ export class SpotsPage implements OnInit {
     }
 
     getSpots() {
-        this._spotService.getSpots(this._coreStore.state.profile.id, this.page).subscribe((res) => {
-            console.log('res', res);
-        });
+        this._spotService.getSpots(this._coreStore.state.profile.id, this.page)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe((res) => this.spots = res.spots);
     }
 }
