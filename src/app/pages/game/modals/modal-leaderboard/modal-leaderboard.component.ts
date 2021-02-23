@@ -32,11 +32,11 @@ export class ModalLeaderboardComponent implements OnInit {
         this._gameService.loadLeaderBoard(this.winner ? this.winner.id : '', this.page).subscribe((res) => {
             if (res.leaderboard.length < 20) {
                 this.breakLoadMore = true;
-                this.infiniteScroll.complete().then();
             } else {
                 this.leaderboard = this.leaderboard.concat(res.leaderboard);
                 this.page = this.page + 1;
             }
+            this.infiniteScroll.complete().then();
         });
 
     }
@@ -51,10 +51,10 @@ export class ModalLeaderboardComponent implements OnInit {
 
     loadData($event: any) {
         if (this.breakLoadMore) {
-            $event.target.disabled = true;
+            this.infiniteScroll.disabled = true;
             return;
         } else {
-            $event.target.disabled = false;
+            this.infiniteScroll.disabled = false;
             this.getLeaderList();
         }
     }
