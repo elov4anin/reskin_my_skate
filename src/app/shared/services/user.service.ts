@@ -53,7 +53,7 @@ export class UserService {
 
     editUserData(params: IEditUserDataParams): Observable<IGetUserDataResponse>  {
         return this._api.basePostRequest<IGetUserDataResponse>(
-            'view-about-me.php',
+            'edit-about-me.php',
             params,
         );
     }

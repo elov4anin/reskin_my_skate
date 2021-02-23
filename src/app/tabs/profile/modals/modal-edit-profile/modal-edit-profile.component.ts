@@ -77,7 +77,10 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
     saveProfile() {
         this._userService.editUserData({
             userid: this.profile.id,
-            data: this.form.value
+            data: {
+                ...this.form.value,
+                dob: dayjs(this.form.value.dob).format('YYYY-MM-DD')
+            }
         })
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(profile => {
