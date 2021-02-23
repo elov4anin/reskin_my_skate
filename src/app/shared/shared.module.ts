@@ -1,18 +1,19 @@
-import {NgModule} from "@angular/core";
-import {MailLayoutComponent} from "./layouts/mail-layout/mail-layout.component";
-import {IonicModule} from "@ionic/angular";
-import {CommonModule} from "@angular/common";
-import {FormsModule} from "@angular/forms";
-import {LogoComponent} from "./components/logo/logo.component";
-import {IonicRatingComponentModule} from "ionic-rating-component";
-import {CheckboxListComponent} from "./components/checkbox-list/checkbox-list.component";
-import {CalendarDayComponent} from "./components/calendar-day/calendar-day.component";
-import {MapBlockComponent} from "./components/map-block/map-block.component";
-import {AddPhotosSliderComponent} from "./components/add-photos-slider/add-photos-slider.component";
-import {ModalLocationListComponent} from "./modals/modal-location-list/modal-location-list.component";
-import {CustomToggleControlComponent} from "./components/custom-toggle-control/custom-toggle-control.component";
-import {EventComponent} from "./components/event/event.component";
+import {NgModule} from '@angular/core';
+import {MailLayoutComponent} from './layouts/mail-layout/mail-layout.component';
+import {IonicModule} from '@ionic/angular';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LogoComponent} from './components/logo/logo.component';
+import {IonicRatingComponentModule} from 'ionic-rating-component';
+import {CheckboxListComponent} from './components/checkbox-list/checkbox-list.component';
+import {CalendarDayComponent} from './components/calendar-day/calendar-day.component';
+import {MapBlockComponent} from './components/map-block/map-block.component';
+import {AddPhotosSliderComponent} from './components/add-photos-slider/add-photos-slider.component';
+import {ModalLocationListComponent} from './modals/modal-location-list/modal-location-list.component';
+import {CustomToggleControlComponent} from './components/custom-toggle-control/custom-toggle-control.component';
+import {EventComponent} from './components/event/event.component';
 import {OverflowDotsPipe} from './pipes/overflow-dots.pipe';
+import {ModalAddSpotComponent} from '../tabs/spots/modal-add-spot/modal-add-spot.component';
 
 const IONIC_MODULES = [
     IonicModule,
@@ -21,6 +22,7 @@ const IONIC_MODULES = [
 const ANGULAR_MODULES = [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 ];
 
 const OTHER_MODULES = [
@@ -37,6 +39,7 @@ const COMPONENTS = [
     ModalLocationListComponent,
     CustomToggleControlComponent,
     EventComponent,
+    ModalAddSpotComponent,
 ];
 
 const PIPES = [

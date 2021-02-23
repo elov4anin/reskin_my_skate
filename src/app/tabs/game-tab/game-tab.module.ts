@@ -8,13 +8,11 @@ import {ModalHowtoComponent} from './modals/modal-howto/modal-howto.component';
 import {ModalAddPlayersComponent} from './modals/modal-add-players/modal-add-players.component';
 import {GameTabRoutingModule} from './game-tab-routing.module';
 import {GameTabPage} from './game-tab.page';
-import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
     imports: [
         SharedModule,
         GameTabRoutingModule,
-        ReactiveFormsModule
     ],
     declarations: [
         GameTabPage,

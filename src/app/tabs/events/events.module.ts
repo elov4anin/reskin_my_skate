@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {EventsPageRoutingModule} from './events-routing.module';
 
 import {EventsPage} from './events.page';
-import {SharedModule} from "../../shared/shared.module";
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
     imports: [
