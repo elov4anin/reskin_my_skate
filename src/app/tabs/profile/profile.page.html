@@ -10,7 +10,8 @@
 </ion-header>
 
 <ion-content color="primary" [fullscreen]="true">
-  <div class="profile-header__wrap" [ngStyle]="{'background-image': 'url(' + profile.picture + ')'}">
+  <div class="profile-header__wrap ion-margin-bottom" [ngStyle]="{
+  'background': 'linear-gradient(89deg, rgba(0,0,0, 0.2) 0%, rgba(0,0,0, 0.74) 100%),url(' + profile.picture + ')'}">
     <div class="d-flex flex-column">
       <ion-text color="light" class="title-20">{{profile.fullname}}</ion-text>
       <ion-text color="tertiary" class="text-16">Active since {{profile.date}}</ion-text>
@@ -18,7 +19,7 @@
   </div>
   <div class="d-flex flex-column ion-margin-bottom ion-margin-start ion-margin-end">
     <ion-text color="light" class="text-16">Date of Birth</ion-text>
-    <ion-text color="tertiary" class="text-16">{{profile.date}}</ion-text>
+    <ion-text color="tertiary" class="text-16">{{profile.dob | date: 'longDate'}}</ion-text>
   </div>
 
   <div class="d-flex flex-column ion-margin-bottom ion-margin-start ion-margin-end">
