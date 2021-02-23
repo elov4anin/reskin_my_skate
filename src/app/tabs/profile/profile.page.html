@@ -7,22 +7,21 @@
       <ion-icon class="menu-icon" slot="icon-only" size="large" name="menu-outline"></ion-icon>
     </ion-menu-button>
   </ion-toolbar>
+</ion-header>
 
+<ion-content color="primary" [fullscreen]="true">
   <div class="profile-header__wrap" [ngStyle]="{'background-image': 'url(' + profile.picture + ')'}">
     <div class="d-flex flex-column">
       <ion-text color="light" class="title-20">{{profile.fullname}}</ion-text>
       <ion-text color="tertiary" class="text-16">Active since {{profile.date}}</ion-text>
     </div>
   </div>
-</ion-header>
-
-<ion-content color="primary" [fullscreen]="true" class="ion-padding">
-  <div class="d-flex flex-column ion-margin-bottom">
+  <div class="d-flex flex-column ion-margin-bottom ion-margin-start ion-margin-end">
     <ion-text color="light" class="text-16">Date of Birth</ion-text>
     <ion-text color="tertiary" class="text-16">{{profile.date}}</ion-text>
   </div>
 
-  <div class="d-flex flex-column ion-margin-bottom">
+  <div class="d-flex flex-column ion-margin-bottom ion-margin-start ion-margin-end">
     <ion-text color="light" class="text-16">Location</ion-text>
     <ion-text color="tertiary" class="text-16">Alderman’s Walk 3183
       West London, UK</ion-text>
@@ -34,7 +33,7 @@
     <ion-button
             color="success"
             expand="block"
-            class="ion-margin-top"
+            class="ion-margin-top  ion-margin-start ion-margin-end"
             (click)="editProfile()"
     >
       <ion-text color="light" class="text-15-500">Edit Profile</ion-text>
