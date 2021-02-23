@@ -1,22 +1,40 @@
 <ion-grid class="p0">
   <ion-row>
-    <ion-col size="9" class="p0">
-      <div class="main-photo mr8" [ngStyle]="{'background-image':'url(assets/images/my_spots/1.png)'}"></div>
-    </ion-col>
-    <ion-col size="3" class="p0">
-      <div class="d-flex h100percent flex-column ion-justify-content-between">
-        <div class="small-photo" [ngStyle]="{'background-image':'url(assets/images/my_spots/2.png)'}"></div>
-        <div class="small-photo" [ngStyle]="{'background-image':'url(assets/images/my_spots/2.png)'}">
-          <div class="last">
-            <ion-text color="light" class="title-20">6</ion-text>
+    <ng-container *ngIf="spot.images.length > 0; else noImagesSpot">
+      <ion-col size="9" class="p0">
+        <div class="main-photo mr8" [ngStyle]="{'background-image': 'url(' + spot.images[0] +')'}"></div>
+      </ion-col>
+      <ion-col size="3" class="p0">
+        <div class="d-flex h100percent flex-column ion-justify-content-between">
+          <div class="small-photo" *ngIf="spot.images[1]" [ngStyle]="{'background-image':'url(' + spot.images[1] +')'}"></div>
+          <div class="small-photo" *ngIf="spot.images[2]" [ngStyle]="{'background-image':'url(' + spot.images[2] +')'}">
+            <div class="last"  *ngIf="spot.images.length > 3" >
+              <ion-text color="light" class="title-20">{{spot.images.length - 3 }}</ion-text>
+            </div>
           </div>
         </div>
-      </div>
-    </ion-col>
+      </ion-col>
+    </ng-container>
+     <ng-template #noImagesSpot>
+       <ion-col>
+       <ion-text color="tertiary" class="text-15 empty-text">
+         This spot not has images
+       </ion-text>
+       </ion-col>
+     </ng-template>
   </ion-row>
   <ion-row>
     <ion-col>
-      <ion-text color="light" class="text-16-500">Isleham Skatepark East</ion-text>
+      <div class="d-flex ion-align-items-center">
+        <ion-text color="light" class="text-16-500">{{spot.name}}</ion-text>
+        <ion-button color="secondary" fill="clear" size="small" (click)="editSpot()">
+          <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" fill="clear" size="small" (click)="deleteSpot(spot.id)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+
     </ion-col>
   </ion-row>
 </ion-grid>

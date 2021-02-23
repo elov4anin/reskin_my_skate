@@ -3,6 +3,10 @@ import {ISlideInfo} from '../../../tabs/skateparks/skateparks.interfaces';
 import {CameraHelper} from '../../helpers/camera.helper';
 import {ActionSheetController, Platform} from '@ionic/angular';
 import {HTMLInputEvent} from '../../interfaces/common';
+import {PictureSourceType} from '@ionic-native/camera';
+import {SpotService} from '../../services/spot.service';
+import {CoreStore} from '../../store/core.store';
+import {FileUploadResult} from '@ionic-native/file-transfer/ngx';
 
 @Component({
     selector: 'app-add-photos-slider',
@@ -11,6 +15,7 @@ import {HTMLInputEvent} from '../../interfaces/common';
 })
 export class AddPhotosSliderComponent implements OnInit {
     @Input() sliders: ISlideInfo[] = [];
+    @Input() oneImage: boolean = true;
 
     @Output() images$: EventEmitter<ISlideInfo[]> = new EventEmitter<ISlideInfo[]>();
     @ViewChild('upload') uploadRef: ElementRef;
@@ -23,11 +28,14 @@ export class AddPhotosSliderComponent implements OnInit {
         spaceBetween: 16,
         width: 60,
     };
+    isLoadingPhoto: boolean;
 
     constructor(
         private _cameraHelper: CameraHelper,
         private _actionSheetController: ActionSheetController,
         private _platform: Platform,
+        private _spotService: SpotService,
+        private _coreStore: CoreStore,
     ) {
     }
 
@@ -36,7 +44,9 @@ export class AddPhotosSliderComponent implements OnInit {
 
     uploadFiles(event: HTMLInputEvent | any) {
         const files: any[] = Array.from(event.target.files);
-        this.sliders = [];
+        if (this.oneImage) {
+            this.sliders = [];
+        }
         this.sliders.push({imgSrc: files[0]});
         this.images$.emit(this.sliders);
     }
@@ -50,6 +60,9 @@ export class AddPhotosSliderComponent implements OnInit {
     }
 
     async addFile() {
+        if (this.isLoadingPhoto) {
+            return;
+        }
         const actionSheet = await this._actionSheetController.create({
             header: 'Add photo',
             cssClass: 'my-custom-class',
@@ -77,17 +90,27 @@ export class AddPhotosSliderComponent implements OnInit {
         await actionSheet.present();
     }
 
-    async takeFromCamera(sourceType: 1 | 0) {
+    async takeFromCamera(sourceType: PictureSourceType.CAMERA |  PictureSourceType.PHOTOLIBRARY) {
+        this.isLoadingPhoto = true;
         try {
-            const filePath: string = await this._cameraHelper.takePictureFromCamera(sourceType);
-            const fileName = sourceType === 1 ?
-                filePath.substring(filePath.lastIndexOf('/') + 1) :
-                filePath.split('?')[0].substring(filePath.lastIndexOf('/') + 1);
-            this.sliders = [];
-            this.sliders.push({imgSrc: filePath, fileName});
-            this.images$.emit(this.sliders);
+            const imgSrc: string = await this._cameraHelper.takePictureFromCamera(sourceType);
+            const fileName = sourceType === PictureSourceType.CAMERA ?
+                imgSrc.substring(imgSrc.lastIndexOf('/') + 1) :
+                imgSrc.split('?')[0].substring(imgSrc.lastIndexOf('/') + 1);
+            if (this.oneImage) {
+                this.sliders = [];
+                this.sliders.push({imgSrc, fileName});
+            } else {
+                const res: FileUploadResult = await this._spotService.uploadSpotMedia(this._coreStore.state.profile.id, {imgSrc, fileName});
+                if (res.responseCode === 200) {
+                    const response = JSON.parse(res.response);
+                    this.sliders.push({imgSrc: response.media_url, fileName});
+                    this.images$.emit(this.sliders);
+                }
+            }
+            this.isLoadingPhoto = false;
         } catch (e) {
-           // this.isFileLoading = false;
+            this.isLoadingPhoto = false;
         }
     }
 }

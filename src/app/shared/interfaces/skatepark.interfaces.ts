@@ -111,10 +111,11 @@ export interface IGetSpotsResponse extends IServerResponse {
     spots: ISpot[];
 }
 
+export interface IGetSpotFeaturesResponse {
+    features: string[];
+}
+
 export interface IEditParamsSpot extends ISpot{
     spot_id: string;
 }
 
-export interface IAddParamsSpot extends ISpot{
-    spot_id: string;
-}

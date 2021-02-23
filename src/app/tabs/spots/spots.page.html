@@ -9,7 +9,7 @@
         <div class="d-flex flex-column">
             <div *ngFor="let spot of spots
 " class="mb20">
-                <app-spot-photos></app-spot-photos>
+                <app-spot-photos [spot]="spot" (select$)="editModal(spot)" (delete$)="deleteSpot($event)"></app-spot-photos>
             </div>
 
         </div>

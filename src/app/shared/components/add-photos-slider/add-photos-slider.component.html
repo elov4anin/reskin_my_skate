@@ -1,7 +1,8 @@
 <div class="d-flex">
   <input type="file" #upload (change)="uploadFiles($event)" style="display: none">
   <div class="add-btn" (click)="addFile()">
-    <ion-icon color="light" name="add-outline" size="large"></ion-icon>
+    <ion-icon *ngIf="!isLoadingPhoto" color="light" name="add-outline" size="large"></ion-icon>
+    <ion-spinner *ngIf="isLoadingPhoto" color="light"></ion-spinner>
   </div>
 
   <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides">

@@ -35,16 +35,19 @@ export class SkateparksPage implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        if (!this._coreStore.state.skateparkFeatures) {
-            this._skateparkService.getFeatures().pipe(
-                takeUntil(this.componentDestroyed),
-            ).subscribe(async (res) => {
-                await this._coreStore.setValue(StorageEnum.SKATEPARK_FEATURES, res.features);
-            });
-        }
-        this._skateparkService.getFavouriteParks( this._coreStore.state.profile.id, 0)
-            .pipe(takeUntil(this.componentDestroyed))
-            .subscribe(res => this.favouriteParks = res.parks);
+        this._coreStore.ready$.then(() => {
+            if (!this._coreStore.state.skateparkFeatures) {
+                this._skateparkService.getFeatures().pipe(
+                    takeUntil(this.componentDestroyed),
+                ).subscribe(async (res) => {
+                    await this._coreStore.setValue(StorageEnum.SKATEPARK_FEATURES, res.features);
+                });
+            }
+
+            this._skateparkService.getFavouriteParks( this._coreStore.state.profile.id, 0)
+                .pipe(takeUntil(this.componentDestroyed))
+                .subscribe(res => this.favouriteParks = res.parks);
+        });
     }
 
     ngOnDestroy(): void {

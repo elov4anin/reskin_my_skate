@@ -1,11 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {NativeGeocoder, NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
-import {Plugins} from "@capacitor/core";
-import {Platform} from "@ionic/angular";
-import {GoogleMapService} from "../../services/google--map.service";
-import {Observable} from "rxjs";
-import {debounceTime, distinctUntilChanged} from "rxjs/operators";
-import {IAddressWithPostalCode, ICoordinates} from "../../interfaces/common";
+import {NativeGeocoder, NativeGeocoderOptions} from '@ionic-native/native-geocoder/ngx';
+import {Plugins} from '@capacitor/core';
+import {Platform} from '@ionic/angular';
+import {GoogleMapService} from '../../services/google--map.service';
+import {Observable} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {IAddressWithPostalCode, ICoordinates} from '../../interfaces/common';
 // @ts-ignore
 import Marker = google.maps.Marker;
 
@@ -19,21 +19,23 @@ declare var google;
   styleUrls: ['./map-block.component.scss'],
 })
 export class MapBlockComponent implements OnInit {
-  @Input() location$: Observable<string>
+  @Input() location$: Observable<string>;
+  @Input() coordinates: ICoordinates;
+
   options: NativeGeocoderOptions = {
     useLocale: true,
     maxResults: 5
   };
   @ViewChild('map', { static: false }) mapElement: ElementRef;
 
-  @Output() address$: EventEmitter<IAddressWithPostalCode> = new EventEmitter<IAddressWithPostalCode>()
+  @Output() address$: EventEmitter<IAddressWithPostalCode> = new EventEmitter<IAddressWithPostalCode>();
   map: any;
   address: IAddressWithPostalCode;
 
   latitude: number;
   longitude: number;
 
-  markers: Marker[] = []
+  markers: Marker[] = [];
   constructor(
       private nativeGeocoder: NativeGeocoder,
       private _platform: Platform,
@@ -49,37 +51,44 @@ export class MapBlockComponent implements OnInit {
         )
         .subscribe(async (location) => {
           const coordinates: ICoordinates = await this._googleMapService.getCoordinates(location);
-          this.map.setCenter({...coordinates})
-        })
+          this.map.setCenter({...coordinates});
+        });
   }
 
   loadMap() {
     Geolocation.getCurrentPosition().then((resp) => {
 
-      this.latitude = resp.coords.latitude;
-      this.longitude = resp.coords.longitude;
+      this.latitude = this.coordinates?.lat || resp.coords.latitude;
+      this.longitude = this.coordinates?.lng || resp.coords.longitude;
 
-      let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
-      let mapOptions = {
+      const latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      const mapOptions = {
         center: latLng,
         zoom: 15,
         mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
+      };
 
      //  this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
 
       this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
+      if (this.coordinates) {
+        const googleLatLng = new google.maps.LatLng(this.coordinates.lat, this.coordinates.lng);
+        this.addMarker(googleLatLng);
+        this.markers.forEach(m => m.setMap(this.map));
+        this.getAddressFromCoords(googleLatLng.lat(), googleLatLng.lng()).then();
+      }
+
       this.map.addListener('click', async ($event) => {
         this.markers.forEach(m => m.setMap(null));
-        this.markers = []
+        this.markers = [];
 
         this.latitude = await $event.latLng.lat();
         this.longitude = await $event.latLng.lng();
 
         this.addMarker($event.latLng);
 
-        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng()).then()
+        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng()).then();
       });
 
     }).catch((error) => {
@@ -149,6 +158,7 @@ export class MapBlockComponent implements OnInit {
     const marker = new google.maps.Marker({
       position: location,
       map: this.map,
+      title: 'Test'
     });
     this.markers.push(marker);
   }

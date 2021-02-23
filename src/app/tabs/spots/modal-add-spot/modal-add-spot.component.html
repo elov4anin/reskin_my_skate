@@ -12,55 +12,66 @@
 </ion-header>
 
 <ion-content color="dark">
+    <from [formGroup]="form">
+        <div class="ion-margin-start ion-margin-end">
+            <ion-item color="dark" class="ion-margin-top item-inline-padding">
+                <ion-label position="stacked">
+                    <ion-text class="text-16">Spot name</ion-text>
+                </ion-label>
+                <ion-input placeholder="Type here" formControlName="name"></ion-input>
+            </ion-item>
 
-    <div class="ion-margin-start ion-margin-end">
-        <ion-item color="dark" class="ion-margin-top item-inline-padding">
-            <ion-label position="stacked">
-                <ion-text class="text-16">Spot name</ion-text>
-            </ion-label>
-            <ion-input placeholder="Type here"></ion-input>
-        </ion-item>
+            <ion-item color="dark" class="item-inline-padding">
+                <ion-label position="stacked">
+                    <ion-text class="text-16">Location</ion-text>
+                </ion-label>
+                <ion-input placeholder="Type here" formControlName="city"></ion-input>
+            </ion-item>
 
-        <ion-item color="dark" class="item-inline-padding">
-            <ion-label position="stacked">
-                <ion-text class="text-16">Location</ion-text>
-            </ion-label>
-            <ion-input placeholder="Type here"></ion-input>
-        </ion-item>
-
-        <div class="ion-margin-top row">
-            <ion-text color="tertiary" class="text-15">
-                Many spots won’t have an address - place the pin on a map to add the exact location
-            </ion-text>
-            <div class="mt12">
-                <app-map-block></app-map-block>
+            <div class="ion-margin-top row">
+                <ion-text color="tertiary" class="text-15">
+                    Many spots won’t have an address - place the pin on a map to add the exact location
+                </ion-text>
+                <div class="mt12">
+                    <app-map-block
+                            [location$]="city$"
+                            [coordinates]="currentSpot ? {lat: currentSpot.latitude, lng: currentSpot.longitude}: null"
+                            (address$)="getAddressFromMap($event)"
+                    ></app-map-block>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="ion-margin-start ion-margin-top row">
-        <ion-label position="stacked">
-            <ion-text class="text-16">Photos</ion-text>
-        </ion-label>
-        <div class="mt12">
-            <app-add-photos-slider></app-add-photos-slider>
+        <div class="ion-margin-start ion-margin-top row">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Photos</ion-text>
+            </ion-label>
+            <div class="mt12">
+                <app-add-photos-slider [oneImage]="false" (images$)="changeImages($event)"></app-add-photos-slider>
+            </div>
         </div>
-    </div>
 
-    <div class="ion-margin-start ion-margin-end ion-margin-top row">
-        <ion-label position="stacked">
-            <ion-text class="text-16">Add features</ion-text>
-        </ion-label>
-        <div class="mt12">
-            <app-checkbox-list [checkboxes]="checkboxes"></app-checkbox-list>
+        <div class="ion-margin-start ion-margin-end ion-margin-top row">
+            <ion-label position="stacked">
+                <ion-text class="text-16">Add features</ion-text>
+            </ion-label>
+            <div class="mt12">
+                <app-checkbox-list [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
+            </div>
         </div>
-    </div>
-
+    </from>
 </ion-content>
 
 <ion-footer>
     <ion-toolbar color="dark">
-        <ion-button class="ion-margin-start ion-margin-end mb12 apply-btn" fill="solid" color="success" expand="block">
+        <ion-button
+                [disabled]="form.invalid"
+                class="ion-margin-start ion-margin-end mb12 apply-btn"
+                fill="solid"
+                color="success"
+                expand="block"
+                (click)="addSpot()"
+        >
             Save spot
         </ion-button>
     </ion-toolbar>

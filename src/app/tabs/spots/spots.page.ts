@@ -45,6 +45,28 @@ export class SpotsPage implements OnInit, OnDestroy {
     getSpots() {
         this._spotService.getSpots(this._coreStore.state.profile.id, this.page)
             .pipe(takeUntil(this.componentDestroyed))
-            .subscribe((res) => this.spots = res.spots);
+            .subscribe((res) => this.spots = res.spots
+                // .filter(s => s.user_id === this._coreStore.state.profile.id)
+       );
+    }
+
+    async editModal(spot: ISpot) {
+        const modal = await this._modalController.create({
+            component: ModalAddSpotComponent,
+            cssClass: 'modal-add-spot',
+            componentProps: {
+                currentSpot: spot
+            }
+        });
+        await modal.present();
+        const { data } = await modal.onWillDismiss();
+        if (data && data.success) {
+            this.getSpots();
+        }
+    }
+
+    async deleteSpot(spotId: string) {
+        await this._spotService.deleteSpot(this._coreStore.state.profile.id, spotId);
+        this.spots = this.spots.filter(s => s.id !== spotId);
     }
 }
