@@ -43,6 +43,13 @@ export class AppComponent implements OnDestroy{
       this.splashScreen.hide();
 
       this._coreStore.ready$.then(() => {
+        this._coreStore.select(selectProfile)
+            .pipe(takeUntil(this.componentDestroyed))
+            .subscribe(profile => {
+              if (profile) {
+               this.profile = profile;
+              }
+            });
         this._coreStore.select(selectLoggedIn)
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(auth => {

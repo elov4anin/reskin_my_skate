@@ -11,13 +11,14 @@
             </ion-header>
             <ion-content color="primary">
                 <ion-list lines="full">
-                    <ion-menu-toggle auto-hide="false">
+                    <ion-menu-toggle auto-hide="false" *ngIf="profile">
                         <ion-item color="primary" class="person" (click)="openProfile()">
                             <ion-thumbnail slot="start">
                                 <img [src]="profile ? profile.picture : 'assets/images/no-avatar.png'">
                             </ion-thumbnail>
                             <ion-label>
-                                <h3 class="person__name">Mike Johanssen</h3>
+                                <h3 class="person__name">{{profile?.lastname}}</h3>
+                                <h3 class="person__name">{{profile?.firstname}}</h3>
                                 <ion-text color="medium" class="person__info">Active since 2019</ion-text>
                             </ion-label>
                             <ion-icon color="medium" slot="end" name="chevron-forward-outline"></ion-icon>
