@@ -79,7 +79,7 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
             userid: this.profile.id,
             data: {
                 ...this.form.value,
-                dob: dayjs(this.form.value.dob).format('YYYY-MM-DD')
+                dob: dayjs(this.form.value.dob).format(' DD-MMM-YYYY')
             }
         })
             .pipe(takeUntil(this.componentDestroyed))
