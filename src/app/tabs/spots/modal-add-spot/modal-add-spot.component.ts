@@ -7,6 +7,8 @@ import {ISlideInfo} from '../../skateparks/skateparks.interfaces';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ReplaySubject} from 'rxjs';
 import {CoreStore} from '../../../shared/store/core.store';
+import {ToastNotificationService} from '../../../shared/helpers/toast-notification.service';
+import {RESPONSE_CODES} from '../../../shared/configs/response.constants';
 
 @Component({
     selector: 'app-modal-add-spot',
@@ -28,6 +30,7 @@ export class ModalAddSpotComponent implements OnInit {
         private _spotService: SpotService,
         private _fb: FormBuilder,
         private _coreStore: CoreStore,
+        private _toast: ToastNotificationService,
     ) {
     }
 
@@ -49,7 +52,7 @@ export class ModalAddSpotComponent implements OnInit {
         if (this.currentSpot) {
             this.city$.next(this.currentSpot.city);
         }
-        this.form.get('city').valueChanges.subscribe(city =>  this.city$.next(city));
+        this.form.get('city').valueChanges.subscribe(city => this.city$.next(city));
     }
 
     getAddressFromMap($event: IAddressWithPostalCode) {
@@ -81,22 +84,28 @@ export class ModalAddSpotComponent implements OnInit {
         const newSpot: ISpot = {
             ...this.form.value,
             ...this.location,
-            image: this.images,
+            images: this.images,
             user_id: this._coreStore.state.profile.id,
         };
         // @ts-ignore
         delete newSpot.address;
+        const res = await this.saveSpot(newSpot);
+        if (res.response_code === RESPONSE_CODES.SUCCESS) {
+            await this._modalController.dismiss({success: true});
+        } else {
+            await this._toast.error(res.response_msg);
+        }
+    }
+
+    private async saveSpot(newSpot: ISpot) {
         if (this.currentSpot && this.currentSpot.id) {
-            await this._spotService.editSpot({
+            return await this._spotService.editSpot({
                 ...newSpot,
                 id: this.currentSpot.id,
                 spot_id: this.currentSpot.id,
             });
         } else {
-            await this._spotService.addSpot(newSpot);
+            return await this._spotService.addSpot(newSpot);
         }
-
-
-        await this._modalController.dismiss({success: true});
     }
 }
