@@ -90,7 +90,7 @@ export class ModalAddSpotComponent implements OnInit {
         // @ts-ignore
         delete newSpot.address;
         const res = await this.saveSpot(newSpot);
-        if (res.response_code === RESPONSE_CODES.SUCCESS) {
+        if (+res.response_code === +RESPONSE_CODES.SUCCESS) {
             await this._modalController.dismiss({success: true});
         } else {
             await this._toast.error(res.response_msg);
