@@ -15,9 +15,9 @@
         ></ion-searchbar>
     </div>
     <app-slider-block
-            *ngIf="favouriteParks.length > 0; else emptyText"
+            *ngIf="mostPopularParks.length > 0; else emptyText"
             title="Most popular"
-            [parks]="favouriteParks"
+            [parks]="mostPopularParks"
             [isNeedRating]="true"
     >
     </app-slider-block>

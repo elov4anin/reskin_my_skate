@@ -3,6 +3,8 @@ import {IonSlides} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs.enum';
 import {ISkatepark} from '../../../../shared/interfaces/skatepark.interfaces';
+import {StorageEnum} from '../../../../shared/store/Storage.enum';
+import {CoreStore} from '../../../../shared/store/core.store';
 
 @Component({
     selector: 'app-slider-block',
@@ -28,7 +30,10 @@ export class SliderBlockComponent implements OnInit {
     readonly defaultRatingColor: string = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-light');
     readonly activeRatingColor: string = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-secondary');
 
-    constructor(private _router: Router) {
+    constructor(
+        private _router: Router,
+        private _coreStore: CoreStore,
+    ) {
     }
 
     ngOnInit() {
@@ -38,7 +43,8 @@ export class SliderBlockComponent implements OnInit {
 
     }
 
-    async openSkatepark(parkId: string) {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, parkId]);
+    async openSkatepark(skatepark: ISkatepark) {
+        await this._coreStore.setValue(StorageEnum.SELECTED_SKATEPARK, skatepark);
+        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, skatepark.id]);
     }
 }

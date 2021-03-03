@@ -5,7 +5,7 @@
 
   <div class="slider-block__list">
     <ion-slides #slider pager="false" [options]="slideOpts" class="custom-slides" pager="false">
-      <ion-slide *ngFor =" let park of parks" (click)="openSkatepark(park.id)">
+      <ion-slide *ngFor =" let park of parks" (click)="openSkatepark(park)">
         <div class="slide" (click)="openSlide()">
           <div class="slide__img" *ngIf="park.has_images" [ngStyle]="{'background-image':'url('+ park.images[0]+')'}"></div>
           <!--  <img src="{{slide.imgSrc}}">-->

@@ -105,6 +105,17 @@ export class SkateparksService {
         );
     }
 
+    getMostPopularParks(userId: string, page: number = 0, limit: number = 10): Observable<IGetFavouriteParksResponse> {
+        return this._api.basePostRequest<IGetFavouriteParksResponse>(
+            'integration/myskate/myskate-most-popular-parks.php',
+            {
+                user_id: userId,
+                page,
+                limit
+            },
+        );
+    }
+
     saveParkFavourite(userId: string, parkId: string): Promise<IServerResponse> {
         return this._api.basePostRequest<IServerResponse>(
             'integration/myskate/myskate-save-park-favourite.php',

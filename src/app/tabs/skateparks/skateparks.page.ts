@@ -23,6 +23,7 @@ export class SkateparksPage implements OnInit, OnDestroy {
     sliders: ISlideInfo[] = sliders;
     searchValue: string;
     favouriteParks: ISkatepark[] = [];
+    mostPopularParks: ISkatepark[] = [];
 
     private componentDestroyed: Subject<any> = new Subject();
 
@@ -47,6 +48,10 @@ export class SkateparksPage implements OnInit, OnDestroy {
             this._skateparkService.getFavouriteParks( this._coreStore.state.profile.id, 0)
                 .pipe(takeUntil(this.componentDestroyed))
                 .subscribe(res => this.favouriteParks = res.parks);
+
+            this._skateparkService.getMostPopularParks( this._coreStore.state.profile.id, 0)
+                .pipe(takeUntil(this.componentDestroyed))
+                .subscribe(res => this.mostPopularParks = res.parks);
         });
     }
 
