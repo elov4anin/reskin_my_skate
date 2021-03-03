@@ -36,8 +36,9 @@ export class ModalReportClosureComponent implements OnInit {
     }
 
     sendReport() {
+        const description = this.form.value.description + ' ' + this.form.value.dateClosure;
         forkJoin([
-            this._skateparkService.reportParkClosure(this.skateparkId, this._coreStore.state.profile.id),
+            this._skateparkService.reportParkClosure(this.skateparkId, this._coreStore.state.profile.id, description),
             this._userService.userReported(this.skateparkId, this._coreStore.state.profile.id)
         ]).subscribe(async res => {
             console.log(res);

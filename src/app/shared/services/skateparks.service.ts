@@ -84,12 +84,13 @@ export class SkateparksService {
     }
 
 
-    reportParkClosure(parkId: string, userId: string) {
+    reportParkClosure(parkId: string, userId: string, description: string) {
         return this._api.basePostRequest<IAddSkateParkResponse>(
             'integration/myskate/myskate-park-report-closure.php',
             {
                 user: userId,
-                park: parkId
+                park: parkId,
+                description
             },
         );
     }
