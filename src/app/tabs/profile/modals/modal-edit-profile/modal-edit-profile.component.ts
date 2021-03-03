@@ -65,7 +65,7 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
             firstname: [userData.firstname ? userData.firstname : '', Validators.required],
             lastname: [userData.lastname ? userData.lastname : '', Validators.required],
             dob: userData.dob ? userData.dob : '',
-            location: '',
+            location: userData.location ? userData.location : '',
             gender: userData.gender ? userData.gender : '0',
         });
     }
@@ -84,13 +84,13 @@ export class ModalEditProfileComponent implements OnInit, OnDestroy {
         })
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(profile => {
-                if (profile.response_msg === 'Success') {
-                    delete profile.response_msg;
-                    const data: IUser = {
-                        ...this.profile,
-                        picture: getPhotoPath(profile.picture)
-                    };
-                    this._modalController.dismiss(data).then();
+                if (profile.response_msg === 'Saved') {
+                  //  delete profile.response_msg;
+                  //  const data: IUser = {
+                  //      ...this.profile,
+                  //      picture: getPhotoPath(profile.picture)
+                  //  };
+                    this._modalController.dismiss({success: true}).then();
                 }
             });
     }

@@ -83,8 +83,9 @@ export class ProfilePage implements OnInit, OnDestroy {
         await modal.present();
 
         const { data } = await modal.onWillDismiss();
-        if (data) {
-            await this._coreStore.setValue(StorageEnum.PROFILE, data);
+        if (data && data.success) {
+            this.getProfile();
+            // await this._coreStore.setValue(StorageEnum.PROFILE, data);
         }
     }
 

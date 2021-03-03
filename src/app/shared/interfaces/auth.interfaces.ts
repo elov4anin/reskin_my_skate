@@ -25,6 +25,7 @@ export interface IUser {
     postcode?: string;
     club_id?: string;
     member_id?: string;
+    location?: string;
 }
 
 export interface IGetUserDataResponse extends IUser {
