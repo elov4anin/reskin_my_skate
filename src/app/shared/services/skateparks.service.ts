@@ -27,11 +27,14 @@ export class SkateparksService {
         );
     }
 
-    getParksByLocation(filter: ISkateparkFilterParams): Observable<IGetParksByLocation> {
+    getParksByLocation(filter: ISkateparkFilterParams, user_id: string): Observable<IGetParksByLocation> {
         filter.page = 0;
         return this._api.basePostRequest<IGetParksByLocation>(
             'integration/myskate-parks-radius-search.php',
-            filter
+            {
+                ...filter,
+                user_id
+            }
         ).pipe(
             map(res => {
                 return {

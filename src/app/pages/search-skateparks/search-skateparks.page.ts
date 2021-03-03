@@ -71,7 +71,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
                     this.currentFilter = filter;
                     this.isFilterActive = this._filterHelper.checkFilterActive(filter);
                     this.presentLoading().then();
-                    return this._skateparksService.getParksByLocation(filter);
+                    return this._skateparksService.getParksByLocation(filter, this._coreStore.state.profile.id);
                 }
                 return of(null);
             })
