@@ -45,6 +45,7 @@ export class LoadTrickControllerComponent implements OnInit {
 
     private async checkTricks() {
         const difficulty = this._coreStore.state.selectedDifficulty;
+        const selectedTrickTypes = this._coreStore.state.selectedTrickTypes;
         const trickCount = this._gameHelper.getTotalCompletedTricks();
         const hasTricks = this._gameHelper.hasTricks();
         if (hasTricks) {
@@ -57,7 +58,7 @@ export class LoadTrickControllerComponent implements OnInit {
                 // console.log('tricks count', trick_count);
             } else {
                 // are the tricks to pick from
-                const tricks = await this._gameHelper.getTricksList(difficulty);
+                const tricks = await this._gameHelper.getTricksList(difficulty, selectedTrickTypes);
                 await this._coreStore.setValue(StorageEnum.TRICKS, tricks);
                 await this._coreStore.setValue(StorageEnum.ORIGINAL_TRICKS, tricks);
             }

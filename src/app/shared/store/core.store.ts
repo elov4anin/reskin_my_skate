@@ -33,6 +33,7 @@ export class CoreStore extends Store<CoreState> {
             this.initValue(StorageEnum.SELECTED_DIFFICULTY),
             this.initValue(StorageEnum.CURRENT_TRICK),
             this.initValue(StorageEnum.GAME_PLAYERS),
+            this.initValue(StorageEnum.SELECTED_TRICK_TYPES),
         ]);
     }
 

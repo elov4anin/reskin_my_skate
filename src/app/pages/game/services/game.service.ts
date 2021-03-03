@@ -12,10 +12,10 @@ export class GameService {
     }
 
 
-    getTrickList(difficulty: number): Observable<IGetTrickListResponse> {
+    getTrickList(difficulty: number, trick_types: string[]): Observable<IGetTrickListResponse> {
         return this._api.basePostRequest<IGetTrickListResponse>(
-            'integration/myskate/myskate-tricks-list.php',
-            { difficulty },
+            'integration/myskate/myskate-tricks-list-filtered.php',
+            { difficulty, trick_types },
         );
     }
 

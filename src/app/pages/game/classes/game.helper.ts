@@ -53,9 +53,9 @@ export class GameHelper implements OnDestroy {
         this.difficulty = difficultyLevel;
     }
 
-    getTricksList(difficulty): Promise<ITrick[]> {
+    getTricksList(difficulty, selectedTrickTypes: string[]): Promise<ITrick[]> {
         return new Promise(resolve => {
-            this._gameService.getTrickList(difficulty)
+            this._gameService.getTrickList(difficulty, selectedTrickTypes)
                 .pipe(takeUntil(this.componentDestroyed))
                 .subscribe(response => {
                 if (response.tricks.length > 0) {
@@ -224,6 +224,7 @@ export class GameHelper implements OnDestroy {
         await this._coreStore.removeValue(StorageEnum.SELECTED_DIFFICULTY);
         await this._coreStore.removeValue(StorageEnum.CURRENT_TRICK);
         await this._coreStore.removeValue(StorageEnum.GAME_PLAYERS);
+        await this._coreStore.removeValue(StorageEnum.SELECTED_TRICK_TYPES);
         if (needRedirect) {
             await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME]);
         }

@@ -29,7 +29,7 @@ export class GameTabPage implements OnInit {
         },
         {
             name: 'Rail & Ledge Tricks',
-            checked: true,
+            checked: false,
             value: 'Rail & Ledge Tricks'
         },
         {
@@ -39,7 +39,7 @@ export class GameTabPage implements OnInit {
         },
         {
             name: 'Flip Tricks',
-            checked: true,
+            checked: false,
             value: 'Flip Tricks'
         },
     ];
@@ -100,12 +100,13 @@ export class GameTabPage implements OnInit {
 
     async startGame() {
         try {
+            const selectedTrickTypes: string[] = this.checkboxes.filter(ch => ch.checked).map(ch => ch.value);
             await this.presentLoading();
             this._playersHelper.setInitialPlayers(this.players);
             await this._gameHelper.initialLoad();
             await this._gameHelper.resetTricksList();
             await this._gameHelper.setDifficultyLevel(this.selectedDifficulty);
-            const tricks = await this._gameHelper.getTricksList(this.selectedDifficulty);
+            const tricks = await this._gameHelper.getTricksList(this.selectedDifficulty, selectedTrickTypes);
             await this._coreStore.setValue(StorageEnum.TRICKS, tricks);
             await this._coreStore.setValue(StorageEnum.ORIGINAL_TRICKS, tricks);
             await this._coreStore.setValue(StorageEnum.SELECTED_DIFFICULTY, this.selectedDifficulty);

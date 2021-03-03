@@ -23,6 +23,7 @@ export class CoreState {
     public readonly selectedDifficulty: number;
     public readonly currentTrick: ITrick;
     public readonly gamePlayers: IPlayer[];
+    public readonly selectedTrickTypes: string[];
 
     constructor() {
         // set initial state
@@ -42,5 +43,6 @@ export class CoreState {
         this.selectedDifficulty = undefined;
         this.currentTrick = undefined;
         this.gamePlayers = [];
+        this.selectedTrickTypes = [];
     }
 }

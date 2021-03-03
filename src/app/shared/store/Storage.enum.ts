@@ -13,6 +13,7 @@ export enum StorageEnum {
     TRICKS = 'tricks',
     ORIGINAL_TRICKS = 'originalTricks',
     SELECTED_DIFFICULTY = 'selectedDifficulty',
+    SELECTED_TRICK_TYPES = 'selectedTrickTypes',
     CURRENT_TRICK = 'currentTrick',
     GAME_PLAYERS = 'gamePlayers',
 }
