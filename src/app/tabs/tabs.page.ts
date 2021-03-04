@@ -5,10 +5,10 @@ import {
   tabsEnum2IconActiveMapping,
   tabsEnum2IconMapping,
   tabsEnum2RouteMapping
-} from "./tabs.enum";
-import {getEnumAsArray} from "../shared/helpers/utils";
-import {IonTabs} from "@ionic/angular";
-import {Router} from "@angular/router";
+} from './tabs.enum';
+import {getEnumAsArray} from '../shared/helpers/utils';
+import {IonTabs} from '@ionic/angular';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -28,7 +28,7 @@ export class TabsPage {
     return {
       tabName: t,
       current: false
-    }
+    };
   }).slice(0, this.MAX_TABS_COUNT);
   selectedTab: string;
 
@@ -37,7 +37,7 @@ export class TabsPage {
 
   async setCurrentTab() {
     this.selectedTab = this.tabsRef.getSelected();
-    const tabNames = this.tabs.map(t => t.tabName)
+    const tabNames = this.tabs.map(t => t.tabName.toLowerCase());
     if (tabNames.includes(this.selectedTab)) {
       const idx = this.tabs.findIndex( t => t.tabName.toLowerCase() === this.selectedTab);
       this.tabs.forEach(t => t.current = false);
