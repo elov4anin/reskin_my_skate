@@ -116,6 +116,7 @@ export class ModalRatingsComponent implements OnInit, OnDestroy {
                 text = 'Post added. ';
             }
             this._toast.info(text).then();
+            this.page = 0;
             this.getFeed();
         });
     }
