@@ -22,7 +22,7 @@
         </ion-row>
         <ion-row class="mt20">
             <ion-col class="p0">
-                <ion-img src="assets/images/store.png"></ion-img>
+                <ion-img [src]="store.image.length > 0 ? store.image : 'assets/images/store.png'"></ion-img>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -39,7 +39,7 @@
                 <ion-text class="text-12" color="tertiary">{{store.city}}{{store.postcode ? ', ' + store.postcode: ''}}</ion-text>
             </div>
         </ion-item>
-        <ion-item color="primary" lines="none" class="ion-margin-end mb16">
+        <ion-item color="primary" lines="none" class="ion-margin-end mb16" *ngIf="store.email">
             <div class="icon-slot" slot="start">
                 <ion-icon src="assets/images/svg-icons/email-24px.svg"></ion-icon>
             </div>
@@ -51,7 +51,7 @@
                 </ion-label>
             </div>
         </ion-item>
-        <ion-item color="primary" lines="none" class="ion-margin-end mb16">
+        <ion-item color="primary" lines="none" class="ion-margin-end mb16" *ngIf="store.phone">
             <div class="icon-slot" slot="start">
                 <ion-icon src="assets/images/svg-icons/call-24px.svg"></ion-icon>
             </div>
@@ -59,15 +59,15 @@
                 <a class="text-16" [href]="'tel:' + store.phone" target="_blank">{{store.phone}}</a>
             </ion-label>
         </ion-item>
-        <ion-item color="primary" lines="none" class="ion-margin-end">
+        <ion-item color="primary" lines="none" class="ion-margin-end" *ngIf="store.additional_info_header || store.additional_info">
             <div class="icon-slot" slot="start">
                 <ion-icon src="assets/images/svg-icons/announcement-24px.svg"></ion-icon>
             </div>
             <div class="d-flex flex-column">
                 <ion-label >
-                    <ion-text class="text-16" color="light">SALE & Holiday work hours</ion-text>
+                    <ion-text class="text-16" color="light">{{store.additional_info_header}}</ion-text>
                 </ion-label>
-                <ion-text class="text-12" color="tertiary">We want to inform you that our store will be open from 10AM to 4PM on December 24th and 31st.</ion-text>
+                <ion-text class="text-12" color="tertiary">{{store.additional_info}}</ion-text>
             </div>
         </ion-item>
     </ion-list>

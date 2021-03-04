@@ -25,7 +25,6 @@ export class CoreStore extends Store<CoreState> {
             this.initValue(StorageEnum.SKATEPARK_FEATURES),
             this.initValue(StorageEnum.SELECTED_NEWS),
             this.initValue(StorageEnum.SELECTED_EVENT),
-            this.initValue(StorageEnum.SELECTED_STORE),
             this.initValue(StorageEnum.PLAYERS),
             this.initValue(StorageEnum.PLAYERS_IN_GAME),
             this.initValue(StorageEnum.TRICKS),

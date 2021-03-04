@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Location} from "@angular/common";
-import {CoreStore} from "../../../shared/store/core.store";
-import {selectStore} from "../../../shared/store/selectors";
-import {takeUntil} from "rxjs/operators";
-import {Subject} from "rxjs";
-import {IStore, Store} from "../../../shared/interfaces/store.interfaces";
-import {StorageEnum} from "../../../shared/store/Storage.enum";
+import {Location} from '@angular/common';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {of, Subject} from 'rxjs';
+import {IStore, Store} from '../../../shared/interfaces/store.interfaces';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import {StoresService} from '../../../shared/services/stores.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-store-detail',
@@ -20,15 +19,22 @@ export class StoreDetailPage implements OnInit, OnDestroy {
 
   constructor(
       private _location: Location,
-      private _coreStore: CoreStore,
-      private _iab: InAppBrowser
+      private _iab: InAppBrowser,
+      private _storeService: StoresService,
+      private _route: ActivatedRoute,
       ) { }
 
   ngOnInit() {
-    this._coreStore.getValue(StorageEnum.SELECTED_STORE).then(store => this.setStore(store));
-    this._coreStore.select(selectStore)
-        .pipe(takeUntil(this.componentDestroyed))
-        .subscribe(store => this.setStore(store))
+    this._route.params
+        .pipe(
+            takeUntil(this.componentDestroyed),
+            switchMap((params) => {
+              if (params && params.id) {
+                return this._storeService.getDetailStoreById(params.id);
+              }
+              return of(null);
+            })
+        ).subscribe(res => this.setStore(res.stores));
   }
 
   ngOnDestroy(): void {
@@ -40,13 +46,13 @@ export class StoreDetailPage implements OnInit, OnDestroy {
     this._location.back();
   }
 
-  private setStore(store: IStore): void {
-    if (store) {
-      this.store = store;
+  private setStore(stores: IStore[]): void {
+    if (stores.length > 0) {
+      this.store = stores[0];
     }
   }
 
   openBrowser() {
-    this._iab.create(this.store.website)
+    this._iab.create(this.store.website);
   }
 }

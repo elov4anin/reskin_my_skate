@@ -1,4 +1,4 @@
-import {IServerResponse} from "./common";
+import {IServerResponse} from './common';
 
 export interface IStore {
     id: string;
@@ -11,6 +11,10 @@ export interface IStore {
     website: string;
     email: string;
     phone: string;
+    is_featured: string; // "1" | "0"  , must boolean
+    image: string;
+    additional_info?: string;
+    additional_info_header?: string;
 }
 
 export  class Store implements IStore {
@@ -24,6 +28,8 @@ export  class Store implements IStore {
     phone: string;
     postcode: string;
     website: string;
+    is_featured: string;
+    image: string;
 
     constructor() {
         this.id = '';
@@ -36,16 +42,22 @@ export  class Store implements IStore {
         this.website = '';
         this.email = '';
         this.phone = '';
+        this.is_featured = '0';
+        this.image = '';
     }
 }
 
 export interface IGetStoresParams {
     page: number;
-    filter?: string
+    filter?: string;
 }
 
 export interface IGetStoresResponse extends IServerResponse{
-    total_stores : number; // total number of stores
-    total_count : number; // total number of stores matching search request
-    stores: IStore[]
+    total_stores: number; // total number of stores
+    total_count: number; // total number of stores matching search request
+    stores: IStore[];
+}
+
+export interface IGetDetailStoreByIdResponse {
+    stores: IStore[];
 }

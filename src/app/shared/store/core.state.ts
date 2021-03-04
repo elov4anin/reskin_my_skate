@@ -2,7 +2,6 @@ import {IUser} from '../interfaces/auth.interfaces';
 import {IGameSettings} from '../interfaces/game';
 import {IFeatureSkatepark, ISkatepark} from '../interfaces/skatepark.interfaces';
 import {IEvent, IFeedNews} from '../interfaces/team.interfaces';
-import {IStore} from '../interfaces/store.interfaces';
 import {IPlayer} from '../../pages/game/interfaces/player.interface';
 import {ITrick} from '../../pages/game/interfaces/game.interfaces';
 
@@ -15,7 +14,6 @@ export class CoreState {
     public readonly skateparkFeatures: IFeatureSkatepark[];
     public readonly selectedNews: IFeedNews;
     public readonly selectedEvent: IEvent;
-    public readonly selectedStore: IStore;
     public readonly players: IPlayer[];
     public readonly playersInGame: IPlayer[];
     public readonly tricks: ITrick[];
@@ -34,7 +32,6 @@ export class CoreState {
         this.skateparkFeatures = undefined;
         this.selectedNews = undefined;
         this.selectedEvent = undefined;
-        this.selectedStore = undefined;
         // game
         this.players = [];
         this.playersInGame = [];
