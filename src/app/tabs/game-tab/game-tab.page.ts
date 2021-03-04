@@ -57,15 +57,6 @@ export class GameTabPage implements OnInit {
     }
 
     ngOnInit() {
-        const user = this._coreStore.state.profile;
-        this.players.push({
-            id:  user.id,
-            name: user.firstname,
-            picture: user.picture,
-            email: user.email,
-            username: user.email,
-            linked: true,
-        });
     }
 
     async openHowPlayModal() {
@@ -136,11 +127,24 @@ export class GameTabPage implements OnInit {
         }
     }
 
+    ionViewDidEnter() {
+        const user = this._coreStore.state.profile;
+        this.players = [];
+        this.players.push({
+            id:  user.id,
+            name: user.firstname,
+            picture: user.picture,
+            email: user.email,
+            username: user.email,
+            linked: true,
+        });
+        console.log('2', this.players);
+    }
+
     ionViewDidLeave() {
         this.selectedDifficulty = undefined;
         this.players = [];
         this.difficulties.forEach(v => v.isSelected = false);
-        console.log('ionViewDidLeave');
     }
 
 }
