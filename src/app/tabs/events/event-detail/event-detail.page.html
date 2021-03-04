@@ -48,13 +48,13 @@
       </div>
       <div class="d-flex flex-column">
         <ion-label >
-          <ion-text class="text-16" color="light">Locak Skatepark</ion-text>
+          <ion-text class="text-16" color="light">{{event.address_line_1}}</ion-text>
         </ion-label>
-        <ion-text class="text-12" color="tertiary">{{event.address_line_1}}</ion-text>
+        <ion-text class="text-12" color="tertiary">{{event.address_line_2}}</ion-text>
       </div>
     </ion-item>
 
-    <ion-item color="primary" lines="none" class="ion-margin-end mb16">
+    <ion-item color="primary" lines="none" class="ion-margin-end mb16" *ngIf="event.is_free_entrance">
       <div class="icon-slot" slot="start">
         <ion-icon src="assets/images/svg-icons/confirmation_number-24px.svg"></ion-icon>
       </div>
