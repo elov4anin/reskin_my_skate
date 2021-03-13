@@ -22,7 +22,7 @@ ion-input {
 }
 ion-item {
   --inner-padding-end: 0;
-  --inner-padding-bottom: var(--ion-margin);
+  --inner-padding-bottom: calc(var(--ion-margin) + 4px);
   margin-right: 5px;
   --padding-start: 0;
 }
