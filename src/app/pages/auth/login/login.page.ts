@@ -23,7 +23,9 @@ export class LoginPage implements OnInit, OnDestroy {
         password: new FormControl('', [
             Validators.required,
             Validators.maxLength(40),
-            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)
+            // Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)
+            // @todo FIX Password – Existing users did not have to have the prerequisites of min 8 characters,
+            //  one number and one CAPS. Needs amending so existing users can re-enter
         ]),
     });
 
