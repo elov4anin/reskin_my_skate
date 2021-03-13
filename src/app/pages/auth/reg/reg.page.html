@@ -11,6 +11,7 @@
       <ion-input placeholder="Type here" formControlName="firstName"
                  [minlength]="2" [maxlength]="25"
                  [ngClass]="{'invalid-input': form.get('firstName').touched && form.get('firstName').invalid}"
+                 (ionInput) = "capitalize($event, 'firstName')"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.firstName">
@@ -30,6 +31,7 @@
       <ion-input placeholder="Type here" formControlName="lastName"
                  [minlength]="2" [maxlength]="25"
                  [ngClass]="{'invalid-input': form.get('lastName').touched && form.get('lastName').invalid}"
+                 (ionInput) = "capitalize($event, 'lastName')"
       ></ion-input>
       <div class="validation-errors">
         <ng-container *ngFor="let validation of validationMessages.lastName">

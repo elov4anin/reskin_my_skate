@@ -14,6 +14,7 @@ import {takeUntil} from 'rxjs/operators';
 import {Subject} from 'rxjs';
 import {matchValuesValidator} from '../../../shared/classes/validators';
 import {GENDERS} from '../../../shared/helpers/genders';
+import {capitalizeFirstLetter} from '../../../shared/helpers/utils';
 
 @Component({
     selector: 'app-reg',
@@ -102,5 +103,9 @@ export class RegPage implements OnInit, OnDestroy {
     }
 
     openDataPicker() {
+    }
+
+    capitalize(event, fieldName) {
+        this.form.get(fieldName).setValue(capitalizeFirstLetter(event.target.value));
     }
 }
