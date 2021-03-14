@@ -1,8 +1,8 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Plugins} from '@capacitor/core';
-import {NativeGeocoderOptions} from "@ionic-native/native-geocoder/ngx";
-import {ICoordinates} from "../../../shared/interfaces/common";
-import {ISkatepark} from "../../../shared/interfaces/skatepark.interfaces";
+import {NativeGeocoderOptions} from '@ionic-native/native-geocoder/ngx';
+import {ICoordinates} from '../../../shared/interfaces/common';
+import {ISkatepark} from '../../../shared/interfaces/skatepark.interfaces';
 
 const {Geolocation} = Plugins;
 
@@ -29,24 +29,24 @@ export class GoogleMapComponent implements OnInit {
     longitude: number;
 
     mapStyles = [
-        {"elementType": "geometry", "stylers": [{"color": "#242f3e"}]},
-        {"elementType": "labels.text.fill","stylers": [{"color": "#746855"}]},
-        {"elementType": "labels.text.stroke","stylers": [{"color": "#242f3e"}]},
-        {"featureType": "administrative.locality","elementType": "labels.text.fill","stylers": [{"color": "#00ffc2"}]},
-        {"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#ced762"}]},
-        {"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#234135"}]},
-        {"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#6b9a76"}]},
-        {"featureType": "road","elementType": "geometry","stylers": [{"color": "#38414e"}]},
-        {"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#212a37"}]},
-        {"featureType": "road","elementType": "labels.text.fill","stylers": [{"color": "#9ca5b3"}]},
-        {"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#00699b"}]},
-        {"featureType": "road.highway","elementType": "geometry.stroke","stylers": [{"color": "#0f1f0e"}]},
-        {"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#80ceec"}]},
-        {"featureType": "transit","elementType": "geometry","stylers": [{"color": "#2f3948"}]},
-        {"featureType": "transit.station","elementType": "labels.text.fill","stylers": [{"color": "#c5c84d"}]},
-        {"featureType": "water","elementType": "geometry","stylers": [{"color": "#17263c"}]},
-        {"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#515c6d"}]},
-        {"featureType": "water","elementType": "labels.text.stroke","stylers": [{"color": "#17263c"}]}
+        {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+        {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+        {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+        {featureType: 'administrative.locality', elementType: 'labels.text.fill', stylers: [{color: '#00ffc2'}]},
+        {featureType: 'poi', elementType: 'labels.text.fill', stylers: [{color: '#ced762'}]},
+        {featureType: 'poi.park', elementType: 'geometry', stylers: [{color: '#234135'}]},
+        {featureType: 'poi.park', elementType: 'labels.text.fill', stylers: [{color: '#6b9a76'}]},
+        {featureType: 'road', elementType: 'geometry', stylers: [{color: '#38414e'}]},
+        {featureType: 'road', elementType: 'geometry.stroke', stylers: [{color: '#212a37'}]},
+        {featureType: 'road', elementType: 'labels.text.fill', stylers: [{color: '#9ca5b3'}]},
+        {featureType: 'road.highway', elementType: 'geometry', stylers: [{color: '#00699b'}]},
+        {featureType: 'road.highway', elementType: 'geometry.stroke', stylers: [{color: '#0f1f0e'}]},
+        {featureType: 'road.highway', elementType: 'labels.text.fill', stylers: [{color: '#80ceec'}]},
+        {featureType: 'transit', elementType: 'geometry', stylers: [{color: '#2f3948'}]},
+        {featureType: 'transit.station', elementType: 'labels.text.fill', stylers: [{color: '#c5c84d'}]},
+        {featureType: 'water', elementType: 'geometry', stylers: [{color: '#17263c'}]},
+        {featureType: 'water', elementType: 'labels.text.fill', stylers: [{color: '#515c6d'}]},
+        {featureType: 'water', elementType: 'labels.text.stroke', stylers: [{color: '#17263c'}]}
     ];
 
     private RADIUS_SIZE: number = 8047; // 5 miles;
@@ -69,20 +69,20 @@ export class GoogleMapComponent implements OnInit {
             this.latitude = resp.coords.latitude;
             this.longitude = resp.coords.longitude;
 
-            let latLng = new google.maps.LatLng(this.coordinates.lat, this.coordinates.lng);
-            let mapOptions = {
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
+            const latLng = new google.maps.LatLng(this.coordinates.lat, this.coordinates.lng);
+            const mapOptions = {
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
                 center: latLng,
                 zoom: 11,
                 fullscreenControl: false,
                 keyboardShortcuts: false,
                 backgroundColor: '#202020',
                 mapTypeControlOptions: {
-                    mapTypeIds: ['roadmap', 'custom'],
+                    mapTypeIds: [google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.ROADMAP, 'custom'],
                     style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
                 },
                 streetViewControl: false
-            }
+            };
 
             // this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
 
@@ -91,7 +91,7 @@ export class GoogleMapComponent implements OnInit {
 
             this.map.mapTypes.set('custom', this.stylesMapType);
             this.map.setMapTypeId('custom');
-            google.maps.event.addListenerOnce(this.map, 'idle', function () {
+            google.maps.event.addListenerOnce(this.map, 'idle', function() {
                 // add radius to map
                 const radiusSearch = new google.maps.Circle({
                     strokeColor: '#00BDFF',
@@ -102,11 +102,11 @@ export class GoogleMapComponent implements OnInit {
                     map: that.map,
                     center: that.coordinates,
                     radius: that.RADIUS_SIZE
-                })
+                });
                 // load the markers
-                 that.loadMarkers(that.skateparks, that.coordinates, that.searchValue, radiusSearch);
+                that.loadMarkers(that.skateparks, that.coordinates, that.searchValue, radiusSearch);
             });
-            
+
             const strictBounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(48.503867, -11.569082),
                 new google.maps.LatLng(61.176357, 2.746907)
@@ -115,7 +115,7 @@ export class GoogleMapComponent implements OnInit {
 
             this.map.addListener('dragend', () => {
 
-                if (strictBounds.contains(this.map.getCenter())) return;
+                if (strictBounds.contains(this.map.getCenter())) { return; }
 
                 const c = this.map.getCenter();
                 let xlng = c.lng();
@@ -137,10 +137,10 @@ export class GoogleMapComponent implements OnInit {
         });
     }
 
-    
+
     private loadMarkers(SkateParks, startlatlng, searchRequest, radiusBounds) {
 
-        // set marker for search location 
+        // set marker for search location
         const symbol = {
             fillColor: 'rgb(0, 117, 160)',
             fillOpacity: 1,
@@ -148,7 +148,7 @@ export class GoogleMapComponent implements OnInit {
             scale: 5,
             strokeColor: 'rgb(0, 117, 160)',
             strokeWeight: 1
-        }
+        };
         // add marker for search location
         const startmarker = new google.maps.Marker({
             map: this.map,
@@ -156,14 +156,14 @@ export class GoogleMapComponent implements OnInit {
             position: startlatlng,
             title: searchRequest,
             icon: symbol
-        })
+        });
         /** http://maps.google.com/mapfiles/ms/icons/blue-dot.png */
             // change color of marker
-        const startmarker_infowindow = " " + searchRequest + " ";
-        //addInfoWindow(startmarker, startlatlng);
-        //console.log('skateparks as our markers', SkateParks);
+        // const startmarker_infowindow = ' ' + searchRequest + ' ';
+        // addInfoWindow(startmarker, startlatlng);
+        // console.log('skateparks as our markers', SkateParks);
         const records = SkateParks;
-        for(let i = 0; i < records.length; i++) {
+        for (let i = 0; i < records.length; i++) {
             const record = records[i];
             const center = new google.maps.LatLng(startlatlng.lat, startlatlng.lng);
             const markerPos = new google.maps.LatLng(record.latitude, record.longitude);
@@ -182,11 +182,11 @@ export class GoogleMapComponent implements OnInit {
     }
 
     addInfoWindow(marker, record) {
-        //console.log('record', record);
-        let starrating = record.rating;
+        // console.log('record', record);
+        const starrating = record.rating;
         let starcontent = '';
         if (starrating > 0) {
-            switch(true) {
+            switch (true) {
                 case (starrating > 0 && starrating < 1):
                     starcontent = '<i class="ion-ios-star-half"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
@@ -224,7 +224,7 @@ export class GoogleMapComponent implements OnInit {
 
         const jsoncontent = record.id;
         // console.log('jsoncontent', jsoncontent);
-        const messageContent = '<div><h4 class="uppercase-text centeralign titlefont positive">' + record.name + '<h4><h6 class="thin-text">' + starcontent + '</h6><a class="button-small button button-dark button-block" (click)="goToSkatePark('+jsoncontent+')">View Details</a></div>';
+        const messageContent = '<div><h4 class="uppercase-text centeralign titlefont positive">' + record.name + '<h4><h6 class="thin-text">' + starcontent + '</h6><a class="button-small button button-dark button-block" (click)="goToSkatePark(' + jsoncontent + ')">View Details</a></div>';
         const infoWindow = new google.maps.InfoWindow({
              content: messageContent
          });
@@ -238,7 +238,6 @@ export class GoogleMapComponent implements OnInit {
 
         google.maps.event.addListener(marker, 'click', function() {
             infoWindow.open(this.map, marker);
-
-        })
+        });
     }
 }

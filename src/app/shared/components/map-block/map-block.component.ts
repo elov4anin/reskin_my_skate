@@ -65,7 +65,11 @@ export class MapBlockComponent implements OnInit {
       const mapOptions = {
         center: latLng,
         zoom: 15,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        mapTypeId: google.maps.MapTypeId.SATELLITE,
+        mapTypeControlOptions: {
+          mapTypeIds: [google.maps.MapTypeId.SATELLITE, google.maps.MapTypeId.ROADMAP, 'custom'],
+          style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR
+        },
       };
 
      //  this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
