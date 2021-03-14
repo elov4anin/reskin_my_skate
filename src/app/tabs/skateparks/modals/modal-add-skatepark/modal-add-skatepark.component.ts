@@ -9,6 +9,7 @@ import {SKATELITIES, TYPES} from '../../../../pages/search-skateparks/modal-filt
 import {SURFACES} from '../../../../pages/search-skateparks/modal-filter-skateparks/surfaces';
 import {IAddressWithPostalCode} from '../../../../shared/interfaces/common';
 import {ISlideInfo} from '../../skateparks.interfaces';
+import {SKATEPARK_CONFIRM_MODAL_ID} from '../../../../shared/configs/modals.constant';
 
 @Component({
     selector: 'app-modal-add-skatepark',
@@ -57,7 +58,7 @@ export class ModalAddSkateparkComponent implements OnInit {
         const modal = await this._modalController.create({
             component: ModalSkateparkConfirmComponent,
             cssClass: 'modal-confirm',
-            id: 'addSkateparkConfirmId',
+            id: SKATEPARK_CONFIRM_MODAL_ID,
             componentProps: {
                 candidate: {
                     ...this.form.value,

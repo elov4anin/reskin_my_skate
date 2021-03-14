@@ -6,6 +6,7 @@ import {CoreStore} from '../../shared/store/core.store';
 import {ISpot} from '../../shared/interfaces/skatepark.interfaces';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {SPOT_CRUD_MODAL_ID} from '../../shared/configs/modals.constant';
 
 @Component({
     selector: 'app-spots',
@@ -37,7 +38,8 @@ export class SpotsPage implements OnInit, OnDestroy {
     async openAddSpotModal() {
         const modal = await this._modalController.create({
             component: ModalAddSpotComponent,
-            cssClass: 'modal-add-spot'
+            cssClass: 'modal-add-spot',
+            id: SPOT_CRUD_MODAL_ID,
         });
         await modal.present();
 
@@ -57,6 +59,7 @@ export class SpotsPage implements OnInit, OnDestroy {
         const modal = await this._modalController.create({
             component: ModalAddSpotComponent,
             cssClass: 'modal-add-spot',
+            id: SPOT_CRUD_MODAL_ID,
             componentProps: {
                 currentSpot: spot
             }

@@ -1,14 +1,15 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {IFeatureSkatepark, ISpot} from '../../../shared/interfaces/skatepark.interfaces';
-import {SpotService} from '../../../shared/services/spot.service';
+import {IEditParamsSpot, IFeatureSkatepark, ISpot} from '../../../shared/interfaces/skatepark.interfaces';
 import {IAddressWithPostalCode} from '../../../shared/interfaces/common';
 import {ISlideInfo} from '../../skateparks/skateparks.interfaces';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ReplaySubject} from 'rxjs';
 import {CoreStore} from '../../../shared/store/core.store';
 import {ToastNotificationService} from '../../../shared/helpers/toast-notification.service';
-import {RESPONSE_CODES} from '../../../shared/configs/response.constants';
+import {ModalSpotConfirmComponent} from '../modal-spot-confirm/modal-spot-confirm.component';
+import {SPOT_CONFIRM_MODAL_ID} from '../../../shared/configs/modals.constant';
+import {SpotService} from '../../../shared/services/spot.service';
 
 @Component({
     selector: 'app-modal-add-spot',
@@ -89,23 +90,32 @@ export class ModalAddSpotComponent implements OnInit {
         };
         // @ts-ignore
         delete newSpot.address;
-        const res = await this.saveSpot(newSpot);
-        if (+res.response_code === +RESPONSE_CODES.SUCCESS) {
-            await this._modalController.dismiss({success: true});
-        } else {
-            await this._toast.error(res.response_msg);
-        }
+        await this.saveSpot(newSpot);
     }
 
     private async saveSpot(newSpot: ISpot) {
         if (this.currentSpot && this.currentSpot.id) {
-            return await this._spotService.editSpot({
+            await this.confirmSave({
                 ...newSpot,
                 id: this.currentSpot.id,
                 spot_id: this.currentSpot.id,
-            });
+            }, 'edit');
         } else {
-            return await this._spotService.addSpot(newSpot);
+            await this.confirmSave(newSpot, 'create');
         }
+    }
+
+    async confirmSave(spot: ISpot | IEditParamsSpot, mode: 'edit' | 'create') {
+
+        const modal = await this._modalController.create({
+            component: ModalSpotConfirmComponent,
+            cssClass: 'modal-confirm',
+            id: SPOT_CONFIRM_MODAL_ID,
+            componentProps: {
+                spot,
+                mode,
+            }
+        });
+        await modal.present();
     }
 }

@@ -9,6 +9,7 @@ import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native
 import {SITE_MAIN} from '../../../../shared/configs/main.config';
 import {fromPromise} from 'rxjs/internal-compatibility';
 import {CoreStore} from '../../../../shared/store/core.store';
+import {SKATEPARK_CONFIRM_MODAL_ID, SKATEPARK_CRUD_MODAL_ID} from '../../../../shared/configs/modals.constant';
 
 @Component({
     selector: 'app-modal-skatepark-confirm',
@@ -48,23 +49,23 @@ export class ModalSkateparkConfirmComponent implements OnInit, OnDestroy {
                 if (!!res.responseCode ) {
                     if (res.responseCode === 200) {
                         await this._toast.success('Skate park added!');
-                        this._modalController.dismiss(undefined, undefined, 'addSkateparkId').then();
-                        this._modalController.dismiss({success: true}, undefined, 'addSkateparkConfirmId').then();
+                        this._modalController.dismiss(undefined, undefined, SKATEPARK_CRUD_MODAL_ID).then();
+                        this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
 
                     } else {
                         await this._toast.success(res.response);
-                        this._modalController.dismiss({success: true}, undefined, 'addSkateparkConfirmId').then();
+                        this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
                     }
                     return;
                 }
 
                 if (res.success) {
                     await this._toast.success('Skate park added!');
-                    this._modalController.dismiss(undefined, undefined, 'addSkateparkId').then();
-                    this._modalController.dismiss({success: true}, undefined, 'addSkateparkConfirmId').then();
+                    this._modalController.dismiss(undefined, undefined, SKATEPARK_CRUD_MODAL_ID).then();
+                    this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
                 } else {
                     await this._toast.success(res.response_msg);
-                    this._modalController.dismiss({success: true}, undefined, 'addSkateparkConfirmId').then();
+                    this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
                 }
             });
     }
