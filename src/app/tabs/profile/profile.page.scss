@@ -2,7 +2,7 @@
 ion-toolbar {
   &.layout-toolbar {
     position: relative;
-    padding-top: 18px;
+    padding-top: 28px;
     padding-bottom: 18px;
     --border-width: 0!important;
     --ion-color-base: transparent!important;
@@ -26,7 +26,7 @@ ion-menu-button {
   margin-inline-end: 12px;
 }
 .profile-header__wrap {
-  margin-top: -80px;
+  margin-top: -90px;
   display: flex;
   align-items: flex-end;
   height: 372px;
