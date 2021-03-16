@@ -30,6 +30,7 @@ export class ToastNotificationService {
             message,
             duration,
             color,
+            position: 'top'
         });
         await toast.present();
     }
