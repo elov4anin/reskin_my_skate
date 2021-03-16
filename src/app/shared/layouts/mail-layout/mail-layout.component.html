@@ -8,7 +8,7 @@
       <app-logo></app-logo>
     </div>
     <ng-container *ngIf="isNeeBackBtn">
-      <ion-menu-button *ngIf="mainLayoutHelper.menuToggleEmitter$ | async" slot="end" color="light"
+      <ion-menu-button slot="end" color="light"
                        class="header-menu-button" (click)="openMenu()">
         <ion-icon class="menu-icon" slot="icon-only" size="large" name="menu-outline"></ion-icon>
       </ion-menu-button>
