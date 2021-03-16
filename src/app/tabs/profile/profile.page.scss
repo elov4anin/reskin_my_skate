@@ -14,8 +14,12 @@ ion-toolbar {
 }
 
 .menu-icon {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
+}
+
+ion-menu-button {
+  font-size: 42px;
 }
 
 .header-menu-button {
@@ -30,7 +34,7 @@ ion-toolbar {
 
   background:  linear-gradient(89deg, rgba(0,0,0, 0.2) 0%, rgba(0,0,0, 0.74) 100%),
           url('/assets/images/profile.png') center no-repeat;
-  background-size: cover;
+  background-size: 50%;
 
 
 }
