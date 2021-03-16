@@ -33,5 +33,8 @@ export const VALIDATION_MESSAGES = {
         {type: 'pattern', message: 'Invalid Date Format, Please give date in format DD/MM/YYYY'},
         // {type: 'minAge', message: 'Minimum 5 years old'},
         // {type: 'maxlength', message: 'Max length is 40 characters'},
+    ],
+    location: [
+        {type: 'required', message: 'Location is required'},
     ]
-}
+};

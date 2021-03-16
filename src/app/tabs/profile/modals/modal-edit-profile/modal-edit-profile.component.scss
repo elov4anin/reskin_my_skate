@@ -14,10 +14,20 @@ ion-input {
   margin-left: 16px;
   margin-right: 16px;
 }
+/*
 ion-item {
   --inner-padding-end: 0;
   margin-bottom: 20px;
   margin-right: 24px;
+}
+*/
+
+ion-item {
+  --inner-padding-end: 0;
+  --inner-padding-bottom: calc(var(--ion-margin) + 4px);
+  margin-right: var(--ion-margin);
+  margin-left: var(--ion-margin);
+  --padding-start: 0;
 }
 
 .upload-photo {

@@ -19,6 +19,15 @@
         <ion-text class="text-16">First Name</ion-text>
       </ion-label>
       <ion-input placeholder="Type here" formControlName="firstname"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.firstName">
+          <div class="error-message"
+               *ngIf="form.get('firstname').hasError(validation.type) && (form.get('firstname').dirty || form.get('firstname').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
     <ion-item color="dark">
@@ -26,6 +35,15 @@
         <ion-text class="text-16">Last Name</ion-text>
       </ion-label>
       <ion-input placeholder="Type here" formControlName="lastname"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.lastName">
+          <div class="error-message"
+               *ngIf="form.get('lastname').hasError(validation.type) && (form.get('lastname').dirty || form.get('lastname').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
     <ion-item color="dark" lines="none">
@@ -54,6 +72,15 @@
         <ion-text class="text-16">Location</ion-text>
       </ion-label>
       <ion-input placeholder="Enter your location" formControlName="location"></ion-input>
+      <div class="validation-errors">
+        <ng-container *ngFor="let validation of validationMessages.location">
+          <div class="error-message"
+               *ngIf="form.get('location').hasError(validation.type) && (form.get('location').dirty || form.get('location').touched)"
+          >
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-item>
 
     <div class="ion-margin">
