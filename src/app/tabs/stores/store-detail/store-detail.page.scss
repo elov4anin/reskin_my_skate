@@ -1,5 +1,9 @@
 ion-img {
   height: 180px;
+
+  &.no-image {
+    height: 120px;
+  }
 }
 
 ion-list {

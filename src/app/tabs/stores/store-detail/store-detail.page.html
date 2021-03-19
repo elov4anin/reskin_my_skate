@@ -23,11 +23,11 @@
         </ion-row>
         <ion-row class="mt20">
             <ion-col class="p0">
-                <ion-img [src]="store.image.length > 0 ? store.image : 'assets/images/no_photo_shop.png'"></ion-img>
+                <ion-img [ngClass]="{'no-image': store.image.length === 0}" [src]="store.image.length > 0 ? store.image : 'assets/images/no_photo_shop.png'"></ion-img>
             </ion-col>
         </ion-row>
     </ion-grid>
-    <div class="divisor mt20 mb20"></div>
+    <div class="divisor  mb20" [ngClass]="{'mt20': store.image.length > 0}"></div>
     <ion-list>
         <ion-item color="primary" lines="none" class="ion-margin-end mb16">
             <div class="icon-slot" slot="start">
@@ -73,6 +73,7 @@
         </ion-item>
     </ion-list>
     <ion-button
+            *ngIf="store.website"
             color="success"
             expand="block"
             class="ion-margin-top ion-padding-start ion-padding-end"

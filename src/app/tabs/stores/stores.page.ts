@@ -61,7 +61,6 @@ export class StoresPage implements OnInit, OnDestroy {
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(res => {
                 if (res.total_stores <= this.stores.length) {
-
                     this.breakLoadMore = true;
                 } else {
                     this.stores = this.stores.concat(res.stores);
