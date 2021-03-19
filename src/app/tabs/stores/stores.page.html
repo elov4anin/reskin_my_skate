@@ -11,8 +11,8 @@
   <ion-list color="primary">
     <ion-item *ngFor="let s of stores" color="primary" lines="none" (click)="openStore(s)">
       <ion-thumbnail slot="start" class="pos-relative">
-        <ion-badge *ngIf="s.is_featured !== '0'" color="success" class="badge-into-thumbnail">Featured</ion-badge>
-        <img [src]="s.image ? s.image : '../../../assets/images/example_store.png'">
+        <ion-badge *ngIf="s.is_featured" color="success" class="badge-into-thumbnail">Featured</ion-badge>
+        <img [src]="s.image ? s.image : '../../../assets/images/no_photo_shop.png'">
       </ion-thumbnail>
       <div class="d-flex flex-column ">
         <ion-text color="light" class="mb12 text-16">{{s.name}}</ion-text>

@@ -11,7 +11,7 @@ export interface IStore {
     website: string;
     email: string;
     phone: string;
-    is_featured: string; // "1" | "0"  , must boolean
+    is_featured: boolean; // "1" | "0"  , must boolean
     image: string;
     additional_info?: string;
     additional_info_header?: string;
@@ -28,7 +28,7 @@ export  class Store implements IStore {
     phone: string;
     postcode: string;
     website: string;
-    is_featured: string;
+    is_featured: boolean;
     image: string;
 
     constructor() {
@@ -42,7 +42,7 @@ export  class Store implements IStore {
         this.website = '';
         this.email = '';
         this.phone = '';
-        this.is_featured = '0';
+        this.is_featured = false;
         this.image = '';
     }
 }
