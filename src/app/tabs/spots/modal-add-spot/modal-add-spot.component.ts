@@ -24,7 +24,8 @@ export class ModalAddSpotComponent implements OnInit {
     city$: ReplaySubject<string> = new ReplaySubject<string>(1);
 
     private location: IAddressWithPostalCode;
-    private images: any[] = [];
+    images: any[] = [];
+    initialSliders: ISlideInfo[] = [];
 
     constructor(
         private _modalController: ModalController,
@@ -52,6 +53,8 @@ export class ModalAddSpotComponent implements OnInit {
         await this.getSpotFeatures();
         if (this.currentSpot) {
             this.city$.next(this.currentSpot.city);
+            this.images = this.currentSpot.images;
+            this.initialSliders = this.getSlides(this.images);
         }
         this.form.get('city').valueChanges.subscribe(city => this.city$.next(city));
     }
@@ -117,5 +120,13 @@ export class ModalAddSpotComponent implements OnInit {
             }
         });
         await modal.present();
+    }
+
+    getSlides(images: string[]): ISlideInfo[] {
+        return  images.map(imgSrc => {
+            return {
+                imgSrc
+            };
+        });
     }
 }

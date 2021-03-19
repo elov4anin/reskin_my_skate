@@ -54,7 +54,7 @@ export class ModalSpotConfirmComponent implements OnInit, OnDestroy {
 
     private async showResult(res) {
         if (+res.response_code === +RESPONSE_CODES.SUCCESS) {
-            await this._toast.success('Spot added!');
+            await this._toast.success(`Spot ${this.mode === 'create' ? 'added' : 'edited'}!`);
             this._modalController.dismiss({success: true}, undefined, SPOT_CRUD_MODAL_ID).then();
             this._modalController.dismiss({success: true}, undefined, SPOT_CONFIRM_MODAL_ID).then();
         } else {

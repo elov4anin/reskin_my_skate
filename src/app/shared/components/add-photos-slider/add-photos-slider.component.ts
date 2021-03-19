@@ -14,16 +14,21 @@ import {FileUploadResult} from '@ionic-native/file-transfer/ngx';
     styleUrls: ['./add-photos-slider.component.scss'],
 })
 export class AddPhotosSliderComponent implements OnInit {
-    @Input() sliders: ISlideInfo[] = [];
+    @Input() set initialSliders(slides: ISlideInfo[]) {
+        this.sliders = slides;
+    }
     @Input() oneImage: boolean = true;
 
     @Output() images$: EventEmitter<ISlideInfo[]> = new EventEmitter<ISlideInfo[]>();
     @ViewChild('upload') uploadRef: ElementRef;
 
+
+    sliders: ISlideInfo[] = [];
+
     slideOpts = {
         initialSlide: 0,
         speed: 400,
-        loop: true,
+        loop: false,
         slidesPerView: 1,
         spaceBetween: 16,
         width: 60,
@@ -53,7 +58,7 @@ export class AddPhotosSliderComponent implements OnInit {
 
     async triggerUploadImage() {
         if (this._platform.is('android') || this._platform.is('ios')) {
-            await this.takeFromCamera(0);
+            await this.takeFromCamera(PictureSourceType.PHOTOLIBRARY);
         } else {
             this.uploadRef.nativeElement.click();
         }
@@ -70,7 +75,7 @@ export class AddPhotosSliderComponent implements OnInit {
                 text: 'Take Photo',
                 icon: 'camera-outline',
                 handler: () => {
-                    this.takeFromCamera(1);
+                    this.takeFromCamera(PictureSourceType.CAMERA);
                 }
             }, {
                 text: 'Photo from Library',

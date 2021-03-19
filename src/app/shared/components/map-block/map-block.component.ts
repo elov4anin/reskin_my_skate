@@ -51,7 +51,9 @@ export class MapBlockComponent implements OnInit {
         )
         .subscribe(async (location) => {
           const coordinates: ICoordinates = await this._googleMapService.getCoordinates(location);
-          this.map.setCenter({...coordinates});
+          if (this.map) {
+            this.map.setCenter({...coordinates});
+          }
         });
   }
 

@@ -47,7 +47,7 @@
                 <ion-text class="text-16">Photos</ion-text>
             </ion-label>
             <div class="mt12">
-                <app-add-photos-slider [oneImage]="false" (images$)="changeImages($event)"></app-add-photos-slider>
+                <app-add-photos-slider [initialSliders]="initialSliders" [oneImage]="false" (images$)="changeImages($event)"></app-add-photos-slider>
             </div>
         </div>
 
