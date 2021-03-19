@@ -4,7 +4,7 @@
 
   </header>
 
-  <ion-segment (ionChange)="segmentChanged($event)" mode="md"  [(ngModel)]="selectedSegment" color="secondary">
+<!--  <ion-segment (ionChange)="segmentChanged($event)" mode="md"  [(ngModel)]="selectedSegment" color="secondary">
     <ion-segment-button *ngFor="let s of segments" [value]="s" >
       <ion-label>
         <ion-text class="text-16-500 text-no-transform">{{segmentsEnum2LabelMapping[s]}}</ion-text>
@@ -16,5 +16,7 @@
   </ng-container>
   <ng-container *ngIf="selectedSegment === segmentsEnum.EVENTS">
     <app-team-event-list></app-team-event-list>
-  </ng-container>
+  </ng-container>-->
+
+  <app-team-news-list></app-team-news-list>
 </app-mail-layout>
