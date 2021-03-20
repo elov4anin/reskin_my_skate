@@ -21,6 +21,9 @@ declare var google;
 export class MapBlockComponent implements OnInit {
   @Input() location$: Observable<string>;
   @Input() coordinates: ICoordinates;
+  @Input() listenClicks: boolean = true;
+
+  @Input()  isModalMode: boolean = false;
 
   options: NativeGeocoderOptions = {
     useLocale: true,
@@ -85,17 +88,19 @@ export class MapBlockComponent implements OnInit {
         this.getAddressFromCoords(googleLatLng.lat(), googleLatLng.lng()).then();
       }
 
-      this.map.addListener('click', async ($event) => {
-        this.markers.forEach(m => m.setMap(null));
-        this.markers = [];
+      if (this.listenClicks) {
+        this.map.addListener('click', async ($event) => {
+          this.markers.forEach(m => m.setMap(null));
+          this.markers = [];
 
-        this.latitude = await $event.latLng.lat();
-        this.longitude = await $event.latLng.lng();
+          this.latitude = await $event.latLng.lat();
+          this.longitude = await $event.latLng.lng();
 
-        this.addMarker($event.latLng);
+          this.addMarker($event.latLng);
 
-        this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng()).then();
-      });
+          this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng()).then();
+        });
+      }
 
     }).catch((error) => {
       console.log('Error getting location', error);

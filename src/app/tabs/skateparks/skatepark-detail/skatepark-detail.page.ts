@@ -9,6 +9,7 @@ import {TRUE_VALUE} from '../../../shared/configs/main.config';
 import {addToFeatures, prepareFeatures} from './feature.heper';
 import {ModalRatingsComponent} from './modal-ratings/modal-ratings.component';
 import {SkateparksService} from '../../../shared/services/skateparks.service';
+import {ModalLocationOnMapComponent} from '../../../shared/modals/modal-location-on-map/modal-location-on-map.component';
 
 
 @Component({
@@ -77,6 +78,21 @@ export class SkateparkDetailPage implements OnInit {
             cssClass: 'modal-rating',
             componentProps: {
                 park: this.skatepark
+            }
+        });
+        return await modal.present();
+    }
+
+    async showLocation() {
+        const modal = await this._modalController.create({
+            component: ModalLocationOnMapComponent,
+            cssClass: 'modal-rating',
+            componentProps: {
+                park: this.skatepark,
+                coordinates: {
+                    lat: this.skatepark.latitude,
+                    lng:  this.skatepark.longitude,
+                }
             }
         });
         return await modal.present();

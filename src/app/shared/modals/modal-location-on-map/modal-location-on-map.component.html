@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-text slot="start" class="ion-margin-start title-20">
+      Skate park on the map
+    </ion-text>
+    <ion-button (click)="closeModal()" fill="clear" slot="end" color="secondary" >
+      <ion-text class="text-16-500">Close</ion-text>
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content color="dark">
+  <app-map-block
+          [coordinates]="coordinates" [location$]="location$" [listenClicks]="false" [isModalMode]="true"
+  ></app-map-block>
+</ion-content>

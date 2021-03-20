@@ -14,6 +14,7 @@ import {CustomToggleControlComponent} from './components/custom-toggle-control/c
 import {EventComponent} from './components/event/event.component';
 import {OverflowDotsPipe} from './pipes/overflow-dots.pipe';
 import {ModalAddSpotComponent} from '../tabs/spots/modal-add-spot/modal-add-spot.component';
+import {ModalLocationOnMapComponent} from './modals/modal-location-on-map/modal-location-on-map.component';
 
 const IONIC_MODULES = [
     IonicModule,
@@ -36,10 +37,14 @@ const COMPONENTS = [
     CalendarDayComponent,
     MapBlockComponent,
     AddPhotosSliderComponent,
-    ModalLocationListComponent,
     CustomToggleControlComponent,
     EventComponent,
+];
+
+const MODALS = [
+    ModalLocationOnMapComponent,
     ModalAddSpotComponent,
+    ModalLocationListComponent,
 ];
 
 const PIPES = [
@@ -58,12 +63,14 @@ const DIRECTIVES = [];
         ...IONIC_MODULES,
         ...ANGULAR_MODULES,
         ...COMPONENTS,
+        ...MODALS,
         ...OTHER_MODULES,
         ...PIPES,
         ...DIRECTIVES
     ],
     declarations: [
         ...COMPONENTS,
+        ...MODALS,
         ...PIPES,
         ...DIRECTIVES,
     ],
