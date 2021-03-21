@@ -4,6 +4,7 @@
                 [fill]="btn.checked ? 'outline' : 'solid'"
                 expand="block" size="default"
                 (click)="clickBtn(btn)"
+                [disabled]="disableBtns"
     >
         <ion-text [color]="btn.checked ? 'secondary' : 'tertiary'">{{btn.name}}</ion-text>
     </ion-button>

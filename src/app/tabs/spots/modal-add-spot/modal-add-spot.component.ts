@@ -10,6 +10,7 @@ import {ToastNotificationService} from '../../../shared/helpers/toast-notificati
 import {ModalSpotConfirmComponent} from '../modal-spot-confirm/modal-spot-confirm.component';
 import {SPOT_CONFIRM_MODAL_ID} from '../../../shared/configs/modals.constant';
 import {SpotService} from '../../../shared/services/spot.service';
+import {getLinksFromSlides, getSlides} from '../../../shared/helpers/utils';
 
 @Component({
     selector: 'app-modal-add-spot',
@@ -54,7 +55,7 @@ export class ModalAddSpotComponent implements OnInit {
         if (this.currentSpot) {
             this.city$.next(this.currentSpot.city);
             this.images = this.currentSpot.images;
-            this.initialSliders = this.getSlides(this.images);
+            this.initialSliders = getSlides(this.images);
         }
         this.form.get('city').valueChanges.subscribe(city => this.city$.next(city));
     }
@@ -64,7 +65,7 @@ export class ModalAddSpotComponent implements OnInit {
     }
 
     changeImages(slides: ISlideInfo[]) {
-        this.images = slides.map(s => s.imgSrc);
+        this.images = getLinksFromSlides(slides);
     }
 
     private creatForm(spot: ISpot) {
@@ -120,13 +121,5 @@ export class ModalAddSpotComponent implements OnInit {
             }
         });
         await modal.present();
-    }
-
-    getSlides(images: string[]): ISlideInfo[] {
-        return  images.map(imgSrc => {
-            return {
-                imgSrc
-            };
-        });
     }
 }

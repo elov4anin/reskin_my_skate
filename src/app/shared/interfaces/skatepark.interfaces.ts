@@ -11,8 +11,8 @@ export interface ISkatepark {
     url: string;
     city: string;
     address: string;
-    longitude: string;
-    latitude: string;
+    longitude: number;
+    latitude: number;
     status: string;
     month_opened: null;
     year_opened: null;

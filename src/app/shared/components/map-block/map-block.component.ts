@@ -55,7 +55,7 @@ export class MapBlockComponent implements OnInit {
         .subscribe(async (location) => {
           const coordinates: ICoordinates = await this._googleMapService.getCoordinates(location);
           if (this.map) {
-            this.map.setCenter({...coordinates});
+            this.map.setCenter(this.coordinates ? this.coordinates : {...coordinates});
           }
         });
   }
@@ -66,7 +66,9 @@ export class MapBlockComponent implements OnInit {
       this.latitude = this.coordinates?.lat || resp.coords.latitude;
       this.longitude = this.coordinates?.lng || resp.coords.longitude;
 
-      const latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+      const latLng = new google.maps.LatLng(
+          this.coordinates ? this.coordinates.lat : resp.coords.latitude,
+          this.coordinates ? this.coordinates.lng : resp.coords.longitude);
       const mapOptions = {
         center: latLng,
         zoom: 15,

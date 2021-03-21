@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark" class="ion-padding-top">
     <ion-text slot="start" class="ion ion-margin-start title-20">
-      Add new Skatepark
+      {{park ? 'Add photos to skatepark': 'Add new Skatepark'}}
     </ion-text>
 
     <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
@@ -34,8 +34,10 @@
       </ion-text>
       <div class="mt12">
         <app-map-block
-                [location$]="form.get('city').valueChanges"
+                [location$]="city$"
+                [coordinates]="park ? {lat: park.latitude, lng: park.longitude}: null"
                 (address$)="getAddressFromMap($event)"
+                [listenClicks]="!park"
         ></app-map-block>
       </div>
     </div>
@@ -46,7 +48,7 @@
       <ion-text class="text-16">Photos</ion-text>
     </ion-label>
     <div class="mt12">
-      <app-add-photos-slider (images$)="changeImages($event)"></app-add-photos-slider>
+      <app-add-photos-slider [initialSliders]="initialSliders"  (images$)="changeImages($event)"></app-add-photos-slider>
     </div>
   </div>
 
@@ -54,21 +56,21 @@
     <ion-label position="stacked">
       <ion-text class="text-16">Type</ion-text>
     </ion-label>
-    <app-custom-toggle-control [buttons]="types" formControlName="type"></app-custom-toggle-control>
+    <app-custom-toggle-control [disableBtns]="!!park" [buttons]="types" formControlName="type"></app-custom-toggle-control>
   </div>
 
   <div class="ion-margin-start ion-margin-end ion-margin-top row">
     <ion-label position="stacked">
       <ion-text class="text-16">Surface</ion-text>
     </ion-label>
-    <app-custom-toggle-control [buttons]="surfaces" formControlName="material"></app-custom-toggle-control>
+    <app-custom-toggle-control [disableBtns]="!!park" [buttons]="surfaces" formControlName="material"></app-custom-toggle-control>
   </div>
 
     <div class="ion-margin-start ion-margin-end ion-margin-top row">
       <ion-label position="stacked">
         <ion-text class="text-16">Skatelite</ion-text>
       </ion-label>
-      <app-custom-toggle-control [buttons]="skatelities" formControlName="skatelite"></app-custom-toggle-control>
+      <app-custom-toggle-control  [disableBtns]="!!park"  [buttons]="skatelities" formControlName="skatelite"></app-custom-toggle-control>
     </div>
 
   <div class="ion-margin-start ion-margin-end ion-margin-top row">
@@ -76,7 +78,7 @@
       <ion-text class="text-16">Add features</ion-text>
     </ion-label>
     <div class="mt12">
-      <app-checkbox-list [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
+      <app-checkbox-list  [disableBtns]="!!park" [checkboxes]="checkboxes" formControlName="features"></app-checkbox-list>
     </div>
   </div>
   </from>
@@ -89,7 +91,7 @@
             fill="solid"
             color="success"
             expand="block"
-            [disabled]="form.invalid"
+            [disabled]="form.invalid || isImageChanged"
             (click)="confirmSave()"
     >
       Save skatepark

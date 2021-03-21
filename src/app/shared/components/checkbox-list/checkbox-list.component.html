@@ -5,7 +5,11 @@
               lines="none"
     >
         <ion-label [color]=" ch.checked ? 'secondary'  : 'tertiary'">{{ch.name}}</ion-label>
-        <ion-checkbox slot="end" [ngClass]="{'darktwo': defaultCheckedColor === 'darktwo'}" [checked]="ch.checked"
-                      (ionChange)="change(ch)"></ion-checkbox>
+        <ion-checkbox slot="end"
+                      [ngClass]="{'darktwo': defaultCheckedColor === 'darktwo'}"
+                      [checked]="ch.checked"
+                      (ionChange)="change(ch)"
+                      [disabled]="disableBtns"
+        ></ion-checkbox>
     </ion-item>
 </ion-list>

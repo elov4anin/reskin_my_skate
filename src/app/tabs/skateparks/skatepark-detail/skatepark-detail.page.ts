@@ -10,6 +10,8 @@ import {addToFeatures, prepareFeatures} from './feature.heper';
 import {ModalRatingsComponent} from './modal-ratings/modal-ratings.component';
 import {SkateparksService} from '../../../shared/services/skateparks.service';
 import {ModalLocationOnMapComponent} from '../../../shared/modals/modal-location-on-map/modal-location-on-map.component';
+import {ModalAddSkateparkComponent} from '../modals/modal-add-skatepark/modal-add-skatepark.component';
+import {SKATEPARK_CRUD_MODAL_ID} from '../../../shared/configs/modals.constant';
 
 
 @Component({
@@ -93,6 +95,18 @@ export class SkateparkDetailPage implements OnInit {
                     lat: this.skatepark.latitude,
                     lng:  this.skatepark.longitude,
                 }
+            }
+        });
+        return await modal.present();
+    }
+
+    async openEditParkModal() {
+        const modal = await this._modalController.create({
+            component: ModalAddSkateparkComponent,
+            cssClass: 'modal-add-spot',
+            id: SKATEPARK_CRUD_MODAL_ID,
+            componentProps: {
+                park: this.skatepark
             }
         });
         return await modal.present();

@@ -28,6 +28,8 @@ export class CustomToggleControlComponent implements ControlValueAccessor {
   }
   @Input() intermediateMode: boolean = true;
 
+  @Input() disableBtns: boolean = false;
+
   @Input()
   set value(val) {
     this._value = val;

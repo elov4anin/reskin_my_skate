@@ -25,7 +25,7 @@ export class CheckboxListComponent implements ControlValueAccessor {
     return this._checkboxes;
   }
 
-
+  @Input() disableBtns: boolean = false;
   @Input() defaultCheckedColor: string = 'primary';
   @Input() defaultUncheckedColor: string = 'dark';
 
