@@ -3,6 +3,9 @@ import {Plugins} from '@capacitor/core';
 import {NativeGeocoderOptions} from '@ionic-native/native-geocoder/ngx';
 import {ICoordinates} from '../../../shared/interfaces/common';
 import {ISkatepark} from '../../../shared/interfaces/skatepark.interfaces';
+import {Router} from '@angular/router';
+import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs/tabs.enum';
+import {SKATEPARKS_ROUTES} from '../../../tabs/skateparks/skatepars-routers.enum';
 
 const {Geolocation} = Plugins;
 
@@ -53,6 +56,7 @@ export class GoogleMapComponent implements OnInit {
     private stylesMapType;
 
     constructor(
+        private _router: Router
     ) {
     }
 
@@ -138,7 +142,8 @@ export class GoogleMapComponent implements OnInit {
     }
 
 
-    private loadMarkers(SkateParks, startlatlng, searchRequest, radiusBounds) {
+    private loadMarkers(SkateParks: ISkatepark[], startlatlng, searchRequest, radiusBounds) {
+        console.log('SkateParks', SkateParks);
 
         // set marker for search location
         const symbol = {
@@ -162,26 +167,24 @@ export class GoogleMapComponent implements OnInit {
         // const startmarker_infowindow = ' ' + searchRequest + ' ';
         // addInfoWindow(startmarker, startlatlng);
         // console.log('skateparks as our markers', SkateParks);
-        const records = SkateParks;
-        for (let i = 0; i < records.length; i++) {
-            const record = records[i];
+        for (const park of SkateParks) {
             const center = new google.maps.LatLng(startlatlng.lat, startlatlng.lng);
-            const markerPos = new google.maps.LatLng(record.latitude, record.longitude);
+            const markerPos = new google.maps.LatLng(park.latitude, park.longitude);
             const distance_search_marker = google.maps.geometry.spherical.computeDistanceBetween(center, markerPos);
             if (distance_search_marker <= this.RADIUS_SIZE) {
 
                 const marker = new google.maps.Marker({
                     map: this.map,
                     animation: google.maps.Animation.DROP,
-                    position: markerPos
+                    position: markerPos,
                 });
 
-                this.addInfoWindow(marker, record);
+                this.addInfoWindow(marker, park);
             }
         }
     }
 
-    addInfoWindow(marker, record) {
+    addInfoWindow(marker, record: ISkatepark) {
         // console.log('record', record);
         const starrating = record.rating;
         let starcontent = '';
@@ -190,31 +193,31 @@ export class GoogleMapComponent implements OnInit {
                 case (starrating > 0 && starrating < 1):
                     starcontent = '<i class="ion-ios-star-half"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
-                case (starrating == 1):
+                case (starrating === 1):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
                 case (starrating > 1 && starrating < 2):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star-half"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
-                case (starrating == 2):
+                case (starrating === 2):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
                 case (starrating > 2 && starrating < 3):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star-half"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
-                case (starrating == 3):
+                case (starrating === 3):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star-outline"></i><i class="ion-ios-star-outline"></i>';
                     break;
                 case (starrating > 3 && starrating < 4):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star-half"></i><i class="ion-ios-star-outline"></i>';
                     break;
-                case (starrating == 4):
+                case (starrating === 4):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star-outline"></i>';
                     break;
                 case (starrating > 4 && starrating < 5):
                     starcontent = '<i class="ion-ios-star-half"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star-half"></i>';
                     break;
-                case (starrating == 5):
+                case (starrating === 5):
                     starcontent = '<i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i><i class="ion-ios-star"></i>';
                     break;
             }
@@ -224,7 +227,14 @@ export class GoogleMapComponent implements OnInit {
 
         const jsoncontent = record.id;
         // console.log('jsoncontent', jsoncontent);
-        const messageContent = '<div><h4 class="uppercase-text centeralign titlefont positive">' + record.name + '<h4><h6 class="thin-text">' + starcontent + '</h6><a class="button-small button button-dark button-block" (click)="goToSkatePark(' + jsoncontent + ')">View Details</a></div>';
+        //region
+        const messageContent = `
+                <div>
+                    <h4 class="ion-text-uppercase ion-text-center text-15"><ion-text color="dark">${record.name}</ion-text><h4>
+                    <h6 class="text-13-300"><ion-text color="dark">${starcontent}</ion-text></h6>
+                    <a class="button-small button button-dark button-block" (click)="${this.goToSkatePark(jsoncontent)}">View Details</a>
+                </div>`;
+        //endregion
         const infoWindow = new google.maps.InfoWindow({
              content: messageContent
          });
@@ -239,5 +249,10 @@ export class GoogleMapComponent implements OnInit {
         google.maps.event.addListener(marker, 'click', function() {
             infoWindow.open(this.map, marker);
         });
+    }
+
+    private goToSkatePark(parkId: string) {
+        return;
+        this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, parkId]);
     }
 }
