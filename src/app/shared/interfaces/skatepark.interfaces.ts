@@ -36,6 +36,7 @@ export interface ISkatepark {
     lessons: string;
     images: string[];
     rating: number;
+    rating_count: number;
     average_rating?: number;
     is_favourite?: boolean;
     modified_at: string; // What format date? (DD-MM-YYYY HH:mm) created_at ?

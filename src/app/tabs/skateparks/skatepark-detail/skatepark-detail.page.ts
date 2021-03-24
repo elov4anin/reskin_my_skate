@@ -40,6 +40,7 @@ export class SkateparkDetailPage implements OnInit {
 
     ngOnInit() {
         this.skatepark = this._coreStore.state.selectedSkatepark;
+        console.log('this.skatepark', this.skatepark);
         this.featuresSlides =  prepareFeatures(this.skatepark);
         this.featuresSlides = addToFeatures(this.skatepark, this.featuresSlides);
 

@@ -46,9 +46,16 @@
                     <ion-text color="medium" class="text-13-300">Last update on May 5, 2020</ion-text>
                 </div>
 
-                <ion-fab-button slot="end" color="primary" size="small">
-                    <ion-text color="secondary" class="text-16">{{s.rating}}</ion-text>
-                </ion-fab-button>
+
+                <div class="d-flex flex-column">
+                    <ion-fab-button slot="end" color="primary" size="small">
+                        <ion-text color="secondary" class="text-16">{{s.rating}}</ion-text>
+                    </ion-fab-button>
+
+                    <ion-text class="text-10-500">({{s.rating_count ? s.rating_count : 0 }} ratings)</ion-text>
+                </div>
+
+
             </ion-item>
         </ion-list>
 

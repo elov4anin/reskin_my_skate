@@ -53,16 +53,20 @@
 
     <div class="divisor mt16 mb16"></div>
     <section class="ion-padding-start ion-padding-end d-flex ion-justify-content-between ion-align-items-center ">
-        <ionic-rating-component
-                #rating
-                activeIcon = "star"
-                defaultIcon = "star-outline"
-                [activeColor] = activeRatingColor
-                [defaultColor] = defaultRatingColor
-                readonly="true"
-                [rating]="skatepark.rating"
-                fontSize = "16px">
-        </ionic-rating-component>
+            <div>
+                <span> {{skatepark.rating}} ({{skatepark.rating_count ? skatepark.rating_count: 0 }} ratings) </span>
+                <ionic-rating-component
+                    #rating
+                    activeIcon = "star"
+                    defaultIcon = "star-outline"
+                    [activeColor] = activeRatingColor
+                    [defaultColor] = defaultRatingColor
+                    readonly="true"
+                    [rating]="skatepark.rating"
+                    fontSize = "16px">
+                </ionic-rating-component>
+            </div>
+
         <ion-button fill="clear" (click)="openModalRatings()">
             <ion-text color="light" class="text-16 text--underline">Add a rating</ion-text>
         </ion-button>
