@@ -30,7 +30,7 @@ export class ModalLocationListComponent implements OnInit, OnDestroy {
         this.locations$ = this._skateparksService.searchLocations(this.search)
             .pipe(
                 map((res) => res.parks)
-            )
+            );
 
     }
 

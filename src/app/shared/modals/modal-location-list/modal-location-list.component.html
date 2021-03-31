@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="dark" class="ion-padding-top">
     <ion-text slot="start" class="ion ion-margin-start title-20">
-      Add new Skatepark
+      Choose a location
     </ion-text>
 
     <ion-text (click)="closeModal()" slot="end" color="secondary" class="ion-margin-end text-16-500 text-hover">
@@ -12,10 +12,19 @@
 </ion-header>
 
 <ion-content color="dark">
-  <ion-list class="ion-list-primary mt12" *ngIf="locations$ | async as locations" lines="full">
-    <ion-item *ngFor="let l of locations" color="primary" (click)="selectLocation(l)">
-      <ion-label>{{l}}</ion-label>
-      <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
-    </ion-item>
-  </ion-list>
+  <ng-container *ngIf="locations$ | async as locations">
+    <ion-list *ngIf="locations.length > 0; else emptyBlock" class="ion-list-primary mt12"  lines="full">
+      <ion-item *ngFor="let l of locations" color="primary" (click)="selectLocation(l)">
+        <ion-label>{{l}}</ion-label>
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-item>
+    </ion-list>
+    <ng-template #emptyBlock>
+      <div class="ion-margin ">
+        <ion-chip color="light" class="ion-padding">
+          <ion-label class="text-16-500">No locations were found for the search term "{{search}}"</ion-label>
+        </ion-chip>
+      </div>
+    </ng-template>
+  </ng-container>
 </ion-content>

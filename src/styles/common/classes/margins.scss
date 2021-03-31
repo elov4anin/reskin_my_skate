@@ -85,3 +85,24 @@
 .ml20 {
   margin-left: calc(var(--theme-base-margin) * 5);
 }
+
+
+.m4 {
+  margin: var(--theme-base-margin);
+}
+
+.m8 {
+  margin: calc(var(--theme-base-margin) * 2);
+}
+
+.m12 {
+  margin: calc(var(--theme-base-margin) * 3);
+}
+
+.m16 {
+  margin: calc(var(--theme-base-margin) * 4);
+}
+
+.m20 {
+  margin: calc(var(--theme-base-margin) * 5);
+}
