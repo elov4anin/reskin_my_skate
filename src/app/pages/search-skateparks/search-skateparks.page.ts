@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
 import {getEnumAsArray} from '../../shared/helpers/utils';
 import {SegmentsEnum, segmentsEnum2LabelMapping} from './segments.enum';
-import {LoadingController, ModalController} from '@ionic/angular';
+import {IonInfiniteScroll, LoadingController, ModalController} from '@ionic/angular';
 import {ModalFilterSkateparksComponent} from './modal-filter-skateparks/modal-filter-skateparks.component';
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../tabs/tabs.enum';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -23,11 +23,15 @@ import {FilterSkateparksHelper} from './modal-filter-skateparks/filter-skatepark
     styleUrls: ['./search-skateparks.page.scss'],
 })
 export class SearchSkateparksPage implements OnInit, OnDestroy {
+    @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+
     readonly segmentsEnum = SegmentsEnum;
     readonly segments = getEnumAsArray(SegmentsEnum);
     readonly segmentsEnum2LabelMapping = segmentsEnum2LabelMapping;
 
     private componentDestroyed: Subject<any> = new Subject();
+    private breakLoadMore: boolean;
+    private readonly LIMIT_RADIUS_SEARCH: number = 100;
 
     selectedSegment: SegmentsEnum = SegmentsEnum.LIST;
     foundSkateparks: ISkatepark[] = [];
@@ -57,6 +61,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             takeUntil(this.componentDestroyed),
         ).subscribe(async (params: any) => {
             if (params && params.search) {
+                this.currentFilter.page = 0;
                 if (this.foundSkateparks.length === 0) {
                     const coordinates = await this._googleMapService.getCoordinates(params.search);
                     this.setFilter(params.search, coordinates);
@@ -76,7 +81,16 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
                 return of(null);
             })
         ).subscribe(async (res: any) => {
-            this.foundSkateparks = res.parks;
+            if (this.currentFilter.page > 0) {
+                if (res.parks.length < this.LIMIT_RADIUS_SEARCH) {
+                    this.infiniteScroll.complete().then();
+                    this.breakLoadMore = true;
+                }
+                this.foundSkateparks = this.foundSkateparks.concat(res.parks);
+            } else {
+                this.breakLoadMore = false;
+                this.foundSkateparks = res.parks;
+            }
             this.isInit = false;
             const isLoading = await this._loadingController.getTop();
             if (isLoading) {
@@ -119,6 +133,7 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             if (this.selectedSegment === SegmentsEnum.MAP) {
                 this.selectedSegment = SegmentsEnum.LIST;
             }
+            this.currentFilter.page = 0;
             this.setFilter(data.selectedLocation, data.coordinates);
             this._filterHelper.filterChange$.next(this.currentFilter);
         }
@@ -166,5 +181,16 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             location,
             coordinates
         };
+    }
+
+    loadData($event: any) {
+        if (this.breakLoadMore) {
+            this.infiniteScroll.disabled = true;
+            return;
+        } else {
+            this.infiniteScroll.disabled = false;
+            this.currentFilter.page = this.currentFilter.page + 1;
+            this._filterHelper.filterChange$.next(this.currentFilter);
+        }
     }
 }
