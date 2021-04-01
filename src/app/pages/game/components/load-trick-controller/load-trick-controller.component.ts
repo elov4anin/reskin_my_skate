@@ -7,7 +7,6 @@ import {StorageEnum} from '../../../../shared/store/Storage.enum';
 import {ActivatedRoute, Router} from '@angular/router';
 import {GameRoutes} from '../../game-routes';
 import {ITrick} from '../../interfaces/game.interfaces';
-import {TabsEnum} from '../../../../tabs/tabs.enum';
 
 @Component({
     selector: 'app-load-trick-controller',
@@ -72,8 +71,8 @@ export class LoadTrickControllerComponent implements OnInit {
         await this._gameHelper.initialLoad();
         await this.dismissLoaders();
         if (!currentTrick) {
-            await this._router.navigate(
-                ['/', TabsEnum.GAME]);
+            await this._gameHelper.stopGame(true);
+            return;
         }
         await this._router.navigate(
             ['/', GameRoutes.ROOT, GameRoutes.TRICK, currentTrick.trick_id], {queryParams: {trickCount, currentPlayer: 0}});

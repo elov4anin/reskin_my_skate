@@ -10,7 +10,7 @@ export enum TabsEnum {
     PROFILE = 'PROFILE',
 }
 
-export const tabsEnum2LabelMapping:  Record<TabsEnum, string> = {
+export const tabsEnum2LabelMapping: Record<TabsEnum, string> = {
     SKATEPARKS: '',
     SPOTS: '',
     GAME: '',
@@ -19,9 +19,9 @@ export const tabsEnum2LabelMapping:  Record<TabsEnum, string> = {
     TEAM: '',
     NEWS: '',
     PROFILE: '',
-}
+};
 
-export const tabsEnum2RouteMapping:  Record<TabsEnum, string> = {
+export const tabsEnum2RouteMapping: Record<TabsEnum, string> = {
     SKATEPARKS: 'skateparks',
     SPOTS: 'spots',
     GAME: 'game',
@@ -30,9 +30,9 @@ export const tabsEnum2RouteMapping:  Record<TabsEnum, string> = {
     TEAM: 'team',
     NEWS: 'news',
     PROFILE: 'profile',
-}
+};
 
-export const tabsEnum2IconMapping:  Record<TabsEnum, string> = {
+export const tabsEnum2IconMapping: Record<TabsEnum, string> = {
     SKATEPARKS: 'search.svg',
     SPOTS: 'spots.svg',
     GAME: 'game.svg',
@@ -41,9 +41,9 @@ export const tabsEnum2IconMapping:  Record<TabsEnum, string> = {
     TEAM: '',
     NEWS: '',
     PROFILE: '',
-}
+};
 
-export const tabsEnum2IconActiveMapping:  Record<TabsEnum, string> = {
+export const tabsEnum2IconActiveMapping: Record<TabsEnum, string> = {
     SKATEPARKS: 'search-active.svg',
     SPOTS: 'spots-active.svg',
     GAME: 'game-active.svg',
@@ -52,6 +52,6 @@ export const tabsEnum2IconActiveMapping:  Record<TabsEnum, string> = {
     TEAM: '',
     NEWS: '',
     PROFILE: '',
-}
+};
 
-export const TABS_MAIN_ROUTE = 'tabs'
+export const TABS_MAIN_ROUTE = 'tabs';

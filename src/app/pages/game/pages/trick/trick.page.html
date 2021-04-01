@@ -1,13 +1,13 @@
 <ion-content color="primary">
-  <ion-fab vertical="top" horizontal="end" slot="fixed">
-    <ion-fab-button color="primary" (click)="stopGame()">
+  <ion-fab vertical="top" horizontal="end" slot="fixed" (click)="stopGame()">
+    <ion-fab-button color="primary" >
       <ion-icon name="power-outline" color="danger"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <div class="d-flex flex-column ion-align-items-center ion-justify-content-start trick">
-    <ion-text color="tertiary" class="text-15">Trick {{trick.trick_id}}</ion-text>
+<!--    <ion-text color="tertiary" class="text-15">Trick {{trick.trick_id}}</ion-text>-->
     <ion-text  color="light" class="title-34">{{trick.name}}</ion-text>
-    <ion-button fill="clear" class="mb16" [disabled]="!trick.url" (click)="openModalPlayTrick()">
+    <ion-button fill="clear" class="mb16" *ngIf="trick.url" (click)="openModalPlayTrick()">
       <ion-icon color="secondary" name="play-circle-outline" slot="start"></ion-icon>
       <ion-text color="secondary" class="text-16">Play instructions</ion-text>
     </ion-button>
@@ -18,7 +18,7 @@
     <ion-text color="tertiary" class="mt12 text-16">{{currentPlayer.name}}</ion-text>
     <div class="d-flex ion-justify-content-between buttons">
 
-      <ion-button class="game-btn" color="success" (click)="openNailed()">
+      <ion-button class="game-btn" color="dark" (click)="openNailed()">
         <div class="d-flex flex-column ion-justify-content-center">
           <ion-icon src="assets/images/svg-icons/nailed.svg"></ion-icon>
           <ion-text class="title-20 mt12">Nailed it!</ion-text>
