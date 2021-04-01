@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, TemplateRef} from '@angular/core';
-import {MainLayoutHelper} from "./main-layout.helper";
+import {MainLayoutHelper} from './main-layout.helper';
 
 @Component({
   selector: 'app-mail-layout',
