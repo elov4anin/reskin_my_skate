@@ -138,4 +138,13 @@ export class SkateparksService {
             },
         ).toPromise();
     }
+
+    getSkateparkById(parkId: string): Promise<IGetFavouriteParksResponse> {
+        return this._api.basePostRequest<IGetFavouriteParksResponse>(
+            'integration/myskate/myskate-park-single.php',
+            {
+                park_id: parkId
+            },
+        ).toPromise();
+    }
 }
