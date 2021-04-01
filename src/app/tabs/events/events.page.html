@@ -5,7 +5,7 @@
   </header>
 
   <ng-container *ngIf="events.length > 0; else emptyBlock">
-    <app-event *ngFor="let item of events;" [event]="events"></app-event>
+    <app-event *ngFor="let item of events;" [event]="item"></app-event>
   </ng-container>
   <ng-template #emptyBlock>
     <ion-text color="tertiary" class="empty-title">No events yet</ion-text>

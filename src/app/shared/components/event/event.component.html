@@ -9,7 +9,7 @@
     <ion-text color="tertiary" class="text-12">{{event.address_line_1}}{{event.city ? ', ' + event.city : ''}}</ion-text>
   </div>
 
-  <app-calendar-day [date]="event.date"></app-calendar-day>
+  <app-calendar-day [date]="event.date_formatted"></app-calendar-day>
 
 </ion-card-header>
 </ion-card>

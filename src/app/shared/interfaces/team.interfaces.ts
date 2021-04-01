@@ -25,7 +25,7 @@ export interface IEvent {
     id: string;
     image: string;
     website: string;
-    paid: boolean;
+    paid: string;
 }
 
 export class EventImpl implements IEvent {
@@ -42,7 +42,7 @@ export class EventImpl implements IEvent {
     postcode: string;
     time: string;
     website: string;
-    paid: boolean;
+    paid: string;
 
     constructor() {
         this.address_line_1 = '';
@@ -58,7 +58,7 @@ export class EventImpl implements IEvent {
         this.postcode = '';
         this.time = '';
         this.website = '';
-        this.paid = false;
+        this.paid = '';
     }
 }
 

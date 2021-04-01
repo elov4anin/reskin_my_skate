@@ -20,7 +20,7 @@ export class EventComponent {
     }
 
     async openEvent(event: IEvent) {
-        await this._coreStore.setValue(StorageEnum.SELECTED_NEWS, event);
+        await this._coreStore.setValue(StorageEnum.SELECTED_EVENT, event);
         await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.EVENTS, event.id]);
     }
 }

@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import {TeamService} from "../../shared/services/team.service";
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
-import {IEvent} from "../../shared/interfaces/team.interfaces";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {TeamService} from '../../shared/services/team.service';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {IEvent} from '../../shared/interfaces/team.interfaces';
 
 @Component({
   selector: 'app-events',
   templateUrl: './events.page.html',
   styleUrls: ['./events.page.scss'],
 })
-export class EventsPage implements OnInit {
+export class EventsPage implements OnInit, OnDestroy {
 
   events: IEvent[] = [];
 
@@ -33,7 +33,12 @@ export class EventsPage implements OnInit {
 
   getEvents() {
     this._team.getEventList(this.page).pipe(takeUntil(this.componentDestroyed))
-        .subscribe(res => this.events = this.events.concat(res.events))
+        .subscribe(res => {
+          this.events = this.events.concat(res.events);
+          if (res.events.length < 10) {
+            this.isDisableLoadMore = true;
+          }
+        });
 
   }
 
@@ -43,8 +48,8 @@ export class EventsPage implements OnInit {
         .subscribe(res => {
           this.events = this.events.concat(res.events);
           if (res.events.length < 10) {
-            this.isDisableLoadMore = true
+            this.isDisableLoadMore = true;
           }
-        })
+        });
   }
 }

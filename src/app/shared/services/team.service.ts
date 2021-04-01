@@ -28,7 +28,7 @@ export class TeamService {
     getEventList(page: number = 0): Observable<IGetEventListResponse> {
         return this._api.basePostRequest<IGetEventListResponse>(
             'integration/myskate/myskate-events.php',
-            {page},
+            {page, test: 'test'},
         );
     }
 
