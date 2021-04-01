@@ -20,6 +20,7 @@ export class ModalSkateparkConfirmComponent implements OnInit, OnDestroy {
     @Input() candidate: IAddSkateparkParams;
 
     private componentDestroyed: Subject<any> = new Subject();
+    isRequestSending: boolean;
 
     constructor(
         private _modalController: ModalController,
@@ -43,29 +44,32 @@ export class ModalSkateparkConfirmComponent implements OnInit, OnDestroy {
     }
 
     savePark() {
+        this.isRequestSending = true;
         this.toggleMethod(this.candidate.image.length > 0)
             .pipe(takeUntil(this.componentDestroyed))
             .subscribe(async (res) => {
                 if (!!res.responseCode ) {
                     if (res.responseCode === 200) {
-                        await this._toast.success('Skate park added!');
                         this._modalController.dismiss(undefined, undefined, SKATEPARK_CRUD_MODAL_ID).then();
                         this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
-
+                        await this._toast.success('Skate park added!');
                     } else {
                         await this._toast.success(res.response);
                         this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
                     }
+                    this.isRequestSending = false;
                     return;
                 }
 
                 if (res.success) {
-                    await this._toast.success('Skate park added!');
                     this._modalController.dismiss(undefined, undefined, SKATEPARK_CRUD_MODAL_ID).then();
                     this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
+                    await this._toast.success('Skate park added!');
+                    this.isRequestSending = false;
                 } else {
                     await this._toast.success(res.response_msg);
                     this._modalController.dismiss({success: true}, undefined, SKATEPARK_CONFIRM_MODAL_ID).then();
+                    this.isRequestSending = false;
                 }
             });
     }
