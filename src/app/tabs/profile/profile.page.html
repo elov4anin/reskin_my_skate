@@ -15,7 +15,7 @@
 ">
     <div class="d-flex flex-column">
       <ion-text color="light" class="title-20">{{profile.firstname}} {{profile.lastname}}</ion-text>
-      <ion-text color="tertiary" class="text-16">Active since {{profile.date}}</ion-text>
+      <ion-text color="tertiary" class="text-16">Active since {{profile.date || profile.created_at}}</ion-text>
     </div>
   </div>
   <div class="d-flex flex-column ion-margin-bottom ion-margin-start ion-margin-end">

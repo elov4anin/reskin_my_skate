@@ -26,6 +26,7 @@ export interface IUser {
     club_id?: string;
     member_id?: string;
     location?: string;
+    created_at? :string;
 }
 
 export interface IGetUserDataResponse extends IUser {
