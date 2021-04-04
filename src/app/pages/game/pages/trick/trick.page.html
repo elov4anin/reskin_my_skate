@@ -6,7 +6,9 @@
   </ion-fab>
   <div class="d-flex flex-column ion-align-items-center ion-justify-content-start trick">
 <!--    <ion-text color="tertiary" class="text-15">Trick {{trick.trick_id}}</ion-text>-->
-    <ion-text  color="light" class="title-34">{{trick.name}}</ion-text>
+      <div class="trickName">
+          <ion-text  color="light" class="title-34 ">{{trick.name}}</ion-text>
+      </div>
     <ion-button fill="clear" class="mb16" *ngIf="trick.url" (click)="openModalPlayTrick()">
       <ion-icon color="secondary" name="play-circle-outline" slot="start"></ion-icon>
       <ion-text color="secondary" class="text-16">Play instructions</ion-text>
