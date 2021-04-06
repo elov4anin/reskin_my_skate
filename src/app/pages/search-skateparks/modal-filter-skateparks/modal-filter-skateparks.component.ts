@@ -85,12 +85,19 @@ export class ModalFilterSkateparksComponent implements OnInit, OnDestroy {
 
     }
 
-    resetFilter() {
+    async resetFilter() {
         this.form.reset();
         this.checkboxesList = this.setUnChecked(this.checkboxesList);
         this.types = this.setUnChecked(this.types);
         this.surfaces = this.setUnChecked(this.surfaces);
         this.skatelite[0].checked = false;
+        await this._modalController.dismiss({
+            filter: {
+                ...this._filterHelper.defaultFilterState,
+                coordinates: this.filterState.coordinates,
+                location: this.filterState.location,
+            }
+        });
     }
 
     private setUnChecked(list: IFeatureSkatepark[]): IFeatureSkatepark[] {

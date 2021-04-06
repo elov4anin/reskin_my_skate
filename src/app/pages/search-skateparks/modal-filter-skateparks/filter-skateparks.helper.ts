@@ -14,7 +14,7 @@ export class FilterSkateparksHelper {
         location: '',
         material: null,
         page: 0,
-    }
+    };
     filterChange$: ReplaySubject<ISkateparkFilterParams> = new ReplaySubject<ISkateparkFilterParams>(1);
 
     constructor() {

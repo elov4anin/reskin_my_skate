@@ -42,13 +42,14 @@
                 [checkboxes]="checkboxes"
                 [defaultCheckedColor]="'darktwo'"
                 [defaultUncheckedColor]="'primary'"
+                [(ngModel)]="selectedTrickTypes"
         ></app-checkbox-list>
       </div>
     </ion-label>
   </div>
   <div class="ion-margin-start ion-margin-end ion-margin-top ion-margin-bottom">
     <ion-button
-            [disabled]="players.length < 1 || !selectedDifficulty"
+            [disabled]="players.length < 1 || !selectedDifficulty || selectedTrickTypes.length < 1"
             class=" w100percent"
             fill="solid"
             color="success"

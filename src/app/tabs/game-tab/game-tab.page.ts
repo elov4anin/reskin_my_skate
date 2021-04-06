@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {difficulties} from './difficulties';
 import {IDifficulty} from '../../pages/game/interfaces/difficulty.interface';
 import {LoadingController, ModalController} from '@ionic/angular';
@@ -12,6 +12,7 @@ import {CoreStore} from '../../shared/store/core.store';
 import {PlayersHelper} from '../../pages/game/classes/players.helper';
 import {GameHelper} from '../../pages/game/classes/game.helper';
 import {StorageEnum} from '../../shared/store/Storage.enum';
+import {trickTypes} from './trick-types';
 
 @Component({
     selector: 'app-game',
@@ -21,30 +22,10 @@ import {StorageEnum} from '../../shared/store/Storage.enum';
 export class GameTabPage implements OnInit {
 
     difficulties = difficulties;
-    checkboxes: IFeatureSkatepark[] = [
-        {
-            name: 'Straight, Spin, Shove Tricks',
-            checked: true,
-            value: 'Straight, Spin, Shove Tricks'
-        },
-        {
-            name: 'Rail & Ledge Tricks',
-            checked: false,
-            value: 'Rail & Ledge Tricks'
-        },
-        {
-            name: 'Ramp Tricks',
-            value: 'Ramp Tricks',
-            checked: true
-        },
-        {
-            name: 'Flip Tricks',
-            checked: false,
-            value: 'Flip Tricks'
-        },
-    ];
+    checkboxes: IFeatureSkatepark[] = trickTypes;
     selectedDifficulty: number;
     players: IPlayer[] = [];
+    selectedTrickTypes: string[] = [];
 
     constructor(
         private _modalController: ModalController,
@@ -53,6 +34,7 @@ export class GameTabPage implements OnInit {
         private _playersHelper: PlayersHelper,
         private _gameHelper: GameHelper,
         private _loadingController: LoadingController,
+        private _cdr: ChangeDetectorRef,
         ) {
     }
 
@@ -90,18 +72,23 @@ export class GameTabPage implements OnInit {
     }
 
     async startGame() {
+        console.log('test', this.selectedTrickTypes);
         try {
-            const selectedTrickTypes: string[] = this.checkboxes.filter(ch => ch.checked).map(ch => ch.value);
+            // const selectedTrickTypes: string[] = this.checkboxes.filter(ch => ch.checked).map(ch => ch.value);
             await this.presentLoading();
             this._playersHelper.setInitialPlayers(this.players);
             await this._gameHelper.initialLoad();
             await this._gameHelper.resetTricksList();
             await this._gameHelper.setDifficultyLevel(this.selectedDifficulty);
-            const tricks = await this._gameHelper.getTricksList(this.selectedDifficulty, selectedTrickTypes);
+            const tricks = await this._gameHelper.getTricksList(this.selectedDifficulty, this.selectedTrickTypes);
             await this._coreStore.setValue(StorageEnum.TRICKS, tricks);
             await this._coreStore.setValue(StorageEnum.ORIGINAL_TRICKS, tricks);
             await this._coreStore.setValue(StorageEnum.SELECTED_DIFFICULTY, this.selectedDifficulty);
             await this.dismissLoaders();
+            this.selectedDifficulty = undefined;
+            this.selectedTrickTypes = [];
+            this.setPlayers();
+            this.difficulties.forEach(v => v.isSelected = false);
             await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONTROLLER]);
         } catch (e) {
             await this.dismissLoaders();
@@ -128,6 +115,10 @@ export class GameTabPage implements OnInit {
     }
 
     ionViewDidEnter() {
+       this.setPlayers();
+    }
+
+    setPlayers() {
         const user = this._coreStore.state.profile;
         this.players = [];
         this.players.push({
@@ -138,13 +129,6 @@ export class GameTabPage implements OnInit {
             username: user.email,
             linked: true,
         });
-        console.log('2', this.players);
-    }
-
-    ionViewDidLeave() {
-        this.selectedDifficulty = undefined;
-        this.players = [];
-        this.difficulties.forEach(v => v.isSelected = false);
     }
 
 }

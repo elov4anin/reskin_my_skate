@@ -16,9 +16,9 @@ export class CheckboxListComponent implements ControlValueAccessor {
   @Input()
   set checkboxes(val: IFeatureSkatepark[]) {
     this._checkboxes = val;
-    if (!val.map(v => v.checked).includes(true)) {
-      this.value = [];
-    }
+   // if (!val.map(v => v.checked).includes(true)) {
+   //   this.value = [];
+   // }
   }
 
   get checkboxes(){
@@ -39,23 +39,25 @@ export class CheckboxListComponent implements ControlValueAccessor {
     return this._value;
   }
 
-  private _value;
+  private _value = [];
   private _checkboxes: IFeatureSkatepark[] = [];
 
   onChange(_: any) {}
   onTouched = () => {};
 
   writeValue(value: any[]) {
-    if (value) {
-      value.forEach(v => {
-        const idx = this.checkboxes.findIndex(btn => btn.value === v);
-        if (idx !== -1) {
-          this.checkboxes[idx].checked = true;
-        }
-      });
-    } else {
-      this.value = [];
-    }
+    this.value = value && value.length > 0 ?  value : [];
+  //  console.log('writeValue 1', value);
+  //  if (value && value.length > 0) {
+  //    console.log('writeValue', value);
+  //    value.forEach(v => {
+  //      const idx = this.checkboxes.findIndex(btn => btn.value === v);
+  //      this.checkboxes[idx].checked = idx !== -1;
+  //    });
+  //  } else {
+  //    this.value = [];
+  //   //  this.checkboxes.forEach(ch => ch.checked = false);
+  //  }
   }
 
   registerOnChange(fn) {
@@ -68,6 +70,13 @@ export class CheckboxListComponent implements ControlValueAccessor {
 
   change(ch: IFeatureSkatepark) {
     ch.checked = !ch.checked;
-    this.value = this.checkboxes.filter(c => c.checked).map(v => v.value);
+    if (ch.checked) {
+      this.value.push(ch.value);
+    } else {
+      this.value = this.value.filter(v => v === ch.value);
+    }
+    this.writeValue(this.value);
+   // ch.checked = !ch.checked;
+    // this.value = this.checkboxes.filter(c => c.checked).map(v => v.value);
   }
 }
