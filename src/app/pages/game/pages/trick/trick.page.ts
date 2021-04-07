@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {ModalTrickHowtoComponent} from './modal-trick-howto/modal-trick-howto.component';
 import {ActivatedRoute, Router} from '@angular/router';
-import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../../tabs/tabs.enum';
 import {GameRoutes} from '../../game-routes';
 import {ITrick, Trick} from '../../interfaces/game.interfaces';
 import {IPlayer} from '../../interfaces/player.interface';
@@ -41,7 +40,6 @@ export class TrickPage implements OnInit {
         this._route.params.subscribe(async (params) => {
             if (params && params.id) {
                 const tricks = this._coreStore.state.tricks;
-                console.log(tricks);
                 const candidateTrick = tricks.find(t => t.trick_id === params.id);
                 if (candidateTrick) {
                     this.trick = candidateTrick;
@@ -81,7 +79,7 @@ export class TrickPage implements OnInit {
         });
         await modal.present();
         const { data } = await modal.onWillDismiss();
-        if (data.next) {
+        if (data && data.next) {
             const newScore = this.currentPlayer.score + 1;
             await this._playerHelper.setPlayerScore(this.currentPlayer.playerID, newScore);
 
@@ -105,8 +103,7 @@ export class TrickPage implements OnInit {
         });
         await modal.present();
         const { data } = await modal.onWillDismiss();
-        console.log(data);
-        if (data.next) {
+        if (data && data.next) {
             if (this._gameHelper.playerFailLetter === 'E') {
                 if (this._playerHelper.getInitialPlayers().length > 1) {
                     //  var failedPopup = $ionicPopup.alert({

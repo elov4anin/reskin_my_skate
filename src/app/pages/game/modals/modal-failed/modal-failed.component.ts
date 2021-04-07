@@ -26,6 +26,7 @@ export class ModalFailedComponent implements OnInit {
 
   async stopGame() {
     await this._gameHelper.stopGame();
+    await this._modalController.dismiss();
   }
 
 }

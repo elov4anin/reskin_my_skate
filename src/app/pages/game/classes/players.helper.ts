@@ -27,7 +27,7 @@ export class PlayersHelper {
         // this is the list of players still in the game - that havent been kicked out yet
         // need so we know which players to loop through
 
-        const playersInGame: IPlayer[] = [];
+        let playersInGame: IPlayer[] = [];
         if (this.gamePlayers.length === 0) {
             this.gamePlayers = await this._coreStore.getValue(StorageEnum.PLAYERS);
             console.log('game player in game', this.gamePlayers);
@@ -35,12 +35,9 @@ export class PlayersHelper {
         if (!this.gamePlayers) {
             this.gamePlayers = [];
         }
-
-        this.gamePlayers.forEach(p => {
-            if (p.lives_left !== 0) {
-                playersInGame.push(p);
-            }
-        });
+        playersInGame = this.gamePlayers
+            .filter(p => p.lives_left !== 0)
+            .sort((a, b) => a.playerID - b.playerID);
         await this._coreStore.setValue(StorageEnum.PLAYERS_IN_GAME, playersInGame);
         return playersInGame;
     }
@@ -61,7 +58,6 @@ export class PlayersHelper {
         if (!this.gamePlayers) {
             this.gamePlayers = [];
         }
-        console.log('this.gamePlayers', this.gamePlayers.length);
         return this.gamePlayers;
     }
 

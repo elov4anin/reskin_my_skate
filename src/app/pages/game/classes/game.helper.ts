@@ -101,7 +101,7 @@ export class GameHelper implements OnDestroy {
         await this._coreStore.setValue(StorageEnum.TRICKS, this.trickList);
     }
 
-    currentPlayerDetails(current): IPlayer {
+    currentPlayerDetails(current: number): IPlayer {
         if (this.playersInGame.length === 0) {
             this.playersInGame = this._coreStore.state.playersInGame;
         }
@@ -166,7 +166,6 @@ export class GameHelper implements OnDestroy {
 
     findWinner(): IPlayer[] {
         const players: IPlayer[] = this._playerHelper.getInitialPlayers();
-        console.log('players', players);
         const winners: IPlayer[] = [];
         const ultimateWinner: IPlayer[] = [];
         if (players.length > 1) {

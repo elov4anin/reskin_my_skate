@@ -39,11 +39,11 @@ export class CongradulationsPage implements OnInit {
     }
 
     async stopGame() {
-      await this._gameHelper.stopGame();
+        await this._gameHelper.stopGame();
     }
 
     async playAgain() {
-        await this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.GAME]);
+        await this.stopGame();
     }
 
     async openLeaderboard() {
