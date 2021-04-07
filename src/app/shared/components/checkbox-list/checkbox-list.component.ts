@@ -71,12 +71,10 @@ export class CheckboxListComponent implements ControlValueAccessor {
   change(ch: IFeatureSkatepark) {
     ch.checked = !ch.checked;
     if (ch.checked) {
-      console.log('ch', ch);
       this.value.push(ch.value);
     } else {
       this.value = this.value.filter(v => v !== ch.value);
     }
-    console.log(this.value);
     this.writeValue(this.value);
    // ch.checked = !ch.checked;
     // this.value = this.checkboxes.filter(c => c.checked).map(v => v.value);
