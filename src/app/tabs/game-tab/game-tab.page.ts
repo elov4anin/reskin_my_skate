@@ -72,7 +72,6 @@ export class GameTabPage implements OnInit {
     }
 
     async startGame() {
-        console.log('test', this.selectedTrickTypes);
         try {
             // const selectedTrickTypes: string[] = this.checkboxes.filter(ch => ch.checked).map(ch => ch.value);
             await this.presentLoading();
