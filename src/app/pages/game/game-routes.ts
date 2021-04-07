@@ -5,5 +5,5 @@ export enum GameRoutes {
     NAILED = 'nailed',
     FAILED = 'failed',
     CURRENT = 'current-standings',
-    CONGRADULATIONS = 'congradulations',
+    CONGRATULATIONS = 'congratulations',
 }

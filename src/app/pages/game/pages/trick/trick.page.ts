@@ -115,7 +115,8 @@ export class TrickPage implements OnInit {
                 } else {
                     //  clearBack();
                     //  $state.go('app.game-winner');
-                    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRADULATIONS]);
+                    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRATULATIONS]);
+                    return;
                 }
             } else {
                 // var failedPopup = $ionicPopup.alert({
@@ -174,7 +175,7 @@ export class TrickPage implements OnInit {
                 if (hasWinner) {
                     // true - return winner page
                     // $state.go('app.game-winner');
-                    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRADULATIONS]);
+                    await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRATULATIONS]);
                 } else {
                     // console.log('NOOOO winner yet');
                     // false- view current standings

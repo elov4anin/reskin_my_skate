@@ -30,7 +30,7 @@ const routes: Routes = [
         loadChildren: () => import('./pages/current-standings/current-standings.module').then(m => m.CurrentStandingsPageModule)
     },
     {
-        path: GameRoutes.CONGRADULATIONS,
+        path: GameRoutes.CONGRATULATIONS,
         loadChildren: () => import('./pages/congradulations/congradulations.module').then(m => m.CongradulationsPageModule)
     },
 ];

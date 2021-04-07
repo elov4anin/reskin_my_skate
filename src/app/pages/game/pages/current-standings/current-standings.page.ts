@@ -26,12 +26,13 @@ export class CurrentStandingsPage implements OnInit {
 
     async ngOnInit() {
         await this.init();
-        this.players = this._playerHelper.getInitialPlayers().sort((a, b) => b.score - a.score);
     }
 
     private async init(): Promise<void> {
+        this.players = this._playerHelper.getInitialPlayers();
         await this._gameHelper.initialLoad();
-        if (this._playerHelper.getInitialPlayers().length > 1) {
+        if (this.players.length > 1) {
+            this.players = this.players.sort((a, b) => b.score - a.score);
             const hasWinner = await this._gameHelper.hasWinner();
             this.stillPlaying = !hasWinner;
         } else {
@@ -48,7 +49,7 @@ export class CurrentStandingsPage implements OnInit {
         await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONTROLLER], {queryParams: {hash: uuid4()}});
     }
 
-    async openLeaderboard() {
-        await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRADULATIONS]);
+    async openCongratulations() {
+        await this._router.navigate(['/', GameRoutes.ROOT, GameRoutes.CONGRATULATIONS]);
     }
 }
