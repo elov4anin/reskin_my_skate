@@ -71,6 +71,7 @@
         <app-google-map [coordinates]="currentFilter.coordinates"
                         [skateparks]="foundSkateparks"
                         [searchValue]="currentFilter.location"
+                        (loadMap$)="mapLoaded($event)"
         ></app-google-map>
     </ng-container>
 </ion-content>

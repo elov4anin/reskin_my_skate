@@ -1,11 +1,12 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Plugins} from '@capacitor/core';
 import {NativeGeocoderOptions} from '@ionic-native/native-geocoder/ngx';
 import {ICoordinates} from '../../../shared/interfaces/common';
 import {ISkatepark} from '../../../shared/interfaces/skatepark.interfaces';
 import {Router} from '@angular/router';
 import {TABS_MAIN_ROUTE, tabsEnum2RouteMapping} from '../../../tabs/tabs.enum';
-import {SKATEPARKS_ROUTES} from '../../../tabs/skateparks/skatepars-routers.enum';
+import {CoreStore} from '../../../shared/store/core.store';
+import {StorageEnum} from '../../../shared/store/Storage.enum';
 
 const {Geolocation} = Plugins;
 
@@ -25,6 +26,7 @@ export class GoogleMapComponent implements OnInit {
         maxResults: 5
     };
     @ViewChild('map', {static: false}) mapElement: ElementRef;
+    @Output() loadMap$: EventEmitter<boolean> = new EventEmitter<boolean>(false);
     map: any;
     address: string;
 
@@ -56,7 +58,8 @@ export class GoogleMapComponent implements OnInit {
     private stylesMapType;
 
     constructor(
-        private _router: Router
+        private _router: Router,
+        private _coreStore: CoreStore,
     ) {
     }
 
@@ -95,7 +98,7 @@ export class GoogleMapComponent implements OnInit {
 
             this.map.mapTypes.set('custom', this.stylesMapType);
             this.map.setMapTypeId('custom');
-            google.maps.event.addListenerOnce(this.map, 'idle', function() {
+            google.maps.event.addListenerOnce(this.map, 'idle', () => {
                 // add radius to map
                 const radiusSearch = new google.maps.Circle({
                     strokeColor: '#00BDFF',
@@ -135,6 +138,7 @@ export class GoogleMapComponent implements OnInit {
 
                 this.map.setCenter(new google.maps.LatLng(ylat, xlng));
             });
+            this.loadMap$.emit(true);
 
         }).catch((error) => {
             console.log('Error getting location', error);
@@ -143,8 +147,6 @@ export class GoogleMapComponent implements OnInit {
 
 
     private loadMarkers(SkateParks: ISkatepark[], startlatlng, searchRequest, radiusBounds) {
-        console.log('SkateParks', SkateParks);
-
         // set marker for search location
         const symbol = {
             fillColor: 'rgb(0, 117, 160)',
@@ -185,6 +187,7 @@ export class GoogleMapComponent implements OnInit {
     }
 
     addInfoWindow(marker, record: ISkatepark) {
+        const that = this;
         // console.log('record', record);
         const starrating = record.rating;
         let starcontent = '';
@@ -229,30 +232,31 @@ export class GoogleMapComponent implements OnInit {
         // console.log('jsoncontent', jsoncontent);
         //region
         const messageContent = `
-                <div>
+                <div  data-park="${record.id}">
                     <h4 class="ion-text-uppercase ion-text-center text-15"><ion-text color="dark">${record.name}</ion-text><h4>
                     <h6 class="text-13-300"><ion-text color="dark">${starcontent}</ion-text></h6>
-                    <a class="button-small button button-dark button-block" (click)="${this.goToSkatePark(jsoncontent)}">View Details</a>
+                    <a class="button-small button button-dark button-block">View Details</a>
                 </div>`;
         //endregion
         const infoWindow = new google.maps.InfoWindow({
              content: messageContent
          });
 
-       // var compiled = $compile(messageContent)($rootScope);
-//
-       // var infoWindow = new google.maps.InfoWindow({
-       //     content: compiled[0]
-       // });
+        google.maps.event.addListener(marker, 'click', () => {
+            infoWindow.open(that.map, marker);
 
-
-        google.maps.event.addListener(marker, 'click', function() {
-            infoWindow.open(this.map, marker);
+            if (messageContent) {
+                google.maps.event.addListenerOnce(infoWindow, 'domready', () => {
+                    document.querySelector(`[data-park="${record.id}"]`).addEventListener('click', async () => {
+                        const park = this.skateparks.find(p => p.id === record.id);
+                        if (park) {
+                            await this._coreStore.setValue(StorageEnum.SELECTED_SKATEPARK, park);
+                            await that._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, record.id]);
+                        }
+                    });
+                });
+            }
         });
     }
 
-    private goToSkatePark(parkId: string) {
-        return;
-        this._router.navigate(['/', TABS_MAIN_ROUTE, tabsEnum2RouteMapping.SKATEPARKS, parkId]);
-    }
 }

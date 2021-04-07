@@ -158,7 +158,10 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
         }
     }
 
-    segmentChanged() {
+    async segmentChanged() {
+        if(this.selectedSegment ===  SegmentsEnum.MAP) {
+            await this.presentLoading();
+        }
     }
 
     async openSkatepark(skatepark: ISkatepark) {
@@ -191,6 +194,13 @@ export class SearchSkateparksPage implements OnInit, OnDestroy {
             this.infiniteScroll.disabled = false;
             this.currentFilter.page = this.currentFilter.page + 1;
             this._filterHelper.filterChange$.next(this.currentFilter);
+        }
+    }
+
+    async mapLoaded(dir: boolean) {
+        const isLoading = await this._loadingController.getTop();
+        if (isLoading) {
+            await this._loadingController.dismiss();
         }
     }
 }
