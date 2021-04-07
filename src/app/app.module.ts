@@ -16,6 +16,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import {OneSignal} from '@ionic-native/onesignal/ngx';
 import {Vibration} from '@ionic-native/vibration/ngx';
+import {pageTransition} from './route.animations';
 
 @NgModule({
     declarations: [AppComponent],
@@ -24,7 +25,8 @@ import {Vibration} from '@ionic-native/vibration/ngx';
         BrowserModule,
         HttpClientModule,
         IonicModule.forRoot({
-            mode: 'ios'
+            mode: 'ios',
+            navAnimation: pageTransition
         }),
         IonicStorageModule.forRoot({
             name: '__skate',
